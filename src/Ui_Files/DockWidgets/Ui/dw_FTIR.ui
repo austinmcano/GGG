@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DockWidget</class>
+ <widget class="QDockWidget" name="DockWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>516</width>
+    <height>562</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>FTIR</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0" colspan="2">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>IR Plot</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="3">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Plot or Fit FTIR</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Skip Every</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>P (asymetry) </string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="2">
+         <widget class="QDoubleSpinBox" name="p_sb">
+          <property name="decimals">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.010000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="2">
+         <widget class="QSpinBox" name="smooth_sb"/>
+        </item>
+        <item row="7" column="2">
+         <widget class="QSpinBox" name="lambda_sb">
+          <property name="maximum">
+           <number>9999999</number>
+          </property>
+          <property name="singleStep">
+           <number>1000</number>
+          </property>
+          <property name="value">
+           <number>1000</number>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="1">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Savitzky–Golay Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1" colspan="3">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QSpinBox" name="skip_sb">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>false</bool>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="3">
+         <widget class="QPushButton" name="smooth_pb">
+          <property name="text">
+           <string>Smooth</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1" colspan="3">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;λ  (smoothness)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="QComboBox" name="ir_plot_cb">
+          <item>
+           <property name="text">
+            <string>Sub Plot (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Plot (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Diff Plot (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Diff (2)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Plot</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QPushButton" name="baseline_pb">
+          <property name="text">
+           <string>Baseline All</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>UNDER WORK</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="3">
+         <widget class="QTreeView" name="FTIR_treeView"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Integrate</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="4">
+         <widget class="QComboBox" name="int_type_cb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <item>
+           <property name="text">
+            <string>Integrate Sub (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Integrate Sub (dir) Corrected</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Integrate Diff (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Integrate Plot (dir)</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Integrate</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_2">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Num of Ints</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3">
+         <widget class="QSpinBox" name="spinBox">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>4</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" rowspan="4" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="minimumSize">
+           <size>
+            <width>320</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>1000</width>
+            <height>1000</height>
+           </size>
+          </property>
+          <property name="rowCount">
+           <number>4</number>
+          </property>
+          <property name="columnCount">
+           <number>3</number>
+          </property>
+          <row>
+           <property name="text">
+            <string>Int. 1</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Int. 2</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Int. 3</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Int. 4</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>From</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>To</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Label</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>400</string>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>4000</string>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="1" column="0">
+           <property name="text">
+            <string>400</string>
+           </property>
+          </item>
+          <item row="1" column="1">
+           <property name="text">
+            <string>4000</string>
+           </property>
+          </item>
+          <item row="1" column="2">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="2" column="0">
+           <property name="text">
+            <string>400</string>
+           </property>
+          </item>
+          <item row="2" column="1">
+           <property name="text">
+            <string>4000</string>
+           </property>
+          </item>
+          <item row="2" column="2">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item row="3" column="0">
+           <property name="text">
+            <string>400</string>
+           </property>
+          </item>
+          <item row="3" column="1">
+           <property name="text">
+            <string>4000</string>
+           </property>
+          </item>
+          <item row="3" column="2">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="6" column="4">
+         <widget class="QPushButton" name="integrate_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Integrate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QComboBox" name="comboBox">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <item>
+           <property name="text">
+            <string>Left Axis</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right Axis</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Fitting</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="2" column="1">
+         <widget class="QPushButton" name="plot_current_pb">
+          <property name="text">
+           <string>Plot Current</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="4">
+         <widget class="QTextEdit" name="fit_report_TE"/>
+        </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="QTableWidget" name="tableWidget_2">
+          <row>
+           <property name="text">
+            <string>Amp</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma High</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Peak 1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 2</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 3</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 4</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 5</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Num of Peak</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="selectdata_pb">
+          <property name="text">
+           <string>Select Data</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QSpinBox" name="num_peaks_sb">
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>5</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QPushButton" name="fit_pb">
+          <property name="text">
+           <string>Fit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="import_to_constraints_pb">
+          <property name="text">
+           <string>import fitted params</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" colspan="2">
+         <widget class="QComboBox" name="fit_shape_cb">
+          <item>
+           <property name="text">
+            <string>Voigt</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Gaussian</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Lorentz</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

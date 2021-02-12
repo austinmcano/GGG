@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DockWidget</class>
+ <widget class="QDockWidget" name="DockWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>534</width>
+    <height>610</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SE</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="5">
+     <widget class="QPushButton" name="plot_pb">
+      <property name="text">
+       <string>Plot</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4">
+     <widget class="QPushButton" name="fill_cols_pb">
+      <property name="text">
+       <string>Fill Columns</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="2" colspan="2">
+     <widget class="QComboBox" name="plot_type_cb">
+      <item>
+       <property name="text">
+        <string>Ext. Plot (half-ints)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ext. Plot (ints)</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>X vs Y</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="2" column="2" colspan="4">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Axis Properties</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0" colspan="5">
+         <widget class="QTreeView" name="SE_treeView"/>
+        </item>
+        <item row="1" column="2" colspan="3">
+         <widget class="QTreeWidget" name="tw_y">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <column>
+           <property name="text">
+            <string>SE-Y</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTreeWidget" name="tw_x">
+          <column>
+           <property name="text">
+            <string>SE-X</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Line Name</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>X Label</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>Y Label</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="4">
+         <widget class="QLineEdit" name="ylabel_le">
+          <property name="text">
+           <string>$\Delta$ Thickness ($\AA$)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="4">
+         <widget class="QLineEdit" name="xlabel_le">
+          <property name="text">
+           <string>Cycles</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0">
+         <widget class="QComboBox" name="ax_cb">
+          <item>
+           <property name="text">
+            <string>Left Ax</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right Ax</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QCheckBox" name="zero_correct_checkb">
+          <property name="text">
+           <string>Zero Correct</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
+         <widget class="QCheckBox" name="line_name_checkbox">
+          <property name="text">
+           <string>Use Line Name</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Skip Rows: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="4">
+         <widget class="QSpinBox" name="skip_rows_sb"/>
+        </item>
+        <item row="3" column="1" colspan="4">
+         <widget class="QLineEdit" name="line_name_le">
+          <property name="text">
+           <string>Extended_Plot</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Fit Results</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QComboBox" name="linetype_cb">
+          <item>
+           <property name="text">
+            <string>.-</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>-.</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>.</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>--</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>,</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="lin_fit_pb">
+          <property name="text">
+           <string>Lin. Fit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QTextEdit" name="fit_results_TE"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="comboBox">
+          <item>
+           <property name="text">
+            <string>Auto Color</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dope Red Color</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dope Blue Color</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="linfitall_pb">
+          <property name="text">
+           <string>Lin. Fit. All</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Use Cols:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_2">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Table</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Y Axis</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="plottable_pb">
+          <property name="text">
+           <string>Plot Table</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="xaxislabel_le"/>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="yaxislabel_le"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>X Axis</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QComboBox" name="xaxis_cb"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QComboBox" name="yaxis_cb"/>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <column>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>3</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>4</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>5</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

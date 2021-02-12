@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>449</width>
+    <height>362</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="Dir_Functions">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab_QCM">
+      <attribute name="title">
+       <string>QCM</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="1">
+        <widget class="QTreeWidget" name="treeWidget_4">
+         <column>
+          <property name="text">
+           <string>Y</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QTreeWidget" name="treeWidget_5">
+         <column>
+          <property name="text">
+           <string>QCM</string>
+          </property>
+         </column>
+         <item>
+          <property name="text">
+           <string>Half Cycle Changes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Full Cycle Changes</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Pressure</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>QCM Mass</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>QCM Mass Sub</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>QCM Mass Diff</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineEdit_4"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_FTIR">
+      <attribute name="title">
+       <string>FTIR</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="2">
+        <widget class="QTreeWidget" name="treewidget_list">
+         <column>
+          <property name="text">
+           <string>Survey</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>To</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>From </string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QTreeWidget" name="treewidget_functions">
+         <column>
+          <property name="text">
+           <string>FTIR</string>
+          </property>
+         </column>
+         <item>
+          <property name="text">
+           <string>Plot All</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Subtraction</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Difference</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Integration</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Integrations</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Skip Plot Every: </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLineEdit" name="lineEdit_from">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="lineEdit_to">
+         <property name="text">
+          <string>9999</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_SE">
+      <attribute name="title">
+       <string>SE</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTreeWidget" name="treeWidget">
+         <column>
+          <property name="text">
+           <string notr="true">1</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

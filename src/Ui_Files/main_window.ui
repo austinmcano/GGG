@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>747</width>
+    <height>536</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>George Group</string>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QWidget" name="graphWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>600</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>747</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuImport">
+     <property name="title">
+      <string>Import</string>
+     </property>
+     <addaction name="actionDirectory"/>
+     <addaction name="actionFile"/>
+    </widget>
+    <addaction name="actionNew_Project_2"/>
+    <addaction name="actionOpen_Project"/>
+    <addaction name="actionRecent_Projects"/>
+    <addaction name="separator"/>
+    <addaction name="actionChange_Settings"/>
+    <addaction name="actionSave_Data"/>
+    <addaction name="actionLoad_Data"/>
+    <addaction name="menuImport"/>
+    <addaction name="actionPrint"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+   </widget>
+   <widget class="QMenu" name="menuViews">
+    <property name="title">
+     <string>Views</string>
+    </property>
+    <addaction name="actionFTIR"/>
+    <addaction name="actionQCM"/>
+    <addaction name="actionSE"/>
+    <addaction name="actionXPS"/>
+    <addaction name="actionXRD"/>
+    <addaction name="actionCurve_Fitting"/>
+    <addaction name="actionCalculator"/>
+    <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="actionProject_Tree"/>
+    <addaction name="actionDataBrowser"/>
+    <addaction name="actionConsole"/>
+   </widget>
+   <widget class="QMenu" name="menuFigure">
+    <property name="title">
+     <string>Graph</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionClear_Graph"/>
+    <addaction name="actionSave_To_CSV"/>
+    <addaction name="actionLegend_Toggle"/>
+    <addaction name="actionSeaborn_Settings"/>
+    <addaction name="actionBar_Graph"/>
+    <addaction name="actionTight_Layout"/>
+   </widget>
+   <widget class="QMenu" name="menuHELP">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionQCM_Help"/>
+    <addaction name="actionXPS_Help"/>
+    <addaction name="actionFTIR_Help"/>
+    <addaction name="actionSE_Help"/>
+    <addaction name="separator"/>
+    <addaction name="actionOther_Help"/>
+   </widget>
+   <widget class="QMenu" name="menuTesting">
+    <property name="title">
+     <string>Testing</string>
+    </property>
+    <addaction name="actionGraph_Test"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuViews"/>
+   <addaction name="menuFigure"/>
+   <addaction name="menuHELP"/>
+   <addaction name="menuTesting"/>
+  </widget>
+  <action name="actionOpen_File">
+   <property name="text">
+    <string>Open File</string>
+   </property>
+  </action>
+  <action name="actionOpen_Directory">
+   <property name="text">
+    <string>Open Directory</string>
+   </property>
+  </action>
+  <action name="actionSave_Data">
+   <property name="text">
+    <string>Save Data</string>
+   </property>
+  </action>
+  <action name="actionNew_Project">
+   <property name="text">
+    <string>New Project</string>
+   </property>
+  </action>
+  <action name="actionCurrent_Path">
+   <property name="text">
+    <string>Current Path</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFTIR">
+   <property name="text">
+    <string>FTIR</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionQCM">
+   <property name="text">
+    <string>QCM</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="actionPlot_Left">
+   <property name="text">
+    <string>Plot Left</string>
+   </property>
+  </action>
+  <action name="actionPlot_Right">
+   <property name="text">
+    <string>Plot Right</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </action>
+  <action name="actionGraph_Options">
+   <property name="text">
+    <string>Graph Options</string>
+   </property>
+  </action>
+  <action name="actionSmooth">
+   <property name="text">
+    <string>Smooth</string>
+   </property>
+  </action>
+  <action name="actionPlot_Mass">
+   <property name="text">
+    <string>Plot Mass</string>
+   </property>
+  </action>
+  <action name="actionPlot_Pressure">
+   <property name="text">
+    <string>Plot Pressure</string>
+   </property>
+  </action>
+  <action name="actionGet_Info">
+   <property name="text">
+    <string>Get Info</string>
+   </property>
+  </action>
+  <action name="actionInitalize">
+   <property name="text">
+    <string>Initalize</string>
+   </property>
+  </action>
+  <action name="actionLinear_Fit">
+   <property name="text">
+    <string>Linear Fit</string>
+   </property>
+  </action>
+  <action name="actionClear_2">
+   <property name="text">
+    <string>Clear</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionRandom_Plot">
+   <property name="text">
+    <string>Random Plot</string>
+   </property>
+  </action>
+  <action name="actionClear_Graph">
+   <property name="text">
+    <string>Clear Graph</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionAdd_Figure">
+   <property name="text">
+    <string>Add Figure</string>
+   </property>
+  </action>
+  <action name="actionRemove_Figure">
+   <property name="text">
+    <string>Remove Plot</string>
+   </property>
+  </action>
+  <action name="actionImport_File">
+   <property name="text">
+    <string>Import File</string>
+   </property>
+  </action>
+  <action name="actionProject_View">
+   <property name="text">
+    <string>Project View</string>
+   </property>
+  </action>
+  <action name="actionSystem_View">
+   <property name="text">
+    <string>System View</string>
+   </property>
+  </action>
+  <action name="actionLinear_Fit_2">
+   <property name="text">
+    <string>Linear Fit</string>
+   </property>
+  </action>
+  <action name="actionCorrect_From_First">
+   <property name="text">
+    <string>Correct From First</string>
+   </property>
+  </action>
+  <action name="actionClear_Current_Data">
+   <property name="text">
+    <string>Clear Current Data</string>
+   </property>
+  </action>
+  <action name="actionXPS">
+   <property name="text">
+    <string>XPS</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionProject_Tree">
+   <property name="text">
+    <string>Project Tree</string>
+   </property>
+  </action>
+  <action name="actionDataBrowser">
+   <property name="text">
+    <string>Data Browser</string>
+   </property>
+  </action>
+  <action name="actionSE">
+   <property name="text">
+    <string>SE</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionConsole">
+   <property name="text">
+    <string>Console</string>
+   </property>
+  </action>
+  <action name="actionQCM_Help">
+   <property name="text">
+    <string>QCM Help</string>
+   </property>
+  </action>
+  <action name="actionFTIR_Help">
+   <property name="text">
+    <string>FTIR Help</string>
+   </property>
+  </action>
+  <action name="actionXPS_Help">
+   <property name="text">
+    <string>XPS Help</string>
+   </property>
+  </action>
+  <action name="actionSE_Help">
+   <property name="text">
+    <string>SE Help</string>
+   </property>
+  </action>
+  <action name="actionOther_Help">
+   <property name="text">
+    <string>Other Help</string>
+   </property>
+  </action>
+  <action name="actionLegend_Toggle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Legend Toggle</string>
+   </property>
+  </action>
+  <action name="actionSave_To_CSV">
+   <property name="text">
+    <string>Save To CSV</string>
+   </property>
+  </action>
+  <action name="actionDark">
+   <property name="text">
+    <string>Dark</string>
+   </property>
+  </action>
+  <action name="actionLight">
+   <property name="text">
+    <string>Light</string>
+   </property>
+  </action>
+  <action name="actionDarkGrid">
+   <property name="text">
+    <string>DarkGrid</string>
+   </property>
+  </action>
+  <action name="actionLightGrid">
+   <property name="text">
+    <string>LightGrid</string>
+   </property>
+  </action>
+  <action name="actionTicks">
+   <property name="text">
+    <string>Ticks</string>
+   </property>
+  </action>
+  <action name="actionPaper">
+   <property name="text">
+    <string>Paper</string>
+   </property>
+  </action>
+  <action name="actionTalk">
+   <property name="text">
+    <string>Talk</string>
+   </property>
+  </action>
+  <action name="actionNotebook">
+   <property name="text">
+    <string>Notebook</string>
+   </property>
+  </action>
+  <action name="actionPoster">
+   <property name="text">
+    <string>Poster</string>
+   </property>
+  </action>
+  <action name="action1">
+   <property name="text">
+    <string>1</string>
+   </property>
+  </action>
+  <action name="action2">
+   <property name="text">
+    <string>2</string>
+   </property>
+  </action>
+  <action name="action3">
+   <property name="text">
+    <string>3</string>
+   </property>
+  </action>
+  <action name="actionDirectory">
+   <property name="text">
+    <string>Directory</string>
+   </property>
+  </action>
+  <action name="actionFile">
+   <property name="text">
+    <string>File</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="text">
+    <string>Copy</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="action4">
+   <property name="text">
+    <string>4</string>
+   </property>
+  </action>
+  <action name="action5">
+   <property name="text">
+    <string>5</string>
+   </property>
+  </action>
+  <action name="actiondeep">
+   <property name="text">
+    <string>deep</string>
+   </property>
+  </action>
+  <action name="actionblue">
+   <property name="text">
+    <string>blue</string>
+   </property>
+  </action>
+  <action name="actionflare">
+   <property name="text">
+    <string>flare</string>
+   </property>
+  </action>
+  <action name="actionhls">
+   <property name="text">
+    <string>hls</string>
+   </property>
+  </action>
+  <action name="actionmako">
+   <property name="text">
+    <string>mako</string>
+   </property>
+  </action>
+  <action name="actioncrest">
+   <property name="text">
+    <string>crest</string>
+   </property>
+  </action>
+  <action name="actionmagma">
+   <property name="text">
+    <string>magma</string>
+   </property>
+  </action>
+  <action name="actioncubehelix">
+   <property name="text">
+    <string>cubehelix</string>
+   </property>
+  </action>
+  <action name="actionlight_b">
+   <property name="text">
+    <string>light:b</string>
+   </property>
+  </action>
+  <action name="actionseagreen">
+   <property name="text">
+    <string>seagreen</string>
+   </property>
+  </action>
+  <action name="actionspectral">
+   <property name="text">
+    <string>spectral</string>
+   </property>
+  </action>
+  <action name="actioncoolwarm">
+   <property name="text">
+    <string>coolwarm</string>
+   </property>
+  </action>
+  <action name="actionSeaborn_Settings">
+   <property name="text">
+    <string>Seaborn Settings</string>
+   </property>
+  </action>
+  <action name="actionNew_Project_2">
+   <property name="text">
+    <string>New Project</string>
+   </property>
+  </action>
+  <action name="actionOpen_Project">
+   <property name="text">
+    <string>Open Project</string>
+   </property>
+  </action>
+  <action name="actionRecent_Projects">
+   <property name="text">
+    <string>Recent Projects</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actionSettings_2">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSettings_3">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSettings_4">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSettings_5">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSettings_6">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionChange_Settings">
+   <property name="text">
+    <string>Change Settings</string>
+   </property>
+  </action>
+  <action name="actionCurve_Fitting">
+   <property name="text">
+    <string>Curve Fitting</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionLoad_Data">
+   <property name="text">
+    <string>Load Data</string>
+   </property>
+  </action>
+  <action name="actionCalculator">
+   <property name="text">
+    <string>Calculator</string>
+   </property>
+  </action>
+  <action name="actionBar_Graph">
+   <property name="text">
+    <string>Bar Graph</string>
+   </property>
+  </action>
+  <action name="actionGraph_Test">
+   <property name="text">
+    <string>Graph_Test</string>
+   </property>
+  </action>
+  <action name="actionTight_Layout">
+   <property name="text">
+    <string>Tight Layout</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionXRD">
+   <property name="text">
+    <string>XRD</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

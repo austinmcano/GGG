@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DockWidget</class>
+ <widget class="QDockWidget" name="DockWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>534</width>
+    <height>574</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>XPS</string>
+  </property>
+  <widget class="QWidget" name="dockWidgetContents">
+   <layout class="QGridLayout" name="gridLayout_7">
+    <item row="1" column="0" colspan="4">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>XPS Plotting</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="3" column="2">
+         <widget class="QPushButton" name="plot_pb">
+          <property name="text">
+           <string>Plot</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QTreeWidget" name="tw_y">
+          <column>
+           <property name="text">
+            <string>Counts</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="fill_cols_pb">
+          <property name="text">
+           <string>Fill Columns</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QTreeView" name="XPS_treeView">
+          <property name="maximumSize">
+           <size>
+            <width>1000</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTreeWidget" name="tw_x">
+          <column>
+           <property name="text">
+            <string>B.E. (e.V.)</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QSpinBox" name="skip_rows_sb"/>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>skip rows</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_13">
+       <attribute name="title">
+        <string>Fitting</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="3" column="3">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Offset</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4">
+         <widget class="QPushButton" name="fit_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Fit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="num_peaks_sb">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="5">
+         <widget class="QTextEdit" name="fit_report_TE"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QComboBox" name="fit_shape_cb">
+          <item>
+           <property name="text">
+            <string>Voigt</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Gaussian</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Lorentz</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_44">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Num of Peaks</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="5">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="rowCount">
+           <number>10</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <row>
+           <property name="text">
+            <string>Amp</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Type</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Peak 1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 2</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 3</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 4</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 5</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QLineEdit" name="offset_LE">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QPushButton" name="plot_curr_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Plot Curr</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2" colspan="2">
+         <widget class="QPushButton" name="shirley_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Shirley</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_14">
+       <attribute name="title">
+        <string>Thickogram</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0" colspan="2">
+         <widget class="QGraphicsView" name="graphicsView"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QTableWidget" name="tableWidget_2">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>145</height>
+           </size>
+          </property>
+          <row>
+           <property name="text">
+            <string>Layer 1</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Layer 2</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Layer 3</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Substrate</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Intenisty</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>IMFP</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>R.S.F.</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string># Density</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>K.E.</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>30</string>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>4</string>
+           </property>
+          </item>
+          <item row="0" column="3">
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item row="0" column="4">
+           <property name="text">
+            <string>285</string>
+           </property>
+          </item>
+          <item row="1" column="0">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="1" column="1">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="1" column="2">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="1" column="3">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="1" column="4">
+           <property name="text">
+            <string>101</string>
+           </property>
+          </item>
+          <item row="2" column="0">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="2" column="1">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="2" column="2">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="2" column="3">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="2" column="4">
+           <property name="text">
+            <string>101</string>
+           </property>
+          </item>
+          <item row="3" column="0">
+           <property name="text">
+            <string>1000</string>
+           </property>
+          </item>
+          <item row="3" column="1">
+           <property name="text">
+            <string>30</string>
+           </property>
+          </item>
+          <item row="3" column="2">
+           <property name="text">
+            <string>4</string>
+           </property>
+          </item>
+          <item row="3" column="3">
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item row="3" column="4">
+           <property name="text">
+            <string>99</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
