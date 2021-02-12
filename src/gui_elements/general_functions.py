@@ -208,7 +208,7 @@ def plot_QCM(self, time,pressure,mass,a_exp=int,b_exp=int,ttp=float,threshold=fl
 
     return MC_A, MC_B, MC_Cycle, half_cycle_density_A, half_cycle_density_B, full_cycle_density
 
-def find_nearest(array, value):
+def find_nearest(array: object, value: object) -> object:
     array = np.asarray(array)
     idx = (np.abs(array - value)).argmin()
     return idx

@@ -2,6 +2,8 @@ from src.Ui_Files.DockWidgets.Py.dw_QCM import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
 import pandas as pd
 from PySide2 import QtCore
+from src.gui_elements.general_functions import *
+from src.gui_elements.plotting_functions import *
 
 class QCM_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
@@ -288,8 +290,6 @@ class QCM_view(QtWidgets.QDockWidget):
         # time_in_idx = find_nearest(time, end_time) - find_nearest(time, start_time)
         mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
         time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
-        print(time_process)
-        print(mass_process)
         for i in range(num_cycles):
             if i % 2 == 0:
                 exposure.append(start_time + (purge_time_a * i))

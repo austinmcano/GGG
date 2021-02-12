@@ -17,29 +17,11 @@ class Ui_DockWidget(object):
     def setupUi(self, DockWidget):
         if not DockWidget.objectName():
             DockWidget.setObjectName(u"DockWidget")
-        DockWidget.resize(534, 610)
+        DockWidget.resize(528, 626)
         self.dockWidgetContents = QWidget()
         self.dockWidgetContents.setObjectName(u"dockWidgetContents")
         self.gridLayout = QGridLayout(self.dockWidgetContents)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.plot_pb = QPushButton(self.dockWidgetContents)
-        self.plot_pb.setObjectName(u"plot_pb")
-
-        self.gridLayout.addWidget(self.plot_pb, 4, 5, 1, 1)
-
-        self.fill_cols_pb = QPushButton(self.dockWidgetContents)
-        self.fill_cols_pb.setObjectName(u"fill_cols_pb")
-
-        self.gridLayout.addWidget(self.fill_cols_pb, 4, 4, 1, 1)
-
-        self.plot_type_cb = QComboBox(self.dockWidgetContents)
-        self.plot_type_cb.addItem("")
-        self.plot_type_cb.addItem("")
-        self.plot_type_cb.addItem("")
-        self.plot_type_cb.setObjectName(u"plot_type_cb")
-
-        self.gridLayout.addWidget(self.plot_type_cb, 4, 2, 1, 2)
-
         self.tabWidget = QTabWidget(self.dockWidgetContents)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setTabShape(QTabWidget.Rounded)
@@ -47,86 +29,99 @@ class Ui_DockWidget(object):
         self.tab_3.setObjectName(u"tab_3")
         self.gridLayout_3 = QGridLayout(self.tab_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.SE_treeView = QTreeView(self.tab_3)
-        self.SE_treeView.setObjectName(u"SE_treeView")
+        self.plot_type_cb = QComboBox(self.tab_3)
+        self.plot_type_cb.addItem("")
+        self.plot_type_cb.addItem("")
+        self.plot_type_cb.addItem("")
+        self.plot_type_cb.setObjectName(u"plot_type_cb")
 
-        self.gridLayout_3.addWidget(self.SE_treeView, 0, 0, 1, 5)
+        self.gridLayout_3.addWidget(self.plot_type_cb, 11, 2, 1, 1)
+
+        self.xlabel_le = QLineEdit(self.tab_3)
+        self.xlabel_le.setObjectName(u"xlabel_le")
+
+        self.gridLayout_3.addWidget(self.xlabel_le, 4, 2, 1, 2)
 
         self.tw_y = QTreeWidget(self.tab_3)
         self.tw_y.setObjectName(u"tw_y")
         self.tw_y.setSelectionMode(QAbstractItemView.SingleSelection)
 
-        self.gridLayout_3.addWidget(self.tw_y, 1, 2, 1, 3)
-
-        self.tw_x = QTreeWidget(self.tab_3)
-        self.tw_x.setObjectName(u"tw_x")
-
-        self.gridLayout_3.addWidget(self.tw_x, 1, 0, 1, 2)
-
-        self.label_10 = QLabel(self.tab_3)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_3.addWidget(self.label_10, 3, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.tw_y, 1, 3, 1, 1)
 
         self.label_8 = QLabel(self.tab_3)
         self.label_8.setObjectName(u"label_8")
 
-        self.gridLayout_3.addWidget(self.label_8, 4, 0, 1, 1)
-
-        self.label_9 = QLabel(self.tab_3)
-        self.label_9.setObjectName(u"label_9")
-
-        self.gridLayout_3.addWidget(self.label_9, 5, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.label_8, 4, 1, 1, 1)
 
         self.ylabel_le = QLineEdit(self.tab_3)
         self.ylabel_le.setObjectName(u"ylabel_le")
 
-        self.gridLayout_3.addWidget(self.ylabel_le, 5, 1, 1, 4)
+        self.gridLayout_3.addWidget(self.ylabel_le, 5, 2, 1, 2)
 
-        self.xlabel_le = QLineEdit(self.tab_3)
-        self.xlabel_le.setObjectName(u"xlabel_le")
+        self.fill_cols_pb = QPushButton(self.tab_3)
+        self.fill_cols_pb.setObjectName(u"fill_cols_pb")
 
-        self.gridLayout_3.addWidget(self.xlabel_le, 4, 1, 1, 4)
+        self.gridLayout_3.addWidget(self.fill_cols_pb, 11, 1, 1, 1)
+
+        self.label_10 = QLabel(self.tab_3)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_3.addWidget(self.label_10, 3, 1, 1, 1)
 
         self.ax_cb = QComboBox(self.tab_3)
         self.ax_cb.addItem("")
         self.ax_cb.addItem("")
         self.ax_cb.setObjectName(u"ax_cb")
 
-        self.gridLayout_3.addWidget(self.ax_cb, 6, 0, 1, 1)
-
-        self.zero_correct_checkb = QCheckBox(self.tab_3)
-        self.zero_correct_checkb.setObjectName(u"zero_correct_checkb")
-        self.zero_correct_checkb.setChecked(True)
-
-        self.gridLayout_3.addWidget(self.zero_correct_checkb, 6, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.ax_cb, 11, 3, 1, 1)
 
         self.line_name_checkbox = QCheckBox(self.tab_3)
         self.line_name_checkbox.setObjectName(u"line_name_checkbox")
         self.line_name_checkbox.setChecked(True)
 
-        self.gridLayout_3.addWidget(self.line_name_checkbox, 6, 2, 1, 1)
-
-        self.label_7 = QLabel(self.tab_3)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout_3.addWidget(self.label_7, 6, 3, 1, 1)
-
-        self.skip_rows_sb = QSpinBox(self.tab_3)
-        self.skip_rows_sb.setObjectName(u"skip_rows_sb")
-
-        self.gridLayout_3.addWidget(self.skip_rows_sb, 6, 4, 1, 1)
+        self.gridLayout_3.addWidget(self.line_name_checkbox, 7, 2, 1, 1)
 
         self.line_name_le = QLineEdit(self.tab_3)
         self.line_name_le.setObjectName(u"line_name_le")
 
-        self.gridLayout_3.addWidget(self.line_name_le, 3, 1, 1, 4)
+        self.gridLayout_3.addWidget(self.line_name_le, 3, 2, 1, 2)
+
+        self.label_9 = QLabel(self.tab_3)
+        self.label_9.setObjectName(u"label_9")
+
+        self.gridLayout_3.addWidget(self.label_9, 5, 1, 1, 1)
+
+        self.zero_correct_checkb = QCheckBox(self.tab_3)
+        self.zero_correct_checkb.setObjectName(u"zero_correct_checkb")
+        self.zero_correct_checkb.setChecked(True)
+
+        self.gridLayout_3.addWidget(self.zero_correct_checkb, 7, 1, 1, 1)
+
+        self.tw_x = QTreeWidget(self.tab_3)
+        self.tw_x.setObjectName(u"tw_x")
+
+        self.gridLayout_3.addWidget(self.tw_x, 1, 1, 1, 2)
+
+        self.SE_treeView = QTreeView(self.tab_3)
+        self.SE_treeView.setObjectName(u"SE_treeView")
+
+        self.gridLayout_3.addWidget(self.SE_treeView, 0, 1, 1, 3)
+
+        self.plot_pb = QPushButton(self.tab_3)
+        self.plot_pb.setObjectName(u"plot_pb")
+
+        self.gridLayout_3.addWidget(self.plot_pb, 12, 3, 1, 1)
 
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
         self.gridLayout_5 = QGridLayout(self.tab_2)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.label_7 = QLabel(self.tab_2)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout_5.addWidget(self.label_7, 1, 0, 1, 1)
+
         self.linetype_cb = QComboBox(self.tab_2)
         self.linetype_cb.addItem("")
         self.linetype_cb.addItem("")
@@ -138,15 +133,20 @@ class Ui_DockWidget(object):
 
         self.gridLayout_5.addWidget(self.linetype_cb, 0, 0, 1, 1)
 
-        self.lin_fit_pb = QPushButton(self.tab_2)
-        self.lin_fit_pb.setObjectName(u"lin_fit_pb")
-
-        self.gridLayout_5.addWidget(self.lin_fit_pb, 3, 0, 1, 1)
-
         self.fit_results_TE = QTextEdit(self.tab_2)
         self.fit_results_TE.setObjectName(u"fit_results_TE")
 
-        self.gridLayout_5.addWidget(self.fit_results_TE, 2, 0, 1, 2)
+        self.gridLayout_5.addWidget(self.fit_results_TE, 3, 0, 1, 2)
+
+        self.skip_rows_sb = QSpinBox(self.tab_2)
+        self.skip_rows_sb.setObjectName(u"skip_rows_sb")
+
+        self.gridLayout_5.addWidget(self.skip_rows_sb, 1, 1, 1, 1)
+
+        self.lin_fit_pb = QPushButton(self.tab_2)
+        self.lin_fit_pb.setObjectName(u"lin_fit_pb")
+
+        self.gridLayout_5.addWidget(self.lin_fit_pb, 4, 0, 1, 1)
 
         self.comboBox = QComboBox(self.tab_2)
         self.comboBox.addItem("")
@@ -159,17 +159,7 @@ class Ui_DockWidget(object):
         self.linfitall_pb = QPushButton(self.tab_2)
         self.linfitall_pb.setObjectName(u"linfitall_pb")
 
-        self.gridLayout_5.addWidget(self.linfitall_pb, 3, 1, 1, 1)
-
-        self.label_4 = QLabel(self.tab_2)
-        self.label_4.setObjectName(u"label_4")
-
-        self.gridLayout_5.addWidget(self.label_4, 1, 0, 1, 1)
-
-        self.lineEdit_2 = QLineEdit(self.tab_2)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-
-        self.gridLayout_5.addWidget(self.lineEdit_2, 1, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.linfitall_pb, 4, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QWidget()
@@ -202,11 +192,23 @@ class Ui_DockWidget(object):
         self.gridLayout_4.addWidget(self.label, 2, 0, 1, 1)
 
         self.xaxis_cb = QComboBox(self.tab_4)
+        self.xaxis_cb.addItem("")
+        self.xaxis_cb.addItem("")
+        self.xaxis_cb.addItem("")
+        self.xaxis_cb.addItem("")
+        self.xaxis_cb.addItem("")
+        self.xaxis_cb.addItem("")
         self.xaxis_cb.setObjectName(u"xaxis_cb")
 
         self.gridLayout_4.addWidget(self.xaxis_cb, 2, 2, 1, 1)
 
         self.yaxis_cb = QComboBox(self.tab_4)
+        self.yaxis_cb.addItem("")
+        self.yaxis_cb.addItem("")
+        self.yaxis_cb.addItem("")
+        self.yaxis_cb.addItem("")
+        self.yaxis_cb.addItem("")
+        self.yaxis_cb.addItem("")
         self.yaxis_cb.setObjectName(u"yaxis_cb")
 
         self.gridLayout_4.addWidget(self.yaxis_cb, 3, 2, 1, 1)
@@ -246,29 +248,29 @@ class Ui_DockWidget(object):
 
     def retranslateUi(self, DockWidget):
         DockWidget.setWindowTitle(QCoreApplication.translate("DockWidget", u"SE", None))
-        self.plot_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
-        self.fill_cols_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
         self.plot_type_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Ext. Plot (half-ints)", None))
         self.plot_type_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Ext. Plot (ints)", None))
         self.plot_type_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"X vs Y", None))
 
+        self.xlabel_le.setText(QCoreApplication.translate("DockWidget", u"Cycles", None))
         ___qtreewidgetitem = self.tw_y.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("DockWidget", u"SE-Y", None));
-        ___qtreewidgetitem1 = self.tw_x.headerItem()
-        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("DockWidget", u"SE-X", None));
-        self.label_10.setText(QCoreApplication.translate("DockWidget", u"Line Name", None))
         self.label_8.setText(QCoreApplication.translate("DockWidget", u"X Label", None))
-        self.label_9.setText(QCoreApplication.translate("DockWidget", u"Y Label", None))
         self.ylabel_le.setText(QCoreApplication.translate("DockWidget", u"$\\Delta$ Thickness ($\\AA$)", None))
-        self.xlabel_le.setText(QCoreApplication.translate("DockWidget", u"Cycles", None))
+        self.fill_cols_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
+        self.label_10.setText(QCoreApplication.translate("DockWidget", u"Line Name", None))
         self.ax_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left Ax", None))
         self.ax_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right Ax", None))
 
-        self.zero_correct_checkb.setText(QCoreApplication.translate("DockWidget", u"Zero Correct", None))
         self.line_name_checkbox.setText(QCoreApplication.translate("DockWidget", u"Use Line Name", None))
-        self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
         self.line_name_le.setText(QCoreApplication.translate("DockWidget", u"Extended_Plot", None))
+        self.label_9.setText(QCoreApplication.translate("DockWidget", u"Y Label", None))
+        self.zero_correct_checkb.setText(QCoreApplication.translate("DockWidget", u"Zero Correct", None))
+        ___qtreewidgetitem1 = self.tw_x.headerItem()
+        ___qtreewidgetitem1.setText(0, QCoreApplication.translate("DockWidget", u"SE-X", None));
+        self.plot_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Axis Properties", None))
+        self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
         self.linetype_cb.setItemText(0, QCoreApplication.translate("DockWidget", u".-", None))
         self.linetype_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"-.", None))
         self.linetype_cb.setItemText(2, QCoreApplication.translate("DockWidget", u".", None))
@@ -282,12 +284,24 @@ class Ui_DockWidget(object):
         self.comboBox.setItemText(2, QCoreApplication.translate("DockWidget", u"Dope Blue Color", None))
 
         self.linfitall_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit. All", None))
-        self.label_4.setText(QCoreApplication.translate("DockWidget", u"Use Cols:", None))
-        self.lineEdit_2.setText(QCoreApplication.translate("DockWidget", u"0", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Fit Results", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"Y Axis", None))
         self.plottable_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Table", None))
         self.label.setText(QCoreApplication.translate("DockWidget", u"X Axis", None))
+        self.xaxis_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"0", None))
+        self.xaxis_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"1", None))
+        self.xaxis_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"2", None))
+        self.xaxis_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"3", None))
+        self.xaxis_cb.setItemText(4, QCoreApplication.translate("DockWidget", u"4", None))
+        self.xaxis_cb.setItemText(5, QCoreApplication.translate("DockWidget", u"5", None))
+
+        self.yaxis_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"0", None))
+        self.yaxis_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"1", None))
+        self.yaxis_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"2", None))
+        self.yaxis_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"3", None))
+        self.yaxis_cb.setItemText(4, QCoreApplication.translate("DockWidget", u"4", None))
+        self.yaxis_cb.setItemText(5, QCoreApplication.translate("DockWidget", u"5", None))
+
         ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("DockWidget", u"0", None));
         ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
