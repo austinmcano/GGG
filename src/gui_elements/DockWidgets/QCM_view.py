@@ -43,7 +43,7 @@ class QCM_view(QtWidgets.QDockWidget):
 
         self.tree_view.setModel(self.model)
         self.tree_view.installEventFilter(self)
-        self.tree_view.setColumnWidth(0, 200)
+        self.tree_view.setColumnWidth(0, 100)
         self.model.sort(0, order=QtCore.Qt.SortOrder.AscendingOrder)
 
         self.ui.fill_cols_pb.clicked.connect(lambda: self.fill_colls())
@@ -53,7 +53,7 @@ class QCM_view(QtWidgets.QDockWidget):
         self.ui.treeWidget_mass.currentItemChanged.connect(lambda: self.load_data(self.ui.treeWidget_mass))
 
     def time_change(self):
-        if self.ui.time_option.currentText()=='From:To Time':
+        if self.ui.time_option.currentText() == 'From:To Time':
             self.ui.From_Time.setText('0')
             self.ui.To_Time.setText('9999999')
 
@@ -163,7 +163,6 @@ class QCM_view(QtWidgets.QDockWidget):
         elif self.ui.plot_type_cb.currentText() == 'Half+Full Cycle (Mass Only)':
             mc_a, mc_b, mc_f = self.mass_qcm_anal(self.time,self.mass,
                                                   float(self.ui.start_time_LE.text()),
-                                                  float(self.ui.end_time_LE.text()),
                                                   float(self.ui.adp_time_LE.text()),
                                                   float(self.ui.bdp_time_LE.text()),
                                                   num_cycles=int(self.ui.num_exp_LE.text()))
@@ -173,7 +172,6 @@ class QCM_view(QtWidgets.QDockWidget):
         elif self.ui.plot_type_cb.currentText() == 'Half Cycle (Mass Only)':
             mc_a, mc_b, mc_f = self.mass_qcm_anal(self.time, self.mass,
                                                   float(self.ui.start_time_LE.text()),
-                                                  float(self.ui.end_time_LE.text()),
                                                   float(self.ui.adp_time_LE.text()),
                                                   float(self.ui.bdp_time_LE.text()),
                                                   num_cycles=int(self.ui.num_exp_LE.text()))
@@ -279,7 +277,7 @@ class QCM_view(QtWidgets.QDockWidget):
 
         return MC_A, MC_B, MC_Cycle, half_cycle_density_A, half_cycle_density_B, full_cycle_density
 
-    def mass_qcm_anal(self,time,mass, start_time=float, end_time=float, purge_time_a=float, purge_time_b=float, num_cycles=int):
+    def mass_qcm_anal(self,time,mass, start_time=float, purge_time_a=float, purge_time_b=float, num_cycles=int):
         # time = data[0]
         # mass = data[2]
         exposure = []
@@ -288,8 +286,10 @@ class QCM_view(QtWidgets.QDockWidget):
         mass_hc_b = []
         exp_length_idx = []
         # time_in_idx = find_nearest(time, end_time) - find_nearest(time, start_time)
-        mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
-        time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
+        # mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
+        # time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
+        mass_process = mass[find_nearest(time, start_time):]
+        time_process = time[find_nearest(time, start_time):]
         for i in range(num_cycles):
             if i % 2 == 0:
                 exposure.append(start_time + (purge_time_a * i))
