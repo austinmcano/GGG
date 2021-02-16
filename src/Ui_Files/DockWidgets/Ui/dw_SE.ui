@@ -54,18 +54,6 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="3">
-         <widget class="QTreeWidget" name="tw_y">
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <column>
-           <property name="text">
-            <string>SE-Y</string>
-           </property>
-          </column>
-         </widget>
-        </item>
         <item row="4" column="1">
          <widget class="QLabel" name="label_8">
           <property name="text">
@@ -92,20 +80,6 @@
           <property name="text">
            <string>Line Name</string>
           </property>
-         </widget>
-        </item>
-        <item row="11" column="3">
-         <widget class="QComboBox" name="ax_cb">
-          <item>
-           <property name="text">
-            <string>Left Ax</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Right Ax</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item row="7" column="2">
@@ -142,7 +116,10 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="2">
+        <item row="0" column="1" colspan="3">
+         <widget class="QTreeView" name="SE_treeView"/>
+        </item>
+        <item row="1" column="1">
          <widget class="QTreeWidget" name="tw_x">
           <column>
            <property name="text">
@@ -151,10 +128,33 @@
           </column>
          </widget>
         </item>
-        <item row="0" column="1" colspan="3">
-         <widget class="QTreeView" name="SE_treeView"/>
+        <item row="1" column="2" colspan="2">
+         <widget class="QTreeWidget" name="tw_y">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <column>
+           <property name="text">
+            <string>SE-Y</string>
+           </property>
+          </column>
+         </widget>
         </item>
-        <item row="12" column="3">
+        <item row="7" column="3">
+         <widget class="QComboBox" name="ax_cb">
+          <item>
+           <property name="text">
+            <string>Left Ax</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right Ax</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="11" column="3">
          <widget class="QPushButton" name="plot_pb">
           <property name="text">
            <string>Plot</string>

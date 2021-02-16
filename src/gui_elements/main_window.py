@@ -19,6 +19,7 @@ from src.gui_elements.settings import ApplicationSettings
 from PySide2 import QtCore,QtWidgets,QtGui
 import seaborn as sns
 from src.gui_elements.plotting_functions import *
+from src.gui_elements.general_functions import *
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
@@ -68,6 +69,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas = FigureCanvas(self.fig)
         self.ax = self.fig.add_subplot(111)
         self.ax_2 = None
+        self.ax_3 = None
+        self.ax_4 = None
         self.canvas.draw()
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)
@@ -109,16 +112,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.send_to_cf_action = self.context_menu_plot.addAction('Send to CF')
         self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
         self.axis_colors_action = self.graph_menu.addAction('Axis Colors')
+        self.axis_setup_action = self.graph_menu.addAction('Change Axis Setup')
 
         self.clear_action.triggered.connect(lambda: self.cleargraph())
-        self.removeplot_action.triggered.connect(lambda: plotting_funs.remove_line(self))
-        self.actionSave_To_CSV.triggered.connect(lambda: plotting_funs.Save_All_Plotted(self))
-        self.save_figure_action.triggered.connect(lambda: plotting_funs.save_fig(self))
-        self.annotation_action.triggered.connect(lambda: plotting_funs.plot_annotation(self))
+        self.removeplot_action.triggered.connect(lambda: remove_line(self))
+        self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
+        self.save_figure_action.triggered.connect(lambda: save_fig(self))
+        self.annotation_action.triggered.connect(lambda: plot_annotation(self))
         self.sns_settings_action.triggered.connect(lambda: self.sns_settings())
-        self.send_to_cf_action.triggered.connect(lambda: plotting_funs.send_to_cf(self))
-        self.open_fig_action.triggered.connect(lambda: plotting_funs.show_pickled_fig(self))
-        self.axis_colors_action.triggered.connect(lambda: plotting_funs.spine_color_fun(self))
+        self.send_to_cf_action.triggered.connect(lambda: send_to_cf(self))
+        self.open_fig_action.triggered.connect(lambda: show_pickled_fig(self))
+        self.axis_colors_action.triggered.connect(lambda: spine_color_fun(self))
+        self.axis_setup_action.triggered.connect(lambda: axis_setup_function(self))
 
 
         start_dialog = QtWidgets.QDialog()

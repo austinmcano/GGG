@@ -14,47 +14,6 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Frame</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Draggable</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QComboBox" name="dragable_cb">
-     <item>
-      <property name="text">
-       <string>Yes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>No</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QSpinBox" name="size_sb"/>
-   </item>
    <item row="2" column="1">
     <widget class="QComboBox" name="frame_cb">
      <item>
@@ -64,7 +23,47 @@
      </item>
      <item>
       <property name="text">
-       <string>Box</string>
+       <string>darrow</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>circle</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>larrow</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>rarrow</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>round</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>round4</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>roundtooth</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>sawtooth</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>square</string>
       </property>
      </item>
     </widget>
@@ -76,6 +75,13 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Frame Width</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
@@ -83,8 +89,140 @@
      </property>
     </widget>
    </item>
+   <item row="1" column="1">
+    <widget class="QSpinBox" name="size_sb">
+     <property name="value">
+      <number>18</number>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QComboBox" name="framecolor_cb">
+     <item>
+      <property name="text">
+       <string>k</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>r</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>g</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>w</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>c</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>m</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>y</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>b</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QDoubleSpinBox" name="framewidth_sb">
+     <property name="value">
+      <double>2.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Frame</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="1">
-    <widget class="QLineEdit" name="text_le"/>
+    <widget class="QLineEdit" name="text_le">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Frame Color</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Frame Background Color</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QComboBox" name="framebgcolor_cb">
+     <item>
+      <property name="text">
+       <string>white</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>purple</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>green</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>red</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>yellow</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>blue</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>black</string>
+      </property>
+     </item>
+    </widget>
    </item>
   </layout>
  </widget>

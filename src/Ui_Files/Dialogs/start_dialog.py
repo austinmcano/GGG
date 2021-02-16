@@ -69,7 +69,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.CF_pb.setText(QCoreApplication.translate("Dialog", u"Curve Fitting", None))
-        self.SE_pb.setText(QCoreApplication.translate("Dialog", u"Ellipsometry", None))
+        self.SE_pb.setText(QCoreApplication.translate("Dialog", u"Spectroscopic Ellipsometry", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Select what closest matches up with why you are here:", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Welcome to the George group gui!", None))
         self.XPS_pb.setText(QCoreApplication.translate("Dialog", u"X-Ray Photoelectron Spectroscopy", None))

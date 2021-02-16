@@ -1,6 +1,7 @@
 from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as TW_ui
 from PySide2 import QtWidgets
 import numpy as np
+from src.Ui_Files.Dialogs.axis_setup_dialog import Ui_Dialog as axis_setup_ui
 from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as STC_ui
 from src.Ui_Files.Dialogs.app_settings import Ui_Dialog as app_settings
 from src.Ui_Files.Dialogs.annotation_dialog import Ui_Dialog as annotation_ui
@@ -246,7 +247,14 @@ def remove_line(self):
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
                     self.canvas.draw()
+                elif isinstance(line,matplotlib.offsetbox.DraggableAnnotation):
+                    print(line)
+                    line.remove()
+                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                    del line
                 else:
+                    print(line)
+                    print(type(line))
                     line_0 = line.lines[0]
                     self.ax.lines.remove(line_0)
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
@@ -410,8 +418,21 @@ def import_directiory_function(self):
 
 def plot_annotation(self):
     def finish():
-        spot = [np.average(ApplicationSettings.C_X_LIM),np.average(ApplicationSettings.C_Y_LIM)]
-        self.ax.annotate(ui.text_le.text(),xy=(spot[0],spot[1])).draggable()
+        if ui.frame_cb.currentText() == 'No Frame':
+            ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = \
+                self.ax.annotate(ui.text_le.text(), xy=(.5, .5),xycoords='figure fraction',horizontalalignment='left',
+                                 verticalalignment='top',fontsize=ui.size_sb.value()).draggable()
+        else:
+            frame = str(ui.frame_cb.currentText())
+            # spot = [np.average(ApplicationSettings.C_X_LIM),np.average(ApplicationSettings.C_Y_LIM)]
+            # if type(spot[0]) is float and type(spot[1]) is float:
+            #     ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = self.ax.annotate(ui.text_le.text(),xy=(spot[0],spot[1])).draggable()
+            # else:
+            ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = \
+                self.ax.annotate(ui.text_le.text(),xy=(.5, .5), xycoords='figure fraction',horizontalalignment='left',
+                                 verticalalignment='top',fontsize=ui.size_sb.value(),
+                                 bbox=dict(boxstyle=frame+",pad=0.3", fc=ui.framebgcolor_cb.currentText(),
+                                           ec=ui.framecolor_cb.currentText(), lw=ui.framewidth_sb.value())).draggable()
         self.canvas.draw()
     d = QtWidgets.QDialog()
     ui = annotation_ui()
@@ -509,3 +530,32 @@ def fil_cols_fun(self):
         column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
         self.ui.tw_x.addTopLevelItems(column_list_x)
         self.ui.tw_y.addTopLevelItems(column_list_y)
+
+def axis_setup_function(self):
+    def axis_fun():
+        self.cleargraph()
+        axis1 = ui.axis1_cb.currentText()
+        axis2 = ui.axis2_cb.currentText()
+        axis3 = ui.axis3_cb.currentText()
+        axis4 = ui.axis4_cb.currentText()
+        if axis1 == 'ON' and all(i == 'OFF' for i in [axis2,axis3,axis4]):
+            self.ax = self.fig.add_subplot(111)
+        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'OFF' and axis4 == 'OFF':
+            self.ax = self.fig.add_subplot(211)
+            self.ax_2 = self.fig.add_subplot(212)
+        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'OFF':
+            self.ax = self.fig.add_subplot(211)
+            self.ax_2 = self.fig.add_subplot(223)
+            self.ax_3 = self.fig.add_subplot(224)
+        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'ON':
+            self.ax = self.fig.add_subplot(221)
+            self.ax_2 = self.fig.add_subplot(222)
+            self.ax_3 = self.fig.add_subplot(223)
+            self.ax_4 = self.fig.add_subplot(224)
+        self.fig.tight_layout()
+        self.canvas.draw()
+    dialog = QtWidgets.QDialog()
+    ui = axis_setup_ui()
+    ui.setupUi(dialog)
+    ui.buttonBox.accepted.connect(lambda: axis_fun())
+    dialog.exec_()
