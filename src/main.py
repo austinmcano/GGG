@@ -1,10 +1,9 @@
 import sys
 from PySide2 import QtWidgets,QtCore, QtGui
 from src.gui_elements.main_window import MainWindow
-# from src import pyqtcss
 import os
-os.environ['QT_MAC_WANTS_LAYER'] = '1'
 
+os.environ['QT_MAC_WANTS_LAYER'] = '1'
 settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
 
 if __name__ == "__main__":

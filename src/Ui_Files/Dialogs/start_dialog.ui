@@ -24,7 +24,7 @@
    <item row="4" column="1">
     <widget class="QPushButton" name="SE_pb">
      <property name="text">
-      <string>Ellipsometry</string>
+      <string>Spectroscopic Ellipsometry</string>
      </property>
     </widget>
    </item>
