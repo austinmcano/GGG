@@ -1,6 +1,7 @@
 from src.Ui_Files.DockWidgets.Py.dw_XPS_0 import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
 from src.gui_elements.plotting_functions import *
+from src.gui_elements.general_functions import *
 from lmfit import Model, Parameters
 from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
 
@@ -116,6 +117,7 @@ class XPS_view(QtWidgets.QDockWidget):
         self.save_constraints()
         self.main_window.cleargraph()
         x_lim = ApplicationSettings.C_X_LIM
+        print(x_lim)
         #  Y is data[0]..... whyyyyyyy x is data[1]
         # self.data = np.flip(ApplicationSettings.CURRENT_PLOT[0].get_data())
         # self.data = np.flip(self.data)

@@ -6,6 +6,8 @@ from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
 from lmfit import Model, Parameters
 from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 from src.gui_elements.plotting_functions import baseline_als
+from src.gui_elements.general_functions import find_nearest
+from matplotlib.widgets import SpanSelector
 
 class FTIR_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
@@ -65,6 +67,8 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.ui.tableWidget_2.cellChanged.connect(lambda: self.save_constraints())
         self.ui.selectdata_pb.clicked.connect(lambda: self.select_data())
         self.ui.baseline_pb.clicked.connect(lambda: self.baseline_data())
+        self.ui.integratemode_rb.toggled.connect(self.integrate_mode)
+
 
     def eventFilter(self, object, event):
         # For right click events
@@ -657,7 +661,7 @@ class FTIR_view(QtWidgets.QDockWidget):
     def integrate(self):
         path = self.model.filePath(self.tree_view.currentIndex())
         csv_list = sorted(glob.glob(path + '/*CSV'))
-        self.sub = self.subtraction_from_survey(csv_list)
+        # self.sub = self.subtraction_from_survey(csv_list)
         min_max = [[400,4000],[400,4000],[400,4000],[400,4000]]
         labels = ['','','','']
         for row in range(4):
@@ -792,6 +796,30 @@ class FTIR_view(QtWidgets.QDockWidget):
         integral_list = []
         lim = [min(range(len(data[0])), key=lambda i: abs(data[0][i] - minimum)),
                min(range(len(data[0])), key=lambda i: abs(data[0][i] - maximum))]
+        print(lim)
         for numb in range(len(data) - 1):
             integral_list.append(integrate.trapz(data[numb + 1][lim[0]:lim[1]], data[0][lim[0]:lim[1]]))
         return integral_list
+
+    def integrate_mode(self, enabled):
+        if enabled:
+            axis_setup_fun(self.main_window, 2)
+            self.span = SpanSelector(self.main_window.ax, self.onselect, 'horizontal', useblit=True,
+                                     rectprops=dict(alpha=0.1, facecolor='blue'))
+        else:
+            del self.span
+
+    def onselect(self, min, max):
+        dict = ApplicationSettings.ALL_DATA_PLOTTED
+        Key_List = []
+        data = []
+        index = 0
+        for i in dict.keys():
+            if index == 0:
+                data.append(dict[i][0]._xy.T[0])
+                index += 1
+            Key_List.append(i)
+            data.append(dict[i][0]._xy.T[1])
+        inte = self.integrate_ir(data, min, max)
+        self.main_window.ax_2.plot(inte, '.-', label=str(np.round(min,4)) + '-' + str(np.round(max,4)))
+        self.main_window.canvas.draw()

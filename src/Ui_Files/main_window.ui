@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>747</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -126,6 +126,21 @@
    <addaction name="menuFigure"/>
    <addaction name="menuHELP"/>
    <addaction name="menuTesting"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionAxis1"/>
+   <addaction name="actionAxis2"/>
+   <addaction name="actionAxis3"/>
+   <addaction name="actionAxis4"/>
   </widget>
   <action name="actionOpen_File">
    <property name="text">
@@ -241,9 +256,6 @@
   <action name="actionClear_Graph">
    <property name="text">
     <string>Clear Graph</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Z</string>
    </property>
   </action>
   <action name="actionAdd_Figure">
@@ -604,6 +616,29 @@
   <action name="actionXRD">
    <property name="text">
     <string>XRD</string>
+   </property>
+  </action>
+  <action name="actionAxis1">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Axis1</string>
+   </property>
+  </action>
+  <action name="actionAxis2">
+   <property name="text">
+    <string>Axis2</string>
+   </property>
+  </action>
+  <action name="actionAxis3">
+   <property name="text">
+    <string>Axis3</string>
+   </property>
+  </action>
+  <action name="actionAxis4">
+   <property name="text">
+    <string>Axis4</string>
    </property>
   </action>
  </widget>

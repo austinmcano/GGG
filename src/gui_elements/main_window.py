@@ -44,30 +44,10 @@ class MainWindow(QtWidgets.QMainWindow):
         # sns.set(self.context, self.style, self.c_palette, self.font, self.fs, True, {"axes.facecolor": "#F0F0F0", 'figure.facecolor': '#505F69'})
         sns.set(self.context, self.style, self.c_palette, self.font,
                 self.fs,True, {"axes.facecolor": self.axes_facecolor,'figure.facecolor': self.fig_facecolor})
-        self.dw_ProjectView = ProjectBrowser(self)
-        self.dw_Data_Broswer = DataBrowser(self)
-        self.dw_FTIR = FTIR_view(self)
-        self.dw_XPS = XPS_view(self)
-        self.dw_XRD = XRD_view(self)
-        self.dw_QCM = QCM_view(self)
-        self.dw_SE = SE_view(self)
-        self.dw_Console = Console_view(self)
-        self.dw_CF = CurveFit_view(self)
-        self.dw_calc = Calculator_view(self)
-        self.All_Views = [self.dw_FTIR,self.dw_QCM,self.dw_SE,self.dw_XPS,self.dw_CF,self.dw_ProjectView
-            ,self.dw_Data_Broswer, self.dw_XRD]
 
-        # for i in self.All_Views:
-        #     try:
-        #         i.setMinimumSize(QtCore.QSize(400, 50))
-        #         i.setMaximumSize(QtCore.QSize(500, 1000))
-        #     except AttributeError:
-        #         pass
-
-        # self.fig = figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
         self.fig = figure(num=None, figsize=(8, 6), dpi=80)
         self.canvas = FigureCanvas(self.fig)
-        self.ax = self.fig.add_subplot(111)
+        self.ax_1 = self.fig.add_subplot(111)
         self.ax_2 = None
         self.ax_3 = None
         self.ax_4 = None
@@ -78,6 +58,22 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas.draw()
         self.bar = {'xlist': '', 'y1list':'','y2list':'','y3list':'', 'width':'0.35', 'num':1,
                     'label1':'','label2':'','label3':''}
+        self.ax = self.ax_1
+
+
+
+        self.dw_ProjectView = ProjectBrowser(self)
+        self.dw_Data_Broswer = DataBrowser(self)
+        self.dw_FTIR = FTIR_view(self)
+        self.dw_XPS = XPS_view(self)
+        self.dw_XRD = XRD_view(self)
+        self.dw_QCM = QCM_view(self)
+        self.dw_SE = SE_view(self)
+        self.dw_Console = Console_view(self)
+        self.dw_CF = CurveFit_view(self)
+        self.dw_calc = Calculator_view(self)
+        self.All_Views = [self.dw_FTIR, self.dw_QCM, self.dw_SE, self.dw_XPS, self.dw_CF, self.dw_ProjectView
+            , self.dw_Data_Broswer, self.dw_XRD]
 
         # self.resize(self.settings.value("size", QtCore.QSize(270, 225)))
         # self.resize(self.settings.value("size"))
@@ -92,16 +88,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ax.tick_params(axis='x', colors=self.settings.value('bottom_spine_color'))
         self.ax.tick_params(axis='y', colors=self.settings.value('left_spine_color'))
 
-    # def closeEvent(self, event: QtGui.QCloseEvent):
-    #     self.settings.setValue('window_size', self.size())
-        # self.settings.setValue('window_position', self.pos())
-        # print(self.settings.fileName())
-
     def init_connections(self):
         self.context_menu_plot = QtWidgets.QMenu(self)
         self.canvas.installEventFilter(self)
 
-        self.clear_action = self.context_menu_plot.addAction('Clear')
+        self.clear_menu = self.context_menu_plot.addMenu('Clear')
+        self.clear_action = self.clear_menu.addAction('Clear All')
+        self.clear_single_action = self.clear_menu.addAction('Clear Graph')
+        self.clear_all_graphs_action = self.clear_menu.addAction('Clear All Graphs')
         self.save_menu = self.context_menu_plot.addMenu('Save')
         self.actionSave_To_CSV = self.save_menu.addAction('Save To CSV')
         self.graph_menu = self.context_menu_plot.addMenu(' Graphs')
@@ -113,7 +107,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
         self.axis_colors_action = self.graph_menu.addAction('Axis Colors')
         self.axis_setup_action = self.graph_menu.addAction('Change Axis Setup')
+        self.axis_setup_action2 = self.graph_menu.addAction('Change Axis Setup 2')
+        self.axis_setup_action3 = self.graph_menu.addAction('Change Axis Setup 3')
+        self.axis_setup_action4 = self.graph_menu.addAction('Change Axis Setup 4')
 
+        self.clear_single_action.triggered.connect(lambda: self.clear_single_graph())
+        self.clear_all_graphs_action.triggered.connect(lambda: self.clear_all_graphs())
         self.clear_action.triggered.connect(lambda: self.cleargraph())
         self.removeplot_action.triggered.connect(lambda: remove_line(self))
         self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
@@ -123,8 +122,20 @@ class MainWindow(QtWidgets.QMainWindow):
         self.send_to_cf_action.triggered.connect(lambda: send_to_cf(self))
         self.open_fig_action.triggered.connect(lambda: show_pickled_fig(self))
         self.axis_colors_action.triggered.connect(lambda: spine_color_fun(self))
-        self.axis_setup_action.triggered.connect(lambda: axis_setup_function(self))
+        # self.axis_setup_action.triggered.connect(lambda: axis_setup_function(self))
+        self.ui.actionAxis1.triggered.connect(lambda: change_axis(self, 'axis1'))
+        self.ui.actionAxis2.triggered.connect(lambda: change_axis(self, 'axis2'))
+        self.ui.actionAxis3.triggered.connect(lambda: change_axis(self, 'axis3'))
+        self.ui.actionAxis4.triggered.connect(lambda: change_axis(self, 'axis4'))
 
+        self.axis_setup_action = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+1'), self)
+        self.axis_setup_action.activated.connect(lambda: axis_setup_fun(self,1))
+        self.axis_setup_action2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+2'), self)
+        self.axis_setup_action2.activated.connect(lambda: axis_setup_fun(self, 2))
+        self.axis_setup_action3 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+3'), self)
+        self.axis_setup_action3.activated.connect(lambda: axis_setup_fun(self, 3))
+        self.axis_setup_action4 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+4'), self)
+        self.axis_setup_action4.activated.connect(lambda: axis_setup_fun(self, 4))
 
         start_dialog = QtWidgets.QDialog()
         start_ui = start_Ui()
@@ -167,6 +178,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionXPS_Help.triggered.connect(lambda: self.memory_usage())
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
         self.ui.actionLegend_Toggle.setShortcut(QtCore.QCoreApplication.translate("MainWindow", u"Ctrl+T", None))
+        self.clear_all_graphs_action.setShortcut(QtCore.QCoreApplication.translate("MainWindow", u"Ctrl+W", None))
+
 
     def memory_usage(self):
         # !/usr/bin/env python
@@ -184,6 +197,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def lims_change(self, event_ax):
         ApplicationSettings.C_X_LIM = list(event_ax.get_xlim())
         ApplicationSettings.C_Y_LIM = list(event_ax.get_ylim())
+        print(list(event_ax.get_xlim()))
+        print(list(event_ax.get_ylim()))
 
     def eventFilter(self, object, event):
         # For right click events
@@ -332,6 +347,24 @@ class MainWindow(QtWidgets.QMainWindow):
     def se_help_function(self):
         print('the best color is: #b63841ff')
 
+    def clear_single_graph(self):
+        self.ax.clear()
+        self.fig.tight_layout()
+        self.canvas.draw()
+
+    def clear_all_graphs(self):
+        self.ax_1.clear()
+        if self.ax_2 is not None:
+            self.ax_2.clear()
+        if self.ax_3 is not None:
+            self.ax_3.clear()
+        if self.ax_4 is not None:
+            self.ax_4.clear()
+        ApplicationSettings.ALL_DATA_PLOTTED = {}
+        self.ax.callbacks.connect('xlim_changed', self.lims_change)
+        self.fig.tight_layout()
+        self.canvas.draw()
+
     def cleargraph(self):
         self.ax.clear()
         self.fig.clf()
@@ -352,6 +385,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.fig.tight_layout()
         self.canvas.draw()
         self.ax_2 = None
+        self.ax_3 = None
+        self.ax_4 = None
 
     def import_fitted_parameters(self):
         pass
@@ -362,3 +397,4 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.settings.setValue("pos", self.pos())
         print('happened')
         e.accept()
+

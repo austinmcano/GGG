@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>562</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,6 +17,9 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="0" colspan="2">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -25,47 +28,38 @@
         <string>IR Plot</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="3">
-         <widget class="QPushButton" name="pushButton">
-          <property name="text">
-           <string>Plot or Fit FTIR</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Skip Every</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
+        <item row="13" column="1">
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>P (asymetry) </string>
           </property>
          </widget>
         </item>
-        <item row="9" column="2">
-         <widget class="QDoubleSpinBox" name="p_sb">
-          <property name="decimals">
-           <number>6</number>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-          <property name="singleStep">
-           <double>0.010000000000000</double>
-          </property>
-          <property name="value">
-           <double>0.010000000000000</double>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="text">
+           <string>Sub Plot (dir)</string>
           </property>
          </widget>
         </item>
-        <item row="12" column="2">
-         <widget class="QSpinBox" name="smooth_sb"/>
+        <item row="16" column="3">
+         <widget class="QPushButton" name="smooth_pb">
+          <property name="text">
+           <string>Smooth</string>
+          </property>
+         </widget>
         </item>
-        <item row="7" column="2">
+        <item row="16" column="1">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Savitzky–Golay Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" colspan="3">
+         <widget class="QTreeView" name="FTIR_treeView"/>
+        </item>
+        <item row="11" column="2">
          <widget class="QSpinBox" name="lambda_sb">
           <property name="maximum">
            <number>9999999</number>
@@ -78,55 +72,21 @@
           </property>
          </widget>
         </item>
-        <item row="12" column="1">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Savitzky–Golay Filter</string>
-          </property>
-         </widget>
-        </item>
         <item row="10" column="1" colspan="3">
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="QSpinBox" name="skip_sb">
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::UpDownArrows</enum>
-          </property>
-          <property name="keyboardTracking">
-           <bool>false</bool>
-          </property>
-          <property name="value">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="3">
-         <widget class="QPushButton" name="smooth_pb">
-          <property name="text">
-           <string>Smooth</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1" colspan="3">
          <widget class="Line" name="line">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
-         <widget class="QLabel" name="label_4">
+        <item row="11" column="3">
+         <widget class="QPushButton" name="baseline_pb">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;λ  (smoothness)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>Baseline All</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="2">
+        <item row="5" column="1" colspan="2">
          <widget class="QComboBox" name="ir_plot_cb">
           <item>
            <property name="text">
@@ -155,22 +115,107 @@
           </item>
          </widget>
         </item>
-        <item row="7" column="3">
-         <widget class="QPushButton" name="baseline_pb">
+        <item row="11" column="1">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Baseline All</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;λ  (smoothness)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="3">
+        <item row="7" column="2">
+         <widget class="QSpinBox" name="skip_sb">
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>false</bool>
+          </property>
+          <property name="value">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Skip Every</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>Plot or Fit FTIR</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1" colspan="3">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="2">
+         <widget class="QSpinBox" name="smooth_sb"/>
+        </item>
+        <item row="13" column="2">
+         <widget class="QDoubleSpinBox" name="p_sb">
+          <property name="decimals">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.010000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="13" column="3">
          <widget class="QLabel" name="label_7">
           <property name="text">
            <string>UNDER WORK</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1" colspan="3">
-         <widget class="QTreeView" name="FTIR_treeView"/>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="text">
+           <string>Plot</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="pushButton_3">
+          <property name="text">
+           <string>Diff Plot (dir)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QPushButton" name="pushButton_4">
+          <property name="text">
+           <string>Plot (dir)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="pushButton_6">
+          <property name="text">
+           <string>Diff Plot (2)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="3">
+         <widget class="QPushButton" name="pushButton_7">
+          <property name="text">
+           <string>TBD</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -179,71 +224,17 @@
         <string>Integrate</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="4">
-         <widget class="QComboBox" name="int_type_cb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <item>
-           <property name="text">
-            <string>Integrate Sub (dir)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Integrate Sub (dir) Corrected</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Integrate Diff (dir)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Integrate Plot (dir)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Integrate</string>
-           </property>
-          </item>
-         </widget>
+        <item row="2" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_47"/>
         </item>
-        <item row="0" column="2">
-         <widget class="QLabel" name="label_2">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>30</height>
-           </size>
-          </property>
+        <item row="1" column="3">
+         <widget class="QRadioButton" name="integratemode_rb">
           <property name="text">
-           <string>Num of Ints</string>
+           <string>Integrate Mode</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="3">
-         <widget class="QSpinBox" name="spinBox">
-          <property name="maximumSize">
-           <size>
-            <width>100</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <number>4</number>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2" rowspan="4" colspan="3">
+        <item row="4" column="3" rowspan="4" colspan="2">
          <widget class="QTableWidget" name="tableWidget">
           <property name="minimumSize">
            <size>
@@ -258,126 +249,18 @@
            </size>
           </property>
           <property name="rowCount">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="columnCount">
-           <number>3</number>
-          </property>
-          <row>
-           <property name="text">
-            <string>Int. 1</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Int. 2</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Int. 3</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Int. 4</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>From</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>To</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Label</string>
-           </property>
-          </column>
-          <item row="0" column="0">
-           <property name="text">
-            <string>400</string>
-           </property>
-          </item>
-          <item row="0" column="1">
-           <property name="text">
-            <string>4000</string>
-           </property>
-          </item>
-          <item row="0" column="2">
-           <property name="text">
-            <string/>
-           </property>
-          </item>
-          <item row="1" column="0">
-           <property name="text">
-            <string>400</string>
-           </property>
-          </item>
-          <item row="1" column="1">
-           <property name="text">
-            <string>4000</string>
-           </property>
-          </item>
-          <item row="1" column="2">
-           <property name="text">
-            <string/>
-           </property>
-          </item>
-          <item row="2" column="0">
-           <property name="text">
-            <string>400</string>
-           </property>
-          </item>
-          <item row="2" column="1">
-           <property name="text">
-            <string>4000</string>
-           </property>
-          </item>
-          <item row="2" column="2">
-           <property name="text">
-            <string/>
-           </property>
-          </item>
-          <item row="3" column="0">
-           <property name="text">
-            <string>400</string>
-           </property>
-          </item>
-          <item row="3" column="1">
-           <property name="text">
-            <string>4000</string>
-           </property>
-          </item>
-          <item row="3" column="2">
-           <property name="text">
-            <string/>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="QPushButton" name="integrate_pb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Integrate</string>
+           <number>0</number>
           </property>
          </widget>
         </item>
-        <item row="6" column="3">
+        <item row="1" column="4">
          <widget class="QComboBox" name="comboBox">
           <property name="maximumSize">
            <size>
-            <width>100</width>
+            <width>16777215</width>
             <height>16777215</height>
            </size>
           </property>
@@ -391,6 +274,52 @@
             <string>Right Axis</string>
            </property>
           </item>
+         </widget>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_46"/>
+        </item>
+        <item row="9" column="3" colspan="2">
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QPushButton" name="integrate_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Integrate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="2">
+         <widget class="QTextBrowser" name="textBrowser">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Press integrate mode.  Add the spectra to the top axis then click and hold on one limit and release on the other limit and the integral will show up on the axis below as well as in the table below here,  or manually type in the limits below and press &amp;quot;Integrate&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -539,6 +468,277 @@
             <string>Lorentz</string>
            </property>
           </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Fitting_2</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="6" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_13"/>
+        </item>
+        <item row="4" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_11"/>
+        </item>
+        <item row="10" column="1" colspan="6">
+         <widget class="QTextEdit" name="textEdit"/>
+        </item>
+        <item row="7" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_31"/>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Amp</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_21"/>
+        </item>
+        <item row="3" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_25"/>
+        </item>
+        <item row="6" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_39"/>
+        </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>low</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_17"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_10"/>
+        </item>
+        <item row="1" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        </item>
+        <item row="2" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_26"/>
+        </item>
+        <item row="0" column="5">
+         <widget class="QRadioButton" name="radioButton_5">
+          <property name="text">
+           <string>Peak 4</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6">
+         <widget class="QRadioButton" name="radioButton_6">
+          <property name="text">
+           <string>Peak 5</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_23"/>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>Cen</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_19"/>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_9">
+          <property name="text">
+           <string>low</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_15"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QRadioButton" name="radioButton_2">
+          <property name="text">
+           <string>Peak 1</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_35"/>
+        </item>
+        <item row="2" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_7"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>Peak #</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLabel" name="label_14">
+          <property name="text">
+           <string>sigma</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+        </item>
+        <item row="5" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_29"/>
+        </item>
+        <item row="8" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_42"/>
+        </item>
+        <item row="6" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_30"/>
+        </item>
+        <item row="4" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_28"/>
+        </item>
+        <item row="1" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+        </item>
+        <item row="0" column="3">
+         <widget class="QRadioButton" name="radioButton_3">
+          <property name="text">
+           <string>Peak 2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string>high</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="4">
+         <widget class="QRadioButton" name="radioButton_4">
+          <property name="text">
+           <string>Peak 3</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_45"/>
+        </item>
+        <item row="5" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_37"/>
+        </item>
+        <item row="2" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_9"/>
+        </item>
+        <item row="8" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_32"/>
+        </item>
+        <item row="7" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_41"/>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>low</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_40"/>
+        </item>
+        <item row="8" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_22"/>
+        </item>
+        <item row="1" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+        </item>
+        <item row="6" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_20"/>
+        </item>
+        <item row="7" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_14"/>
+        </item>
+        <item row="3" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_24"/>
+        </item>
+        <item row="4" column="3">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_18"/>
+        </item>
+        <item row="9" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_33"/>
+        </item>
+        <item row="5" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_12"/>
+        </item>
+        <item row="1" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_2"/>
+        </item>
+        <item row="6" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_38"/>
+        </item>
+        <item row="5" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_36"/>
+        </item>
+        <item row="9" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_44"/>
+        </item>
+        <item row="9" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_16"/>
+        </item>
+        <item row="2" column="2">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+        </item>
+        <item row="4" column="5">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_34"/>
+        </item>
+        <item row="3" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_27"/>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLabel" name="label_13">
+          <property name="text">
+           <string>high</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="6">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_43"/>
+        </item>
+        <item row="2" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_8"/>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>high</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1" colspan="2">
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="text">
+           <string>Select Data</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="3" colspan="2">
+         <widget class="QPushButton" name="pushButton_9">
+          <property name="text">
+           <string>Fit Init</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="5" colspan="2">
+         <widget class="QPushButton" name="pushButton_10">
+          <property name="text">
+           <string>Fit</string>
+          </property>
          </widget>
         </item>
        </layout>

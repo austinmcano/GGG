@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>626</height>
+    <width>553</width>
+    <height>583</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,13 +54,6 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>X Label</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="2" colspan="2">
          <widget class="QLineEdit" name="ylabel_le">
           <property name="text">
@@ -72,30 +65,6 @@
          <widget class="QPushButton" name="fill_cols_pb">
           <property name="text">
            <string>Fill Columns</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Line Name</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
-         <widget class="QCheckBox" name="line_name_checkbox">
-          <property name="text">
-           <string>Use Line Name</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2" colspan="2">
-         <widget class="QLineEdit" name="line_name_le">
-          <property name="text">
-           <string>Extended_Plot</string>
           </property>
          </widget>
         </item>
@@ -121,6 +90,12 @@
         </item>
         <item row="1" column="1">
          <widget class="QTreeWidget" name="tw_x">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <column>
            <property name="text">
             <string>SE-X</string>
@@ -140,7 +115,21 @@
           </column>
          </widget>
         </item>
-        <item row="7" column="3">
+        <item row="11" column="3">
+         <widget class="QPushButton" name="plot_pb">
+          <property name="text">
+           <string>Plot</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>X Label</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
          <widget class="QComboBox" name="ax_cb">
           <item>
            <property name="text">
@@ -154,13 +143,6 @@
           </item>
          </widget>
         </item>
-        <item row="11" column="3">
-         <widget class="QPushButton" name="plot_pb">
-          <property name="text">
-           <string>Plot</string>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -168,14 +150,31 @@
         <string>Fit Results</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_7">
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>Skip Rows: </string>
+           <string>Line Name</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Linear fit From: To</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QCheckBox" name="line_name_checkbox">
+          <property name="text">
+           <string>Use Line Name</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
          <widget class="QComboBox" name="linetype_cb">
           <item>
            <property name="text">
@@ -209,20 +208,54 @@
           </item>
          </widget>
         </item>
-        <item row="3" column="0" colspan="2">
+        <item row="8" column="0" colspan="3">
          <widget class="QTextEdit" name="fit_results_TE"/>
         </item>
-        <item row="1" column="1">
+        <item row="4" column="2">
          <widget class="QSpinBox" name="skip_rows_sb"/>
         </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="lin_fit_pb">
-          <property name="text">
-           <string>Lin. Fit</string>
+        <item row="7" column="0" colspan="3">
+         <widget class="QTextBrowser" name="textBrowser">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>150</height>
+           </size>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;There are a few parameter for plotting if you may need it,  including what the line should look like, the color (UNDER WORK) and if the data may require you to skip inital metadata at the beginning.  Lin. Fit function makes a popup dialog where you can pick a single line on the graph to linearly fit where the fit stats will show up below. The Lin. Fit. All will fit all the data on the graph and print in the line command the slopes of the data&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
+        <item row="1" column="1">
+         <widget class="QComboBox" name="axischoise_cb">
+          <item>
+           <property name="text">
+            <string>axis1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>axis2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>axis3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>axis4</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="2">
          <widget class="QComboBox" name="comboBox">
           <item>
            <property name="text">
@@ -241,10 +274,44 @@
           </item>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="9" column="0" colspan="2">
+         <widget class="QPushButton" name="lin_fit_pb">
+          <property name="text">
+           <string>Lin. Fit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+        </item>
+        <item row="9" column="2">
          <widget class="QPushButton" name="linfitall_pb">
           <property name="text">
            <string>Lin. Fit. All</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLineEdit" name="line_name_le">
+          <property name="text">
+           <string>Extended_Plot</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Skip Rows: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+          <property name="maximum">
+           <double>999999.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>99.989999999999995</double>
           </property>
          </widget>
         </item>

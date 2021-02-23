@@ -58,12 +58,14 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.lin_fit_pb.clicked.connect(lambda: self.linear_SE())
         self.ui.plottable_pb.clicked.connect(lambda: self.plot_table_data())
         self.ui.linfitall_pb.clicked.connect(lambda: self.lin_fit_all_fun())
+        self.ui.axischoise_cb.currentTextChanged.connect(lambda: self.change_axis())
 
     def eventFilter(self, object, event):
         # For right click events
         if event.type() == QtCore.QEvent.ContextMenu:
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
+
 
     def plot_type_organizer(self):
         if self.ui.plot_type_cb.currentText() == 'X vs Y':
@@ -93,8 +95,8 @@ class SE_view(QtWidgets.QDockWidget):
                 y_data = self.data[i.text(0)].to_numpy()
                 ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
                     ax.plot(x_data, y_data, self.ui.linetype_cb.currentText(),label=x)
-        self.main_window.ax.set_xlabel(self.ui.xlabel_le.text())
-        self.main_window.ax.set_ylabel(self.ui.ylabel_le.text())
+        ax.set_xlabel(self.ui.xlabel_le.text())
+        ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
@@ -109,10 +111,11 @@ class SE_view(QtWidgets.QDockWidget):
             key = ui.treeWidget.currentItem().text(0)
             self.data_x = dict[key][0]._xy.T[0]
             self.data_y = dict[key][0]._xy.T[1]
-            x_lim = ApplicationSettings.C_X_LIM
-            indexs = [find_nearest(self.data_x, x_lim[0]), find_nearest(self.data_x, x_lim[1])]
-            self.data_x = self.data_x[indexs[0]:indexs[1]]
-            self.data_y = self.data_y[indexs[0]:indexs[1]]
+            # x_lim = ApplicationSettings.C_X_LIM
+            # print(x_lim)
+            # indexs = [find_nearest(self.data_x, x_lim[0]), find_nearest(self.data_x, x_lim[1])]
+            # self.data_x = self.data_x[indexs[0]:indexs[1]]
+            # self.data_y = self.data_y[indexs[0]:indexs[1]]
             model = LinearModel()
             pars = model.guess(self.data_y,x=self.data_x)
             fit = model.fit(self.data_y,pars,x=self.data_x)
@@ -141,21 +144,31 @@ class SE_view(QtWidgets.QDockWidget):
             self.data_x = dict[i][0]._xy.T[0]
             self.data_y = dict[i][0]._xy.T[1]
             x_lim = ApplicationSettings.C_X_LIM
-            indexs = [find_nearest(self.data_x, x_lim[0]), find_nearest(self.data_x, x_lim[1])]
-            self.data_x = self.data_x[indexs[0]:indexs[1]]
-            self.data_y = self.data_y[indexs[0]:indexs[1]]
+            # indexs = [find_nearest(self.data_x, x_lim[0]), find_nearest(self.data_x, x_lim[1])]
+            # self.data_x = self.data_x[indexs[0]:indexs[1]]
+            # self.data_y = self.data_y[indexs[0]:indexs[1]]
             pars = model.guess(self.data_y, x=self.data_x)
             fit = model.fit(self.data_y, pars, x=self.data_x)
-            # ApplicationSettings.ALL_DATA_PLOTTED[i + '_Fit'] = \
-            #     self.main_window.ax.plot(self.data_x, fit.best_fit, label=i + '_Fit')
+            self.main_window.ax.plot(self.data_x, fit.best_fit, label=str(i) + '_Fit')
             listofslopes.append(fit.values['slope'])
             names_of_slopes.append(i)
+        print(self.ui.tableWidget.item(0, 1).text())
+        if self.ui.tableWidget.item(0, 1).text() == '0':
+            a = 1
+        elif self.ui.tableWidget.item(0, 2).text() == '0':
+            a = 2
+        elif self.ui.tableWidget.item(0, 3).text() == '0':
+            a = 3
+        elif self.ui.tableWidget.item(0, 4).text() == '0':
+            a = 4
+        elif self.ui.tableWidget.item(0, 5).text() == '0':
+            a = 5
+        else:
+            print('passed')
+        for i in range(len(listofslopes)):
+            self.ui.tableWidget.setItem(i,a,QtWidgets.QTableWidgetItem(str(listofslopes[i])))
         print(names_of_slopes)
         print(listofslopes)
-        # try:
-        #     self.ui.fit_results_TE.setText(listofslopes)
-        # except:
-        #     pass
         self.main_window.canvas.draw()
 
     def extended_plot_fun(self):
@@ -168,7 +181,7 @@ class SE_view(QtWidgets.QDockWidget):
         if self.ui.ax_cb.currentText() == 'Left Ax':
             ax = self.main_window.ax
         elif self.ui.ax_cb.currentText() == 'Right Ax':
-            if self.main_window.ax_2 is None:
+            if self.ax_2 is None:
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
         y_data = []
@@ -187,8 +200,8 @@ class SE_view(QtWidgets.QDockWidget):
             ApplicationSettings.ALL_DATA_PLOTTED[name] = \
                 ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,
                         self.ui.linetype_cb.currentText(),label=name)
-        self.main_window.ax.set_xlabel(self.ui.xlabel_le.text())
-        self.main_window.ax.set_ylabel(self.ui.ylabel_le.text())
+        ax.set_xlabel(self.ui.xlabel_le.text())
+        ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
@@ -203,7 +216,7 @@ class SE_view(QtWidgets.QDockWidget):
         lenofx = len(x)
         # y = np.trim_zeros(data[int(self.ui.yaxis_cb.currentText())], 'b')
         y= data[int(self.ui.yaxis_cb.currentText())][0:len(x)]
-        ApplicationSettings.ALL_DATA_PLOTTED[self.ui.yaxislabel_le.text()] = \
+        ApplicationSettings.ALL_DATA_PLOTTED[self.ui.xaxis_cb.currentText()+'_'+self.ui.yaxis_cb.currentText()] = \
             self.main_window.ax.plot(x,y,self.ui.linetype_cb.currentText(), label=self.ui.yaxislabel_le.text())
         self.main_window.ax.set_xlabel(self.ui.xaxislabel_le.text())
         self.main_window.ax.set_ylabel(self.ui.yaxislabel_le.text())

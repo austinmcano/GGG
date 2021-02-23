@@ -152,7 +152,7 @@ class QCM_view(QtWidgets.QDockWidget):
             ApplicationSettings.ALL_DATA_PLOTTED['MC_F'] = self.ax.plot(mc_f, label='Cycle Mass Change')
         elif self.ui.plot_type_cb.currentText() == "Half Cycle":
             mc_a, mc_b, mc_f, hcd_a, hcd_b, fc_d = \
-                self.qcm_anal(self, self.time, self.pressure, self.mass,a_exp=int(self.ui.num_A.value()),
+                self.qcm_anal(self.time, self.pressure, self.mass,a_exp=int(self.ui.num_A.value()),
                               b_exp=int(self.ui.num_B.value()),ttp=float(self.ui.time_through_purge.text()),
                               threshold=float(self.ui.P_Threshold.text()),from_time=lims[0],to_time=lims[1],
                               wait_time=float(self.ui.wait_LE.text()),density=float(self.ui.Density.text()))

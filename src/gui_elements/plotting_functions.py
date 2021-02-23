@@ -186,23 +186,43 @@ def Calc_view_fun(self):
     self.dw_calc.show()
 
 def toggle_legend(self):
-    if self.ui.actionLegend_Toggle.isChecked()==True:
+    # if self.ui.actionLegend_Toggle.isChecked()==True:
+    #     self.ax.legend()
+    #     leg_1 = self.ax.legend(loc='best')
+    #     leg_1.set_draggable(True)
+    #     if self.ax_2 is not None:
+    #         self.ax_2.legend()
+    #         leg_2 = self.ax.legend(loc='best')
+    #         leg_2.set_draggable(True)
+    #     self.canvas.draw()
+    # elif self.ui.actionLegend_Toggle.isChecked()==False:
+    if self.ax.get_legend() is None:
         self.ax.legend()
         leg_1 = self.ax.legend(loc='best')
         leg_1.set_draggable(True)
         if self.ax_2 is not None:
+            print(self.ax_2)
             self.ax_2.legend()
             leg_2 = self.ax.legend(loc='best')
             leg_2.set_draggable(True)
+        if self.ax_2 is not None:
+            print(self.ax_3)
+            self.ax_3.legend()
+            leg_3 = self.ax.legend(loc='best')
+            leg_3.set_draggable(True)
+        if self.ax_2 is not None:
+            print(self.ax_4)
+            self.ax_4.legend()
+            leg_4 = self.ax.legend(loc='best')
+            leg_4.set_draggable(True)
         self.canvas.draw()
-    elif self.ui.actionLegend_Toggle.isChecked()==False:
-        if self.ax.get_legend() is None:
-            pass
-        else:
-            self.ax.get_legend().remove()
+    else:
+        self.ax.get_legend().remove()
         if self.ax_2 is not None:
             self.ax_2.get_legend().remove()
         self.canvas.draw()
+
+
 
 def Save_All_Plotted(self):
     # names = self.settings.value('Data_Names')
@@ -238,7 +258,36 @@ def remove_line(self):
             line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
             try:
                 if isinstance(line, list):
-                    self.ax.lines.remove(line[0])
+                    try:
+                        self.ax.lines.remove(line[0])
+                    except ValueError:
+                        print('x not in list')
+                    except AttributeError:
+                        print('ax is None')
+                    try:
+                        self.ax_1.lines.remove(line[0])
+                    except ValueError:
+                        print('x not in list')
+                    except AttributeError:
+                        print('ax_1 is None')
+                    try:
+                        self.ax_2.lines.remove(line[0])
+                    except ValueError:
+                        print('x not in list')
+                    except AttributeError:
+                        print('ax_2 is None')
+                    try:
+                        self.ax_3.lines.remove(line[0])
+                    except ValueError:
+                        print('x not in list')
+                    except AttributeError:
+                        print('ax_3 is None')
+                    try:
+                        self.ax_3.lines.remove(line[0])
+                    except ValueError:
+                        print('x not in list')
+                    except AttributeError:
+                        print('ax_4 is None')
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
                     self.canvas.draw()
@@ -531,27 +580,94 @@ def fil_cols_fun(self):
         self.ui.tw_x.addTopLevelItems(column_list_x)
         self.ui.tw_y.addTopLevelItems(column_list_y)
 
-def axis_setup_function(self):
+def change_axis(self,axis):
+    if axis =='axis1':
+        self.ax = self.ax_1
+    elif axis =='axis2':
+        self.ax = self.ax_2
+    elif axis =='axis3':
+        self.ax = self.ax_3
+    elif axis =='axis4':
+        self.ax = self.ax_4
+    try:
+        self.ax.callbacks.connect('xlim_changed', self.lims_change)
+    except AttributeError:
+        print('No Axis made yet')
+
+def axis_setup_fun(self,ax_num):
+    self.ax.clear()
+    self.fig.clf()
+    self.ui.verticalLayout.removeWidget(self.toolbar)
+    self.ui.verticalLayout.removeWidget(self.canvas)
+    self.toolbar.close()
+    self.canvas.close()
+    self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+    self.canvas = FigureCanvas(self.fig)
+    self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+    self.ui.verticalLayout.addWidget(self.toolbar)
+    self.ui.verticalLayout.addWidget(self.canvas)
+    self.canvas.installEventFilter(self)
+    if ax_num == 1:
+        self.ax_1 = self.fig.add_subplot(111)
+    elif ax_num == 2:
+        self.ax_1 = self.fig.add_subplot(211)
+        self.ax_2 = self.fig.add_subplot(212)
+    elif ax_num == 3:
+        self.ax_1 = self.fig.add_subplot(211)
+        self.ax_2 = self.fig.add_subplot(223)
+        self.ax_3 = self.fig.add_subplot(224)
+    elif ax_num >= 4:
+        self.ax_1 = self.fig.add_subplot(221)
+        self.ax_2 = self.fig.add_subplot(222)
+        self.ax_3 = self.fig.add_subplot(223)
+        self.ax_4 = self.fig.add_subplot(224)
+
+    self.ax = self.ax_1
+
+    self.ax.callbacks.connect('xlim_changed', self.lims_change)
+    self.fig.tight_layout()
+    self.canvas.draw()
+
+def axis_setup_function(self,ax_num):
     def axis_fun():
-        self.cleargraph()
+        self.ax.clear()
+        self.fig.clf()
+        self.ui.verticalLayout.removeWidget(self.toolbar)
+        self.ui.verticalLayout.removeWidget(self.canvas)
+        self.toolbar.close()
+        self.canvas.close()
+        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+        self.canvas = FigureCanvas(self.fig)
+        self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+        self.ui.verticalLayout.addWidget(self.toolbar)
+        self.ui.verticalLayout.addWidget(self.canvas)
+        self.canvas.installEventFilter(self)
+        self.ax.callbacks.connect('xlim_changed', self.lims_change)
         axis1 = ui.axis1_cb.currentText()
         axis2 = ui.axis2_cb.currentText()
         axis3 = ui.axis3_cb.currentText()
         axis4 = ui.axis4_cb.currentText()
         if axis1 == 'ON' and all(i == 'OFF' for i in [axis2,axis3,axis4]):
-            self.ax = self.fig.add_subplot(111)
+            self.ax_1 = self.fig.add_subplot(111)
+            self.ax_2 = None
+            self.ax_3 = None
+            self.ax_4 = None
         elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'OFF' and axis4 == 'OFF':
-            self.ax = self.fig.add_subplot(211)
+            self.ax_1 = self.fig.add_subplot(211)
             self.ax_2 = self.fig.add_subplot(212)
+            self.ax_3 = None
+            self.ax_4 = None
         elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'OFF':
-            self.ax = self.fig.add_subplot(211)
+            self.ax_1 = self.fig.add_subplot(211)
             self.ax_2 = self.fig.add_subplot(223)
             self.ax_3 = self.fig.add_subplot(224)
+            self.ax_4 = None
         elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'ON':
-            self.ax = self.fig.add_subplot(221)
+            self.ax_1 = self.fig.add_subplot(221)
             self.ax_2 = self.fig.add_subplot(222)
             self.ax_3 = self.fig.add_subplot(223)
             self.ax_4 = self.fig.add_subplot(224)
+        self.ax = self.ax_1
         self.fig.tight_layout()
         self.canvas.draw()
     dialog = QtWidgets.QDialog()
