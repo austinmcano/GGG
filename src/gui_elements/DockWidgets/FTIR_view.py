@@ -57,7 +57,6 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.tree_view.installEventFilter(self)
         self.tree_view.setColumnWidth(0, 200)
 
-        self.ui.pushButton.clicked.connect(lambda: self.ir_plot())
         self.ui.smooth_pb.clicked.connect(lambda: self.smooth())
         self.ui.integrate_pb.clicked.connect(lambda: self.integrate())
         # self.ui.
@@ -69,6 +68,11 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.ui.baseline_pb.clicked.connect(lambda: self.baseline_data())
         self.ui.integratemode_rb.toggled.connect(self.integrate_mode)
 
+        self.ui.sub_dir_pb.clicked.connect(lambda: self.ir_plot('sub'))
+        self.ui.diff_2_pb.clicked.connect(lambda: self.ir_plot('diff2'))
+        self.ui.diff_dir_pb.clicked.connect(lambda: self.ir_plot('diff'))
+        self.ui.abs_dir_pb.clicked.connect(lambda: self.ir_plot('abs'))
+        self.ui.spectra_pb.clicked.connect(lambda: self.ir_plot('spectra'))
 
     def eventFilter(self, object, event):
         # For right click events
@@ -604,24 +608,23 @@ class FTIR_view(QtWidgets.QDockWidget):
             self.main_window.ax.plot(self.data_x,start_plot, '--k')
         self.ir_basic()
 
-    def ir_plot(self):
+    def ir_plot(self,type):
         path = self.model.filePath(self.tree_view.currentIndex())
         head, tail = os.path.split(path)
-        combo = self.ui.ir_plot_cb.currentText()
-        if combo == 'Plot':
+        if type == 'spectra':
             temp = pd.read_csv(path,delimiter=',')
             self.data = temp.to_numpy().T
             # self.data = np.genfromtxt(path,delimiter=',').T
             ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
                 self.data[0],self.data[1],label=tail)
-        elif combo == 'Sub Plot (dir)':
+        elif type == 'sub':
             if os.path.isdir(path):
                 csv_list = sorted(glob.glob(path + '/*CSV'))
                 self.sub = self.subtraction_from_survey(csv_list)
                 for i in range(0,len(self.sub)-1,self.ui.skip_sb.value()+1):
                     ApplicationSettings.ALL_DATA_PLOTTED['Sub_'+str(i)] = \
                         self.main_window.ax.plot(self.sub[0],self.sub[i+1],label='Sub_'+str(i))
-        elif combo == 'Diff Plot (dir)':
+        elif type == 'diff':
             if os.path.isdir(path):
                 csv_list = sorted(glob.glob(path + '/*CSV'))
                 self.diff = self.difference_from_survey(csv_list)
@@ -631,7 +634,7 @@ class FTIR_view(QtWidgets.QDockWidget):
                             self.main_window.ax.plot(self.diff[0],self.diff[i+1],label='Diff_'+str(i))
                     except ValueError:
                         print('not the same size thing')
-        elif combo == 'Plot (dir)':
+        elif type == 'abs':
             if os.path.isdir(path):
                 csv_list = sorted(glob.glob(path + '/*CSV'))
                 data = []
@@ -643,8 +646,7 @@ class FTIR_view(QtWidgets.QDockWidget):
                 for j in range(0,len(self.data)-1,self.ui.skip_sb.value()+1):
                     ApplicationSettings.ALL_DATA_PLOTTED['IR_'+str(j)] = \
                         self.main_window.ax.plot(self.data[0],self.data[j+1])
-
-        elif combo == 'Diff (2)':
+        elif type == 'diff2':
             pass
         self.ir_basic()
 
@@ -652,71 +654,88 @@ class FTIR_view(QtWidgets.QDockWidget):
         limits = self.main_window.ax.get_xlim()
         if limits[1] > limits[0]:
             self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
-        # self.main_window.ax.set_xlim(4000, 400)
         self.main_window.ax.set_xlabel('Wavenumber ($cm^{-1}$)')
         self.main_window.ax.set_ylabel('Absorbance')
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
     def integrate(self):
+        # dict = ApplicationSettings.ALL_DATA_PLOTTED
+        # Key_List = []
+        # data = []
+        # index = 0
+        # for i in dict.keys():
+        #     if index == 0:
+        #         data.append(dict[i][0]._xy.T[0])
+        #         index += 1
+        #     Key_List.append(i)
+        #     data.append(dict[i][0]._xy.T[1])
+        # inte = self.integrate_ir(data, self.ui.min_sb.value(), self.ui.max_sb.value())
+        # self.main_window.ax.plot(inte, '.-', label=str(np.round(self.ui.min_sb.value(), 4)) + '-' +
+        #                                              str(np.round(self.ui.max_sb.value(), 4)))
+        # self.main_window.canvas.draw()
         path = self.model.filePath(self.tree_view.currentIndex())
         csv_list = sorted(glob.glob(path + '/*CSV'))
         # self.sub = self.subtraction_from_survey(csv_list)
-        min_max = [[400,4000],[400,4000],[400,4000],[400,4000]]
-        labels = ['','','','']
-        for row in range(4):
-            labels[row] = self.ui.tableWidget.item(row, 2).text()
-            for column in range(2):
-                min_max[row][column] = float(self.ui.tableWidget.item(row,column).text())
-        print(labels)
-        minimum = float(self.ui.tableWidget.item(0,0).text())
-        maximum = float(self.ui.tableWidget.item(0, 1).text())
-        num_of_int = self.ui.spinBox.value()
+        # min_max = [[400,4000],[400,4000],[400,4000],[400,4000]]
+        # labels = ['','','','']
+        # for row in range(4):
+        #     labels[row] = self.ui.tableWidget.item(row, 2).text()
+        #     for column in range(2):
+        #         min_max[row][column] = float(self.ui.tableWidget.item(row,column).text())
+        # print(labels)
+        # minimum = float(self.ui.tableWidget.item(0,0).text())
+        # maximum = float(self.ui.tableWidget.item(0, 1).text())
+        # num_of_int = self.ui.spinBox.value()
 
-        if self.ui.comboBox.currentText()=='Left Axis':
+        if self.ui.leftrightaxis_cb.currentText()=='Left Axis':
             ax = self.main_window.ax
-        elif self.ui.comboBox.currentText()=='Right Axis':
+        elif self.ui.leftrightaxis_cb.currentText()=='Right Axis':
             if self.main_window.ax_2 is None:
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
-        if self.ui.int_type_cb.currentText() == 'Integrate Plot (dir)':
-            pass
-        if self.ui.int_type_cb.currentText() == 'Integrate Sub (dir) Corrected':
-            for i in range(num_of_int):
-                self.sub = self.subtraction_from_survey(csv_list)
-                inte = self.integrate_ir(self.sub, min_max[i][0], min_max[i][1])
-                inte_c = [i-inte[0] for i in inte]
-                ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(minimum) + '-' + str(maximum)] = \
-                    ax.plot(inte_c, '.-', label=labels[i] + str(minimum) + '-' + str(maximum))
-        elif self.ui.int_type_cb.currentText() == 'Integrate Sub (dir)':
-            for i in range(num_of_int):
-                self.sub = self.subtraction_from_survey(csv_list)
-                inte = self.integrate_ir(self.sub, min_max[i][0], min_max[i][1])
-                ApplicationSettings.ALL_DATA_PLOTTED['Int. '+str(minimum)+'-'+str(maximum)] = \
-                    ax.plot(inte,'.-',label='Int. '+str(minimum)+'-'+str(maximum))
-        elif self.ui.int_type_cb.currentText() == 'Integrate Diff (dir)':
-            for i in range(num_of_int):
-                self.diff = self.difference_from_survey(csv_list)
-                inte = self.integrate_ir(self.diff, min_max[i][0], min_max[i][1])
-                ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(minimum) + '-' + str(maximum)] = \
-                    ax.plot(inte,'.-', label='Int. ' + str(minimum) + '-' + str(maximum))
+        if self.ui.int_type_cb.currentText() == 'Absolute':
+            print('Passed')
+        elif self.ui.int_type_cb.currentText() == 'Subtraction_C':
+            # for i in range(num_of_int):
+            self.sub = self.subtraction_from_survey(csv_list)
+            inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
+            inte_c = [i-inte[0] for i in inte]
+            ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
+                ax.plot(inte_c, '.-', label=str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
+        elif self.ui.int_type_cb.currentText() == 'Subtraction':
+            # for i in range(num_of_int):
+
+            self.sub = self.subtraction_from_survey(csv_list)
+            inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
+        elif self.ui.int_type_cb.currentText() == 'Difference':
+            # for i in range(num_of_int):
+            self.diff = self.difference_from_survey(csv_list)
+            inte = self.integrate_ir(self.diff, self.ui.min_sb.value(), self.ui.max_sb.value())
+        if self.ui.xaxis_cb.currentText() == 'Ints':
+            x = np.linspace(1, len(inte), len(inte))
+        elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
+            x = np.linspace(0.5, len(inte)/2, len(inte))
+        ApplicationSettings.ALL_DATA_PLOTTED[
+            'Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
+            ax.plot(x,inte, '.-', label='Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
         self.main_window.canvas.draw()
 
     def smooth(self):
-        # keys = ApplicationSettings.ALL_DATA_PLOTTED.keys()
+        dict = ApplicationSettings.ALL_DATA_PLOTTED
+        Key_List = []
+        data = []
+        index = 0
+        for i in dict.keys():
+            if index == 0:
+                data.append(dict[i][0]._xy.T[0])
+                index += 1
+            Key_List.append(i)
+            data.append(dict[i][0]._xy.T[1])
         self.main_window.cleargraph()
-        if self.ui.ir_plot_cb.currentText() == 'Sub Plot (dir)':
-            for i in range(len(self.sub)-1):
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i)+'sm_sub'] = self.main_window.ax.plot(
-                    self.sub[0],savgol_filter(self.sub[i+1], self.ui.smooth_sb.value(), 3))
-        elif self.ui.ir_plot_cb.currentText() == 'Diff Plot (dir)':
-            for i in range(len(self.diff)-1):
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i)+'sm_diff'] = self.main_window.ax.plot(
-                    self.diff[0],savgol_filter(self.diff[i+1], self.ui.smooth_sb.value(), 3))
-        elif self.ui.ir_plot_cb.currentText() == 'Plot (dir)':
-            for i in range(len(self.data) - 1):
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i) + 'sm_diff'] = self.main_window.ax.plot(
-                    self.data[0],savgol_filter(self.data[i + 1], self.ui.smooth_sb.value(),3))
+        for i in range(len(Key_List)):
+            ApplicationSettings.ALL_DATA_PLOTTED[str(i)+'_sm'] = self.main_window.ax.plot(
+                data[0],savgol_filter(data[i+1], self.ui.smooth_sb.value(), 3))
         self.ir_basic()
 
     def baseline_data(self):
@@ -753,13 +772,7 @@ class FTIR_view(QtWidgets.QDockWidget):
                 try:
                     sub_list.append(data[l + 1][1][:length] - data[l][1][:length])
                 except TypeError:
-                    print('[l + 1][1][:length]')
-                    print(data[l + 1][1][:length])
-                    print('[l][1][:length]')
-                    print(data[l][1][:length])
-            else:
-                print('problem with unequal lengths')
-                print(len(data[l + 1][1][:length]), len(data[l][1][:length]))
+                    print('problem with unequal lengths')
         return sub_list
 
     def subtraction_from_survey(self,list_of_csv):
@@ -796,7 +809,6 @@ class FTIR_view(QtWidgets.QDockWidget):
         integral_list = []
         lim = [min(range(len(data[0])), key=lambda i: abs(data[0][i] - minimum)),
                min(range(len(data[0])), key=lambda i: abs(data[0][i] - maximum))]
-        print(lim)
         for numb in range(len(data) - 1):
             integral_list.append(integrate.trapz(data[numb + 1][lim[0]:lim[1]], data[0][lim[0]:lim[1]]))
         return integral_list
@@ -805,11 +817,11 @@ class FTIR_view(QtWidgets.QDockWidget):
         if enabled:
             axis_setup_fun(self.main_window, 2)
             self.span = SpanSelector(self.main_window.ax, self.onselect, 'horizontal', useblit=True,
-                                     rectprops=dict(alpha=0.1, facecolor='blue'))
+                                     rectprops=dict(alpha=0.2, facecolor='red'))
         else:
             del self.span
 
-    def onselect(self, min, max):
+    def onselect(self, minimum, maximum):
         dict = ApplicationSettings.ALL_DATA_PLOTTED
         Key_List = []
         data = []
@@ -820,6 +832,14 @@ class FTIR_view(QtWidgets.QDockWidget):
                 index += 1
             Key_List.append(i)
             data.append(dict[i][0]._xy.T[1])
-        inte = self.integrate_ir(data, min, max)
-        self.main_window.ax_2.plot(inte, '.-', label=str(np.round(min,4)) + '-' + str(np.round(max,4)))
+        # print(Key_List)
+        inte = self.integrate_ir(data, minimum, maximum)
+        self.main_window.ax_2.plot(inte, '.-', label=str(np.round(minimum,1)) + '-' + str(np.round(maximum,1)))
         self.main_window.canvas.draw()
+        col_count = self.ui.tableWidget.columnCount()
+        self.ui.tableWidget.setColumnCount(col_count+1)
+        row_count = self.ui.tableWidget.rowCount()
+        if len(inte) > row_count:
+            self.ui.tableWidget.setRowCount(len(inte))
+        for i in range(len(inte)):
+            self.ui.tableWidget.setItem(i,col_count,QtWidgets.QTableWidgetItem(str(inte[i])))

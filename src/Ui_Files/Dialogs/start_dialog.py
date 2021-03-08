@@ -22,6 +22,8 @@ class Ui_Dialog(object):
         self.gridLayout.setObjectName(u"gridLayout")
         self.CF_pb = QPushButton(Dialog)
         self.CF_pb.setObjectName(u"CF_pb")
+        self.CF_pb.setEnabled(True)
+        self.CF_pb.setFocusPolicy(Qt.TabFocus)
 
         self.gridLayout.addWidget(self.CF_pb, 7, 1, 1, 1)
 
@@ -60,6 +62,11 @@ class Ui_Dialog(object):
 
         self.gridLayout.addWidget(self.XRD_pb, 5, 1, 1, 1)
 
+        QWidget.setTabOrder(self.CF_pb, self.XPS_pb)
+        QWidget.setTabOrder(self.XPS_pb, self.XRD_pb)
+        QWidget.setTabOrder(self.XRD_pb, self.SE_pb)
+        QWidget.setTabOrder(self.SE_pb, self.QCM_pb)
+        QWidget.setTabOrder(self.QCM_pb, self.FTIR_pb)
 
         self.retranslateUi(Dialog)
 

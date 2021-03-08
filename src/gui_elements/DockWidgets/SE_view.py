@@ -66,7 +66,6 @@ class SE_view(QtWidgets.QDockWidget):
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
 
-
     def plot_type_organizer(self):
         if self.ui.plot_type_cb.currentText() == 'X vs Y':
             self.plot_se()
@@ -181,8 +180,8 @@ class SE_view(QtWidgets.QDockWidget):
         if self.ui.ax_cb.currentText() == 'Left Ax':
             ax = self.main_window.ax
         elif self.ui.ax_cb.currentText() == 'Right Ax':
-            if self.ax_2 is None:
-                self.main_window.ax_2 = self.main_window.ax.twinx()
+            # if self.ax_2 is None:
+            self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
         y_data = []
         for i in self.ui.tw_y.selectedItems():

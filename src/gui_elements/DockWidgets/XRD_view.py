@@ -1,6 +1,7 @@
 from src.Ui_Files.DockWidgets.Py.dw_XRD import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
-# from src.gui_elements.Plotting_Functions import *
+from src.gui_elements import plotting_functions
+from src.gui_elements.general_functions import *
 from lmfit import Parameters
 from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
 
@@ -49,7 +50,7 @@ class XRD_view(QtWidgets.QDockWidget):
         self.tree_view.setColumnWidth(0, 200)
 
         self.ui.tw_fit_params.cellChanged.connect(lambda: self.save_constraints())
-        self.ui.fillcols_pb.clicked.connect(lambda: self.fill_cols())
+        self.ui.fillcols_pb.clicked.connect(lambda: fil_cols_fun(self))
         self.ui.plot_pb.clicked.connect(lambda: self.plot_xrd())
         self.ui.baseline_pb.clicked.connect(lambda: self.baseline_function())
         self.ui.go_pb.clicked.connect(lambda: self.scherrer_calculate())
@@ -76,32 +77,32 @@ class XRD_view(QtWidgets.QDockWidget):
     def lorentz(self, x, amp, cen, sigma):
         return (amp/np.pi)*(1/2*sigma)/((x-cen)**2+(1/2*sigma)**2)
 
-    def fill_cols(self):
-        self.ui.tw_x.clear()
-        self.ui.tw_y.clear()
-        path = self.model.filePath(self.tree_view.currentIndex())
-        filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
-        if extension == '.CSV' or extension == '.csv':
-            self.data = pd.read_csv(path, delimiter=',', skiprows=0)
-        elif extension == '.xls' or extension == '.xlxs':
-            excelfile = pd.ExcelFile(path)
-            self.data = pd.read_excel(excelfile, "Sheet1")
-        elif extension == '.X01':
-            self.data = pd.read_csv(path, delimiter='   ', skiprows=48, engine='python')
-        elif extension =='.txt':
-            self.data = pd.read_csv(path, sep='\t', skiprows=self.ui.skip_rows_sb.value())
-        else:
-            print(extension)
-            self.data = pd.read_csv(path, sep='\t')
-
-        strings = [col for col in self.data.columns]
-        column_list_x = []
-        column_list_y = []
-        for i in strings:
-            column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
-            column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
-            self.ui.tw_x.addTopLevelItems(column_list_x)
-            self.ui.tw_y.addTopLevelItems(column_list_y)
+    # def fill_cols(self):
+    #     self.ui.tw_x.clear()
+    #     self.ui.tw_y.clear()
+    #     path = self.model.filePath(self.tree_view.currentIndex())
+    #     filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
+    #     if extension == '.CSV' or extension == '.csv':
+    #         self.data = pd.read_csv(path, delimiter=',', skiprows=0)
+    #     elif extension == '.xls' or extension == '.xlxs':
+    #         excelfile = pd.ExcelFile(path)
+    #         self.data = pd.read_excel(excelfile, "Sheet1")
+    #     elif extension == '.X01':
+    #         self.data = pd.read_csv(path, delimiter='   ', skiprows=48, engine='python')
+    #     elif extension =='.txt':
+    #         self.data = pd.read_csv(path, sep='\t', skiprows=self.ui.skip_rows_sb.value())
+    #     else:
+    #         print(extension)
+    #         self.data = pd.read_csv(path, sep='\t')
+    #
+    #     strings = [col for col in self.data.columns]
+    #     column_list_x = []
+    #     column_list_y = []
+    #     for i in strings:
+    #         column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
+    #         column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
+    #         self.ui.tw_x.addTopLevelItems(column_list_x)
+    #         self.ui.tw_y.addTopLevelItems(column_list_y)
 
     def plot_xrd(self):
         x = self.ui.tw_x.currentIndex().data()
@@ -269,7 +270,11 @@ class XRD_view(QtWidgets.QDockWidget):
 
     def baseline_function(self):
         self.main_window.cleargraph()
-        self.baseline = baseline_als(self.y_data,self.ui.lambda_sb.value(),self.ui.p_sb.value())
+        print(self.y_data)
+        print(self.ui.lambda_sb.value())
+        print(self.ui.p_sb.value())
+        self.baseline = plotting_functions.baseline_als(self.y_data,self.ui.lambda_sb.value(),self.ui.p_sb.value())
+        print(self.baseline)
         ApplicationSettings.ALL_DATA_PLOTTED['corrected'] = \
             self.main_window.ax.plot(self.x_data, self.y_data-self.baseline, label='corrected')
         ApplicationSettings.ALL_DATA_PLOTTED['raw'] = \

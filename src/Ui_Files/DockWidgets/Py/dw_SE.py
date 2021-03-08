@@ -101,6 +101,16 @@ class Ui_DockWidget(object):
 
         self.gridLayout_3.addWidget(self.ax_cb, 7, 2, 1, 1)
 
+        self.label_7 = QLabel(self.tab_3)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout_3.addWidget(self.label_7, 8, 1, 1, 1)
+
+        self.skip_rows_sb = QSpinBox(self.tab_3)
+        self.skip_rows_sb.setObjectName(u"skip_rows_sb")
+
+        self.gridLayout_3.addWidget(self.skip_rows_sb, 8, 2, 1, 1)
+
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -137,11 +147,6 @@ class Ui_DockWidget(object):
         self.fit_results_TE.setObjectName(u"fit_results_TE")
 
         self.gridLayout_5.addWidget(self.fit_results_TE, 8, 0, 1, 3)
-
-        self.skip_rows_sb = QSpinBox(self.tab_2)
-        self.skip_rows_sb.setObjectName(u"skip_rows_sb")
-
-        self.gridLayout_5.addWidget(self.skip_rows_sb, 4, 2, 1, 1)
 
         self.textBrowser = QTextBrowser(self.tab_2)
         self.textBrowser.setObjectName(u"textBrowser")
@@ -185,11 +190,6 @@ class Ui_DockWidget(object):
         self.line_name_le.setObjectName(u"line_name_le")
 
         self.gridLayout_5.addWidget(self.line_name_le, 3, 2, 1, 1)
-
-        self.label_7 = QLabel(self.tab_2)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout_5.addWidget(self.label_7, 4, 0, 1, 1)
 
         self.doubleSpinBox_2 = QDoubleSpinBox(self.tab_2)
         self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
@@ -303,6 +303,7 @@ class Ui_DockWidget(object):
         self.ax_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left Ax", None))
         self.ax_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right Ax", None))
 
+        self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Axis Properties", None))
         self.label_10.setText(QCoreApplication.translate("DockWidget", u"Line Name", None))
         self.label_3.setText(QCoreApplication.translate("DockWidget", u"Linear fit From: To", None))
@@ -331,7 +332,6 @@ class Ui_DockWidget(object):
         self.lin_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit", None))
         self.linfitall_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit. All", None))
         self.line_name_le.setText(QCoreApplication.translate("DockWidget", u"Extended_Plot", None))
-        self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Fit Results", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"Y Axis", None))
         self.plottable_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Table", None))

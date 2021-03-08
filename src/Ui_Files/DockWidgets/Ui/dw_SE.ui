@@ -143,6 +143,16 @@
           </item>
          </widget>
         </item>
+        <item row="8" column="1">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Skip Rows: </string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2">
+         <widget class="QSpinBox" name="skip_rows_sb"/>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -210,9 +220,6 @@
         </item>
         <item row="8" column="0" colspan="3">
          <widget class="QTextEdit" name="fit_results_TE"/>
-        </item>
-        <item row="4" column="2">
-         <widget class="QSpinBox" name="skip_rows_sb"/>
         </item>
         <item row="7" column="0" colspan="3">
          <widget class="QTextBrowser" name="textBrowser">
@@ -295,13 +302,6 @@ p, li { white-space: pre-wrap; }
          <widget class="QLineEdit" name="line_name_le">
           <property name="text">
            <string>Extended_Plot</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Skip Rows: </string>
           </property>
          </widget>
         </item>

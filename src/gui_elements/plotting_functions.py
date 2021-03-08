@@ -186,43 +186,16 @@ def Calc_view_fun(self):
     self.dw_calc.show()
 
 def toggle_legend(self):
-    # if self.ui.actionLegend_Toggle.isChecked()==True:
-    #     self.ax.legend()
-    #     leg_1 = self.ax.legend(loc='best')
-    #     leg_1.set_draggable(True)
-    #     if self.ax_2 is not None:
-    #         self.ax_2.legend()
-    #         leg_2 = self.ax.legend(loc='best')
-    #         leg_2.set_draggable(True)
-    #     self.canvas.draw()
-    # elif self.ui.actionLegend_Toggle.isChecked()==False:
     if self.ax.get_legend() is None:
         self.ax.legend()
         leg_1 = self.ax.legend(loc='best')
         leg_1.set_draggable(True)
-        if self.ax_2 is not None:
-            print(self.ax_2)
-            self.ax_2.legend()
-            leg_2 = self.ax.legend(loc='best')
-            leg_2.set_draggable(True)
-        if self.ax_2 is not None:
-            print(self.ax_3)
-            self.ax_3.legend()
-            leg_3 = self.ax.legend(loc='best')
-            leg_3.set_draggable(True)
-        if self.ax_2 is not None:
-            print(self.ax_4)
-            self.ax_4.legend()
-            leg_4 = self.ax.legend(loc='best')
-            leg_4.set_draggable(True)
         self.canvas.draw()
     else:
         self.ax.get_legend().remove()
         if self.ax_2 is not None:
             self.ax_2.get_legend().remove()
         self.canvas.draw()
-
-
 
 def Save_All_Plotted(self):
     # names = self.settings.value('Data_Names')
@@ -261,33 +234,33 @@ def remove_line(self):
                     try:
                         self.ax.lines.remove(line[0])
                     except ValueError:
-                        print('x not in list')
+                        pass
                     except AttributeError:
-                        print('ax is None')
+                        pass
                     try:
                         self.ax_1.lines.remove(line[0])
                     except ValueError:
-                        print('x not in list')
+                        pass
                     except AttributeError:
-                        print('ax_1 is None')
+                        pass
                     try:
                         self.ax_2.lines.remove(line[0])
                     except ValueError:
-                        print('x not in list')
+                        pass
                     except AttributeError:
-                        print('ax_2 is None')
+                        pass
                     try:
                         self.ax_3.lines.remove(line[0])
                     except ValueError:
-                        print('x not in list')
+                        pass
                     except AttributeError:
-                        print('ax_3 is None')
+                        pass
                     try:
                         self.ax_3.lines.remove(line[0])
                     except ValueError:
-                        print('x not in list')
+                        pass
                     except AttributeError:
-                        print('ax_4 is None')
+                        pass
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
                     self.canvas.draw()
@@ -541,8 +514,6 @@ def bar_graph(self):
     d.exec_()
 
 def baseline_als(y, lam, p, niter=10):
-    # where y is the data needed to be corrected, lam is lambda and is a smoothing
-    # parameter and p is the asymmetry of the baseline, niter is the num of iterations
     L = len(y)
     D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
     w = np.ones(L)
@@ -551,22 +522,28 @@ def baseline_als(y, lam, p, niter=10):
         Z = W + lam * D.dot(D.transpose())
         z = spsolve(Z, w*y)
         w = p * (y > z) + (1-p) * (y < z)
+    print(z)
+    return z
 
 def fil_cols_fun(self):
     self.ui.tw_x.clear()
     self.ui.tw_y.clear()
     path = self.model.filePath(self.tree_view.currentIndex())
     filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
-    skip_rows = self.ui.skip_rows_sb.value()
+    try:
+        skip_rows = self.ui.skip_rows_sb.value()
+    except AttributeError:
+        print('No Skipped Rows')
+        skip_rows = 0
     if extension == '.CSV' or extension == '.csv':
-        self.data = pd.read_csv(path, delimiter=',', skiprows=0)
-    elif extension == '.xls' or extension == '.xlxs':
+        self.data = pd.read_csv(path, delimiter=',', skiprows=skip_rows)
+    elif extension == '.xls' or extension == '.xlsx':
         excelfile = pd.ExcelFile(path)
-        self.data = pd.read_excel(excelfile, "Sheet1")
+        self.data = pd.read_excel(excelfile, "Sheet1", skiprows=skip_rows)
     elif extension == '.X01':
         self.data = pd.read_csv(path, delimiter='   ', skiprows=48, engine='python')
     elif extension =='.txt':
-        self.data = pd.read_csv(path, sep='\t', skiprows=self.ui.skip_rows_sb.value())
+        self.data = pd.read_csv(path, sep='\t', skiprows=skip_rows)
     else:
         print(extension)
         self.data = pd.read_csv(path, sep='\t')
