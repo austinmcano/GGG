@@ -1,6 +1,7 @@
 from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as TW_ui
 from PySide2 import QtWidgets
 import numpy as np
+from src.Ui_Files.Dialogs.line_dialog import Ui_Dialog as vhline_ui
 from src.Ui_Files.Dialogs.axis_setup_dialog import Ui_Dialog as axis_setup_ui
 from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as STC_ui
 from src.Ui_Files.Dialogs.app_settings import Ui_Dialog as app_settings
@@ -584,6 +585,7 @@ def axis_setup_fun(self,ax_num):
     self.ui.verticalLayout.addWidget(self.toolbar)
     self.ui.verticalLayout.addWidget(self.canvas)
     self.canvas.installEventFilter(self)
+    ApplicationSettings.ALL_DATA_PLOTTED = {}
     if ax_num == 1:
         self.ax_1 = self.fig.add_subplot(111)
     elif ax_num == 2:
@@ -652,3 +654,18 @@ def axis_setup_function(self,ax_num):
     ui.setupUi(dialog)
     ui.buttonBox.accepted.connect(lambda: axis_fun())
     dialog.exec_()
+
+def add_line_to_graph(self):
+    def finish():
+        if ui.comboBox.currentText() == 'Verticle Line':
+            self.ax.axvline(x=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
+                            color=ui.color_cb.currentText())
+        elif ui.comboBox.currentText() == 'Horizontal Line':
+            self.ax.axhline(y=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
+                            color=ui.color_cb.currentText())
+        self.canvas.draw()
+    d = QtWidgets.QDialog()
+    ui = vhline_ui()
+    ui.setupUi(d)
+    ui.buttonBox.accepted.connect(lambda: finish())
+    d.exec_()

@@ -11,15 +11,7 @@ from src.Ui_Files.Dialogs.bargraph_dialog import Ui_Dialog as bar_dialog
 from src.Ui_Files.Dialogs.spine_color_dialog import Ui_Dialog as spine_color_dialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-from matplotlib.pyplot import figure
-import matplotlib
-import pickle
-import pandas as pd
 from PySide2 import QtCore,QtWidgets,QtGui
-import sys
-from shutil import copyfile, copytree, rmtree, copy2
-import os
-import seaborn as sns
 from src.gui_elements.settings import ApplicationSettings
 from scipy import integrate
 from scipy.linalg import norm

@@ -1,15 +1,17 @@
 from src.Ui_Files.DockWidgets.Py.dw_QCM import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
-import pandas as pd
-from PySide2 import QtCore
 from src.gui_elements.general_functions import *
 from src.gui_elements.plotting_functions import *
+from matplotlib.widgets import SpanSelector
+from lmfit.models import PolynomialModel
+from lmfit import Parameters, Model
 
 class QCM_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
         super().__init__()
         self.main_window = main_window
         self.ui = Ui_DockWidget()
+        self.setFixedWidth(600)
         self.ui.setupUi(self)
 
         self._init_vars()
@@ -18,11 +20,22 @@ class QCM_view(QtWidgets.QDockWidget):
 
     def _init_vars(self):
         # self.ax = self.main_window.ax
+        self.pressure_hist = []
         self.current_data_container = None
         self.time = None
         self.pressure = None
         self.mass = None
         self.data = None
+        self.fig = figure(num=None, figsize=(5, 4), dpi=80)
+        self.canvas = FigureCanvas(self.fig)
+        self.toolbar = NavigationToolbar(self.canvas, self, coordinates=True)
+        self.ui.gridLayout_4.addWidget(self.toolbar,6,0)
+        self.ui.gridLayout_4.addWidget(self.canvas,7,0,7,-1)
+        self.p_ax = self.fig.add_subplot(111)
+        self.fig.tight_layout()
+        self.canvas.draw()
+        # self.canvas.resize(200, 200)
+
 
     def _init_widgets(self):
         self.tree_view = self.ui.QCMtreeView
@@ -51,6 +64,7 @@ class QCM_view(QtWidgets.QDockWidget):
         self.ui.treeWidget_time.currentItemChanged.connect(lambda: self.load_data(self.ui.treeWidget_time))
         self.ui.treeWidget_pressure.currentItemChanged.connect(lambda: self.load_data(self.ui.treeWidget_pressure))
         self.ui.treeWidget_mass.currentItemChanged.connect(lambda: self.load_data(self.ui.treeWidget_mass))
+        self.ui.intmode_rb.toggled.connect(self.integrate_mode)
 
     def time_change(self):
         if self.ui.time_option.currentText() == 'From:To Time':
@@ -313,3 +327,68 @@ class QCM_view(QtWidgets.QDockWidget):
             fc[i] = mass_hc_a[i]+mass_hc_b[i]
         return mass_hc_a,mass_hc_b, fc
 
+
+    def integrate_mode(self, enabled):
+        if enabled:
+            self.span = SpanSelector(self.main_window.ax, self.onselect, 'horizontal', useblit=True,
+                                     rectprops=dict(alpha=0.2, facecolor='red'))
+        else:
+            del self.span
+            self.pressure_hist = []
+
+    def poly(x, a, b):
+        return a + b * x# + c * x ** 2 + d * x ** 3
+
+    def pressure_find_function(self, pressure, time, minimum, maximum,threshold,wait_time):
+        exposure_idx = []
+        exposure_times = []
+        t = 0
+        lim = [min(range(len(time)), key=lambda i: abs(time[i] - minimum)),
+               min(range(len(time)), key=lambda i: abs(time[i] - maximum))]
+        print(minimum,maximum)
+        for num in range(len(pressure) - 10):
+            # p_diff.append(pressure[num + 3] - pressure[num])
+            if pressure[num + 3] - pressure[num] >= threshold and time[num] - t > wait_time and minimum < time[num] < maximum:
+                exposure_times.append(time[num])
+                exposure_idx.append(num)
+                t = time[num]
+        return exposure_idx, lim[0], lim[1]
+
+    def integrate_pressure(self,data,minimum,maximum):
+        lim = [min(range(len(data[0])), key=lambda i: abs(data[0][i] - minimum)),
+               min(range(len(data[0])), key=lambda i: abs(data[0][i] - maximum))]
+        start_end = [data[0][lim[0]],data[0][lim[1]]]
+        # baseline = baseline_als(data[1][lim[0]:lim[1]],1000,.01)
+        # mod = Model(self.poly)
+        # pars = mod.make_params(a=1, b=2)
+        # fit = mod.fit(data[1][lim[0]:lim[1]], pars, x=data[0][lim[0]:lim[1]])
+        # self.main_window.cleargraph()
+        # self.main_window.ax.plot(data[0][lim[0]:lim[1]],fit.best_fit)
+        self.pressure_hist.append(integrate.trapz(data[1][lim[0]:lim[1]],data[0][lim[0]:lim[1]]))
+        self.p_ax.hist(self.pressure_hist)
+        self.canvas.draw()
+
+    # def clear_pax(self):
+    #     self.p_ax.clear()
+
+    def onselect(self, minimum, maximum):
+        self.p_ax.clear()
+        dict = ApplicationSettings.ALL_DATA_PLOTTED
+        Key_List = []
+        data = []
+        index = 0
+        for i in dict.keys():
+            if index == 0:
+                data.append(dict[i][0]._xy.T[0])
+                index += 1
+            Key_List.append(i)
+            data.append(dict[i][0]._xy.T[1])
+        exposure_idx, minimum_idx, maximum_idx = self.pressure_find_function(data[1],data[0],minimum,maximum,self.ui.threshold_sb.value(),self.ui.waittime_sb.value())
+        print(exposure_idx)
+        self.p_ax.plot(data[0][minimum_idx:maximum_idx],data[1][minimum_idx:maximum_idx])
+        for i in exposure_idx:
+            print(data[0][i])
+            self.p_ax.axvline(x=data[0][i], linestyle="--",lw=0.8,color='black')
+        # self.integrate_pressure(data, minimum, maximum)
+        # self.p_ax.plot(inte, '.-', label=str(np.round(minimum,1)) + '-' + str(np.round(maximum,1)))
+        self.canvas.draw()

@@ -11,13 +11,6 @@ from src.gui_elements.DockWidgets.Calc_view import Calculator_view
 from src.Ui_Files.Dialogs.start_dialog import Ui_Dialog as start_Ui
 from src.gui_elements.DockWidgets.Console_view import Console_view
 from src.Ui_Files.Dialogs.seaborn_settings import Ui_Dialog as Ui_sns_Dialog
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-from matplotlib.pyplot import figure
-import psutil
-from src.gui_elements.settings import ApplicationSettings
-from PySide2 import QtCore,QtWidgets,QtGui
-import seaborn as sns
 import gc
 from src.gui_elements.plotting_functions import *
 from src.gui_elements.general_functions import *
@@ -152,6 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
         start_ui.CF_pb.clicked.connect(lambda: self.start(self.dw_CF))
         start_dialog.exec_()
 
+        self.ui.actionAdd_Line.triggered.connect(lambda: add_line_to_graph(self))
         self.ui.actionGraph_Test.triggered.connect(lambda: graph_test_fun(self))
         self.ui.actionFile.triggered.connect(lambda: import_file(self))
         self.ui.actionLoad_Data.triggered.connect(lambda: load_data(self))

@@ -101,6 +101,7 @@
     <addaction name="actionSeaborn_Settings"/>
     <addaction name="actionBar_Graph"/>
     <addaction name="actionTight_Layout"/>
+    <addaction name="actionAdd_Line"/>
    </widget>
    <widget class="QMenu" name="menuHELP">
     <property name="title">
@@ -639,6 +640,11 @@
   <action name="actionAxis4">
    <property name="text">
     <string>Axis4</string>
+   </property>
+  </action>
+  <action name="actionAdd_Line">
+   <property name="text">
+    <string>Add Line</string>
    </property>
   </action>
  </widget>

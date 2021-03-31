@@ -3,6 +3,7 @@ from src.gui_elements.RC_Fucntions import *
 from src.gui_elements.plotting_functions import *
 from src.gui_elements.general_functions import *
 from lmfit import Model, Parameters
+from scipy.linalg import norm
 from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
 
 class XPS_view(QtWidgets.QDockWidget):
@@ -92,11 +93,12 @@ class XPS_view(QtWidgets.QDockWidget):
                          model(self.x_data, con[2][0], con[2][3], con[2][6]) + \
                          model(self.x_data, con[3][0], con[3][3], con[3][6]) + \
                          model(self.x_data, con[4][0], con[4][3], con[4][6])
-        ApplicationSettings.ALL_DATA_PLOTTED['Y_Data'] = self.main_window.ax.plot(self.x_data,self.y_data,'-b')
+        ApplicationSettings.ALL_DATA_PLOTTED['Y_Data'] = self.main_window.ax.plot(self.x_data,self.y_data)
         ApplicationSettings.ALL_DATA_PLOTTED['Shirley'] = \
             self.main_window.ax.plot(self.x_data,self.shirley,'.k', markersize=4)
         ApplicationSettings.ALL_DATA_PLOTTED['XPS Init Values'] = \
             self.main_window.ax.plot(self.x_data,start_plot + self.shirley, '-y')
+        self.xps_basic()
         self.main_window.canvas.draw()
 
     def eventFilter(self, object, event):
@@ -121,7 +123,7 @@ class XPS_view(QtWidgets.QDockWidget):
         #  Y is data[0]..... whyyyyyyy x is data[1]
         # self.data = np.flip(ApplicationSettings.CURRENT_PLOT[0].get_data())
         # self.data = np.flip(self.data)
-        indexs = [find_nearest(self.x_data, x_lim[1]), find_nearest(self.x_data, x_lim[0])]
+        indexs = [find_nearest(self.x_data, x_lim[0]), find_nearest(self.x_data, x_lim[1])]
         self.x_data = self.x_data[indexs[0]:indexs[1]]
         self.y_data = self.y_data[indexs[0]:indexs[1]]
         ApplicationSettings.ALL_DATA_PLOTTED['y_data'] = self.main_window.ax.plot(self.x_data,self.y_data)
@@ -326,10 +328,10 @@ class XPS_view(QtWidgets.QDockWidget):
                                                                                            'k--', label='Shirley')
                 ApplicationSettings.ALL_DATA_PLOTTED['V1'] = self.main_window.ax.plot(self.x_data,
                                                                                       self.shirley + comps['p1_'],
-                                                                                      'k--', label='V1')
+                                                                                      'k--', label='_V1')
                 ApplicationSettings.ALL_DATA_PLOTTED['V2'] = self.main_window.ax.plot(self.x_data,
                                                                                       self.shirley + comps['p2_'],
-                                                                                      'k--', label='V2')
+                                                                                      'k--', label='_V2')
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data,
                                                                                        result.best_fit + self.shirley,
                                                                                        'r--', label='Result')
@@ -352,13 +354,13 @@ class XPS_view(QtWidgets.QDockWidget):
                                                                                            'k--', label='Shirley')
                 ApplicationSettings.ALL_DATA_PLOTTED['V1'] = self.main_window.ax.plot(self.x_data,
                                                                                       self.shirley + comps['p1_'],
-                                                                                      'k--', label='V1')
+                                                                                      'k--', label='_V1')
                 ApplicationSettings.ALL_DATA_PLOTTED['V2'] = self.main_window.ax.plot(self.x_data,
                                                                                       self.shirley + comps['p2_'],
-                                                                                      'k--', label='V2')
+                                                                                      'k--', label='_V2')
                 ApplicationSettings.ALL_DATA_PLOTTED['V3'] = self.main_window.ax.plot(self.x_data,
                                                                                       self.shirley + comps['p3_'],
-                                                                                      'k--', label='V3')
+                                                                                      'k--', label='_V3')
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data,
                                                                                        result.best_fit + self.shirley,
                                                                                        'r--', label='Result')
@@ -383,10 +385,10 @@ class XPS_view(QtWidgets.QDockWidget):
                 result = vmodel.fit(self.y_data - self.shirley, params, x=self.x_data)
                 comps = result.eval_components()
                 ApplicationSettings.ALL_DATA_PLOTTED['Shirley'] = self.main_window.ax.plot(self.x_data, self.shirley, 'k--', label='Shirley')
-                ApplicationSettings.ALL_DATA_PLOTTED['V1'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p1_'], 'k--', label='V1')
-                ApplicationSettings.ALL_DATA_PLOTTED['V2'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p2_'], 'k--', label='V2')
-                ApplicationSettings.ALL_DATA_PLOTTED['V3'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p3_'], 'k--', label='V3')
-                ApplicationSettings.ALL_DATA_PLOTTED['V4'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p4_'], 'k--', label='V4')
+                ApplicationSettings.ALL_DATA_PLOTTED['V1'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p1_'], 'k--', label='_V1')
+                ApplicationSettings.ALL_DATA_PLOTTED['V2'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p2_'], 'k--', label='_V2')
+                ApplicationSettings.ALL_DATA_PLOTTED['V3'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p3_'], 'k--', label='_V3')
+                ApplicationSettings.ALL_DATA_PLOTTED['V4'] = self.main_window.ax.plot(self.x_data, self.shirley + comps['p4_'], 'k--', label='_V4')
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data, result.best_fit + self.shirley, 'r--', label='Result')
                 leg = self.main_window.ax.legend(loc='best',fontsize='small')
                 leg.set_draggable(True)
@@ -414,15 +416,15 @@ class XPS_view(QtWidgets.QDockWidget):
                 result = vmodel.fit(self.y_data - self.shirley, params, x=self.x_data)
                 comps = result.eval_components()
                 ApplicationSettings.ALL_DATA_PLOTTED['Shirley'] = self.main_window.ax.plot(self.x_data, self.shirley, 'k--', label='Shirley')
-                ApplicationSettings.ALL_DATA_PLOTTED['V1'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p1_'], 'k--', label='V1')
-                ApplicationSettings.ALL_DATA_PLOTTED['V2'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p2_'], 'k--', label='V2')
-                ApplicationSettings.ALL_DATA_PLOTTED['V3'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p3_'], 'k--', label='V3')
-                ApplicationSettings.ALL_DATA_PLOTTED['V4'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p4_'], 'k--', label='V4')
-                ApplicationSettings.ALL_DATA_PLOTTED['V5'] = self.main_window.ax.plot(self.x_data,self.shirley + comps['p5_'],'k--', label='V5')
+                ApplicationSettings.ALL_DATA_PLOTTED['V1'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p1_'], 'k--', label='_V1')
+                ApplicationSettings.ALL_DATA_PLOTTED['V2'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p2_'], 'k--', label='_V2')
+                ApplicationSettings.ALL_DATA_PLOTTED['V3'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p3_'], 'k--', label='_V3')
+                ApplicationSettings.ALL_DATA_PLOTTED['V4'] =self.main_window.ax.plot(self.x_data, self.shirley + comps['p4_'], 'k--', label='_V4')
+                ApplicationSettings.ALL_DATA_PLOTTED['V5'] = self.main_window.ax.plot(self.x_data,self.shirley + comps['p5_'],'k--', label='_V5')
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] =self.main_window.ax.plot(self.x_data, result.best_fit + self.shirley, 'r--', label='Result')
                 self.ui.fit_report_TE.setText(result.fit_report())
         self.xps_basic()
-        ApplicationSettings.ALL_DATA_PLOTTED['Y Data'] = self.main_window.ax.plot(self.x_data,self.y_data,'-b')
+        ApplicationSettings.ALL_DATA_PLOTTED['Y Data'] = self.main_window.ax.plot(self.x_data,self.y_data)
         self.main_window.canvas.draw()
 
     def fill_cols(self):
@@ -465,6 +467,9 @@ class XPS_view(QtWidgets.QDockWidget):
         self.xps_basic()
 
     def xps_basic(self):
+        limits = self.main_window.ax.get_xlim()
+        if limits[1] > limits[0]:
+            self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
         self.main_window.ax.set_xlabel('B. E. (eV)')
         self.main_window.ax.set_ylabel('Counts')
         leg = self.main_window.ax.legend(loc='best')

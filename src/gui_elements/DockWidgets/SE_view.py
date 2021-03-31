@@ -6,7 +6,6 @@ from lmfit.models import LinearModel
 from src.gui_elements.general_functions import *
 from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 
-
 class SE_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
         super().__init__()

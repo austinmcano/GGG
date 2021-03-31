@@ -647,7 +647,15 @@ class FTIR_view(QtWidgets.QDockWidget):
                     ApplicationSettings.ALL_DATA_PLOTTED['IR_'+str(j)] = \
                         self.main_window.ax.plot(self.data[0],self.data[j+1])
         elif type == 'diff2':
-            pass
+            paths = [self.model.filePath(self.tree_view.selectedIndexes()[0]),
+                     self.model.filePath(self.tree_view.selectedIndexes()[5])]
+            temp1 = pd.read_csv(paths[0],delimiter=',').to_numpy().T
+            temp2 = pd.read_csv(paths[1],delimiter=',').to_numpy().T
+            self.data = [temp1[0],temp1[1]-temp2[1]]
+            print(self.data)
+            ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
+                self.data[0], self.data[1], label=tail)
+
         self.ir_basic()
 
     def ir_basic(self):
@@ -815,7 +823,6 @@ class FTIR_view(QtWidgets.QDockWidget):
 
     def integrate_mode(self, enabled):
         if enabled:
-            axis_setup_fun(self.main_window, 2)
             self.span = SpanSelector(self.main_window.ax, self.onselect, 'horizontal', useblit=True,
                                      rectprops=dict(alpha=0.2, facecolor='red'))
         else:
