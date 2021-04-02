@@ -1,7 +1,7 @@
 from src.Ui_Files.DockWidgets.Py.dw_calculator import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
 from PySide2 import QtCore,QtWidgets
-import numexpr
+# import numexpr
 
 
 class Calculator_view(QtWidgets.QDockWidget):
@@ -53,8 +53,8 @@ class Calculator_view(QtWidgets.QDockWidget):
         self.text = self.text+num
         self.ui.lineEdit.setText(self.text)
 
-    def equal_pressed(self):
-        num = numexpr.evaluate(self.ui.lineEdit.text()).item()
-        self.ui.lineEdit.setText(str(num))
-        self.text = str(num)
+    # def equal_pressed(self):
+    #     num = numexpr.evaluate(self.ui.lineEdit.text()).item()
+    #     self.ui.lineEdit.setText(str(num))
+    #     self.text = str(num)
 
