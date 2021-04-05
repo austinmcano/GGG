@@ -412,6 +412,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def cleargraph(self):
         self.ax.clear()
         self.fig.clf()
+        del self.fig
         self.ui.verticalLayout.removeWidget(self.toolbar)
         self.ui.verticalLayout.removeWidget(self.canvas)
         self.toolbar.close()

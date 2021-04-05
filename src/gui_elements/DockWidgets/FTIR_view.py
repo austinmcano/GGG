@@ -73,6 +73,9 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.ui.diff_dir_pb.clicked.connect(lambda: self.ir_plot('diff'))
         self.ui.abs_dir_pb.clicked.connect(lambda: self.ir_plot('abs'))
         self.ui.spectra_pb.clicked.connect(lambda: self.ir_plot('spectra'))
+        self.ui.fit2_pb.clicked.connect(lambda: self.fitting_function_2())
+        self.ui.select_data_pb.clicked.connect(lambda: self.select_data())
+        self.ui.fit_init_pb.clicked.connect(lambda: self.plot_init_2())
 
     def eventFilter(self, object, event):
         # For right click events
@@ -536,6 +539,56 @@ class FTIR_view(QtWidgets.QDockWidget):
         ApplicationSettings.ALL_DATA_PLOTTED['Y Data'] = self.main_window.ax.plot(self.data_x, self.data_y)
         self.ir_basic()
 
+    def fitting_function_2(self):
+        self.main_window.cleargraph()
+        constraints = [[self.ui.p1_amp_sb.value(), self.ui.p1_ampl_sb.value(),self.ui.p1_amph_sb.value(),
+                        self.ui.p1_cen_sb.value(), self.ui.p1_cenl_sb.value(), self.ui.p1_cenh_sb.value(),
+                        self.ui.p1_sig_sb.value(), self.ui.p1_sigl_sb.value(), self.ui.p1_sigh_sb.value()],[self.ui.p2_amp_sb.value(), self.ui.p2_ampl_sb.value(), self.ui.p2_amph_sb.value(),
+                        self.ui.p2_cen_sb.value(), self.ui.p2_cenl_sb.value(), self.ui.p2_cenh_sb.value(),
+                        self.ui.p2_sig_sb.value(), self.ui.p2_sigl_sb.value(), self.ui.p2_sigh_sb.value()],[self.ui.p3_amp_sb.value(), self.ui.p3_ampl_sb.value(), self.ui.p3_amph_sb.value(),
+                        self.ui.p3_cen_sb.value(), self.ui.p3_cenl_sb.value(), self.ui.p3_cenh_sb.value(),
+                        self.ui.p3_sig_sb.value(), self.ui.p3_sigl_sb.value(), self.ui.p3_sigh_sb.value()],[self.ui.p4_amp_sb.value(), self.ui.p4_ampl_sb.value(), self.ui.p4_amph_sb.value(),
+                        self.ui.p4_cen_sb.value(), self.ui.p4_cenl_sb.value(), self.ui.p4_cenh_sb.value(),
+                        self.ui.p4_sig_sb.value(), self.ui.p4_sigl_sb.value(), self.ui.p4_sigh_sb.value()],[self.ui.p5_amp_sb.value(), self.ui.p5_ampl_sb.value(), self.ui.p5_amph_sb.value(),
+                        self.ui.p5_cen_sb.value(), self.ui.p5_cenl_sb.value(), self.ui.p5_cenh_sb.value(),
+                        self.ui.p5_sig_sb.value(), self.ui.p5_sigl_sb.value(), self.ui.p5_sigh_sb.value()]]
+        fit_params = []
+        checked = [self.ui.p1_cb.isChecked(),self.ui.p2_cb.isChecked(),self.ui.p3_cb.isChecked(),
+                   self.ui.p4_cb.isChecked(),self.ui.p5_cb.isChecked()]
+        # line_shapes = [self.ui.lineshape_1,self.ui.lineshape_2,self.ui.lineshape_3,self.ui.lineshape_4,self.ui.lineshape_5]
+        line_shape_mods = [VoigtModel(prefix='p1_'),VoigtModel(prefix='p2_'),VoigtModel(prefix='p3_'),
+                           VoigtModel(prefix='p4_'),VoigtModel(prefix='p5_')]
+        cur_mods = []
+        checked_peaks = []
+        for x in range(1,6):
+            if checked[x-1]:
+                fit_params.append(('p%s_amplitude'% x,constraints[x-1][0],True,constraints[x-1][1],constraints[x-1][2]))
+                fit_params.append(('p%s_center' % x,constraints[x-1][3],True,constraints[x-1][4],constraints[x-1][5]))
+                fit_params.append(('p%s_sigma' % x,constraints[x-1][6],True,constraints[x-1][7],constraints[x-1][8]))
+                checked_peaks.append(x-1)
+                cur_mods.append(line_shape_mods[x-1])
+        if len(checked_peaks) == 1:
+            mod = cur_mods[0]
+        elif len(checked_peaks) == 2:
+            mod = cur_mods[0] + cur_mods[1]
+        elif len(checked_peaks) == 3:
+            mod = cur_mods[0] + cur_mods[1] +cur_mods[2]
+        elif len(checked_peaks) == 4:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+        elif len(checked_peaks) == 5:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+
+        params = Parameters()
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        for i in fit_params:
+            params.add_many(i)
+        result = mod.fit(self.data_y, params, x=self.data_x)
+        self.ui.fit_report_TE.setText(result.fit_report())
+        ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = \
+            self.main_window.ax.plot(self.data_x,result.best_fit, 'r--', label='Result')
+        ApplicationSettings.ALL_DATA_PLOTTED['Y Data'] = self.main_window.ax.plot(self.data_x, self.data_y)
+        self.ir_basic()
+
     def select_data(self):
         def finish():
             key = ui.treeWidget.currentItem().text(0)
@@ -573,6 +626,39 @@ class FTIR_view(QtWidgets.QDockWidget):
 
     def lorentz(self, x, amp, cen, sigma):
         return (amp/np.pi)*(1/2*sigma)/((x-cen)**2+(1/2*sigma)**2)
+
+    def plot_init_2(self):
+        self.main_window.cleargraph()
+        model = self.gaussian
+        peaks = None
+        constraints = [[self.ui.p1_amp_sb.value(), self.ui.p1_ampl_sb.value(), self.ui.p1_amph_sb.value(),
+                        self.ui.p1_cen_sb.value(), self.ui.p1_cenl_sb.value(), self.ui.p1_cenh_sb.value(),
+                        self.ui.p1_sig_sb.value(), self.ui.p1_sigl_sb.value(), self.ui.p1_sigh_sb.value()],
+                       [self.ui.p2_amp_sb.value(), self.ui.p2_ampl_sb.value(), self.ui.p2_amph_sb.value(),
+                        self.ui.p2_cen_sb.value(), self.ui.p2_cenl_sb.value(), self.ui.p2_cenh_sb.value(),
+                        self.ui.p2_sig_sb.value(), self.ui.p2_sigl_sb.value(), self.ui.p2_sigh_sb.value()],
+                       [self.ui.p3_amp_sb.value(), self.ui.p3_ampl_sb.value(), self.ui.p3_amph_sb.value(),
+                        self.ui.p3_cen_sb.value(), self.ui.p3_cenl_sb.value(), self.ui.p3_cenh_sb.value(),
+                        self.ui.p3_sig_sb.value(), self.ui.p3_sigl_sb.value(), self.ui.p3_sigh_sb.value()],
+                       [self.ui.p4_amp_sb.value(), self.ui.p4_ampl_sb.value(), self.ui.p4_amph_sb.value(),
+                        self.ui.p4_cen_sb.value(), self.ui.p4_cenl_sb.value(), self.ui.p4_cenh_sb.value(),
+                        self.ui.p4_sig_sb.value(), self.ui.p4_sigl_sb.value(), self.ui.p4_sigh_sb.value()],
+                       [self.ui.p5_amp_sb.value(), self.ui.p5_ampl_sb.value(), self.ui.p5_amph_sb.value(),
+                        self.ui.p5_cen_sb.value(), self.ui.p5_cenl_sb.value(), self.ui.p5_cenh_sb.value(),
+                        self.ui.p5_sig_sb.value(), self.ui.p5_sigl_sb.value(), self.ui.p5_sigh_sb.value()]]
+
+        checked = [self.ui.p1_cb.isChecked(), self.ui.p2_cb.isChecked(), self.ui.p3_cb.isChecked(),
+                   self.ui.p4_cb.isChecked(), self.ui.p5_cb.isChecked()]
+        for i in range(5):
+            if checked[i]:
+                if peaks is None:
+                    peaks = model(self.data_x,constraints[i][0],constraints[i][3],constraints[i][6])
+                else:
+                    peaks = model(self.data_x, constraints[i][0], constraints[i][3], constraints[i][6]) + peaks
+
+        ApplicationSettings.ALL_DATA_PLOTTED['Y_Data'] = self.main_window.ax.plot(self.data_x,self.data_y)
+        ApplicationSettings.ALL_DATA_PLOTTED['FTIR Init Values'] = self.main_window.ax.plot(self.data_x,peaks, '--k')
+        self.ir_basic()
 
     def plot_init(self):
         self.main_window.cleargraph()

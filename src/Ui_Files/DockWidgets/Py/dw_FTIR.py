@@ -17,7 +17,7 @@ class Ui_DockWidget(object):
     def setupUi(self, DockWidget):
         if not DockWidget.objectName():
             DockWidget.setObjectName(u"DockWidget")
-        DockWidget.resize(516, 600)
+        DockWidget.resize(600, 614)
         self.dockWidgetContents = QWidget()
         self.dockWidgetContents.setObjectName(u"dockWidgetContents")
         self.gridLayout = QGridLayout(self.dockWidgetContents)
@@ -327,325 +327,465 @@ class Ui_DockWidget(object):
         self.tab_4.setObjectName(u"tab_4")
         self.gridLayout_5 = QGridLayout(self.tab_4)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.doubleSpinBox_13 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_13.setObjectName(u"doubleSpinBox_13")
+        self.p4_amph_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_amph_sb.setObjectName(u"p4_amph_sb")
+        self.p4_amph_sb.setMaximum(9999.000000000000000)
+        self.p4_amph_sb.setValue(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_13, 6, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_amph_sb, 4, 5, 1, 1)
 
-        self.doubleSpinBox_11 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_11.setObjectName(u"doubleSpinBox_11")
+        self.p3_cenh_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_cenh_sb.setObjectName(u"p3_cenh_sb")
+        self.p3_cenh_sb.setMaximum(4000.000000000000000)
+        self.p3_cenh_sb.setValue(4000.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_11, 4, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.p3_cenh_sb, 9, 4, 1, 1)
 
-        self.textEdit = QTextEdit(self.tab_4)
-        self.textEdit.setObjectName(u"textEdit")
+        self.line_5 = QFrame(self.tab_4)
+        self.line_5.setObjectName(u"line_5")
+        self.line_5.setFrameShape(QFrame.HLine)
+        self.line_5.setFrameShadow(QFrame.Sunken)
 
-        self.gridLayout_5.addWidget(self.textEdit, 10, 1, 1, 6)
-
-        self.doubleSpinBox_31 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_31.setObjectName(u"doubleSpinBox_31")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_31, 7, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.line_5, 10, 1, 1, 6)
 
         self.label_8 = QLabel(self.tab_4)
         self.label_8.setObjectName(u"label_8")
 
-        self.gridLayout_5.addWidget(self.label_8, 1, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.label_8, 2, 1, 1, 1)
 
-        self.doubleSpinBox_21 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_21.setObjectName(u"doubleSpinBox_21")
+        self.p2_cenl_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_cenl_sb.setObjectName(u"p2_cenl_sb")
+        self.p2_cenl_sb.setMaximum(4000.000000000000000)
+        self.p2_cenl_sb.setValue(400.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_21, 7, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.p2_cenl_sb, 8, 3, 1, 1)
 
-        self.doubleSpinBox_25 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_25.setObjectName(u"doubleSpinBox_25")
+        self.p1_sigh_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_sigh_sb.setObjectName(u"p1_sigh_sb")
+        self.p1_sigh_sb.setMaximum(500.000000000000000)
+        self.p1_sigh_sb.setValue(300.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_25, 3, 5, 1, 1)
+        self.gridLayout_5.addWidget(self.p1_sigh_sb, 13, 2, 1, 1)
 
-        self.doubleSpinBox_39 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_39.setObjectName(u"doubleSpinBox_39")
+        self.p4_cenl_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_cenl_sb.setObjectName(u"p4_cenl_sb")
+        self.p4_cenl_sb.setMaximum(4000.000000000000000)
+        self.p4_cenl_sb.setValue(400.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_39, 6, 6, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_cenl_sb, 8, 5, 1, 1)
 
-        self.label_15 = QLabel(self.tab_4)
-        self.label_15.setObjectName(u"label_15")
+        self.p4_cenh_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_cenh_sb.setObjectName(u"p4_cenh_sb")
+        self.p4_cenh_sb.setMaximum(4000.000000000000000)
+        self.p4_cenh_sb.setValue(4000.000000000000000)
 
-        self.gridLayout_5.addWidget(self.label_15, 8, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_cenh_sb, 9, 5, 1, 1)
 
-        self.doubleSpinBox_17 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_17.setObjectName(u"doubleSpinBox_17")
+        self.p1_cenl_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_cenl_sb.setObjectName(u"p1_cenl_sb")
+        self.p1_cenl_sb.setMaximum(4000.000000000000000)
+        self.p1_cenl_sb.setValue(400.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_17, 3, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.p1_cenl_sb, 8, 2, 1, 1)
 
-        self.doubleSpinBox_10 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_10.setObjectName(u"doubleSpinBox_10")
+        self.label_13 = QLabel(self.tab_4)
+        self.label_13.setObjectName(u"label_13")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_10, 3, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.label_13, 9, 1, 1, 1)
 
-        self.doubleSpinBox = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox.setObjectName(u"doubleSpinBox")
+        self.p4_sig_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_sig_sb.setObjectName(u"p4_sig_sb")
+        self.p4_sig_sb.setMaximum(500.000000000000000)
+        self.p4_sig_sb.setValue(50.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox, 1, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_sig_sb, 11, 5, 1, 1)
 
-        self.doubleSpinBox_26 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_26.setObjectName(u"doubleSpinBox_26")
+        self.p1_cen_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_cen_sb.setObjectName(u"p1_cen_sb")
+        self.p1_cen_sb.setMaximum(4000.000000000000000)
+        self.p1_cen_sb.setValue(1000.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_26, 2, 6, 1, 1)
-
-        self.radioButton_5 = QRadioButton(self.tab_4)
-        self.radioButton_5.setObjectName(u"radioButton_5")
-
-        self.gridLayout_5.addWidget(self.radioButton_5, 0, 5, 1, 1)
-
-        self.radioButton_6 = QRadioButton(self.tab_4)
-        self.radioButton_6.setObjectName(u"radioButton_6")
-
-        self.gridLayout_5.addWidget(self.radioButton_6, 0, 6, 1, 1)
-
-        self.doubleSpinBox_23 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_23.setObjectName(u"doubleSpinBox_23")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_23, 9, 3, 1, 1)
-
-        self.label_11 = QLabel(self.tab_4)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout_5.addWidget(self.label_11, 4, 1, 1, 1)
-
-        self.doubleSpinBox_19 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_19.setObjectName(u"doubleSpinBox_19")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_19, 5, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.p1_cen_sb, 7, 2, 1, 1)
 
         self.label_9 = QLabel(self.tab_4)
         self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_5.addWidget(self.label_9, 2, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.label_9, 3, 1, 1, 1)
 
-        self.doubleSpinBox_15 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_15.setObjectName(u"doubleSpinBox_15")
+        self.p1_amph_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_amph_sb.setObjectName(u"p1_amph_sb")
+        self.p1_amph_sb.setMaximum(9999.000000000000000)
+        self.p1_amph_sb.setValue(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_15, 8, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.p1_amph_sb, 4, 2, 1, 1)
 
-        self.radioButton_2 = QRadioButton(self.tab_4)
-        self.radioButton_2.setObjectName(u"radioButton_2")
+        self.p5_cb = QCheckBox(self.tab_4)
+        self.p5_cb.setObjectName(u"p5_cb")
 
-        self.gridLayout_5.addWidget(self.radioButton_2, 0, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.p5_cb, 0, 6, 1, 1)
 
-        self.doubleSpinBox_35 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_35.setObjectName(u"doubleSpinBox_35")
+        self.p2_cb = QCheckBox(self.tab_4)
+        self.p2_cb.setObjectName(u"p2_cb")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_35, 4, 6, 1, 1)
+        self.gridLayout_5.addWidget(self.p2_cb, 0, 3, 1, 1)
 
-        self.doubleSpinBox_7 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_7.setObjectName(u"doubleSpinBox_7")
+        self.p3_cen_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_cen_sb.setObjectName(u"p3_cen_sb")
+        self.p3_cen_sb.setMaximum(4000.000000000000000)
+        self.p3_cen_sb.setValue(2000.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_7, 2, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.p3_cen_sb, 7, 4, 1, 1)
+
+        self.p5_cenl_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_cenl_sb.setObjectName(u"p5_cenl_sb")
+        self.p5_cenl_sb.setMaximum(4000.000000000000000)
+        self.p5_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_cenl_sb, 8, 6, 1, 1)
+
+        self.p5_sig_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_sig_sb.setObjectName(u"p5_sig_sb")
+        self.p5_sig_sb.setMaximum(500.000000000000000)
+        self.p5_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_sig_sb, 11, 6, 1, 1)
+
+        self.p3_sigl_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_sigl_sb.setObjectName(u"p3_sigl_sb")
+        self.p3_sigl_sb.setMaximum(500.000000000000000)
+        self.p3_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_5.addWidget(self.p3_sigl_sb, 12, 4, 1, 1)
+
+        self.p5_cenh_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_cenh_sb.setObjectName(u"p5_cenh_sb")
+        self.p5_cenh_sb.setMaximum(4000.000000000000000)
+        self.p5_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_cenh_sb, 9, 6, 1, 1)
+
+        self.p3_sig_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_sig_sb.setObjectName(u"p3_sig_sb")
+        self.p3_sig_sb.setMaximum(500.000000000000000)
+        self.p3_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p3_sig_sb, 11, 4, 1, 1)
+
+        self.p2_sig_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_sig_sb.setObjectName(u"p2_sig_sb")
+        self.p2_sig_sb.setMaximum(500.000000000000000)
+        self.p2_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p2_sig_sb, 11, 3, 1, 1)
+
+        self.line_4 = QFrame(self.tab_4)
+        self.line_4.setObjectName(u"line_4")
+        self.line_4.setFrameShape(QFrame.HLine)
+        self.line_4.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_5.addWidget(self.line_4, 6, 1, 1, 6)
+
+        self.p5_sigl_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_sigl_sb.setObjectName(u"p5_sigl_sb")
+        self.p5_sigl_sb.setMaximum(500.000000000000000)
+        self.p5_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_sigl_sb, 12, 6, 1, 1)
+
+        self.p4_ampl_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_ampl_sb.setObjectName(u"p4_ampl_sb")
+        self.p4_ampl_sb.setMaximum(9999.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p4_ampl_sb, 3, 5, 1, 1)
+
+        self.p3_cenl_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_cenl_sb.setObjectName(u"p3_cenl_sb")
+        self.p3_cenl_sb.setMaximum(4000.000000000000000)
+        self.p3_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p3_cenl_sb, 8, 4, 1, 1)
+
+        self.p1_cb = QCheckBox(self.tab_4)
+        self.p1_cb.setObjectName(u"p1_cb")
+        self.p1_cb.setChecked(True)
+
+        self.gridLayout_5.addWidget(self.p1_cb, 0, 2, 1, 1)
+
+        self.p5_amp_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_amp_sb.setObjectName(u"p5_amp_sb")
+        self.p5_amp_sb.setMaximum(9999.000000000000000)
+        self.p5_amp_sb.setValue(10.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_amp_sb, 2, 6, 1, 1)
+
+        self.p5_cen_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_cen_sb.setObjectName(u"p5_cen_sb")
+        self.p5_cen_sb.setMaximum(4000.000000000000000)
+        self.p5_cen_sb.setValue(3000.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_cen_sb, 7, 6, 1, 1)
+
+        self.label_14 = QLabel(self.tab_4)
+        self.label_14.setObjectName(u"label_14")
+
+        self.gridLayout_5.addWidget(self.label_14, 11, 1, 1, 1)
+
+        self.p1_sig_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_sig_sb.setObjectName(u"p1_sig_sb")
+        self.p1_sig_sb.setMaximum(500.000000000000000)
+        self.p1_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p1_sig_sb, 11, 2, 1, 1)
+
+        self.fit2_pb = QPushButton(self.tab_4)
+        self.fit2_pb.setObjectName(u"fit2_pb")
+
+        self.gridLayout_5.addWidget(self.fit2_pb, 15, 5, 1, 2)
+
+        self.p5_sigh_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_sigh_sb.setObjectName(u"p5_sigh_sb")
+        self.p5_sigh_sb.setMaximum(500.000000000000000)
+        self.p5_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_sigh_sb, 13, 6, 1, 1)
+
+        self.p2_sigh_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_sigh_sb.setObjectName(u"p2_sigh_sb")
+        self.p2_sigh_sb.setMaximum(500.000000000000000)
+        self.p2_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p2_sigh_sb, 13, 3, 1, 1)
 
         self.label_17 = QLabel(self.tab_4)
         self.label_17.setObjectName(u"label_17")
 
         self.gridLayout_5.addWidget(self.label_17, 0, 1, 1, 1)
 
-        self.label_14 = QLabel(self.tab_4)
-        self.label_14.setObjectName(u"label_14")
+        self.p2_cen_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_cen_sb.setObjectName(u"p2_cen_sb")
+        self.p2_cen_sb.setMaximum(4000.000000000000000)
+        self.p2_cen_sb.setValue(1500.000000000000000)
 
-        self.gridLayout_5.addWidget(self.label_14, 7, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.p2_cen_sb, 7, 3, 1, 1)
 
-        self.doubleSpinBox_3 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_3.setObjectName(u"doubleSpinBox_3")
+        self.textEdit = QTextEdit(self.tab_4)
+        self.textEdit.setObjectName(u"textEdit")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_3, 1, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.textEdit, 14, 1, 1, 6)
 
-        self.doubleSpinBox_29 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_29.setObjectName(u"doubleSpinBox_29")
+        self.p4_cb = QCheckBox(self.tab_4)
+        self.p4_cb.setObjectName(u"p4_cb")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_29, 5, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_cb, 0, 5, 1, 1)
 
-        self.doubleSpinBox_42 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_42.setObjectName(u"doubleSpinBox_42")
+        self.p2_ampl_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_ampl_sb.setObjectName(u"p2_ampl_sb")
+        self.p2_ampl_sb.setMaximum(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_42, 8, 5, 1, 1)
+        self.gridLayout_5.addWidget(self.p2_ampl_sb, 3, 3, 1, 1)
 
-        self.doubleSpinBox_30 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_30.setObjectName(u"doubleSpinBox_30")
+        self.select_data_pb = QPushButton(self.tab_4)
+        self.select_data_pb.setObjectName(u"select_data_pb")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_30, 6, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.select_data_pb, 15, 1, 1, 2)
 
-        self.doubleSpinBox_28 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_28.setObjectName(u"doubleSpinBox_28")
+        self.p2_amph_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_amph_sb.setObjectName(u"p2_amph_sb")
+        self.p2_amph_sb.setMaximum(9999.000000000000000)
+        self.p2_amph_sb.setValue(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_28, 4, 4, 1, 1)
-
-        self.doubleSpinBox_5 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_5.setObjectName(u"doubleSpinBox_5")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_5, 1, 6, 1, 1)
-
-        self.radioButton_3 = QRadioButton(self.tab_4)
-        self.radioButton_3.setObjectName(u"radioButton_3")
-
-        self.gridLayout_5.addWidget(self.radioButton_3, 0, 3, 1, 1)
-
-        self.label_16 = QLabel(self.tab_4)
-        self.label_16.setObjectName(u"label_16")
-
-        self.gridLayout_5.addWidget(self.label_16, 9, 1, 1, 1)
-
-        self.radioButton_4 = QRadioButton(self.tab_4)
-        self.radioButton_4.setObjectName(u"radioButton_4")
-
-        self.gridLayout_5.addWidget(self.radioButton_4, 0, 4, 1, 1)
-
-        self.doubleSpinBox_45 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_45.setObjectName(u"doubleSpinBox_45")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_45, 9, 6, 1, 1)
-
-        self.doubleSpinBox_37 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_37.setObjectName(u"doubleSpinBox_37")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_37, 5, 5, 1, 1)
-
-        self.doubleSpinBox_9 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_9.setObjectName(u"doubleSpinBox_9")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_9, 2, 5, 1, 1)
-
-        self.doubleSpinBox_32 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_32.setObjectName(u"doubleSpinBox_32")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_32, 8, 4, 1, 1)
-
-        self.doubleSpinBox_41 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_41.setObjectName(u"doubleSpinBox_41")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_41, 7, 6, 1, 1)
+        self.gridLayout_5.addWidget(self.p2_amph_sb, 4, 3, 1, 1)
 
         self.label_12 = QLabel(self.tab_4)
         self.label_12.setObjectName(u"label_12")
 
-        self.gridLayout_5.addWidget(self.label_12, 5, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.label_12, 8, 1, 1, 1)
 
-        self.doubleSpinBox_40 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_40.setObjectName(u"doubleSpinBox_40")
+        self.p1_amp_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_amp_sb.setObjectName(u"p1_amp_sb")
+        self.p1_amp_sb.setMaximum(9999.000000000000000)
+        self.p1_amp_sb.setValue(10.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_40, 7, 5, 1, 1)
+        self.gridLayout_5.addWidget(self.p1_amp_sb, 2, 2, 1, 1)
 
-        self.doubleSpinBox_22 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_22.setObjectName(u"doubleSpinBox_22")
+        self.label_11 = QLabel(self.tab_4)
+        self.label_11.setObjectName(u"label_11")
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_22, 8, 3, 1, 1)
+        self.gridLayout_5.addWidget(self.label_11, 7, 1, 1, 1)
 
-        self.doubleSpinBox_4 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_4.setObjectName(u"doubleSpinBox_4")
+        self.p4_sigh_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_sigh_sb.setObjectName(u"p4_sigh_sb")
+        self.p4_sigh_sb.setMaximum(500.000000000000000)
+        self.p4_sigh_sb.setValue(300.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_4, 1, 5, 1, 1)
+        self.gridLayout_5.addWidget(self.p4_sigh_sb, 13, 5, 1, 1)
 
-        self.doubleSpinBox_20 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_20.setObjectName(u"doubleSpinBox_20")
+        self.p5_amph_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_amph_sb.setObjectName(u"p5_amph_sb")
+        self.p5_amph_sb.setMaximum(9999.000000000000000)
+        self.p5_amph_sb.setValue(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.doubleSpinBox_20, 6, 3, 1, 1)
-
-        self.doubleSpinBox_14 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_14.setObjectName(u"doubleSpinBox_14")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_14, 7, 2, 1, 1)
-
-        self.doubleSpinBox_24 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_24.setObjectName(u"doubleSpinBox_24")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_24, 3, 4, 1, 1)
-
-        self.doubleSpinBox_18 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_18.setObjectName(u"doubleSpinBox_18")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_18, 4, 3, 1, 1)
-
-        self.doubleSpinBox_33 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_33.setObjectName(u"doubleSpinBox_33")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_33, 9, 4, 1, 1)
-
-        self.doubleSpinBox_12 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_12.setObjectName(u"doubleSpinBox_12")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_12, 5, 2, 1, 1)
-
-        self.doubleSpinBox_2 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_2, 1, 2, 1, 1)
-
-        self.doubleSpinBox_38 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_38.setObjectName(u"doubleSpinBox_38")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_38, 6, 5, 1, 1)
-
-        self.doubleSpinBox_36 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_36.setObjectName(u"doubleSpinBox_36")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_36, 5, 6, 1, 1)
-
-        self.doubleSpinBox_44 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_44.setObjectName(u"doubleSpinBox_44")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_44, 9, 5, 1, 1)
-
-        self.doubleSpinBox_16 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_16.setObjectName(u"doubleSpinBox_16")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_16, 9, 2, 1, 1)
-
-        self.doubleSpinBox_6 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_6.setObjectName(u"doubleSpinBox_6")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_6, 2, 2, 1, 1)
-
-        self.doubleSpinBox_34 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_34.setObjectName(u"doubleSpinBox_34")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_34, 4, 5, 1, 1)
-
-        self.doubleSpinBox_27 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_27.setObjectName(u"doubleSpinBox_27")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_27, 3, 6, 1, 1)
-
-        self.label_13 = QLabel(self.tab_4)
-        self.label_13.setObjectName(u"label_13")
-
-        self.gridLayout_5.addWidget(self.label_13, 6, 1, 1, 1)
-
-        self.doubleSpinBox_43 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_43.setObjectName(u"doubleSpinBox_43")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_43, 8, 6, 1, 1)
-
-        self.doubleSpinBox_8 = QDoubleSpinBox(self.tab_4)
-        self.doubleSpinBox_8.setObjectName(u"doubleSpinBox_8")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_8, 2, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.p5_amph_sb, 4, 6, 1, 1)
 
         self.label_10 = QLabel(self.tab_4)
         self.label_10.setObjectName(u"label_10")
 
-        self.gridLayout_5.addWidget(self.label_10, 3, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.label_10, 4, 1, 1, 1)
 
-        self.pushButton_8 = QPushButton(self.tab_4)
-        self.pushButton_8.setObjectName(u"pushButton_8")
+        self.label_16 = QLabel(self.tab_4)
+        self.label_16.setObjectName(u"label_16")
 
-        self.gridLayout_5.addWidget(self.pushButton_8, 11, 1, 1, 2)
+        self.gridLayout_5.addWidget(self.label_16, 13, 1, 1, 1)
 
-        self.pushButton_9 = QPushButton(self.tab_4)
-        self.pushButton_9.setObjectName(u"pushButton_9")
+        self.p3_amp_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_amp_sb.setObjectName(u"p3_amp_sb")
+        self.p3_amp_sb.setMaximum(9999.000000000000000)
+        self.p3_amp_sb.setValue(10.000000000000000)
 
-        self.gridLayout_5.addWidget(self.pushButton_9, 11, 3, 1, 2)
+        self.gridLayout_5.addWidget(self.p3_amp_sb, 2, 4, 1, 1)
 
-        self.pushButton_10 = QPushButton(self.tab_4)
-        self.pushButton_10.setObjectName(u"pushButton_10")
+        self.p3_amph_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_amph_sb.setObjectName(u"p3_amph_sb")
+        self.p3_amph_sb.setMaximum(9999.000000000000000)
+        self.p3_amph_sb.setValue(9999.000000000000000)
 
-        self.gridLayout_5.addWidget(self.pushButton_10, 11, 5, 1, 2)
+        self.gridLayout_5.addWidget(self.p3_amph_sb, 4, 4, 1, 1)
+
+        self.p4_sigl_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_sigl_sb.setObjectName(u"p4_sigl_sb")
+        self.p4_sigl_sb.setMaximum(500.000000000000000)
+        self.p4_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_5.addWidget(self.p4_sigl_sb, 12, 5, 1, 1)
+
+        self.p2_amp_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_amp_sb.setObjectName(u"p2_amp_sb")
+        self.p2_amp_sb.setMaximum(9999.000000000000000)
+        self.p2_amp_sb.setValue(10.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p2_amp_sb, 2, 3, 1, 1)
+
+        self.p5_ampl_sb = QDoubleSpinBox(self.tab_4)
+        self.p5_ampl_sb.setObjectName(u"p5_ampl_sb")
+        self.p5_ampl_sb.setMaximum(9999.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p5_ampl_sb, 3, 6, 1, 1)
+
+        self.p3_cb = QCheckBox(self.tab_4)
+        self.p3_cb.setObjectName(u"p3_cb")
+
+        self.gridLayout_5.addWidget(self.p3_cb, 0, 4, 1, 1)
+
+        self.label_15 = QLabel(self.tab_4)
+        self.label_15.setObjectName(u"label_15")
+
+        self.gridLayout_5.addWidget(self.label_15, 12, 1, 1, 1)
+
+        self.p2_sigl_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_sigl_sb.setObjectName(u"p2_sigl_sb")
+        self.p2_sigl_sb.setMaximum(500.000000000000000)
+        self.p2_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_5.addWidget(self.p2_sigl_sb, 12, 3, 1, 1)
+
+        self.p1_cenh_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_cenh_sb.setObjectName(u"p1_cenh_sb")
+        self.p1_cenh_sb.setMaximum(4000.000000000000000)
+        self.p1_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p1_cenh_sb, 9, 2, 1, 1)
+
+        self.p4_amp_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_amp_sb.setObjectName(u"p4_amp_sb")
+        self.p4_amp_sb.setMaximum(9999.000000000000000)
+        self.p4_amp_sb.setValue(10.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p4_amp_sb, 2, 5, 1, 1)
+
+        self.p4_cen_sb = QDoubleSpinBox(self.tab_4)
+        self.p4_cen_sb.setObjectName(u"p4_cen_sb")
+        self.p4_cen_sb.setMaximum(4000.000000000000000)
+        self.p4_cen_sb.setValue(2500.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p4_cen_sb, 7, 5, 1, 1)
+
+        self.p3_sigh_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_sigh_sb.setObjectName(u"p3_sigh_sb")
+        self.p3_sigh_sb.setMaximum(500.000000000000000)
+        self.p3_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p3_sigh_sb, 13, 4, 1, 1)
+
+        self.fit_init_pb = QPushButton(self.tab_4)
+        self.fit_init_pb.setObjectName(u"fit_init_pb")
+
+        self.gridLayout_5.addWidget(self.fit_init_pb, 15, 3, 1, 2)
+
+        self.p3_ampl_sb = QDoubleSpinBox(self.tab_4)
+        self.p3_ampl_sb.setObjectName(u"p3_ampl_sb")
+        self.p3_ampl_sb.setMaximum(9999.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p3_ampl_sb, 3, 4, 1, 1)
+
+        self.p1_sigl_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_sigl_sb.setObjectName(u"p1_sigl_sb")
+        self.p1_sigl_sb.setMaximum(500.000000000000000)
+        self.p1_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_5.addWidget(self.p1_sigl_sb, 12, 2, 1, 1)
+
+        self.p2_cenh_sb = QDoubleSpinBox(self.tab_4)
+        self.p2_cenh_sb.setObjectName(u"p2_cenh_sb")
+        self.p2_cenh_sb.setMaximum(4000.000000000000000)
+        self.p2_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p2_cenh_sb, 9, 3, 1, 1)
+
+        self.p1_ampl_sb = QDoubleSpinBox(self.tab_4)
+        self.p1_ampl_sb.setObjectName(u"p1_ampl_sb")
+        self.p1_ampl_sb.setMaximum(9999.000000000000000)
+
+        self.gridLayout_5.addWidget(self.p1_ampl_sb, 3, 2, 1, 1)
+
+        self.lineshape_1 = QComboBox(self.tab_4)
+        self.lineshape_1.addItem("")
+        self.lineshape_1.addItem("")
+        self.lineshape_1.addItem("")
+        self.lineshape_1.setObjectName(u"lineshape_1")
+
+        self.gridLayout_5.addWidget(self.lineshape_1, 1, 2, 1, 1)
+
+        self.lineshape_2 = QComboBox(self.tab_4)
+        self.lineshape_2.addItem("")
+        self.lineshape_2.addItem("")
+        self.lineshape_2.addItem("")
+        self.lineshape_2.setObjectName(u"lineshape_2")
+
+        self.gridLayout_5.addWidget(self.lineshape_2, 1, 3, 1, 1)
+
+        self.lineshape_3 = QComboBox(self.tab_4)
+        self.lineshape_3.addItem("")
+        self.lineshape_3.addItem("")
+        self.lineshape_3.addItem("")
+        self.lineshape_3.setObjectName(u"lineshape_3")
+
+        self.gridLayout_5.addWidget(self.lineshape_3, 1, 4, 1, 1)
+
+        self.lineshape_4 = QComboBox(self.tab_4)
+        self.lineshape_4.addItem("")
+        self.lineshape_4.addItem("")
+        self.lineshape_4.addItem("")
+        self.lineshape_4.setObjectName(u"lineshape_4")
+
+        self.gridLayout_5.addWidget(self.lineshape_4, 1, 5, 1, 1)
+
+        self.lineshape_5 = QComboBox(self.tab_4)
+        self.lineshape_5.addItem("")
+        self.lineshape_5.addItem("")
+        self.lineshape_5.addItem("")
+        self.lineshape_5.setObjectName(u"lineshape_5")
+
+        self.gridLayout_5.addWidget(self.lineshape_5, 1, 6, 1, 1)
 
         self.tabWidget.addTab(self.tab_4, "")
 
@@ -736,23 +876,43 @@ class Ui_DockWidget(object):
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Fitting", None))
         self.label_8.setText(QCoreApplication.translate("DockWidget", u"Amp", None))
-        self.label_15.setText(QCoreApplication.translate("DockWidget", u"low", None))
-        self.radioButton_5.setText(QCoreApplication.translate("DockWidget", u"Peak 4", None))
-        self.radioButton_6.setText(QCoreApplication.translate("DockWidget", u"Peak 5", None))
-        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Cen", None))
-        self.label_9.setText(QCoreApplication.translate("DockWidget", u"low", None))
-        self.radioButton_2.setText(QCoreApplication.translate("DockWidget", u"Peak 1", None))
-        self.label_17.setText(QCoreApplication.translate("DockWidget", u"Peak #", None))
-        self.label_14.setText(QCoreApplication.translate("DockWidget", u"sigma", None))
-        self.radioButton_3.setText(QCoreApplication.translate("DockWidget", u"Peak 2", None))
-        self.label_16.setText(QCoreApplication.translate("DockWidget", u"high", None))
-        self.radioButton_4.setText(QCoreApplication.translate("DockWidget", u"Peak 3", None))
-        self.label_12.setText(QCoreApplication.translate("DockWidget", u"low", None))
         self.label_13.setText(QCoreApplication.translate("DockWidget", u"high", None))
+        self.label_9.setText(QCoreApplication.translate("DockWidget", u"low", None))
+        self.p5_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 5", None))
+        self.p2_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 2", None))
+        self.p1_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 1", None))
+        self.label_14.setText(QCoreApplication.translate("DockWidget", u"sigma", None))
+        self.fit2_pb.setText(QCoreApplication.translate("DockWidget", u"Fit", None))
+        self.label_17.setText(QCoreApplication.translate("DockWidget", u"Peak #", None))
+        self.p4_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 4", None))
+        self.select_data_pb.setText(QCoreApplication.translate("DockWidget", u"Select Data", None))
+        self.label_12.setText(QCoreApplication.translate("DockWidget", u"low", None))
+        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Cen", None))
         self.label_10.setText(QCoreApplication.translate("DockWidget", u"high", None))
-        self.pushButton_8.setText(QCoreApplication.translate("DockWidget", u"Select Data", None))
-        self.pushButton_9.setText(QCoreApplication.translate("DockWidget", u"Fit Init", None))
-        self.pushButton_10.setText(QCoreApplication.translate("DockWidget", u"Fit", None))
+        self.label_16.setText(QCoreApplication.translate("DockWidget", u"high", None))
+        self.p3_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 3", None))
+        self.label_15.setText(QCoreApplication.translate("DockWidget", u"low", None))
+        self.fit_init_pb.setText(QCoreApplication.translate("DockWidget", u"Fit Init", None))
+        self.lineshape_1.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
+        self.lineshape_1.setItemText(1, QCoreApplication.translate("DockWidget", u"Lorentz", None))
+        self.lineshape_1.setItemText(2, QCoreApplication.translate("DockWidget", u"Gaussian", None))
+
+        self.lineshape_2.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
+        self.lineshape_2.setItemText(1, QCoreApplication.translate("DockWidget", u"Lorentz", None))
+        self.lineshape_2.setItemText(2, QCoreApplication.translate("DockWidget", u"Gaussian", None))
+
+        self.lineshape_3.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
+        self.lineshape_3.setItemText(1, QCoreApplication.translate("DockWidget", u"Lorentz", None))
+        self.lineshape_3.setItemText(2, QCoreApplication.translate("DockWidget", u"Gaussian ", None))
+
+        self.lineshape_4.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
+        self.lineshape_4.setItemText(1, QCoreApplication.translate("DockWidget", u"Lorentz", None))
+        self.lineshape_4.setItemText(2, QCoreApplication.translate("DockWidget", u"Gaussian", None))
+
+        self.lineshape_5.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
+        self.lineshape_5.setItemText(1, QCoreApplication.translate("DockWidget", u"Lorentz", None))
+        self.lineshape_5.setItemText(2, QCoreApplication.translate("DockWidget", u"Gaussian", None))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("DockWidget", u"Fitting_2", None))
     # retranslateUi
 
