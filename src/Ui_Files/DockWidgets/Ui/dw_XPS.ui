@@ -83,205 +83,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_13">
-       <attribute name="title">
-        <string>Fitting</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_8">
-        <item row="3" column="3">
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>Correct C1s to </string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="4">
-         <widget class="QPushButton" name="fit_pb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Fit</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QSpinBox" name="num_peaks_sb">
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="minimum">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" colspan="5">
-         <widget class="QTextEdit" name="fit_report_TE"/>
-        </item>
-        <item row="3" column="2">
-         <widget class="QComboBox" name="fit_shape_cb">
-          <item>
-           <property name="text">
-            <string>Voigt</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Gaussian</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Lorentz</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="label_44">
-          <property name="maximumSize">
-           <size>
-            <width>80</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Num of Peaks</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0" colspan="5">
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="rowCount">
-           <number>10</number>
-          </property>
-          <property name="columnCount">
-           <number>5</number>
-          </property>
-          <row>
-           <property name="text">
-            <string>Amp</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Amp Low</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Amp High</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Cen</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Cen Low</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Cen High</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Sigma</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Sigma Low</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Sigma High</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>Type</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>Peak 1</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Peak 2</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Peak 3</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Peak 4</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>Peak 5</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="7" column="0" colspan="2">
-         <widget class="QPushButton" name="plot_curr_pb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Plot Curr</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2" colspan="2">
-         <widget class="QPushButton" name="shirley_pb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Shirley</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="QDoubleSpinBox" name="correctc1s_dsb">
-          <property name="decimals">
-           <number>1</number>
-          </property>
-          <property name="maximum">
-           <double>1000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>284.800000000000011</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
       <widget class="QWidget" name="tab_2">
        <attribute name="title">
         <string>Better Fitting</string>
@@ -295,9 +96,9 @@
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="initplot_pb">
           <property name="text">
-           <string>Plot Current</string>
+           <string>Plot init</string>
           </property>
          </widget>
         </item>
@@ -1076,6 +877,205 @@
             <string>99</string>
            </property>
           </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_13">
+       <attribute name="title">
+        <string>None</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="3" column="3">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Correct C1s to </string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="4">
+         <widget class="QPushButton" name="fit_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Fit</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QSpinBox" name="num_peaks_sb">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="5">
+         <widget class="QTextEdit" name="fit_report_TE"/>
+        </item>
+        <item row="3" column="2">
+         <widget class="QComboBox" name="fit_shape_cb">
+          <item>
+           <property name="text">
+            <string>Voigt</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Gaussian</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Lorentz</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_44">
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Num of Peaks</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="5">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="rowCount">
+           <number>10</number>
+          </property>
+          <property name="columnCount">
+           <number>5</number>
+          </property>
+          <row>
+           <property name="text">
+            <string>Amp</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Amp High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Cen High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma Low</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Sigma High</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>Type</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Peak 1</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 2</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 3</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 4</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Peak 5</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QPushButton" name="plot_curr_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Plot Curr</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2" colspan="2">
+         <widget class="QPushButton" name="shirley_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Shirley</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QDoubleSpinBox" name="correctc1s_dsb">
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>284.800000000000011</double>
+          </property>
          </widget>
         </item>
        </layout>

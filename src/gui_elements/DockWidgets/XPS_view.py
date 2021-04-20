@@ -66,6 +66,7 @@ class XPS_view(QtWidgets.QDockWidget):
         self.ui.xpsrange_rb.toggled.connect(self.select_xps_range)
         self.ui.fit_range_cb.currentIndexChanged.connect(lambda: self.fit_range_changed())
         self.ui.fit_pb_2.clicked.connect(lambda: self.fit_fun_2())
+        self.ui.initplot_pb.clicked.connect(lambda: self.initial_fit())
 
     def eventFilter(self, object, event):
         # For right click events
@@ -602,20 +603,34 @@ class XPS_view(QtWidgets.QDockWidget):
 
     def fit_fun_2(self):
         try:
-            line0 = ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText()+'_fit']
+            line0 = ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_fit']
             self.main_window.ax.lines.remove(line0[0])
         except KeyError:
             pass
+        except ValueError:
+            pass
         for i in range(5):
             try:
-                line0=ApplicationSettings.ALL_DATA_PLOTTED['V%s' % str(i)]
-                poly = ApplicationSettings.ALL_DATA_PLOTTED['V%s_err' % str(i)]
+                line0 = ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.fit_range_cb.currentText()]
                 self.main_window.ax.lines.remove(line0[0])
-                poly[0].remove(self)
             except KeyError:
                 pass
             except ValueError:
                 pass
+        try:
+            line1 = ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_init']
+            self.main_window.ax.lines.remove(line1[0])
+        except KeyError:
+            pass
+        except ValueError:
+            pass
+        try:
+            poly = ApplicationSettings.ALL_DATA_PLOTTED['V%serr_'% str(i)+self.ui.fit_range_cb.currentText()]
+            poly.remove()
+        except KeyError:
+            pass
+        except ValueError:
+            pass
         checked = [self.ui.peak1_box.isChecked(), self.ui.peak2_box.isChecked(), self.ui.peak3_box.isChecked(),
                    self.ui.peak4_box.isChecked(), self.ui.peak5_box.isChecked()]
         nums_checked = []
@@ -660,9 +675,9 @@ class XPS_view(QtWidgets.QDockWidget):
             obj.peak_constraints[i][0][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][0][0] = result.params['p%s_sigma' % str(i)].value
             if not self.ui.plot_what_box.isChecked():
-                ApplicationSettings.ALL_DATA_PLOTTED['V%s' % str(i)] = \
+                ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.fit_range_cb.currentText()] = \
                     self.main_window.ax.plot(obj.x_data,  obj.shirley[1]+ comps['p%s_' % str(i)], 'k--', label='_V1')
-        ApplicationSettings.ALL_DATA_PLOTTED['V%s_err' % str(i)] = \
+        ApplicationSettings.ALL_DATA_PLOTTED['V%serr_' % str(i)+self.ui.fit_range_cb.currentText()] = \
             self.main_window.ax.fill_between(obj.x_data, result.best_fit - dely+obj.shirley[1], result.best_fit + dely+obj.shirley[1], color="#ABABAB",label='3-$\sigma$ uncertainty band')
         self.main_window.canvas.draw()
 
@@ -687,6 +702,65 @@ class XPS_view(QtWidgets.QDockWidget):
         self.ui.xpsrange_rb.setChecked(False)
         self.main_window.canvas.draw()
 
+    def initial_fit(self):
+        try:
+            line0 = ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_fit']
+            self.main_window.ax.lines.remove(line0[0])
+        except KeyError:
+            pass
+        except ValueError:
+            pass
+        for i in range(5):
+            try:
+                line0 = ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.fit_range_cb.currentText()]
+                self.main_window.ax.lines.remove(line0[0])
+            except KeyError:
+                pass
+            except ValueError:
+                pass
+        try:
+            line1 = ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_init']
+            self.main_window.ax.lines.remove(line1[0])
+        except KeyError:
+            pass
+        except ValueError:
+            pass
+        try:
+            poly = ApplicationSettings.ALL_DATA_PLOTTED['V%serr_'% str(i)+self.ui.fit_range_cb.currentText()]
+            poly.remove()
+        except KeyError:
+            pass
+        except ValueError:
+            pass
+        checked = [self.ui.peak1_box.isChecked(), self.ui.peak2_box.isChecked(), self.ui.peak3_box.isChecked(),
+                   self.ui.peak4_box.isChecked(), self.ui.peak5_box.isChecked()]
+        nums_checked = []
+        for i in range(len(checked)):
+            if checked[i]:
+                nums_checked.append(i)
+        cons = [[self.ui.amp1_sb.value(), self.ui.amp1l_sb.value(), self.ui.amp1h_sb.value()],
+                [self.ui.cen1_sb.value(), self.ui.cen1l_sb.value(), self.ui.cen1h_sb.value()],
+                [self.ui.sigma1_sb.value(), self.ui.sigma1l_sb.value(), self.ui.sigma1h_sb.value()]], [
+                   [self.ui.amp2_sb.value(), self.ui.amp2l_sb.value(), self.ui.amp2h_sb.value()],
+                   [self.ui.cen2_sb.value(), self.ui.cen2l_sb.value(), self.ui.cen2h_sb.value()],
+                   [self.ui.sigma2_sb.value(), self.ui.sigma2l_sb.value(), self.ui.sigma2h_sb.value()]], [
+                   [self.ui.amp3_sb.value(), self.ui.amp3l_sb.value(), self.ui.amp3h_sb.value()],
+                   [self.ui.cen3_sb.value(), self.ui.cen3l_sb.value(), self.ui.cen3h_sb.value()],
+                   [self.ui.sigma3_sb.value(), self.ui.sigma3l_sb.value(), self.ui.sigma3h_sb.value()]], [
+                   [self.ui.amp4_sb.value(), self.ui.amp4l_sb.value(), self.ui.amp4h_sb.value()],
+                   [self.ui.cen4_sb.value(), self.ui.cen4l_sb.value(), self.ui.cen4h_sb.value()],
+                   [self.ui.sigma4_sb.value(), self.ui.sigma4l_sb.value(), self.ui.sigma4h_sb.value()]], [
+                   [self.ui.amp5_sb.value(), self.ui.amp5l_sb.value(), self.ui.amp5h_sb.value()],
+                   [self.ui.cen5_sb.value(), self.ui.cen5l_sb.value(), self.ui.cen5h_sb.value()],
+                   [self.ui.sigma5_sb.value(), self.ui.sigma5l_sb.value(), self.ui.sigma5h_sb.value()]]
+        obj = self.fit_obj[self.ui.fit_range_cb.currentText()]
+        shirl = obj.shirley
+        result = obj.fit(checked, cons)
+        ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_init'] = \
+            self.main_window.ax.plot(obj.x_data, result.init_fit + shirl[1], 'k--',
+                                     label=self.ui.fit_range_cb.currentText() + '_init')
+        self.main_window.canvas.draw()
+
 class Fit_Object(object):
     def __init__(self, x_data, y_data, minimum, maximum):
         self.peak_constraints = []
@@ -703,7 +777,8 @@ class Fit_Object(object):
         self.fit_result = None
 
     def init_constraints(self, minimum, maximum):
-        centers = np.linspace(minimum,maximum, 5)
+        middle = minimum + (maximum-minimum)/2
+        centers = [middle for i in range(5)]
         for i in range(5):
             self.peak_constraints.append([[5000, 0, 999999], [centers[i], minimum, maximum],[1,.0001,10]])
 
@@ -805,7 +880,6 @@ class Fit_Object(object):
         self.shirley = [self.x_data,self.shirley_calculate(self.x_data,self.y_data)]
 
     def fit(self, checked, cons):
-        fit_params = []
         self.update_constraints(cons)
         line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'), PseudoVoigtModel(prefix='p2_'),
                            PseudoVoigtModel(prefix='p3_'), PseudoVoigtModel(prefix='p4_')]
@@ -842,3 +916,40 @@ class Fit_Object(object):
             for j in range(3):
                 for k in range(3):
                     self.peak_constraints[i][j][k] = constraints[i][j][k]
+
+    def inital_plot(self, checked, cons):
+        self.update_constraints(cons)
+        line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'),
+                           PseudoVoigtModel(prefix='p2_'),
+                           PseudoVoigtModel(prefix='p3_'), PseudoVoigtModel(prefix='p4_')]
+        cur_mods = []
+        checked_peaks = []
+        params = Parameters()
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        for x in range(5):
+            if checked[x]:
+                params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], True,
+                                 self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
+                                ('p%s_center' % str(x), self.peak_constraints[x][1][0], True,
+                                 self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], True,
+                                 self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
+                                ('p%s_fraction' % str(x), .7, False))
+                checked_peaks.append(x)
+                cur_mods.append(line_shape_mods[x])
+        if len(checked_peaks) == 1:
+            mod = cur_mods[0]
+        elif len(checked_peaks) == 2:
+            mod = cur_mods[0] + cur_mods[1]
+        elif len(checked_peaks) == 3:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
+        elif len(checked_peaks) == 4:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+        elif len(checked_peaks) == 5:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        result = mod.fit(self.y_data - self.shirley[1], params, x=self.x_data)
+        # comps = result.eval_components()
+        # self.fit_result = result.fit_report()
+        return result.init_fit
+
