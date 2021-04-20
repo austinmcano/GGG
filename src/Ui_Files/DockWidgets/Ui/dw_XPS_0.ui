@@ -68,7 +68,11 @@
          </widget>
         </item>
         <item row="3" column="0" colspan="2">
-         <widget class="QSpinBox" name="skip_rows_sb"/>
+         <widget class="QSpinBox" name="skip_rows_sb">
+          <property name="value">
+           <number>1</number>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0" colspan="2">
          <widget class="QLabel" name="label_2">
@@ -87,7 +91,7 @@
         <item row="3" column="3">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Offset</string>
+           <string>Correct C1s to </string>
           </property>
          </widget>
         </item>
@@ -237,13 +241,6 @@
           </column>
          </widget>
         </item>
-        <item row="3" column="4">
-         <widget class="QLineEdit" name="offset_LE">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
         <item row="7" column="0" colspan="2">
          <widget class="QPushButton" name="plot_curr_pb">
           <property name="maximumSize">
@@ -267,6 +264,19 @@
           </property>
           <property name="text">
            <string>Shirley</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4">
+         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>284.800000000000011</double>
           </property>
          </widget>
         </item>

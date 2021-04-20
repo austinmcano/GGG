@@ -229,7 +229,10 @@ def Save_All_Plotted(self):
 def remove_line(self):
     def finish():
         for j in ui.treeWidget.selectedIndexes():
+            print(j)
+            print(j.data())
             line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+
             try:
                 if isinstance(line, list):
                     try:

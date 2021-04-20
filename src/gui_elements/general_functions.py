@@ -19,32 +19,32 @@ from scipy.signal import savgol_filter
 from scipy import sparse
 from scipy.sparse.linalg import spsolve
 
-def linear_plot_SE(self):
-    dialog = QtWidgets.QDialog()
-    ui = TW_ui()
-    ui.setupUi(dialog)
-    dict = ApplicationSettings.ALL_DATA_PLOTTED
-    Key_List = []
-    for i in dict.keys():
-        Key_List.append(QtWidgets.QTreeWidgetItem([i]))
-    ui.treeWidget.addTopLevelItems(Key_List)
-    dialog.exec_()
-    # save_csv = ui.treeWidget.indexOfTopLevelItem(ui.treeWidget.currentItem())
-    for ix in ui.treeWidget.selectedIndexes():
-        text = ix.data()  # or ix.data(),
-        data = ApplicationSettings.ALL_DATA_PLOTTED[text]
-
-    # trying to deal with nan elements in a list
-    new_data = [[], []]
-    for b in range(len(data)):
-        for c in range(len(data[b])):
-            if not np.isnan(data[b][c]):
-                new_data[b].append(data[b][c])
-            else:
-                pass
-    fit = np.polyfit(new_data[0], new_data[1], 1)
-    self.ax.plot(new_data[0], np.poly1d(fit)(new_data[0]))
-    self.canvas.draw()
+# def linear_plot_SE(self):
+#     dialog = QtWidgets.QDialog()
+#     ui = TW_ui()
+#     ui.setupUi(dialog)
+#     dict = ApplicationSettings.ALL_DATA_PLOTTED
+#     Key_List = []
+#     for i in dict.keys():
+#         Key_List.append(QtWidgets.QTreeWidgetItem([i]))
+#     ui.treeWidget.addTopLevelItems(Key_List)
+#     dialog.exec_()
+#     # save_csv = ui.treeWidget.indexOfTopLevelItem(ui.treeWidget.currentItem())
+#     for ix in ui.treeWidget.selectedIndexes():
+#         text = ix.data()  # or ix.data(),
+#         data = ApplicationSettings.ALL_DATA_PLOTTED[text]
+#
+#     # trying to deal with nan elements in a list
+#     new_data = [[], []]
+#     for b in range(len(data)):
+#         for c in range(len(data[b])):
+#             if not np.isnan(data[b][c]):
+#                 new_data[b].append(data[b][c])
+#             else:
+#                 pass
+#     fit = np.polyfit(new_data[0], new_data[1], 1)
+#     self.ax.plot(new_data[0], np.poly1d(fit)(new_data[0]))
+#     self.canvas.draw()
 
 def keycheck(dict, key):
     if key in dict.keys():

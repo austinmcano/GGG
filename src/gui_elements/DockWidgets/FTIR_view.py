@@ -583,10 +583,15 @@ class FTIR_view(QtWidgets.QDockWidget):
         for i in fit_params:
             params.add_many(i)
         result = mod.fit(self.data_y, params, x=self.data_x)
-        self.ui.fit_report_TE.setText(result.fit_report())
+        self.ui.textEdit.setText(result.fit_report())
         ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = \
-            self.main_window.ax.plot(self.data_x,result.best_fit, 'r--', label='Result')
+            self.main_window.ax.plot(self.data_x, result.best_fit, 'r--', label='Result')
         ApplicationSettings.ALL_DATA_PLOTTED['Y Data'] = self.main_window.ax.plot(self.data_x, self.data_y)
+        comps = result.eval_components()
+        print(checked_peaks)
+        for i in checked_peaks:
+            ApplicationSettings.ALL_DATA_PLOTTED['Peak %s' % i] = \
+                self.main_window.ax.plot(self.data_x, comps['p%s_' % str(i+1)])
         self.ir_basic()
 
     def select_data(self):

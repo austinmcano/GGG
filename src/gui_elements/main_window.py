@@ -410,6 +410,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas.draw()
 
     def cleargraph(self):
+        self.dw_XPS.ui.fit_range_cb.clear()
+        self.dw_XPS.fit_obj.clear()
         self.ax.clear()
         self.fig.clf()
         del self.fig
