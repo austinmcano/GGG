@@ -17,7 +17,7 @@ class Ui_DockWidget(object):
     def setupUi(self, DockWidget):
         if not DockWidget.objectName():
             DockWidget.setObjectName(u"DockWidget")
-        DockWidget.resize(594, 511)
+        DockWidget.resize(594, 508)
         self.dockWidgetContents = QWidget()
         self.dockWidgetContents.setObjectName(u"dockWidgetContents")
         self.gridLayout_7 = QGridLayout(self.dockWidgetContents)
@@ -85,7 +85,7 @@ class Ui_DockWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 556, 777))
+        self.scrollAreaWidgetContents.setGeometry(QRect(-289, 0, 822, 783))
         self.gridLayout_4 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.sigma4_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
@@ -97,18 +97,21 @@ class Ui_DockWidget(object):
         self.amp3l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp3l_sb.setObjectName(u"amp3l_sb")
         self.amp3l_sb.setMaximum(999999.000000000000000)
+        self.amp3l_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp3l_sb, 10, 3, 1, 1)
 
         self.amp4h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp4h_sb.setObjectName(u"amp4h_sb")
         self.amp4h_sb.setMaximum(999999.000000000000000)
+        self.amp4h_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp4h_sb, 9, 4, 1, 1)
 
         self.amp3h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp3h_sb.setObjectName(u"amp3h_sb")
         self.amp3h_sb.setMaximum(999999.000000000000000)
+        self.amp3h_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp3h_sb, 9, 3, 1, 1)
 
@@ -120,6 +123,7 @@ class Ui_DockWidget(object):
         self.amp2l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp2l_sb.setObjectName(u"amp2l_sb")
         self.amp2l_sb.setMaximum(999999.000000000000000)
+        self.amp2l_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp2l_sb, 10, 2, 1, 1)
 
@@ -150,6 +154,12 @@ class Ui_DockWidget(object):
 
         self.gridLayout_4.addWidget(self.peak5_box, 4, 5, 1, 1)
 
+        self.sigma7h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma7h_sb.setObjectName(u"sigma7h_sb")
+        self.sigma7h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma7h_sb, 19, 7, 1, 1)
+
         self.peak1_box = QCheckBox(self.scrollAreaWidgetContents)
         self.peak1_box.setObjectName(u"peak1_box")
         self.peak1_box.setChecked(True)
@@ -161,27 +171,41 @@ class Ui_DockWidget(object):
 
         self.gridLayout_4.addWidget(self.peak2_box, 4, 2, 1, 1)
 
+        self.sigma6h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma6h_sb.setObjectName(u"sigma6h_sb")
+        self.sigma6h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma6h_sb, 19, 6, 1, 1)
+
         self.peak4_box = QCheckBox(self.scrollAreaWidgetContents)
         self.peak4_box.setObjectName(u"peak4_box")
 
         self.gridLayout_4.addWidget(self.peak4_box, 4, 4, 1, 1)
 
-        self.line = QFrame(self.scrollAreaWidgetContents)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.amp7_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp7_sb.setObjectName(u"amp7_sb")
+        self.amp7_sb.setMaximum(999999.000000000000000)
+        self.amp7_sb.setSingleStep(1000.000000000000000)
 
-        self.gridLayout_4.addWidget(self.line, 15, 0, 1, 6)
+        self.gridLayout_4.addWidget(self.amp7_sb, 8, 7, 1, 1)
+
+        self.sigma7l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma7l_sb.setObjectName(u"sigma7l_sb")
+        self.sigma7l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma7l_sb, 20, 7, 1, 1)
 
         self.amp1_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp1_sb.setObjectName(u"amp1_sb")
         self.amp1_sb.setMaximum(999999.000000000000000)
+        self.amp1_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp1_sb, 8, 1, 1, 1)
 
         self.amp2h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp2h_sb.setObjectName(u"amp2h_sb")
         self.amp2h_sb.setMaximum(999999.000000000000000)
+        self.amp2h_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp2h_sb, 9, 2, 1, 1)
 
@@ -202,12 +226,12 @@ class Ui_DockWidget(object):
 
         self.gridLayout_4.addWidget(self.label_13, 1, 1, 1, 1)
 
-        self.correctc1s_dsb_2 = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.correctc1s_dsb_2.setObjectName(u"correctc1s_dsb_2")
-        self.correctc1s_dsb_2.setMaximum(1000.000000000000000)
-        self.correctc1s_dsb_2.setValue(284.800000000000011)
+        self.correctc1s_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.correctc1s_dsb.setObjectName(u"correctc1s_dsb")
+        self.correctc1s_dsb.setMaximum(1000.000000000000000)
+        self.correctc1s_dsb.setValue(284.800000000000011)
 
-        self.gridLayout_4.addWidget(self.correctc1s_dsb_2, 1, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.correctc1s_dsb, 1, 2, 1, 1)
 
         self.sigma1_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.sigma1_sb.setObjectName(u"sigma1_sb")
@@ -218,6 +242,7 @@ class Ui_DockWidget(object):
         self.amp1h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp1h_sb.setObjectName(u"amp1h_sb")
         self.amp1h_sb.setMaximum(999999.000000000000000)
+        self.amp1h_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp1h_sb, 9, 1, 1, 1)
 
@@ -236,6 +261,7 @@ class Ui_DockWidget(object):
         self.amp1l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp1l_sb.setObjectName(u"amp1l_sb")
         self.amp1l_sb.setMaximum(999999.000000000000000)
+        self.amp1l_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp1l_sb, 10, 1, 1, 1)
 
@@ -266,6 +292,7 @@ class Ui_DockWidget(object):
         self.amp4l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp4l_sb.setObjectName(u"amp4l_sb")
         self.amp4l_sb.setMaximum(999999.000000000000000)
+        self.amp4l_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp4l_sb, 10, 4, 1, 1)
 
@@ -291,12 +318,11 @@ class Ui_DockWidget(object):
 
         self.gridLayout_4.addWidget(self.label_10, 19, 0, 1, 1)
 
-        self.line_2 = QFrame(self.scrollAreaWidgetContents)
-        self.line_2.setObjectName(u"line_2")
-        self.line_2.setFrameShape(QFrame.HLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
+        self.sd_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.sd_box.setObjectName(u"sd_box")
+        self.sd_box.setChecked(True)
 
-        self.gridLayout_4.addWidget(self.line_2, 11, 0, 1, 6)
+        self.gridLayout_4.addWidget(self.sd_box, 21, 2, 1, 1)
 
         self.sigma3l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.sigma3l_sb.setObjectName(u"sigma3l_sb")
@@ -304,17 +330,111 @@ class Ui_DockWidget(object):
 
         self.gridLayout_4.addWidget(self.sigma3l_sb, 20, 3, 1, 1)
 
-        self.fitreport_te = QTextEdit(self.scrollAreaWidgetContents)
-        self.fitreport_te.setObjectName(u"fitreport_te")
-        self.fitreport_te.setMinimumSize(QSize(0, 400))
-
-        self.gridLayout_4.addWidget(self.fitreport_te, 22, 0, 1, 6)
-
         self.sigma3h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.sigma3h_sb.setObjectName(u"sigma3h_sb")
         self.sigma3h_sb.setMaximum(999999.000000000000000)
 
         self.gridLayout_4.addWidget(self.sigma3h_sb, 19, 3, 1, 1)
+
+        self.sigma6l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma6l_sb.setObjectName(u"sigma6l_sb")
+        self.sigma6l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma6l_sb, 20, 6, 1, 1)
+
+        self.cen7_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen7_sb.setObjectName(u"cen7_sb")
+        self.cen7_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen7_sb, 12, 7, 1, 1)
+
+        self.amp6_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp6_sb.setObjectName(u"amp6_sb")
+        self.amp6_sb.setMaximum(999999.000000000000000)
+        self.amp6_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp6_sb, 8, 6, 1, 1)
+
+        self.amp7l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp7l_sb.setObjectName(u"amp7l_sb")
+        self.amp7l_sb.setMaximum(999999.000000000000000)
+        self.amp7l_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp7l_sb, 10, 7, 1, 1)
+
+        self.amp7h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp7h_sb.setObjectName(u"amp7h_sb")
+        self.amp7h_sb.setMaximum(999999.000000000000000)
+        self.amp7h_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp7h_sb, 9, 7, 1, 1)
+
+        self.cen7l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen7l_sb.setObjectName(u"cen7l_sb")
+        self.cen7l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen7l_sb, 14, 7, 1, 1)
+
+        self.cen7h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen7h_sb.setObjectName(u"cen7h_sb")
+        self.cen7h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen7h_sb, 13, 7, 1, 1)
+
+        self.amp6l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp6l_sb.setObjectName(u"amp6l_sb")
+        self.amp6l_sb.setMaximum(999999.000000000000000)
+        self.amp6l_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp6l_sb, 10, 6, 1, 1)
+
+        self.amp6h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp6h_sb.setObjectName(u"amp6h_sb")
+        self.amp6h_sb.setMaximum(999999.000000000000000)
+        self.amp6h_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp6h_sb, 9, 6, 1, 1)
+
+        self.cen6h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen6h_sb.setObjectName(u"cen6h_sb")
+        self.cen6h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen6h_sb, 13, 6, 1, 1)
+
+        self.cen6_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen6_sb.setObjectName(u"cen6_sb")
+        self.cen6_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen6_sb, 12, 6, 1, 1)
+
+        self.cen6l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen6l_sb.setObjectName(u"cen6l_sb")
+        self.cen6l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen6l_sb, 14, 6, 1, 1)
+
+        self.sigma6_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma6_sb.setObjectName(u"sigma6_sb")
+        self.sigma6_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma6_sb, 17, 6, 1, 1)
+
+        self.sigma7_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma7_sb.setObjectName(u"sigma7_sb")
+        self.sigma7_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma7_sb, 17, 7, 1, 1)
+
+        self.clear_fit_objects_pb = QPushButton(self.scrollAreaWidgetContents)
+        self.clear_fit_objects_pb.setObjectName(u"clear_fit_objects_pb")
+
+        self.gridLayout_4.addWidget(self.clear_fit_objects_pb, 21, 5, 1, 1)
+
+        self.hold_vgratio_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.hold_vgratio_box.setObjectName(u"hold_vgratio_box")
+        self.hold_vgratio_box.setChecked(False)
+
+        self.gridLayout_4.addWidget(self.hold_vgratio_box, 21, 3, 1, 1)
 
         self.plot_what_box = QCheckBox(self.scrollAreaWidgetContents)
         self.plot_what_box.setObjectName(u"plot_what_box")
@@ -382,6 +502,7 @@ class Ui_DockWidget(object):
         self.amp2_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp2_sb.setObjectName(u"amp2_sb")
         self.amp2_sb.setMaximum(999999.000000000000000)
+        self.amp2_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp2_sb, 8, 2, 1, 1)
 
@@ -394,6 +515,7 @@ class Ui_DockWidget(object):
         self.amp3_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp3_sb.setObjectName(u"amp3_sb")
         self.amp3_sb.setMaximum(999999.000000000000000)
+        self.amp3_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp3_sb, 8, 3, 1, 1)
 
@@ -410,12 +532,14 @@ class Ui_DockWidget(object):
         self.amp4_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp4_sb.setObjectName(u"amp4_sb")
         self.amp4_sb.setMaximum(999999.000000000000000)
+        self.amp4_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp4_sb, 8, 4, 1, 1)
 
         self.amp5_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp5_sb.setObjectName(u"amp5_sb")
         self.amp5_sb.setMaximum(999999.000000000000000)
+        self.amp5_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp5_sb, 8, 5, 1, 1)
 
@@ -439,6 +563,14 @@ class Ui_DockWidget(object):
         self.cen3_sb.setMaximum(999999.000000000000000)
 
         self.gridLayout_4.addWidget(self.cen3_sb, 12, 3, 1, 1)
+
+        self.weight_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.weight_dsb.setObjectName(u"weight_dsb")
+        self.weight_dsb.setMaximum(1.000000000000000)
+        self.weight_dsb.setSingleStep(0.100000000000000)
+        self.weight_dsb.setValue(0.700000000000000)
+
+        self.gridLayout_4.addWidget(self.weight_dsb, 21, 4, 1, 1)
 
         self.cen2_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.cen2_sb.setObjectName(u"cen2_sb")
@@ -478,12 +610,14 @@ class Ui_DockWidget(object):
         self.amp5l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp5l_sb.setObjectName(u"amp5l_sb")
         self.amp5l_sb.setMaximum(999999.000000000000000)
+        self.amp5l_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp5l_sb, 10, 5, 1, 1)
 
         self.amp5h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.amp5h_sb.setObjectName(u"amp5h_sb")
         self.amp5h_sb.setMaximum(999999.000000000000000)
+        self.amp5h_sb.setSingleStep(1000.000000000000000)
 
         self.gridLayout_4.addWidget(self.amp5h_sb, 9, 5, 1, 1)
 
@@ -528,6 +662,113 @@ class Ui_DockWidget(object):
         self.sigma5l_sb.setMaximum(999999.000000000000000)
 
         self.gridLayout_4.addWidget(self.sigma5l_sb, 20, 5, 1, 1)
+
+        self.amp8_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp8_sb.setObjectName(u"amp8_sb")
+        self.amp8_sb.setMaximum(999999.000000000000000)
+        self.amp8_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp8_sb, 8, 8, 1, 1)
+
+        self.amp8h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp8h_sb.setObjectName(u"amp8h_sb")
+        self.amp8h_sb.setMaximum(999999.000000000000000)
+        self.amp8h_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp8h_sb, 9, 8, 1, 1)
+
+        self.amp8l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.amp8l_sb.setObjectName(u"amp8l_sb")
+        self.amp8l_sb.setMaximum(999999.000000000000000)
+        self.amp8l_sb.setSingleStep(1000.000000000000000)
+
+        self.gridLayout_4.addWidget(self.amp8l_sb, 10, 8, 1, 1)
+
+        self.cen8_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen8_sb.setObjectName(u"cen8_sb")
+        self.cen8_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen8_sb, 12, 8, 1, 1)
+
+        self.cen8h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen8h_sb.setObjectName(u"cen8h_sb")
+        self.cen8h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen8h_sb, 13, 8, 1, 1)
+
+        self.cen8l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.cen8l_sb.setObjectName(u"cen8l_sb")
+        self.cen8l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.cen8l_sb, 14, 8, 1, 1)
+
+        self.sigma8_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma8_sb.setObjectName(u"sigma8_sb")
+        self.sigma8_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma8_sb, 17, 8, 1, 1)
+
+        self.sigma8h_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma8h_sb.setObjectName(u"sigma8h_sb")
+        self.sigma8h_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma8h_sb, 19, 8, 1, 1)
+
+        self.sigma8l_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.sigma8l_sb.setObjectName(u"sigma8l_sb")
+        self.sigma8l_sb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_4.addWidget(self.sigma8l_sb, 20, 8, 1, 1)
+
+        self.peak6_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.peak6_box.setObjectName(u"peak6_box")
+
+        self.gridLayout_4.addWidget(self.peak6_box, 4, 6, 1, 1)
+
+        self.peak7_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.peak7_box.setObjectName(u"peak7_box")
+
+        self.gridLayout_4.addWidget(self.peak7_box, 4, 7, 1, 1)
+
+        self.peak8_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.peak8_box.setObjectName(u"peak8_box")
+
+        self.gridLayout_4.addWidget(self.peak8_box, 4, 8, 1, 1)
+
+        self.comboBox_6 = QComboBox(self.scrollAreaWidgetContents)
+        self.comboBox_6.setObjectName(u"comboBox_6")
+
+        self.gridLayout_4.addWidget(self.comboBox_6, 6, 6, 1, 1)
+
+        self.comboBox_7 = QComboBox(self.scrollAreaWidgetContents)
+        self.comboBox_7.setObjectName(u"comboBox_7")
+
+        self.gridLayout_4.addWidget(self.comboBox_7, 6, 7, 1, 1)
+
+        self.comboBox_8 = QComboBox(self.scrollAreaWidgetContents)
+        self.comboBox_8.setObjectName(u"comboBox_8")
+
+        self.gridLayout_4.addWidget(self.comboBox_8, 6, 8, 1, 1)
+
+        self.line_2 = QFrame(self.scrollAreaWidgetContents)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_4.addWidget(self.line_2, 11, 0, 1, 9)
+
+        self.line = QFrame(self.scrollAreaWidgetContents)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_4.addWidget(self.line, 15, 0, 1, 9)
+
+        self.fitreport_te = QTextEdit(self.scrollAreaWidgetContents)
+        self.fitreport_te.setObjectName(u"fitreport_te")
+        self.fitreport_te.setMinimumSize(QSize(0, 400))
+
+        self.gridLayout_4.addWidget(self.fitreport_te, 22, 0, 1, 9)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
@@ -617,109 +858,6 @@ class Ui_DockWidget(object):
         self.gridLayout_10.addWidget(self.tableWidget_2, 1, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_14, "")
-        self.tab_13 = QWidget()
-        self.tab_13.setObjectName(u"tab_13")
-        self.gridLayout_8 = QGridLayout(self.tab_13)
-        self.gridLayout_8.setObjectName(u"gridLayout_8")
-        self.label = QLabel(self.tab_13)
-        self.label.setObjectName(u"label")
-
-        self.gridLayout_8.addWidget(self.label, 3, 3, 1, 1)
-
-        self.fit_pb = QPushButton(self.tab_13)
-        self.fit_pb.setObjectName(u"fit_pb")
-        self.fit_pb.setMaximumSize(QSize(16777215, 16777215))
-
-        self.gridLayout_8.addWidget(self.fit_pb, 7, 4, 1, 1)
-
-        self.num_peaks_sb = QSpinBox(self.tab_13)
-        self.num_peaks_sb.setObjectName(u"num_peaks_sb")
-        self.num_peaks_sb.setMaximumSize(QSize(80, 16777215))
-        self.num_peaks_sb.setMinimum(1)
-
-        self.gridLayout_8.addWidget(self.num_peaks_sb, 3, 1, 1, 1)
-
-        self.fit_report_TE = QTextEdit(self.tab_13)
-        self.fit_report_TE.setObjectName(u"fit_report_TE")
-
-        self.gridLayout_8.addWidget(self.fit_report_TE, 6, 0, 1, 5)
-
-        self.fit_shape_cb = QComboBox(self.tab_13)
-        self.fit_shape_cb.addItem("")
-        self.fit_shape_cb.addItem("")
-        self.fit_shape_cb.addItem("")
-        self.fit_shape_cb.setObjectName(u"fit_shape_cb")
-
-        self.gridLayout_8.addWidget(self.fit_shape_cb, 3, 2, 1, 1)
-
-        self.label_44 = QLabel(self.tab_13)
-        self.label_44.setObjectName(u"label_44")
-        self.label_44.setMaximumSize(QSize(80, 16777215))
-
-        self.gridLayout_8.addWidget(self.label_44, 3, 0, 1, 1)
-
-        self.tableWidget = QTableWidget(self.tab_13)
-        if (self.tableWidget.columnCount() < 5):
-            self.tableWidget.setColumnCount(5)
-        __qtablewidgetitem29 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, __qtablewidgetitem29)
-        __qtablewidgetitem30 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, __qtablewidgetitem30)
-        __qtablewidgetitem31 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, __qtablewidgetitem31)
-        __qtablewidgetitem32 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem32)
-        __qtablewidgetitem33 = QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, __qtablewidgetitem33)
-        if (self.tableWidget.rowCount() < 10):
-            self.tableWidget.setRowCount(10)
-        __qtablewidgetitem34 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem34)
-        __qtablewidgetitem35 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem35)
-        __qtablewidgetitem36 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(2, __qtablewidgetitem36)
-        __qtablewidgetitem37 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(3, __qtablewidgetitem37)
-        __qtablewidgetitem38 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(4, __qtablewidgetitem38)
-        __qtablewidgetitem39 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(5, __qtablewidgetitem39)
-        __qtablewidgetitem40 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(6, __qtablewidgetitem40)
-        __qtablewidgetitem41 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(7, __qtablewidgetitem41)
-        __qtablewidgetitem42 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(8, __qtablewidgetitem42)
-        __qtablewidgetitem43 = QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(9, __qtablewidgetitem43)
-        self.tableWidget.setObjectName(u"tableWidget")
-        self.tableWidget.setRowCount(10)
-        self.tableWidget.setColumnCount(5)
-
-        self.gridLayout_8.addWidget(self.tableWidget, 5, 0, 1, 5)
-
-        self.plot_curr_pb = QPushButton(self.tab_13)
-        self.plot_curr_pb.setObjectName(u"plot_curr_pb")
-        self.plot_curr_pb.setMaximumSize(QSize(16777215, 16777215))
-
-        self.gridLayout_8.addWidget(self.plot_curr_pb, 7, 0, 1, 2)
-
-        self.shirley_pb = QPushButton(self.tab_13)
-        self.shirley_pb.setObjectName(u"shirley_pb")
-        self.shirley_pb.setMaximumSize(QSize(16777215, 16777215))
-
-        self.gridLayout_8.addWidget(self.shirley_pb, 7, 2, 1, 2)
-
-        self.correctc1s_dsb = QDoubleSpinBox(self.tab_13)
-        self.correctc1s_dsb.setObjectName(u"correctc1s_dsb")
-        self.correctc1s_dsb.setDecimals(1)
-        self.correctc1s_dsb.setMaximum(1000.000000000000000)
-        self.correctc1s_dsb.setValue(284.800000000000011)
-
-        self.gridLayout_8.addWidget(self.correctc1s_dsb, 3, 4, 1, 1)
-
-        self.tabWidget.addTab(self.tab_13, "")
 
         self.gridLayout_7.addWidget(self.tabWidget, 0, 1, 1, 1)
 
@@ -756,7 +894,10 @@ class Ui_DockWidget(object):
         self.label_9.setText(QCoreApplication.translate("DockWidget", u"Sigma", None))
         self.label_11.setText(QCoreApplication.translate("DockWidget", u"Low", None))
         self.label_10.setText(QCoreApplication.translate("DockWidget", u"High", None))
-        self.plot_what_box.setText(QCoreApplication.translate("DockWidget", u"Plot Only Best Fit", None))
+        self.sd_box.setText(QCoreApplication.translate("DockWidget", u"3sig SD", None))
+        self.clear_fit_objects_pb.setText(QCoreApplication.translate("DockWidget", u"Clear Fit Objects", None))
+        self.hold_vgratio_box.setText(QCoreApplication.translate("DockWidget", u"Vary V-G Ratio", None))
+        self.plot_what_box.setText(QCoreApplication.translate("DockWidget", u"All Conponents", None))
         self.comboBox_5.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
         self.comboBox_5.setItemText(1, QCoreApplication.translate("DockWidget", u"Gaussian", None))
         self.comboBox_5.setItemText(2, QCoreApplication.translate("DockWidget", u"Lorentz", None))
@@ -783,6 +924,9 @@ class Ui_DockWidget(object):
         self.label_6.setText(QCoreApplication.translate("DockWidget", u"Cen", None))
         self.label_4.setText(QCoreApplication.translate("DockWidget", u"High", None))
         self.label_8.setText(QCoreApplication.translate("DockWidget", u"Low", None))
+        self.peak6_box.setText(QCoreApplication.translate("DockWidget", u"Peak6", None))
+        self.peak7_box.setText(QCoreApplication.translate("DockWidget", u"Peak7", None))
+        self.peak8_box.setText(QCoreApplication.translate("DockWidget", u"Peak8", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Better Fitting", None))
         self.pushButton.setText(QCoreApplication.translate("DockWidget", u"Go", None))
         ___qtablewidgetitem = self.tableWidget_2.horizontalHeaderItem(0)
@@ -849,45 +993,5 @@ class Ui_DockWidget(object):
         self.tableWidget_2.setSortingEnabled(__sortingEnabled)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_14), QCoreApplication.translate("DockWidget", u"Thickogram", None))
-        self.label.setText(QCoreApplication.translate("DockWidget", u"Correct C1s to ", None))
-        self.fit_pb.setText(QCoreApplication.translate("DockWidget", u"Fit", None))
-        self.fit_shape_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Voigt", None))
-        self.fit_shape_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Gaussian", None))
-        self.fit_shape_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"Lorentz", None))
-
-        self.label_44.setText(QCoreApplication.translate("DockWidget", u"Num of Peaks", None))
-        ___qtablewidgetitem29 = self.tableWidget.horizontalHeaderItem(0)
-        ___qtablewidgetitem29.setText(QCoreApplication.translate("DockWidget", u"Peak 1", None));
-        ___qtablewidgetitem30 = self.tableWidget.horizontalHeaderItem(1)
-        ___qtablewidgetitem30.setText(QCoreApplication.translate("DockWidget", u"Peak 2", None));
-        ___qtablewidgetitem31 = self.tableWidget.horizontalHeaderItem(2)
-        ___qtablewidgetitem31.setText(QCoreApplication.translate("DockWidget", u"Peak 3", None));
-        ___qtablewidgetitem32 = self.tableWidget.horizontalHeaderItem(3)
-        ___qtablewidgetitem32.setText(QCoreApplication.translate("DockWidget", u"Peak 4", None));
-        ___qtablewidgetitem33 = self.tableWidget.horizontalHeaderItem(4)
-        ___qtablewidgetitem33.setText(QCoreApplication.translate("DockWidget", u"Peak 5", None));
-        ___qtablewidgetitem34 = self.tableWidget.verticalHeaderItem(0)
-        ___qtablewidgetitem34.setText(QCoreApplication.translate("DockWidget", u"Amp", None));
-        ___qtablewidgetitem35 = self.tableWidget.verticalHeaderItem(1)
-        ___qtablewidgetitem35.setText(QCoreApplication.translate("DockWidget", u"Amp Low", None));
-        ___qtablewidgetitem36 = self.tableWidget.verticalHeaderItem(2)
-        ___qtablewidgetitem36.setText(QCoreApplication.translate("DockWidget", u"Amp High", None));
-        ___qtablewidgetitem37 = self.tableWidget.verticalHeaderItem(3)
-        ___qtablewidgetitem37.setText(QCoreApplication.translate("DockWidget", u"Cen", None));
-        ___qtablewidgetitem38 = self.tableWidget.verticalHeaderItem(4)
-        ___qtablewidgetitem38.setText(QCoreApplication.translate("DockWidget", u"Cen Low", None));
-        ___qtablewidgetitem39 = self.tableWidget.verticalHeaderItem(5)
-        ___qtablewidgetitem39.setText(QCoreApplication.translate("DockWidget", u"Cen High", None));
-        ___qtablewidgetitem40 = self.tableWidget.verticalHeaderItem(6)
-        ___qtablewidgetitem40.setText(QCoreApplication.translate("DockWidget", u"Sigma", None));
-        ___qtablewidgetitem41 = self.tableWidget.verticalHeaderItem(7)
-        ___qtablewidgetitem41.setText(QCoreApplication.translate("DockWidget", u"Sigma Low", None));
-        ___qtablewidgetitem42 = self.tableWidget.verticalHeaderItem(8)
-        ___qtablewidgetitem42.setText(QCoreApplication.translate("DockWidget", u"Sigma High", None));
-        ___qtablewidgetitem43 = self.tableWidget.verticalHeaderItem(9)
-        ___qtablewidgetitem43.setText(QCoreApplication.translate("DockWidget", u"Type", None));
-        self.plot_curr_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Curr", None))
-        self.shirley_pb.setText(QCoreApplication.translate("DockWidget", u"Shirley", None))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_13), QCoreApplication.translate("DockWidget", u"None", None))
     # retranslateUi
 

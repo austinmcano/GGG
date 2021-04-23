@@ -15,7 +15,6 @@ class QCM_view(QtWidgets.QDockWidget):
         self.ui.setupUi(self)
 
         self._init_vars()
-        self._init_widgets()
         self._init_UI()
 
     def _init_vars(self):
@@ -36,15 +35,12 @@ class QCM_view(QtWidgets.QDockWidget):
         self.canvas.draw()
         # self.canvas.resize(200, 200)
 
-
-    def _init_widgets(self):
+    def _init_UI(self):
+        self.model = QtWidgets.QFileSystemModel()
         self.tree_view = self.ui.QCMtreeView
         self.context_menu = QtWidgets.QMenu(self)
         # Create context menu
         rc_browser_options(self)
-
-    def _init_UI(self):
-        self.model = QtWidgets.QFileSystemModel()
         # self.model.setRootPath(QtCore.QDir.currentPath())
         self.model.setRootPath('')
 

@@ -278,6 +278,11 @@ def remove_line(self):
                     line.remove()
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
+                elif isinstance(line,matplotlib.collections.PolyCollection):
+                    print(line)
+                    line.remove()
+                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                    del line
                 else:
                     print(line)
                     print(type(line))
