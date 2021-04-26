@@ -94,7 +94,12 @@ class XPS_view(QtWidgets.QDockWidget):
         self.y_data = self.data[y].to_numpy()
         self.y_data = self.y_data[~np.isnan(self.y_data)]
         # self.x_data = self.x_data+float(self.ui.offset_LE.text())
-        self.x_data = self.correct_to(self.x_data,self.y_data, self.ui.correctc1s_dsb.value())
+        try:
+            self.x_data = self.correct_to(self.x_data,self.y_data, 284.8)
+        except ValueError:
+            print('correct to didnt work, falling back to offset in c1s')
+            self.x_data = np.asarray(self.x_data)
+            self.x_data = self.x_data + self.ui.correctc1s_dsb.value()
         ApplicationSettings.ALL_DATA_PLOTTED[str(x)] = \
             self.main_window.ax.plot(self.x_data, self.y_data, label=x)
         self.xps_basic()

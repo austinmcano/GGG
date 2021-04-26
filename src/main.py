@@ -1,10 +1,10 @@
 import sys
-from PySide2 import QtWidgets,QtCore, QtGui
+from PySide2 import QtWidgets, QtCore, QtGui
 from src.gui_elements.main_window import MainWindow
 import os
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
-settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
+settings = QtCore.QSettings('src/Resources/settings.ini', QtCore.QSettings.IniFormat)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -44,7 +44,6 @@ if __name__ == "__main__":
         app.setPalette(palette)
     else:
         app.setStyle(style)
-
 
     window = MainWindow()
     window.resize(settings.value('size'))
