@@ -27,6 +27,7 @@ class XPS_view(QtWidgets.QDockWidget):
         self.tree_view = self.ui.XPS_treeView
         self.context_menu = QtWidgets.QMenu(self)
         self.fit_obj = {}
+        self.path = None
 
     def _init_UI(self):
         rc_browser_options(self)
@@ -41,7 +42,7 @@ class XPS_view(QtWidgets.QDockWidget):
 
         self.ui.plot_pb.clicked.connect(lambda: self.plot())
         self.ui.fill_cols_pb.clicked.connect(lambda: self.fill_cols())
-        self.ui.xpsrange_rb.toggled.connect(self.select_xps_range)
+        self.ui.xpsrange_box.toggled.connect(self.select_xps_range)
         self.ui.fit_range_cb.currentIndexChanged.connect(lambda: self.fit_range_changed())
         self.ui.fit_pb_2.clicked.connect(lambda: self.fit_fun())
         self.ui.initplot_pb.clicked.connect(lambda: self.initial_fit())
@@ -56,20 +57,20 @@ class XPS_view(QtWidgets.QDockWidget):
     def fill_cols(self):
         self.ui.tw_x.clear()
         self.ui.tw_y.clear()
-        path = self.model.filePath(self.tree_view.currentIndex())
+        self.path = self.model.filePath(self.tree_view.currentIndex())
         filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
         if extension == '.CSV' or extension == '.csv':
-            self.data = pd.read_csv(path, delimiter=',', skiprows=self.ui.skip_rows_sb.value())
+            self.data = pd.read_csv(self.path, delimiter=',', skiprows=self.ui.skip_rows_sb.value())
         elif extension == '.xls' or extension == '.xlxs':
-            excelfile = pd.ExcelFile(path)
+            excelfile = pd.ExcelFile(self.path)
             self.data = pd.read_excel(excelfile, "Sheet1",skiprows=self.ui.skip_rows_sb.value())
         elif extension == '.X01':
-            self.data = pd.read_csv(path, delimiter='   ', skiprows=self.ui.skip_rows_sb.value(), engine='python')
+            self.data = pd.read_csv(self.path, delimiter='   ', skiprows=self.ui.skip_rows_sb.value(), engine='python')
         elif extension =='.txt':
-            self.data = pd.read_csv(path, sep='\t', skiprows=self.ui.skip_rows_sb.value())
+            self.data = pd.read_csv(self.path, sep='\t', skiprows=self.ui.skip_rows_sb.value())
         else:
             print(extension)
-            self.data = pd.read_csv(path, sep='\t',skiprows=self.ui.skip_rows_sb.value())
+            self.data = pd.read_csv(self.path, sep='\t',skiprows=self.ui.skip_rows_sb.value())
 
         strings = [col for col in self.data.columns]
         column_list_x = []
@@ -80,11 +81,20 @@ class XPS_view(QtWidgets.QDockWidget):
             self.ui.tw_x.addTopLevelItems(column_list_x)
             self.ui.tw_y.addTopLevelItems(column_list_y)
 
-    def correct_to(self, x_data, y_data, correction):
-        lims = [find_nearest(x_data, 295),find_nearest(x_data, 260)]
-        # np.where(y_data[lims[0]:lims[1]] == np.amax(y_data[lims[0]:lims[1]]))
-        idx = np.where(y_data == np.amax(y_data[lims[0]:lims[1]]))[0]
-        return x_data + correction - x_data[idx]
+    def correct_to(self, x_data, y_data, correction=float, offset=float):
+        if self.ui.c1s_rb.isChecked():
+            try:
+                x_data = np.asarray(x_data)
+                lims = [find_nearest(x_data, 295),find_nearest(x_data, 265)]
+                idx = np.where(y_data == np.amax(y_data[lims[0]:lims[1]]))[0]
+                return x_data + correction - x_data[idx][-1]
+            except AttributeError or ValueError:
+                print('correct to didnt work, falling back to offset in c1s')
+                x_data = np.asarray(x_data)
+                return x_data + offset
+        elif self.ui.offset_rb.isChecked():
+            x_data = np.asarray(x_data)
+            return x_data + offset
 
     def plot(self):
         x = self.ui.tw_x.currentIndex().data()
@@ -93,15 +103,9 @@ class XPS_view(QtWidgets.QDockWidget):
         y = self.ui.tw_y.currentIndex().data()
         self.y_data = self.data[y].to_numpy()
         self.y_data = self.y_data[~np.isnan(self.y_data)]
-        # self.x_data = self.x_data+float(self.ui.offset_LE.text())
-        try:
-            self.x_data = self.correct_to(self.x_data,self.y_data, 284.8)
-        except ValueError:
-            print('correct to didnt work, falling back to offset in c1s')
-            self.x_data = np.asarray(self.x_data)
-            self.x_data = self.x_data + self.ui.correctc1s_dsb.value()
-        ApplicationSettings.ALL_DATA_PLOTTED[str(x)] = \
-            self.main_window.ax.plot(self.x_data, self.y_data, label=x)
+        self.x_data = self.correct_to(self.x_data,self.y_data, self.ui.correctc1s_dsb.value(), self.ui.offset_sb.value())
+        ApplicationSettings.ALL_DATA_PLOTTED[os.path.basename(self.path)] = \
+            self.main_window.ax.plot(self.x_data, self.y_data, label=os.path.basename(self.path))
         self.xps_basic()
 
     def select_xps_range(self,enabled):
@@ -118,13 +122,13 @@ class XPS_view(QtWidgets.QDockWidget):
                                      self.fit_obj[str(np.round(minimum,1))+'+'+str(np.round(maximum,1))].shirley[1])
         self.ui.fit_range_cb.clear()
         self.ui.fit_range_cb.addItems([i for i in self.fit_obj.keys()])
-        self.ui.xpsrange_rb.setChecked(False)
+        self.ui.xpsrange_box.setChecked(False)
         self.main_window.canvas.draw()
 
     def fit_range_changed(self):
         try:
             temp = self.fit_obj[self.ui.fit_range_cb.currentText()].peak_constraints
-            _, _, _, constraints = self.checked_cons()
+            _, _, _, constraints, holds = self.checked_cons()
             # constraints = [[self.ui.amp1_sb,self.ui.amp1l_sb,self.ui.amp1h_sb],
             #         [self.ui.cen1_sb,self.ui.cen1l_sb,self.ui.cen1h_sb],
             #         [self.ui.sigma1_sb,self.ui.sigma1l_sb,self.ui.sigma1h_sb]],\
@@ -209,15 +213,26 @@ class XPS_view(QtWidgets.QDockWidget):
                           [self.ui.amp8_sb, self.ui.amp8l_sb, self.ui.amp8h_sb],
                           [self.ui.cen8_sb, self.ui.cen8l_sb, self.ui.cen8h_sb],
                           [self.ui.sigma8_sb, self.ui.sigma8l_sb, self.ui.sigma8h_sb]]
-        return checked, cons, nums_checked, constraints
+        holds = [[self.ui.amp1hold_box.isChecked(),self.ui.cen1hold_box.isChecked(),self.ui.sigma1hold_box.isChecked()],
+                 [self.ui.amp2hold_box.isChecked(),self.ui.cen2hold_box.isChecked(),self.ui.sigma2hold_box.isChecked()],
+                 [self.ui.amp3hold_box.isChecked(),self.ui.cen3hold_box.isChecked(),self.ui.sigma3hold_box.isChecked()],
+                 [self.ui.amp4hold_box.isChecked(),self.ui.cen4hold_box.isChecked(),self.ui.sigma4hold_box.isChecked()],
+                 [self.ui.amp5hold_box.isChecked(),self.ui.cen5hold_box.isChecked(),self.ui.sigma5hold_box.isChecked()],
+                 [self.ui.amp6hold_box.isChecked(),self.ui.cen6hold_box.isChecked(),self.ui.sigma6hold_box.isChecked()],
+                 [self.ui.amp7hold_box.isChecked(),self.ui.cen7hold_box.isChecked(),self.ui.sigma7hold_box.isChecked()],
+                 [self.ui.amp8hold_box.isChecked(),self.ui.cen8hold_box.isChecked(),self.ui.sigma8hold_box.isChecked()]]
+        holds = [[not holds[j][i] for i in range(3)] for j in range(8)]
+        return checked, cons, nums_checked, constraints, holds
 
     def initial_fit(self):
         self.removing_xps_lines()
-        checked, cons, nums_checked,_ = self.checked_cons()
+        checked, cons, nums_checked,_,holds = self.checked_cons()
         obj = self.fit_obj[self.ui.fit_range_cb.currentText()]
         result = obj.initial_plot(checked, cons,self.ui.hold_vgratio_box.isChecked(), self.ui.weight_dsb.value())
+        comps = result.eval_components()
+        init = result.init_fit
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_init'] = \
-            self.main_window.ax.plot(obj.x_data, result + obj.shirley[1], 'k--',
+            self.main_window.ax.plot(obj.x_data, init + obj.shirley[1], 'k--',
                                      label=self.ui.fit_range_cb.currentText() + '_init')
         self.main_window.canvas.draw()
 
@@ -234,7 +249,7 @@ class XPS_view(QtWidgets.QDockWidget):
 
     def fit_fun(self):
         self.removing_xps_lines()
-        checked, cons, nums_checked, constraints = self.checked_cons()
+        checked, cons, nums_checked, constraints, holds = self.checked_cons()
         # constraints = [[self.ui.amp1_sb, self.ui.amp1l_sb, self.ui.amp1h_sb],
         #                [self.ui.cen1_sb, self.ui.cen1l_sb, self.ui.cen1h_sb],
         #                [self.ui.sigma1_sb, self.ui.sigma1l_sb, self.ui.sigma1h_sb]], [[self.ui.amp2_sb, self.ui.amp2l_sb, self.ui.amp2h_sb],
@@ -252,9 +267,10 @@ class XPS_view(QtWidgets.QDockWidget):
         #                [self.ui.sigma7_sb, self.ui.sigma7l_sb, self.ui.sigma7h_sb]],[[self.ui.amp8_sb, self.ui.amp8l_sb, self.ui.amp8h_sb],
         #                [self.ui.cen8_sb, self.ui.cen8l_sb, self.ui.cen8h_sb],
         #                [self.ui.sigma8_sb, self.ui.sigma8l_sb, self.ui.sigma8h_sb]]
-
+        fwhm_list = [self.ui.fwhm1_dsb,self.ui.fwhm2_dsb,self.ui.fwhm3_dsb,self.ui.fwhm4_dsb,self.ui.fwhm5_dsb,
+                     self.ui.fwhm6_dsb,self.ui.fwhm7_dsb,self.ui.fwhm8_dsb]
         obj = self.fit_obj[self.ui.fit_range_cb.currentText()]
-        result = obj.fit(checked, cons,self.ui.hold_vgratio_box.isChecked(), self.ui.weight_dsb.value())
+        result = obj.fit(checked, cons,self.ui.hold_vgratio_box.isChecked(), self.ui.weight_dsb.value(), holds)
         comps = result.eval_components()
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText()+'_fit'] = \
             self.main_window.ax.plot(obj.x_data, result.best_fit+obj.shirley[1], 'k--', label=self.ui.fit_range_cb.currentText()+'_fit')
@@ -272,12 +288,16 @@ class XPS_view(QtWidgets.QDockWidget):
             constraints[i][0][0].setValue(result.params['p%s_amplitude' % str(i)].value)
             constraints[i][1][0].setValue(result.params['p%s_center' % str(i)].value)
             constraints[i][2][0].setValue(result.params['p%s_sigma' % str(i)].value)
+            fwhm_list[i].setValue(result.params['p%s_sigma' % str(i)].value*3.60131)
             obj.peak_constraints[i][0][0] = result.params['p%s_amplitude' % str(i)].value
             obj.peak_constraints[i][1][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][2][0] = result.params['p%s_sigma' % str(i)].value
+
             if self.ui.plot_what_box.isChecked():
                 ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.fit_range_cb.currentText()] = \
                     self.main_window.ax.plot(obj.x_data,  obj.shirley[1]+ comps['p%s_' % str(i)], 'k--', label='_V1')
+            # print(result.params['p%s_fwhm' % str(i)].value)
+            # fwhm_list[i].setValue(result.params['p%s_fwhm'])
         self.main_window.canvas.draw()
 
     def clear_fit_objs(self):
@@ -431,7 +451,7 @@ class Fit_Object(object):
         self.y_data = self.y_data[lims[1]:lims[0]]
         self.shirley = [self.x_data,self.shirley_calculate(self.x_data,self.y_data)]
 
-    def fit(self, checked, cons, vghold, vgratio):
+    def fit(self, checked, cons, vghold, vgratio, holds):
         self.update_constraints(cons)
         line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'),
                            PseudoVoigtModel(prefix='p2_'), PseudoVoigtModel(prefix='p3_'),
@@ -443,9 +463,9 @@ class Fit_Object(object):
         # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
         for x in range(8):
             if checked[x]:
-                params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], True, self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
-                                ('p%s_center' % str(x), self.peak_constraints[x][1][0], True, self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
-                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], True, self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
+                params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], holds[x][0], self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
+                                ('p%s_center' % str(x), self.peak_constraints[x][1][0], holds[x][1], self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
                                 ('p%s_fraction' % str(x), vgratio, vghold))
                 checked_peaks.append(x)
                 cur_mods.append(line_shape_mods[x])
@@ -519,5 +539,4 @@ class Fit_Object(object):
         result = mod.fit(self.y_data - self.shirley[1], params, x=self.x_data)
         # comps = result.eval_components()
         # self.fit_result = result.fit_report()
-        return result.init_fit
-
+        return result

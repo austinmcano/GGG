@@ -4,7 +4,7 @@ from src.gui_elements.main_window import MainWindow
 import os
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
-settings = QtCore.QSettings('src/Resources/settings.ini', QtCore.QSettings.IniFormat)
+settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

@@ -20,7 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.settings = QtCore.QSettings('src/Resources/settings.ini', QtCore.QSettings.IniFormat)
+        self.settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self._init_UI()
         self.init_connections()
