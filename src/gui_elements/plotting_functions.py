@@ -45,6 +45,7 @@ def spine_color_fun(self):
         self.settings.setValue('right_spine_color', ui.rspine_cb.currentText())
         if self.ax_2 is not None:
             self.ax_2.tick_params(axis='y', colors=ui.rspine_cb.currentText())
+            self.ax_2.yaxis.label.set_color(ui.rspine_cb.currentText())
         self.canvas.draw()
     dialog = QtWidgets.QDialog()
     ui = spine_color_dialog()
@@ -534,7 +535,7 @@ def baseline_als(y, lam, p, niter=10):
     print(z)
     return z
 
-def fil_cols_fun(self):
+def fill_cols_fun(self):
     self.ui.tw_x.clear()
     self.ui.tw_y.clear()
     path = self.model.filePath(self.tree_view.currentIndex())

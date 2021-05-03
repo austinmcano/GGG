@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'dw_SE.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -30,6 +33,7 @@ class Ui_DockWidget(object):
         self.gridLayout_3 = QGridLayout(self.tab_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.plot_type_cb = QComboBox(self.tab_3)
+        self.plot_type_cb.addItem("")
         self.plot_type_cb.addItem("")
         self.plot_type_cb.addItem("")
         self.plot_type_cb.addItem("")
@@ -59,7 +63,7 @@ class Ui_DockWidget(object):
 
         self.zero_correct_checkb = QCheckBox(self.tab_3)
         self.zero_correct_checkb.setObjectName(u"zero_correct_checkb")
-        self.zero_correct_checkb.setChecked(True)
+        self.zero_correct_checkb.setChecked(False)
 
         self.gridLayout_3.addWidget(self.zero_correct_checkb, 7, 1, 1, 1)
 
@@ -116,43 +120,21 @@ class Ui_DockWidget(object):
         self.tab_2.setObjectName(u"tab_2")
         self.gridLayout_5 = QGridLayout(self.tab_2)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.label_10 = QLabel(self.tab_2)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_5.addWidget(self.label_10, 3, 0, 1, 1)
-
-        self.label_3 = QLabel(self.tab_2)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout_5.addWidget(self.label_3, 5, 0, 1, 1)
-
-        self.line_name_checkbox = QCheckBox(self.tab_2)
-        self.line_name_checkbox.setObjectName(u"line_name_checkbox")
-        self.line_name_checkbox.setChecked(False)
-
-        self.gridLayout_5.addWidget(self.line_name_checkbox, 0, 0, 1, 3)
-
-        self.linetype_cb = QComboBox(self.tab_2)
-        self.linetype_cb.addItem("")
-        self.linetype_cb.addItem("")
-        self.linetype_cb.addItem("")
-        self.linetype_cb.addItem("")
-        self.linetype_cb.addItem("")
-        self.linetype_cb.addItem("")
-        self.linetype_cb.setObjectName(u"linetype_cb")
-
-        self.gridLayout_5.addWidget(self.linetype_cb, 1, 0, 1, 1)
-
-        self.fit_results_TE = QTextEdit(self.tab_2)
-        self.fit_results_TE.setObjectName(u"fit_results_TE")
-
-        self.gridLayout_5.addWidget(self.fit_results_TE, 8, 0, 1, 3)
-
         self.textBrowser = QTextBrowser(self.tab_2)
         self.textBrowser.setObjectName(u"textBrowser")
         self.textBrowser.setMaximumSize(QSize(16777215, 150))
 
-        self.gridLayout_5.addWidget(self.textBrowser, 7, 0, 1, 3)
+        self.gridLayout_5.addWidget(self.textBrowser, 3, 0, 1, 5)
+
+        self.fit_results_TE = QTextEdit(self.tab_2)
+        self.fit_results_TE.setObjectName(u"fit_results_TE")
+
+        self.gridLayout_5.addWidget(self.fit_results_TE, 4, 0, 1, 5)
+
+        self.selectrange_box = QCheckBox(self.tab_2)
+        self.selectrange_box.setObjectName(u"selectrange_box")
+
+        self.gridLayout_5.addWidget(self.selectrange_box, 1, 1, 1, 1)
 
         self.axischoise_cb = QComboBox(self.tab_2)
         self.axischoise_cb.addItem("")
@@ -161,42 +143,17 @@ class Ui_DockWidget(object):
         self.axischoise_cb.addItem("")
         self.axischoise_cb.setObjectName(u"axischoise_cb")
 
-        self.gridLayout_5.addWidget(self.axischoise_cb, 1, 1, 1, 1)
-
-        self.comboBox = QComboBox(self.tab_2)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-
-        self.gridLayout_5.addWidget(self.comboBox, 1, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.axischoise_cb, 1, 0, 1, 1)
 
         self.lin_fit_pb = QPushButton(self.tab_2)
         self.lin_fit_pb.setObjectName(u"lin_fit_pb")
 
-        self.gridLayout_5.addWidget(self.lin_fit_pb, 9, 0, 1, 2)
-
-        self.doubleSpinBox = QDoubleSpinBox(self.tab_2)
-        self.doubleSpinBox.setObjectName(u"doubleSpinBox")
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox, 5, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.lin_fit_pb, 5, 1, 1, 2)
 
         self.linfitall_pb = QPushButton(self.tab_2)
         self.linfitall_pb.setObjectName(u"linfitall_pb")
 
-        self.gridLayout_5.addWidget(self.linfitall_pb, 9, 2, 1, 1)
-
-        self.line_name_le = QLineEdit(self.tab_2)
-        self.line_name_le.setObjectName(u"line_name_le")
-
-        self.gridLayout_5.addWidget(self.line_name_le, 3, 2, 1, 1)
-
-        self.doubleSpinBox_2 = QDoubleSpinBox(self.tab_2)
-        self.doubleSpinBox_2.setObjectName(u"doubleSpinBox_2")
-        self.doubleSpinBox_2.setMaximum(999999.000000000000000)
-        self.doubleSpinBox_2.setValue(99.989999999999995)
-
-        self.gridLayout_5.addWidget(self.doubleSpinBox_2, 6, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.linfitall_pb, 5, 3, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_4 = QWidget()
@@ -288,6 +245,7 @@ class Ui_DockWidget(object):
         self.plot_type_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Ext. Plot (half-ints)", None))
         self.plot_type_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Ext. Plot (ints)", None))
         self.plot_type_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"X vs Y", None))
+        self.plot_type_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"Ext. Plot (third-ints)", None))
 
         self.xlabel_le.setText(QCoreApplication.translate("DockWidget", u"Cycles", None))
         self.ylabel_le.setText(QCoreApplication.translate("DockWidget", u"$\\Delta$ Thickness ($\\AA$)", None))
@@ -305,33 +263,19 @@ class Ui_DockWidget(object):
 
         self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Axis Properties", None))
-        self.label_10.setText(QCoreApplication.translate("DockWidget", u"Line Name", None))
-        self.label_3.setText(QCoreApplication.translate("DockWidget", u"Linear fit From: To", None))
-        self.line_name_checkbox.setText(QCoreApplication.translate("DockWidget", u"Use Line Name", None))
-        self.linetype_cb.setItemText(0, QCoreApplication.translate("DockWidget", u".-", None))
-        self.linetype_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"-.", None))
-        self.linetype_cb.setItemText(2, QCoreApplication.translate("DockWidget", u".", None))
-        self.linetype_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"-", None))
-        self.linetype_cb.setItemText(4, QCoreApplication.translate("DockWidget", u"--", None))
-        self.linetype_cb.setItemText(5, QCoreApplication.translate("DockWidget", u",", None))
-
         self.textBrowser.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">There are a few parameter for plotting if you may need it,  including what the line should look like, the color (UNDER WORK) and if the data may require you to skip inital metadata at the beginning.  Lin. Fit function makes a popup dialog where you can pick a single line on the graph to linearly fit where the fit stats will show up below. The Lin. Fit. All will fit all the data on the graph and print in the line command the slopes of the data</p></body></html>", None))
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:13pt;\">There are a few parameter for plotting if you may need it,  including what the line should look like, the color (UNDER WORK) and if the data may require you to skip inital metadata at the beginning.  Lin. Fit function makes a popup dialog where you can pick a single line on the graph to linearly fit where the fit stats will show up below. The Lin. Fit. All will fit all the data on the graph and print in the line command the slopes of the data</span></p></body></html>", None))
+        self.selectrange_box.setText(QCoreApplication.translate("DockWidget", u"Select Fitting Range", None))
         self.axischoise_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"axis1", None))
         self.axischoise_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"axis2", None))
         self.axischoise_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"axis3", None))
         self.axischoise_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"axis4", None))
 
-        self.comboBox.setItemText(0, QCoreApplication.translate("DockWidget", u"Auto Color", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("DockWidget", u"Dope Red Color", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("DockWidget", u"Dope Blue Color", None))
-
         self.lin_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit", None))
         self.linfitall_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit. All", None))
-        self.line_name_le.setText(QCoreApplication.translate("DockWidget", u"Extended_Plot", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Fit Results", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"Y Axis", None))
         self.plottable_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Table", None))
