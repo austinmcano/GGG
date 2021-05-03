@@ -2,7 +2,7 @@ from src.Ui_Files.DockWidgets.Py.dw_FTIR import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
 import glob
 from scipy.signal import savgol_filter
-from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
+from lmfit.models import VoigtModel, GaussianModel, LorentzianModel, PseudoVoigtModel
 from lmfit import Model, Parameters
 from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 from src.gui_elements.plotting_functions import baseline_als
@@ -941,3 +941,113 @@ class FTIR_view(QtWidgets.QDockWidget):
             self.ui.tableWidget.setRowCount(len(inte))
         for i in range(len(inte)):
             self.ui.tableWidget.setItem(i,col_count,QtWidgets.QTableWidgetItem(str(inte[i])))
+
+class IR_Fit_Object(object):
+    def __init__(self, x_data, y_data, minimum, maximum):
+        self.peak_constraints = []
+        self.constraints = []
+        self.peak_type = {}
+        self.peak_fitted_values = {}
+        self.shirley = None
+        self.x_data = x_data
+        self.y_data = y_data
+        self.mini = minimum
+        self.maxi = maximum
+        self.init_constraints(minimum, maximum)
+        self.fit_result = None
+
+    def init_constraints(self, minimum, maximum):
+        middle = minimum + (maximum-minimum)/2
+        centers = [middle for i in range(8)]
+        for i in range(8):
+            self.peak_constraints.append([[5000, 0, 999999], [centers[i], minimum, maximum],[1,.0001,10]])
+
+    def fit(self, checked, cons, vghold, vgratio, holds):
+        self.update_constraints(cons)
+        line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'),
+                           PseudoVoigtModel(prefix='p2_'), PseudoVoigtModel(prefix='p3_'),
+                           PseudoVoigtModel(prefix='p4_'), PseudoVoigtModel(prefix='p5_'),
+                           PseudoVoigtModel(prefix='p6_'), PseudoVoigtModel(prefix='p7_')]
+        cur_mods = []
+        checked_peaks = []
+        params = Parameters()
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        for x in range(8):
+            if checked[x]:
+                params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], holds[x][0], self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
+                                ('p%s_center' % str(x), self.peak_constraints[x][1][0], holds[x][1], self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
+                                ('p%s_fraction' % str(x), vgratio, vghold))
+                checked_peaks.append(x)
+                cur_mods.append(line_shape_mods[x])
+        if len(checked_peaks) == 1:
+            mod = cur_mods[0]
+        elif len(checked_peaks) == 2:
+            mod = cur_mods[0] + cur_mods[1]
+        elif len(checked_peaks) == 3:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
+        elif len(checked_peaks) == 4:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+        elif len(checked_peaks) == 5:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+        elif len(checked_peaks) == 6:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]
+        elif len(checked_peaks) == 7:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]+ cur_mods[6]
+        elif len(checked_peaks) == 8:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]+ cur_mods[5]+ cur_mods[6]+ cur_mods[7]
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        result = mod.fit(self.y_data-self.shirley[1], params, x=self.x_data)
+        # comps = result.eval_components()
+        self.fit_result = result.fit_report()
+        return result
+
+    def update_constraints(self, constraints):
+        for i in range(5):
+            for j in range(3):
+                for k in range(3):
+                    self.peak_constraints[i][j][k] = constraints[i][j][k]
+
+    def initial_plot(self, checked, cons,vghold, vgratio):
+        self.update_constraints(cons)
+        line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'),
+                           PseudoVoigtModel(prefix='p2_'),PseudoVoigtModel(prefix='p3_'),
+                           PseudoVoigtModel(prefix='p4_'),PseudoVoigtModel(prefix='p5_'),
+                           PseudoVoigtModel(prefix='p6_'),PseudoVoigtModel(prefix='p7_')]
+        cur_mods = []
+        checked_peaks = []
+        params = Parameters()
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        for x in range(8):
+            if checked[x]:
+                params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], True,
+                                 self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
+                                ('p%s_center' % str(x), self.peak_constraints[x][1][0], True,
+                                 self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], True,
+                                 self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
+                                ('p%s_fraction' % str(x), vgratio, vghold))
+                checked_peaks.append(x)
+                cur_mods.append(line_shape_mods[x])
+        if len(checked_peaks) == 1:
+            mod = cur_mods[0]
+        elif len(checked_peaks) == 2:
+            mod = cur_mods[0] + cur_mods[1]
+        elif len(checked_peaks) == 3:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
+        elif len(checked_peaks) == 4:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+        elif len(checked_peaks) == 5:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+        elif len(checked_peaks) == 6:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]
+        elif len(checked_peaks) == 7:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6]
+        elif len(checked_peaks) == 8:
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + \
+                  cur_mods[7]
+        # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        result = mod.fit(self.y_data - self.shirley[1], params, x=self.x_data)
+        # comps = result.eval_components()
+        # self.fit_result = result.fit_report()
+        return result

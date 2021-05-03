@@ -105,7 +105,7 @@ class XPS_view(QtWidgets.QDockWidget):
         self.y_data = self.y_data[~np.isnan(self.y_data)]
         self.x_data = self.correct_to(self.x_data,self.y_data, self.ui.correctc1s_dsb.value(), self.ui.offset_sb.value())
         ApplicationSettings.ALL_DATA_PLOTTED[os.path.basename(self.path)] = \
-            self.main_window.ax.plot(self.x_data, self.y_data, label=os.path.basename(self.path))
+            self.main_window.ax.plot(self.x_data, self.y_data, '.-', markersize=6, label=os.path.basename(self.path))
         self.xps_basic()
 
     def select_xps_range(self,enabled):
@@ -122,6 +122,7 @@ class XPS_view(QtWidgets.QDockWidget):
                                      self.fit_obj[str(np.round(minimum,1))+'+'+str(np.round(maximum,1))].shirley[1])
         self.ui.fit_range_cb.clear()
         self.ui.fit_range_cb.addItems([i for i in self.fit_obj.keys()])
+        self.ui.fit_range_cb.setCurrentText(str(np.round(minimum,1))+'+'+str(np.round(maximum,1)))
         self.ui.xpsrange_box.setChecked(False)
         self.main_window.canvas.draw()
 
@@ -250,30 +251,19 @@ class XPS_view(QtWidgets.QDockWidget):
     def fit_fun(self):
         self.removing_xps_lines()
         checked, cons, nums_checked, constraints, holds = self.checked_cons()
-        # constraints = [[self.ui.amp1_sb, self.ui.amp1l_sb, self.ui.amp1h_sb],
-        #                [self.ui.cen1_sb, self.ui.cen1l_sb, self.ui.cen1h_sb],
-        #                [self.ui.sigma1_sb, self.ui.sigma1l_sb, self.ui.sigma1h_sb]], [[self.ui.amp2_sb, self.ui.amp2l_sb, self.ui.amp2h_sb],
-        #                [self.ui.cen2_sb, self.ui.cen2l_sb, self.ui.cen2h_sb],
-        #                [self.ui.sigma2_sb, self.ui.sigma2l_sb, self.ui.sigma2h_sb]], [[self.ui.amp3_sb, self.ui.amp3l_sb, self.ui.amp3h_sb],
-        #                [self.ui.cen3_sb, self.ui.cen3l_sb, self.ui.cen3h_sb],
-        #                [self.ui.sigma3_sb, self.ui.sigma3l_sb, self.ui.sigma3h_sb]], [[self.ui.amp4_sb, self.ui.amp4l_sb, self.ui.amp4h_sb],
-        #                [self.ui.cen4_sb, self.ui.cen4l_sb, self.ui.cen4h_sb],
-        #                [self.ui.sigma4_sb, self.ui.sigma4l_sb, self.ui.sigma4h_sb]], [[self.ui.amp5_sb, self.ui.amp5l_sb, self.ui.amp5h_sb],
-        #                [self.ui.cen5_sb, self.ui.cen5l_sb, self.ui.cen5h_sb],
-        #                [self.ui.sigma5_sb, self.ui.sigma5l_sb, self.ui.sigma5h_sb]], [[self.ui.amp6_sb, self.ui.amp6l_sb, self.ui.amp6h_sb],
-        #                [self.ui.cen6_sb, self.ui.cen6l_sb, self.ui.cen6h_sb],
-        #                [self.ui.sigma6_sb, self.ui.sigma6l_sb, self.ui.sigma6h_sb]],[[self.ui.amp7_sb, self.ui.amp7l_sb, self.ui.amp7h_sb],
-        #                [self.ui.cen7_sb, self.ui.cen7l_sb, self.ui.cen7h_sb],
-        #                [self.ui.sigma7_sb, self.ui.sigma7l_sb, self.ui.sigma7h_sb]],[[self.ui.amp8_sb, self.ui.amp8l_sb, self.ui.amp8h_sb],
-        #                [self.ui.cen8_sb, self.ui.cen8l_sb, self.ui.cen8h_sb],
-        #                [self.ui.sigma8_sb, self.ui.sigma8l_sb, self.ui.sigma8h_sb]]
         fwhm_list = [self.ui.fwhm1_dsb,self.ui.fwhm2_dsb,self.ui.fwhm3_dsb,self.ui.fwhm4_dsb,self.ui.fwhm5_dsb,
                      self.ui.fwhm6_dsb,self.ui.fwhm7_dsb,self.ui.fwhm8_dsb]
         obj = self.fit_obj[self.ui.fit_range_cb.currentText()]
         result = obj.fit(checked, cons,self.ui.hold_vgratio_box.isChecked(), self.ui.weight_dsb.value(), holds)
         comps = result.eval_components()
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText()+'_fit'] = \
-            self.main_window.ax.plot(obj.x_data, result.best_fit+obj.shirley[1], 'k--', label=self.ui.fit_range_cb.currentText()+'_fit')
+            self.main_window.ax.plot(obj.x_data, result.best_fit+obj.shirley[1], '-', label=self.ui.fit_range_cb.currentText()+'_fit')
+        # This is the best way to plot a ModelResult class but it doens't work with the shirley background being
+        # Different length nparray :(
+        # x_array_dense = np.linspace(min(obj.x_data), max(obj.x_data), 200)
+        # ApplicationSettings.ALL_DATA_PLOTTED[self.ui.fit_range_cb.currentText() + '_fit'] = \
+        #     self.main_window.ax.plot(
+        #         x_array_dense, result.model.eval(result.params, **{result.model.independent_vars[0]: x_array_dense}))
         self.ui.fitreport_te.setText(result.fit_report())
         if self.ui.sd_box.isChecked():
             try:
@@ -288,7 +278,7 @@ class XPS_view(QtWidgets.QDockWidget):
             constraints[i][0][0].setValue(result.params['p%s_amplitude' % str(i)].value)
             constraints[i][1][0].setValue(result.params['p%s_center' % str(i)].value)
             constraints[i][2][0].setValue(result.params['p%s_sigma' % str(i)].value)
-            fwhm_list[i].setValue(result.params['p%s_sigma' % str(i)].value*3.60131)
+            fwhm_list[i].setValue(result.params['p%s_sigma' % str(i)].value*2)
             obj.peak_constraints[i][0][0] = result.params['p%s_amplitude' % str(i)].value
             obj.peak_constraints[i][1][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][2][0] = result.params['p%s_sigma' % str(i)].value

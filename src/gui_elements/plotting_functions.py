@@ -336,7 +336,7 @@ def random_c_plot(self):
 def app_settings_fun(self):
     def function():
         self.settings.setValue('app_style',ui.comboBox.currentText())
-        os.execl(sys.executable, sys.executable, *sys.argv)
+        # os.execl(sys.executable, sys.executable, *sys.argv)
     def change_path(settings_type):
         path = QtWidgets.QFileDialog.getExistingDirectory()
         self.settings.setValue(settings_type, path)
@@ -372,7 +372,7 @@ def app_settings_fun(self):
     ui.comboBox.addItems(['DarkFusion'])
     ui.comboBox.addItems(['GrayFusion'])
     update()
-    # ui.buttonBox.accepted.connect(lambda: function())
+    ui.buttonBox.accepted.connect(lambda: function())
     ui.comboBox.currentTextChanged.connect(lambda: function())
     ui.changedatapath_pb.clicked.connect(lambda: change_path('DATA_PATH'))
     ui.changesavepath_pb.clicked.connect(lambda: change_path('SAVED_DATA_PATH'))
