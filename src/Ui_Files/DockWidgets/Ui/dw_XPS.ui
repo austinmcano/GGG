@@ -25,13 +25,6 @@
         <string>XPS Plotting</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="3" column="2">
-         <widget class="QPushButton" name="plot_pb">
-          <property name="text">
-           <string>Plot</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="QTreeWidget" name="tw_y">
           <column>
@@ -39,13 +32,6 @@
             <string>Counts</string>
            </property>
           </column>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="fill_cols_pb">
-          <property name="text">
-           <string>Fill Columns</string>
-          </property>
          </widget>
         </item>
         <item row="0" column="0" colspan="3">
@@ -67,17 +53,24 @@
           </column>
          </widget>
         </item>
-        <item row="3" column="0" colspan="2">
+        <item row="2" column="0" colspan="2">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>skip rows</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
          <widget class="QSpinBox" name="skip_rows_sb">
           <property name="value">
            <number>1</number>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QLabel" name="label_2">
+        <item row="3" column="0" colspan="3">
+         <widget class="QPushButton" name="fill_cols_pb">
           <property name="text">
-           <string>skip rows</string>
+           <string>Fill Columns</string>
           </property>
          </widget>
         </item>
@@ -113,51 +106,11 @@
              <x>0</x>
              <y>0</y>
              <width>796</width>
-             <height>878</height>
+             <height>852</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">
-            <item row="19" column="4">
-             <widget class="QDoubleSpinBox" name="sigma4_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="3">
-             <widget class="QDoubleSpinBox" name="amp3l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="4">
-             <widget class="QDoubleSpinBox" name="amp4h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="7">
-             <widget class="QComboBox" name="comboBox_7"/>
-            </item>
-            <item row="10" column="3">
-             <widget class="QDoubleSpinBox" name="amp3h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="2">
+            <item row="10" column="2">
              <widget class="QDoubleSpinBox" name="amp2l_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
@@ -167,15 +120,8 @@
               </property>
              </widget>
             </item>
-            <item row="13" column="4">
+            <item row="12" column="4">
              <widget class="QDoubleSpinBox" name="cen4_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="4">
-             <widget class="QDoubleSpinBox" name="sigma4l_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -188,6 +134,81 @@
               </property>
              </widget>
             </item>
+            <item row="24" column="0" colspan="9">
+             <widget class="QTextEdit" name="fitreport_te">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>400</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="8">
+             <widget class="QDoubleSpinBox" name="cen8l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="8">
+             <widget class="QDoubleSpinBox" name="amp8h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="peak1_box">
+              <property name="text">
+               <string>Peak1</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="4">
+             <widget class="QDoubleSpinBox" name="sigma4l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="7">
+             <widget class="QDoubleSpinBox" name="sigma7h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="0" colspan="9">
+             <widget class="Line" name="line">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="8">
+             <widget class="QDoubleSpinBox" name="amp8_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="2">
+             <widget class="QCheckBox" name="peak2_box">
+              <property name="text">
+               <string>Peak2</string>
+              </property>
+             </widget>
+            </item>
             <item row="4" column="0">
              <widget class="QLabel" name="label_12">
               <property name="text">
@@ -195,8 +216,8 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="8">
-             <widget class="QDoubleSpinBox" name="amp8h_sb">
+            <item row="9" column="3">
+             <widget class="QDoubleSpinBox" name="amp3h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -212,263 +233,30 @@
               </property>
              </widget>
             </item>
-            <item row="17" column="0" colspan="9">
-             <widget class="Line" name="line">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="6">
-             <widget class="QComboBox" name="comboBox_6"/>
-            </item>
-            <item row="25" column="0" colspan="9">
-             <widget class="QTextEdit" name="fitreport_te">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>400</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="8">
-             <widget class="QDoubleSpinBox" name="cen8l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="8">
-             <widget class="QDoubleSpinBox" name="amp8_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="7">
-             <widget class="QDoubleSpinBox" name="sigma7h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="peak1_box">
-              <property name="text">
-               <string>Peak1</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="8">
-             <widget class="QComboBox" name="comboBox_8"/>
-            </item>
-            <item row="4" column="2">
-             <widget class="QCheckBox" name="peak2_box">
-              <property name="text">
-               <string>Peak2</string>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="6">
-             <widget class="QDoubleSpinBox" name="sigma6h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="8">
-             <widget class="QDoubleSpinBox" name="amp8l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QCheckBox" name="peak4_box">
-              <property name="text">
-               <string>Peak4</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="7">
-             <widget class="QDoubleSpinBox" name="amp7_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="7">
-             <widget class="QDoubleSpinBox" name="sigma7l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="8">
-             <widget class="QDoubleSpinBox" name="cen8_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="8">
-             <widget class="QDoubleSpinBox" name="cen8h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="1">
-             <widget class="QDoubleSpinBox" name="amp1_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="2">
-             <widget class="QDoubleSpinBox" name="amp2h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="2">
-             <widget class="QDoubleSpinBox" name="cen2l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="2">
-             <widget class="QDoubleSpinBox" name="sigma2_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="1">
-             <widget class="QDoubleSpinBox" name="sigma1_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="1">
-             <widget class="QDoubleSpinBox" name="amp1h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="2">
-             <widget class="QDoubleSpinBox" name="sigma2l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="3">
-             <widget class="QDoubleSpinBox" name="cen3l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="1">
-             <widget class="QDoubleSpinBox" name="amp1l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0" colspan="6">
-             <widget class="Line" name="line_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="3">
-             <widget class="QDoubleSpinBox" name="sigma3_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="0">
-             <widget class="QLabel" name="label_9">
-              <property name="text">
-               <string>Sigma</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="1">
-             <widget class="QDoubleSpinBox" name="cen1_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="4">
-             <widget class="QDoubleSpinBox" name="amp4l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="2">
+            <item row="20" column="2">
              <widget class="QDoubleSpinBox" name="sigma2h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="15" column="1">
-             <widget class="QDoubleSpinBox" name="cen1h_sb">
+            <item row="1" column="1" colspan="3">
+             <widget class="QComboBox" name="fit_range_cb"/>
+            </item>
+            <item row="23" column="2">
+             <widget class="QCheckBox" name="sd_box">
+              <property name="text">
+               <string>3sig SD</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="3">
+             <widget class="QDoubleSpinBox" name="sigma3l_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="0">
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Low</string>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>High</string>
               </property>
              </widget>
             </item>
@@ -479,42 +267,283 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="1" colspan="3">
-             <widget class="QComboBox" name="fit_range_cb"/>
-            </item>
-            <item row="24" column="2">
-             <widget class="QCheckBox" name="sd_box">
-              <property name="text">
-               <string>3sig SD</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="3">
-             <widget class="QDoubleSpinBox" name="sigma3l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="3">
+            <item row="20" column="3">
              <widget class="QDoubleSpinBox" name="sigma3h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="19" column="8">
+            <item row="20" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>High</string>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="8">
              <widget class="QDoubleSpinBox" name="sigma8_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="21" column="8">
+            <item row="21" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Low</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1">
+             <widget class="QDoubleSpinBox" name="cen1h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="4">
+             <widget class="QDoubleSpinBox" name="amp4h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="4">
+             <widget class="QDoubleSpinBox" name="sigma4_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="3">
+             <widget class="QDoubleSpinBox" name="amp3l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="8">
+             <widget class="QDoubleSpinBox" name="cen8h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="2">
+             <widget class="QDoubleSpinBox" name="cen2l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QDoubleSpinBox" name="amp1h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="8">
+             <widget class="QDoubleSpinBox" name="cen8_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="2">
+             <widget class="QDoubleSpinBox" name="sigma2_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="1">
+             <widget class="QDoubleSpinBox" name="sigma1_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="2">
+             <widget class="QDoubleSpinBox" name="sigma2l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QCheckBox" name="peak4_box">
+              <property name="text">
+               <string>Peak4</string>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="3">
+             <widget class="QDoubleSpinBox" name="sigma3_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="6">
+             <widget class="QDoubleSpinBox" name="sigma6h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QDoubleSpinBox" name="amp1_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="2">
+             <widget class="QDoubleSpinBox" name="amp2h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="3">
+             <widget class="QDoubleSpinBox" name="cen3l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="7">
+             <widget class="QDoubleSpinBox" name="sigma7l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="1">
+             <widget class="QDoubleSpinBox" name="cen1_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="0">
+             <widget class="QLabel" name="label_9">
+              <property name="text">
+               <string>Sigma</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1">
+             <widget class="QDoubleSpinBox" name="amp1l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="4">
+             <widget class="QDoubleSpinBox" name="amp4l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0" colspan="6">
+             <widget class="Line" name="line_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="7">
+             <widget class="QDoubleSpinBox" name="amp7_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="8">
+             <widget class="QDoubleSpinBox" name="amp8l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="6">
+             <widget class="QDoubleSpinBox" name="sigma6l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="8">
              <widget class="QDoubleSpinBox" name="sigma8h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="6">
+             <widget class="QDoubleSpinBox" name="amp6_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="7">
+             <widget class="QDoubleSpinBox" name="cen7_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="6">
+             <widget class="QDoubleSpinBox" name="cen6_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="6">
+             <widget class="QDoubleSpinBox" name="cen6l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="6">
+             <widget class="QDoubleSpinBox" name="sigma6_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -527,10 +556,17 @@
               </property>
              </widget>
             </item>
-            <item row="12" column="0" colspan="9">
-             <widget class="Line" name="line_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
+            <item row="14" column="6">
+             <widget class="QDoubleSpinBox" name="cen6h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="7">
+             <widget class="QDoubleSpinBox" name="sigma7_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -538,6 +574,64 @@
              <widget class="QCheckBox" name="xpsrange_box">
               <property name="text">
                <string>Fit Range</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="0" colspan="9">
+             <widget class="Line" name="line_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="7">
+             <widget class="QDoubleSpinBox" name="cen7h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="6">
+             <widget class="QDoubleSpinBox" name="amp6h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="8">
+             <widget class="QDoubleSpinBox" name="sigma8l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="7">
+             <widget class="QDoubleSpinBox" name="cen7l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="6">
+             <widget class="QDoubleSpinBox" name="amp6l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="7">
+             <widget class="QDoubleSpinBox" name="amp7l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -551,48 +645,7 @@
               </property>
              </widget>
             </item>
-            <item row="22" column="6">
-             <widget class="QDoubleSpinBox" name="sigma6l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="7">
-             <widget class="QDoubleSpinBox" name="cen7_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="8">
-             <widget class="QDoubleSpinBox" name="sigma8l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="6">
-             <widget class="QDoubleSpinBox" name="amp6_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="7">
-             <widget class="QDoubleSpinBox" name="amp7l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="7">
+            <item row="9" column="7">
              <widget class="QDoubleSpinBox" name="amp7h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
@@ -602,22 +655,39 @@
               </property>
              </widget>
             </item>
-            <item row="16" column="7">
-             <widget class="QDoubleSpinBox" name="cen7l_sb">
+            <item row="20" column="1">
+             <widget class="QDoubleSpinBox" name="sigma1h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="15" column="7">
-             <widget class="QDoubleSpinBox" name="cen7h_sb">
+            <item row="1" column="5">
+             <widget class="QDoubleSpinBox" name="correctc1s_dsb">
+              <property name="maximum">
+               <double>1000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>284.800000000000011</double>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="2">
+             <widget class="QDoubleSpinBox" name="cen2h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="11" column="6">
-             <widget class="QDoubleSpinBox" name="amp6l_sb">
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Amp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="2">
+             <widget class="QDoubleSpinBox" name="amp2_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -626,8 +696,8 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="6">
-             <widget class="QDoubleSpinBox" name="amp6h_sb">
+            <item row="7" column="4">
+             <widget class="QDoubleSpinBox" name="amp4_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -636,38 +706,54 @@
               </property>
              </widget>
             </item>
-            <item row="15" column="6">
-             <widget class="QDoubleSpinBox" name="cen6h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="4" column="7">
+             <widget class="QCheckBox" name="peak7_box">
+              <property name="text">
+               <string>Peak7</string>
               </property>
              </widget>
             </item>
-            <item row="13" column="6">
-             <widget class="QDoubleSpinBox" name="cen6_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="23" column="3">
+             <widget class="QCheckBox" name="hold_vgratio_box">
+              <property name="text">
+               <string>Vary V-G Ratio</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
-            <item row="16" column="6">
-             <widget class="QDoubleSpinBox" name="cen6l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="14" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>High</string>
               </property>
              </widget>
             </item>
-            <item row="19" column="6">
-             <widget class="QDoubleSpinBox" name="sigma6_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="10" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Low</string>
               </property>
              </widget>
             </item>
-            <item row="19" column="7">
-             <widget class="QDoubleSpinBox" name="sigma7_sb">
+            <item row="7" column="3">
+             <widget class="QDoubleSpinBox" name="amp3_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="23" column="1">
+             <widget class="QCheckBox" name="plot_what_box">
+              <property name="text">
+               <string>All Conponents</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -685,256 +771,28 @@
               </property>
              </widget>
             </item>
-            <item row="24" column="5">
-             <widget class="QPushButton" name="clear_fit_objects_pb">
-              <property name="text">
-               <string>Clear Fit Objects</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="7">
-             <widget class="QCheckBox" name="peak7_box">
-              <property name="text">
-               <string>Peak7</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="5">
-             <widget class="QDoubleSpinBox" name="correctc1s_dsb">
-              <property name="maximum">
-               <double>1000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>284.800000000000011</double>
-              </property>
-             </widget>
-            </item>
-            <item row="24" column="3">
-             <widget class="QCheckBox" name="hold_vgratio_box">
-              <property name="text">
-               <string>Vary V-G Ratio</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="24" column="1">
-             <widget class="QCheckBox" name="plot_what_box">
-              <property name="text">
-               <string>All Conponents</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="1">
+            <item row="21" column="1">
              <widget class="QDoubleSpinBox" name="sigma1l_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="21" column="1">
-             <widget class="QDoubleSpinBox" name="sigma1h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="5">
-             <widget class="QComboBox" name="comboBox_5">
-              <item>
-               <property name="text">
-                <string>Voigt</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Gaussian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Lorentz</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="6" column="4">
-             <widget class="QComboBox" name="comboBox_4">
-              <item>
-               <property name="text">
-                <string>Voigt</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Gaussian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Lorentz</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="6" column="2">
-             <widget class="QComboBox" name="comboBox_2">
-              <item>
-               <property name="text">
-                <string>Voigt</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Gaussian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Lorentz</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="6" column="1">
-             <widget class="QComboBox" name="comboBox">
-              <item>
-               <property name="text">
-                <string>Voigt</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Gaussian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Lorentz</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="6" column="3">
-             <widget class="QComboBox" name="comboBox_3">
-              <item>
-               <property name="text">
-                <string>Voigt</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Gaussian</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Lorentz</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="11" column="0">
-             <widget class="QLabel" name="label_5">
+            <item row="23" column="5">
+             <widget class="QPushButton" name="clear_fit_objects_pb">
               <property name="text">
-               <string>Low</string>
+               <string>Clear Fit Objects</string>
               </property>
              </widget>
             </item>
-            <item row="8" column="2">
-             <widget class="QDoubleSpinBox" name="amp2_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="2">
-             <widget class="QDoubleSpinBox" name="cen2h_sb">
+            <item row="15" column="4">
+             <widget class="QDoubleSpinBox" name="cen4l_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="8" column="3">
-             <widget class="QDoubleSpinBox" name="amp3_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Amp</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>High</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="4">
-             <widget class="QDoubleSpinBox" name="amp4_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="5">
-             <widget class="QDoubleSpinBox" name="amp5_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="text">
-               <string>Cen</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="text">
-               <string>High</string>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="0">
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>Low</string>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="3">
-             <widget class="QDoubleSpinBox" name="cen3_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="24" column="4">
+            <item row="23" column="4">
              <widget class="QDoubleSpinBox" name="weight_dsb">
               <property name="maximum">
                <double>1.000000000000000</double>
@@ -947,43 +805,43 @@
               </property>
              </widget>
             </item>
-            <item row="13" column="2">
-             <widget class="QDoubleSpinBox" name="cen2_sb">
+            <item row="19" column="2">
+             <widget class="QCheckBox" name="sigma2hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="5">
+             <widget class="QDoubleSpinBox" name="sigma5_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="15" column="3">
-             <widget class="QDoubleSpinBox" name="cen3h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="19" column="6">
+             <widget class="QCheckBox" name="sigma6hold_box">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="21" column="4">
-             <widget class="QDoubleSpinBox" name="sigma4h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="8" column="7">
+             <widget class="QCheckBox" name="amp7hold_box">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="16" column="1">
-             <widget class="QDoubleSpinBox" name="cen1l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
+            <item row="19" column="5">
+             <widget class="QCheckBox" name="sigma5hold_box">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="15" column="5">
-             <widget class="QDoubleSpinBox" name="cen5h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="5">
-             <widget class="QDoubleSpinBox" name="amp5l_sb">
+            <item row="7" column="5">
+             <widget class="QDoubleSpinBox" name="amp5_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
               </property>
@@ -992,7 +850,7 @@
               </property>
              </widget>
             </item>
-            <item row="10" column="5">
+            <item row="9" column="5">
              <widget class="QDoubleSpinBox" name="amp5h_sb">
               <property name="maximum">
                <double>999999.000000000000000</double>
@@ -1002,231 +860,255 @@
               </property>
              </widget>
             </item>
-            <item row="16" column="5">
-             <widget class="QDoubleSpinBox" name="cen5l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="4">
-             <widget class="QDoubleSpinBox" name="cen4l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="5">
-             <widget class="QDoubleSpinBox" name="sigma5_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="13" column="5">
-             <widget class="QDoubleSpinBox" name="cen5_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="4">
-             <widget class="QDoubleSpinBox" name="cen4h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="5">
-             <widget class="QDoubleSpinBox" name="sigma5h_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="22" column="5">
-             <widget class="QDoubleSpinBox" name="sigma5l_sb">
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="4">
-             <widget class="QCheckBox" name="amp4hold_box">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="5">
-             <widget class="QCheckBox" name="sigma5hold_box">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="6">
-             <widget class="QCheckBox" name="sigma6hold_box">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="1">
+            <item row="19" column="1">
              <widget class="QCheckBox" name="sigma1hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="20" column="2">
-             <widget class="QCheckBox" name="sigma2hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="12" column="2">
+             <widget class="QDoubleSpinBox" name="cen2_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="20" column="8">
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>High</string>
+              </property>
+             </widget>
+            </item>
+            <item row="19" column="8">
              <widget class="QCheckBox" name="sigma8hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="20" column="7">
+            <item row="19" column="7">
              <widget class="QCheckBox" name="sigma7hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="3">
+            <item row="8" column="3">
              <widget class="QCheckBox" name="amp3hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="2">
+            <item row="15" column="1">
+             <widget class="QDoubleSpinBox" name="cen1l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="5">
+             <widget class="QDoubleSpinBox" name="sigma5h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="5">
+             <widget class="QDoubleSpinBox" name="sigma5l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="2">
              <widget class="QCheckBox" name="amp2hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="1">
+            <item row="20" column="4">
+             <widget class="QDoubleSpinBox" name="sigma4h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="5">
+             <widget class="QDoubleSpinBox" name="amp5l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
              <widget class="QCheckBox" name="amp1hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="20" column="4">
+            <item row="8" column="4">
+             <widget class="QCheckBox" name="amp4hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="3">
+             <widget class="QDoubleSpinBox" name="cen3_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="5">
+             <widget class="QDoubleSpinBox" name="cen5_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Low</string>
+              </property>
+             </widget>
+            </item>
+            <item row="19" column="4">
              <widget class="QCheckBox" name="sigma4hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="7">
-             <widget class="QCheckBox" name="amp7hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="14" column="4">
+             <widget class="QDoubleSpinBox" name="cen4h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="14" column="6">
-             <widget class="QCheckBox" name="cen6hold_box">
+            <item row="12" column="0">
+             <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>Hold</string>
+               <string>Cen</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="8">
-             <widget class="QCheckBox" name="amp8hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="14" column="3">
+             <widget class="QDoubleSpinBox" name="cen3h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="14" column="2">
-             <widget class="QCheckBox" name="cen2hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="14" column="5">
+             <widget class="QDoubleSpinBox" name="cen5h_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="14" column="7">
-             <widget class="QCheckBox" name="cen7hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="15" column="5">
+             <widget class="QDoubleSpinBox" name="cen5l_sb">
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="9" column="5">
+            <item row="8" column="5">
              <widget class="QCheckBox" name="amp5hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="4">
-             <widget class="QCheckBox" name="cen4hold_box">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="8">
-             <widget class="QCheckBox" name="cen8hold_box">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="3">
+            <item row="19" column="3">
              <widget class="QCheckBox" name="sigma3hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="5">
+            <item row="13" column="6">
+             <widget class="QCheckBox" name="cen6hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="8">
+             <widget class="QCheckBox" name="cen8hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="2">
+             <widget class="QCheckBox" name="cen2hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="4">
+             <widget class="QCheckBox" name="cen4hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="5">
              <widget class="QCheckBox" name="cen5hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="9" column="6">
+            <item row="13" column="7">
+             <widget class="QCheckBox" name="cen7hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="6">
              <widget class="QCheckBox" name="amp6hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="3">
-             <widget class="QCheckBox" name="cen3hold_box">
+            <item row="8" column="8">
+             <widget class="QCheckBox" name="amp8hold_box">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="14" column="1">
-             <widget class="QCheckBox" name="cen1hold_box">
-              <property name="text">
-               <string>Hold</string>
+            <item row="22" column="5">
+             <widget class="QDoubleSpinBox" name="fwhm5_dsb">
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="23" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>FWHM</string>
+            <item row="22" column="3">
+             <widget class="QDoubleSpinBox" name="fwhm3_dsb">
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="23" column="1">
+            <item row="22" column="1">
              <widget class="QDoubleSpinBox" name="fwhm1_dsb">
               <property name="enabled">
                <bool>true</bool>
@@ -1236,50 +1118,57 @@
               </property>
              </widget>
             </item>
-            <item row="23" column="2">
-             <widget class="QDoubleSpinBox" name="fwhm2_dsb">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="23" column="3">
-             <widget class="QDoubleSpinBox" name="fwhm3_dsb">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="23" column="4">
-             <widget class="QDoubleSpinBox" name="fwhm4_dsb">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="23" column="5">
-             <widget class="QDoubleSpinBox" name="fwhm5_dsb">
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="23" column="6">
+            <item row="22" column="6">
              <widget class="QDoubleSpinBox" name="fwhm6_dsb">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="23" column="7">
+            <item row="13" column="1">
+             <widget class="QCheckBox" name="cen1hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="22" column="8">
+             <widget class="QDoubleSpinBox" name="fwhm8_dsb">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="13" column="3">
+             <widget class="QCheckBox" name="cen3hold_box">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="22" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>FWHM</string>
+              </property>
+             </widget>
+            </item>
+            <item row="22" column="7">
              <widget class="QDoubleSpinBox" name="fwhm7_dsb">
               <property name="readOnly">
                <bool>true</bool>
               </property>
              </widget>
             </item>
-            <item row="23" column="8">
-             <widget class="QDoubleSpinBox" name="fwhm8_dsb">
+            <item row="22" column="4">
+             <widget class="QDoubleSpinBox" name="fwhm4_dsb">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="22" column="2">
+             <widget class="QDoubleSpinBox" name="fwhm2_dsb">
               <property name="readOnly">
                <bool>true</bool>
               </property>
@@ -1463,6 +1352,13 @@
         </item>
        </layout>
       </widget>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="plot_pb">
+      <property name="text">
+       <string>Plot</string>
+      </property>
      </widget>
     </item>
    </layout>

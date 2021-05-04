@@ -270,7 +270,7 @@ class SE_view(QtWidgets.QDockWidget):
             pars = model.guess(data_y,x=data_x)
             result = model.fit(data_y,pars,x=data_x)
             ApplicationSettings.ALL_DATA_PLOTTED[key+'_fit'] = \
-                self.main_window.ax.plot(data_x,result.best_fit,label=key+'_fit')
+                self.main_window.ax.plot(data_x,result.best_fit,'-',label=key+'_fit')
             self.ui.fit_results_TE.setText(result.fit_report())
         dialog = QtWidgets.QDialog()
         ui = twDialog_ui()

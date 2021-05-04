@@ -128,39 +128,18 @@ class XPS_view(QtWidgets.QDockWidget):
 
     def fit_range_changed(self):
         try:
-            temp = self.fit_obj[self.ui.fit_range_cb.currentText()].peak_constraints
+            temp = self.fit_obj[self.ui.fit_range_cb.currentText()]
+            self.main_window.ax.set_xlim(temp.maxi+5,temp.mini-5)
+            self.main_window.ax.set_ylim(auto=True)
             _, _, _, constraints, holds = self.checked_cons()
-            # constraints = [[self.ui.amp1_sb,self.ui.amp1l_sb,self.ui.amp1h_sb],
-            #         [self.ui.cen1_sb,self.ui.cen1l_sb,self.ui.cen1h_sb],
-            #         [self.ui.sigma1_sb,self.ui.sigma1l_sb,self.ui.sigma1h_sb]],\
-            #               [[self.ui.amp2_sb, self.ui.amp2l_sb, self.ui.amp2h_sb],
-            #       [self.ui.cen2_sb, self.ui.cen2l_sb, self.ui.cen2h_sb],
-            #       [self.ui.sigma2_sb, self.ui.sigma2l_sb, self.ui.sigma2h_sb]],\
-            #               [[self.ui.amp3_sb, self.ui.amp3l_sb, self.ui.amp3h_sb],
-            #       [self.ui.cen3_sb, self.ui.cen3l_sb, self.ui.cen3h_sb],
-            #       [self.ui.sigma3_sb, self.ui.sigma3l_sb, self.ui.sigma3h_sb]],\
-            #               [[self.ui.amp4_sb, self.ui.amp4l_sb, self.ui.amp4h_sb],
-            #       [self.ui.cen4_sb, self.ui.cen4l_sb, self.ui.cen4h_sb],
-            #       [self.ui.sigma4_sb, self.ui.sigma4l_sb, self.ui.sigma4h_sb]],\
-            #               [[self.ui.amp5_sb, self.ui.amp5l_sb, self.ui.amp5h_sb],
-            #       [self.ui.cen5_sb, self.ui.cen5l_sb, self.ui.cen5h_sb],
-            #       [self.ui.sigma5_sb, self.ui.sigma5l_sb, self.ui.sigma5h_sb]], \
-            #               [[self.ui.amp6_sb, self.ui.amp6l_sb, self.ui.amp6h_sb],
-            #                [self.ui.cen6_sb, self.ui.cen6l_sb, self.ui.cen6h_sb],
-            #                [self.ui.sigma6_sb, self.ui.sigma6l_sb, self.ui.sigma6h_sb]], \
-            #               [[self.ui.amp7_sb, self.ui.amp7l_sb, self.ui.amp7h_sb],
-            #                [self.ui.cen7_sb, self.ui.cen7l_sb, self.ui.cen7h_sb],
-            #                [self.ui.sigma7_sb, self.ui.sigma7l_sb, self.ui.sigma7h_sb]], \
-            #               [[self.ui.amp8_sb, self.ui.amp8l_sb, self.ui.amp8h_sb],
-            #                [self.ui.cen8_sb, self.ui.cen8l_sb, self.ui.cen8h_sb],
-            #                [self.ui.sigma8_sb, self.ui.sigma8l_sb, self.ui.sigma8h_sb]]
             for i in range(8):
                 for j in range(3):
                     for k in range(3):
-                        constraints[i][j][k].setValue(temp[i][j][k])
+                        constraints[i][j][k].setValue(temp.peak_constraints[i][j][k])
             self.ui.fitreport_te.setText(self.fit_obj[self.ui.fit_range_cb.currentText()].fit_result)
+            self.main_window.canvas.draw()
         except KeyError:
-            pass
+            print('Change Failed')
 
     def checked_cons(self):
         checked = [self.ui.peak1_box.isChecked(), self.ui.peak2_box.isChecked(), self.ui.peak3_box.isChecked(),
@@ -243,8 +222,8 @@ class XPS_view(QtWidgets.QDockWidget):
             self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
         self.main_window.ax.set_xlabel('B. E. (eV)')
         self.main_window.ax.set_ylabel('Counts')
-        leg = self.main_window.ax.legend(loc='best')
-        leg.set_draggable(True)
+        # leg = self.main_window.ax.legend(loc='best')
+        # leg.set_draggable(True)
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
