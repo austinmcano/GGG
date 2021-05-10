@@ -441,7 +441,7 @@ class FTIR_view(QtWidgets.QDockWidget):
             constraints[i][0][0].setValue(result.params['p%s_amplitude' % str(i)].value)
             constraints[i][1][0].setValue(result.params['p%s_center' % str(i)].value)
             constraints[i][2][0].setValue(result.params['p%s_sigma' % str(i)].value)
-            fwhm_list[i].setValue(result.params['p%s_sigma' % str(i)].value*2)
+            fwhm_list[i].setValue(result.params['p%s_sigma' % str(i)].value*3.6013)
             obj.peak_constraints[i][0][0] = result.params['p%s_amplitude' % str(i)].value
             obj.peak_constraints[i][1][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][2][0] = result.params['p%s_sigma' % str(i)].value
