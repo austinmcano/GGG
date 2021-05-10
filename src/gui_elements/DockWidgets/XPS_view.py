@@ -216,17 +216,6 @@ class XPS_view(QtWidgets.QDockWidget):
                                      label=self.ui.fit_range_cb.currentText() + '_init')
         self.main_window.canvas.draw()
 
-    def xps_basic(self):
-        limits = self.main_window.ax.get_xlim()
-        if limits[1] > limits[0]:
-            self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
-        self.main_window.ax.set_xlabel('B. E. (eV)')
-        self.main_window.ax.set_ylabel('Counts')
-        # leg = self.main_window.ax.legend(loc='best')
-        # leg.set_draggable(True)
-        self.main_window.fig.tight_layout()
-        self.main_window.canvas.draw()
-
     def fit_fun(self):
         self.removing_xps_lines()
         checked, cons, nums_checked, constraints, holds = self.checked_cons()
@@ -307,6 +296,16 @@ class XPS_view(QtWidgets.QDockWidget):
             pass
         self.main_window.canvas.draw()
 
+    def xps_basic(self):
+        limits = self.main_window.ax.get_xlim()
+        if limits[1] > limits[0]:
+            self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
+        self.main_window.ax.set_xlabel('B. E. (eV)')
+        self.main_window.ax.set_ylabel('Counts')
+        # leg = self.main_window.ax.legend(loc='best')
+        # leg.set_draggable(True)
+        self.main_window.fig.tight_layout()
+        self.main_window.canvas.draw()
 
 class Fit_Object(object):
     def __init__(self, x_data, y_data, minimum, maximum):
