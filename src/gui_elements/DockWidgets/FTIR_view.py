@@ -2,7 +2,7 @@ from src.Ui_Files.DockWidgets.Py.dw_FTIR import Ui_DockWidget
 from src.gui_elements.RC_Fucntions import *
 import glob
 from scipy.signal import savgol_filter
-from lmfit.models import VoigtModel, GaussianModel, LorentzianModel, PseudoVoigtModel
+from lmfit.models import VoigtModel, ConstantModel, LinearModel
 from lmfit import Model, Parameters
 from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 from src.gui_elements.plotting_functions import baseline_als
@@ -162,7 +162,6 @@ class FTIR_view(QtWidgets.QDockWidget):
             temp1 = pd.read_csv(paths[0],delimiter=',').to_numpy().T
             temp2 = pd.read_csv(paths[1],delimiter=',').to_numpy().T
             self.data = [temp1[0],temp1[1]-temp2[1]]
-            print(self.data)
             ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
                 self.data[0], self.data[1], label=tail)
         self.ir_basic()
@@ -284,81 +283,6 @@ class FTIR_view(QtWidgets.QDockWidget):
         # need to first get the keys from the dict, than grab the ._xy from Line2D object, put through the baseline
         # correction, clear the data and then plot all the corrected baselines. Not too hard right?
 
-    # def difference_from_survey(self,list_of_csv):
-    #     data = []
-    #     for csv in list_of_csv:
-    #         temp_data = pd.read_csv(csv, delimiter=',')
-    #         temp_data = temp_data.dropna(how='any')
-    #         data.append(temp_data.to_numpy().T)
-    #     sub_list = [data[0][0]]
-    #     for l in range(len(data) - 1):
-    #         length = len(data[0][0])
-    #         if len(data[l + 1][1][:length]) == len(data[l][1][:length]):
-    #             try:
-    #                 sub_list.append(data[l + 1][1][:length] - data[l][1][:length])
-    #             except TypeError:
-    #                 print('problem with unequal lengths')
-    #     return sub_list
-
-    # def subtraction_from_survey(self,list_of_csv):
-    #     data = []
-    #     for csv in list_of_csv:
-    #         data.append(np.genfromtxt(csv, delimiter=',').T)
-    #     sub_list = [data[0][0]]
-    #     for l in range(len(data) - 1):
-    #         length = len(data[0][0])
-    #         sub_list.append(data[l + 1][1][:length] - data[0][1][:length])
-    #     return sub_list
-
-    # def diff_select_survey(self,list_of_csv):
-    #     def finish():
-    #         data = []
-    #         for csv in list_of_csv:
-    #             data.append(np.genfromtxt(csv, delimiter=',').T)
-    #         sub_list = [data[0][0]]
-    #         for l in range(len(data) - 1):
-    #             sub_list.append(data[l + 1][1] - data[l][1])
-    #         return sub_list
-    #
-    #     dialog = QtWidgets.QDialog()
-    #     ui = simple_tw()
-    #     ui.setupUi(dialog)
-    #     Key_List = []
-    #     for i in list_of_csv:
-    #         Key_List.append(QtWidgets.QTreeWidgetItem([i]))
-    #     ui.treeWidget.addTopLevelItems(Key_List)
-    #     ui.buttonBox.accepted.connect(lambda: finish())
-    #     dialog.exec_()
-
-    # def integrate_mode(self, enabled):
-    #     if enabled:
-    #         self.span = SpanSelector(self.main_window.ax, self.onselect, 'horizontal', useblit=True,
-    #                                  rectprops=dict(alpha=0.2, facecolor='red'))
-    #     else:
-    #         del self.span
-    #
-    # def onselect(self, minimum, maximum):
-    #     dict = ApplicationSettings.ALL_DATA_PLOTTED
-    #     Key_List = []
-    #     data = []
-    #     index = 0
-    #     for i in dict.keys():
-    #         if index == 0:
-    #             data.append(dict[i][0]._xy.T[0])
-    #             index += 1
-    #         Key_List.append(i)
-    #         data.append(dict[i][0]._xy.T[1])
-    #     # print(Key_List)
-    #     inte = self.integrate_ir(data, minimum, maximum)
-    #     self.main_window.ax_2.plot(inte, '.-', label=str(np.round(minimum,1)) + '-' + str(np.round(maximum,1)))
-    #     self.main_window.canvas.draw()
-    #     col_count = self.ui.tableWidget.columnCount()
-    #     self.ui.tableWidget.setColumnCount(col_count+1)
-    #     row_count = self.ui.tableWidget.rowCount()
-    #     if len(inte) > row_count:
-    #         self.ui.tableWidget.setRowCount(len(inte))
-    #     for i in range(len(inte)):
-    #         self.ui.tableWidget.setItem(i,col_count,QtWidgets.QTableWidgetItem(str(inte[i])))
     def select_ir_range(self,enabled):
         if enabled:
             self.span = SpanSelector(self.main_window.ax, self.on_select, 'horizontal', useblit=False,
@@ -392,7 +316,7 @@ class FTIR_view(QtWidgets.QDockWidget):
             temp = self.fit_obj[self.ui.ir_range_cb.currentText()]
             self.main_window.ax.set_xlim(temp.maxi+50,temp.mini-50)
             self.main_window.ax.set_ylim(auto=True)
-            _, _, _, constraints, holds = self.checked_cons()
+            _, _, _, constraints, holds, lin_pars = self.checked_cons()
             for i in range(8):
                 for j in range(3):
                     for k in range(3):
@@ -472,13 +396,14 @@ class FTIR_view(QtWidgets.QDockWidget):
                  [self.ui.p8_amp_hold.isChecked(), self.ui.p8_cen_hold.isChecked(), self.ui.p8_sigma_hold.isChecked()]]
 
         holds = [[not holds[j][i] for i in range(3)] for j in range(8)]
-        return checked, cons, nums_checked, constraints, holds
+        lin_pars = [self.ui.slope_dsb.value(), self.ui.intercept_dsb.value()]
+        return checked, cons, nums_checked, constraints, holds, lin_pars
 
     def initial_fit(self):
         self.removing_ir_lines()
-        checked, cons, nums_checked,_,holds = self.checked_cons()
+        checked, cons, nums_checked,_,holds, lin_pars = self.checked_cons()
         obj = self.fit_obj[self.ui.ir_range_cb.currentText()]
-        result = obj.initial_plot(checked, cons)
+        result = obj.initial_plot(checked, cons, lin_pars)
         # comps = result.eval_components()
         init = result.init_fit
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.ir_range_cb.currentText() + '_init'] = \
@@ -488,11 +413,11 @@ class FTIR_view(QtWidgets.QDockWidget):
 
     def fit_fun(self):
         self.removing_ir_lines()
-        checked, cons, nums_checked, constraints, holds = self.checked_cons()
+        checked, cons, nums_checked, constraints, holds, lin_pars = self.checked_cons()
         fwhm_list = [self.ui.p1_fwhm,self.ui.p2_fwhm,self.ui.p3_fwhm,self.ui.p4_fwhm,self.ui.p5_fwhm,
                      self.ui.p6_fwhm,self.ui.p7_fwhm,self.ui.p8_fwhm]
         obj = self.fit_obj[self.ui.ir_range_cb.currentText()]
-        result = obj.fit(checked, cons, holds)
+        result = obj.fit(checked, cons, holds, lin_pars)
         comps = result.eval_components()
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.ir_range_cb.currentText()+'_fit'] = \
             self.main_window.ax.plot(obj.x_data, result.best_fit, 'r-', label=self.ui.ir_range_cb.currentText()+'_fit')
@@ -520,14 +445,21 @@ class FTIR_view(QtWidgets.QDockWidget):
             obj.peak_constraints[i][0][0] = result.params['p%s_amplitude' % str(i)].value
             obj.peak_constraints[i][1][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][2][0] = result.params['p%s_sigma' % str(i)].value
+            self.ui.slope_dsb.setValue(result.params['slope'])
+            self.ui.intercept_dsb.setValue(result.params['intercept'])
 
-            if self.ui.plot_components_box.isChecked():
+        if self.ui.plot_components_box.isChecked():
+            for i in nums_checked:
                 ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
-                    self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
+                    self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['linear'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
+            ApplicationSettings.ALL_DATA_PLOTTED['lin_part' + self.ui.ir_range_cb.currentText()] = \
+                self.main_window.ax.plot(obj.x_data, comps['linear'], 'k--',
+                                         label='_linmod_' + self.ui.ir_range_cb.currentText())
+
         self.main_window.canvas.draw()
 
     def clear_fit_objs(self):
-        self.ui.fit_range_cb.clear()
+        self.ui.ir_range_cb.clear()
         self.fit_obj = {}
 
     def removing_ir_lines(self):
@@ -553,6 +485,15 @@ class FTIR_view(QtWidgets.QDockWidget):
                 pass
             except ValueError:
                 pass
+        if str('Verr_' + self.ui.ir_range_cb.currentText()) in ApplicationSettings.ALL_DATA_PLOTTED:
+            poly = ApplicationSettings.ALL_DATA_PLOTTED['Verr_' + self.ui.ir_range_cb.currentText()]
+            poly.remove()
+            ApplicationSettings.ALL_DATA_PLOTTED.pop('Verr_' + self.ui.ir_range_cb.currentText())
+            del poly
+        if str('lin_part' + self.ui.ir_range_cb.currentText()) in ApplicationSettings.ALL_DATA_PLOTTED:
+            line0 = ApplicationSettings.ALL_DATA_PLOTTED['lin_part' + self.ui.ir_range_cb.currentText()]
+            print(line0)
+            self.main_window.ax.lines.remove(line0[0])
         self.main_window.canvas.draw()
 
 class IR_Fit_Object(object):
@@ -574,10 +515,11 @@ class IR_Fit_Object(object):
         middle = minimum + (maximum-minimum)/2
         centers = [middle for i in range(8)]
         for i in range(8):
-            self.peak_constraints.append([[50, 0, 9999], [centers[i], minimum, maximum], [50, .0001, 1000]])
+            self.peak_constraints.append([[50, 0, 99999], [centers[i], minimum, maximum], [50, .0001, 1000]])
 
-    def fit(self, checked, cons, holds):
+    def fit(self, checked, cons, holds, lin_pars):
         self.update_constraints(cons)
+        con_mod = LinearModel()
         line_shape_mods = [VoigtModel(prefix='p0_'), VoigtModel(prefix='p1_'),
                            VoigtModel(prefix='p2_'), VoigtModel(prefix='p3_'),
                            VoigtModel(prefix='p4_'), VoigtModel(prefix='p5_'),
@@ -590,28 +532,28 @@ class IR_Fit_Object(object):
             if checked[x]:
                 params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], holds[x][0], self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
                                 ('p%s_center' % str(x), self.peak_constraints[x][1][0], holds[x][1], self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
-                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]))
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
+                                ('slope', lin_pars[0], True),('intercept', lin_pars[1], True))
                 checked_peaks.append(x)
                 cur_mods.append(line_shape_mods[x])
         if len(checked_peaks) == 1:
-            mod = cur_mods[0]
+            mod = cur_mods[0] + con_mod
         elif len(checked_peaks) == 2:
-            mod = cur_mods[0] + cur_mods[1]
+            mod = cur_mods[0] + cur_mods[1] + con_mod
         elif len(checked_peaks) == 3:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + con_mod
         elif len(checked_peaks) == 4:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + con_mod
         elif len(checked_peaks) == 5:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + con_mod
         elif len(checked_peaks) == 6:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + con_mod
         elif len(checked_peaks) == 7:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]+ cur_mods[6]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]+ cur_mods[6] + con_mod
         elif len(checked_peaks) == 8:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]+ cur_mods[5]+ cur_mods[6]+ cur_mods[7]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + cur_mods[7] + con_mod
         # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
         result = mod.fit(self.y_data, params, x=self.x_data)
-        # comps = result.eval_components()
         self.fit_result = result.fit_report()
         return result
 
@@ -621,7 +563,7 @@ class IR_Fit_Object(object):
                 for k in range(3):
                     self.peak_constraints[i][j][k] = constraints[i][j][k]
 
-    def initial_plot(self, checked, cons):
+    def initial_plot(self, checked, cons, lin_pars):
         self.update_constraints(cons)
         # line_shape_mods = [PseudoVoigtModel(prefix='p0_'), PseudoVoigtModel(prefix='p1_'),
         #                    PseudoVoigtModel(prefix='p2_'),PseudoVoigtModel(prefix='p3_'),
@@ -632,6 +574,7 @@ class IR_Fit_Object(object):
                            VoigtModel(prefix='p4_'), VoigtModel(prefix='p5_'),
                            VoigtModel(prefix='p6_'), VoigtModel(prefix='p7_')]
         cur_mods = []
+        con_mod = LinearModel()
         checked_peaks = []
         params = Parameters()
         # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
@@ -642,26 +585,26 @@ class IR_Fit_Object(object):
                                 ('p%s_center' % str(x), self.peak_constraints[x][1][0], True,
                                  self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
                                 ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], True,
-                                 self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]))
+                                 self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),('slope', lin_pars[0], True), ('intercept', lin_pars[1], True))
                 checked_peaks.append(x)
                 cur_mods.append(line_shape_mods[x])
         if len(checked_peaks) == 1:
-            mod = cur_mods[0]
+            mod = cur_mods[0] + con_mod
         elif len(checked_peaks) == 2:
-            mod = cur_mods[0] + cur_mods[1]
+            mod = cur_mods[0] + cur_mods[1] + con_mod
         elif len(checked_peaks) == 3:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + con_mod
         elif len(checked_peaks) == 4:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + con_mod
         elif len(checked_peaks) == 5:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + con_mod
         elif len(checked_peaks) == 6:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + con_mod
         elif len(checked_peaks) == 7:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6]
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + con_mod
         elif len(checked_peaks) == 8:
             mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + \
-                  cur_mods[7]
+                  cur_mods[7] + con_mod
         # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
         result = mod.fit(self.y_data, params, x=self.x_data)
         return result
