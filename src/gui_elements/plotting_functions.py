@@ -275,12 +275,10 @@ def remove_line(self):
                     del line
                     self.canvas.draw()
                 elif isinstance(line,matplotlib.offsetbox.DraggableAnnotation):
-                    print(line)
-                    line.remove()
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
+                    self.canvas.draw()
                 elif isinstance(line,matplotlib.collections.PolyCollection):
-                    print(line)
                     line.remove()
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
