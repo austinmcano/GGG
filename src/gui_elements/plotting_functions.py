@@ -89,8 +89,8 @@ def save_fig(self):
     def finish():
         text = ui.lineEdit.text()
         # pickle.dump(self.ax, self.settings.value('FIG_PATH') + text, 'w')
-        with open(self.settings.value('FIG_PATH') + text, 'wb') as f:  # should be 'wb' rather than 'w'
-            pickle.dump(self.fig, f)
+        # with open(self.settings.value('FIG_PATH') + text, 'wb') as f:  # should be 'wb' rather than 'w'
+        #     pickle.dump(self.fig, f)
         with open(self.settings.value('FIG_PATH') + text+'.pkl', 'wb') as fid:
             pickle.dump(self.fig, fid)
         os.path.join(self.settings.value('FIG_PATH'),text+'.pkl')
@@ -105,23 +105,30 @@ def save_fig(self):
 
 def show_pickled_fig(self):
     path,ext = QtWidgets.QFileDialog.getOpenFileName(self,'Pickeled Figure',self.settings.value('FIG_PATH'))
-    # figx = pickle.load(open(path, 'rb'))
-    with open(path, 'rb') as fid:
-        figx = pickle.load(fid)
-    self.canvas.draw()
     if path == '':
         pass
     else:
+        with open(path, 'rb') as fid:
+            figx = pickle.load(fid)
+        self.canvas.draw()
         self.ui.verticalLayout.removeWidget(self.toolbar)
-        self.ui.verticalLayout.removeWidget(self.canvas)
         self.toolbar.close()
+        self.ui.verticalLayout.removeWidget(self.canvas)
         self.canvas.close()
         sns.set(context=self.context, style=self.style, palette=self.c_palette,
                 font=self.font, font_scale=self.fs, color_codes=True)
         self.fig = figx
-        self.ax = self.fig.add_subplot(111)
+        print(self.fig.axes)
+        self.ax_1 = self.fig.axes[0]
+        self.ax = self.ax_1
+        for ax in self.fig.axes:
+            print(ax)
+            if ax is not self.ax:
+                # self.ax.get_shared_y_axes().join(self.ax, ax)
+                self.ax_2 = ax
         self.canvas = FigureCanvas(self.fig)
-        self.ui.verticalLayout.addWidget(NavigationToolbar(self.canvas, self.canvas, coordinates=True))
+        self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+        self.ui.verticalLayout.addWidget(self.toolbar)
         self.ui.verticalLayout.addWidget(self.canvas)
 
         self.canvas.installEventFilter(self)
