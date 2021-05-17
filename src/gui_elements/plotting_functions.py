@@ -91,6 +91,10 @@ def save_fig(self):
         # pickle.dump(self.ax, self.settings.value('FIG_PATH') + text, 'w')
         with open(self.settings.value('FIG_PATH') + text, 'wb') as f:  # should be 'wb' rather than 'w'
             pickle.dump(self.fig, f)
+        with open(self.settings.value('FIG_PATH') + text+'.pkl', 'wb') as fid:
+            pickle.dump(self.fig, fid)
+        os.path.join(self.settings.value('FIG_PATH'),text+'.pkl')
+        print(self.settings.value('FIG_PATH') + text+'.pkl')
     dialog = QtWidgets.QDialog()
     ui = simple_text_ui()
     ui.setupUi(dialog)
@@ -101,7 +105,10 @@ def save_fig(self):
 
 def show_pickled_fig(self):
     path,ext = QtWidgets.QFileDialog.getOpenFileName(self,'Pickeled Figure',self.settings.value('FIG_PATH'))
-    figx = pickle.load(open(path, 'rb'))
+    # figx = pickle.load(open(path, 'rb'))
+    with open(path, 'rb') as fid:
+        figx = pickle.load(fid)
+    self.canvas.draw()
     if path == '':
         pass
     else:
