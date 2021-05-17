@@ -91,10 +91,10 @@ def save_fig(self):
         # pickle.dump(self.ax, self.settings.value('FIG_PATH') + text, 'w')
         # with open(self.settings.value('FIG_PATH') + text, 'wb') as f:  # should be 'wb' rather than 'w'
         #     pickle.dump(self.fig, f)
-        with open(self.settings.value('FIG_PATH') + text+'.pkl', 'wb') as fid:
+        with open(os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'), 'wb') as fid:
             pickle.dump(self.fig, fid)
-        os.path.join(self.settings.value('FIG_PATH'),text+'.pkl')
-        print(self.settings.value('FIG_PATH') + text+'.pkl')
+        # os.path.join(self.settings.value('FIG_PATH'), text+'.pkl')
+        # print(self.settings.value('FIG_PATH') + text+'.pkl')
     dialog = QtWidgets.QDialog()
     ui = simple_text_ui()
     ui.setupUi(dialog)
@@ -421,11 +421,13 @@ def new_project(self):
         os.makedirs(os.path.join(project_name,ui.project_le.text()))
         os.makedirs(os.path.join(project_name,ui.project_le.text(),'Data'))
         os.makedirs(os.path.join(project_name, ui.project_le.text(), 'Saved'))
+        os.makedirs(os.path.join(project_name, ui.project_le.text(), 'Graphs'))
         project_path = os.path.join(project_name, ui.project_le.text())
 
         self.settings.setValue('PROJECT_PATH',project_path)
         self.settings.setValue('SAVED_DATA_PATH', os.path.join(project_path,'Saved'))
         self.settings.setValue('DATA_PATH', os.path.join(project_path, 'Data'))
+        self.settings.setValue('FIG_PATH', os.path.join(project_path, 'Graphs'))
     dialog_path = QtWidgets.QFileDialog.getExistingDirectory()
     d = QtWidgets.QDialog()
     ui = new_project_dialog()
