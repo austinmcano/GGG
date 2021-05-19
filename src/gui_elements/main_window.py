@@ -26,7 +26,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.init_connections()
 
     def _init_UI(self):
-        # sns.set_style("whitegrid", {"axes.facecolor": "#F0F0F0", 'figure.facecolor': '#505F69'})
         self.style = self.settings.value('sns_style')
         self.context = self.settings.value('sns_context')
         self.fs = int(self.settings.value('sns_fontscale'))
@@ -53,8 +52,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.bar = {'xlist': '', 'y1list':'','y2list':'','y3list':'', 'width':'0.35', 'num':1,
                     'label1':'','label2':'','label3':''}
         self.ax = self.ax_1
-
-
+        self.dragh = DragHandler(self, figure=self.fig)
 
         self.dw_ProjectView = ProjectBrowser(self)
         self.dw_Data_Broswer = DataBrowser(self)
@@ -82,8 +80,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ax.tick_params(axis='x', colors=self.settings.value('bottom_spine_color'))
         self.ax.tick_params(axis='y', colors=self.settings.value('left_spine_color'))
 
-    def init_connections(self):
+        self.color_list = []
+        for name in matplotlib.colors.cnames.items():
+            self.color_list.append(name[0])
 
+
+    def init_connections(self):
         self.plot_context_actions()
         # self.context_menu_plot = QtWidgets.QMenu(self)
         # self.canvas.installEventFilter(self)
@@ -158,8 +160,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionClear_Graph.triggered.connect(lambda: self.cleargraph())
         self.ui.actionXPS.triggered.connect(lambda: XPS_view_fun(self))
         self.ui.actionXRD.triggered.connect(lambda: XRD_view_fun(self))
-        self.ui.actionDataBrowser.triggered.connect(lambda: DataBrowser_view_fun(self))
-        self.ui.actionProject_Tree.triggered.connect(lambda: Project_view_fun(self))
+        # self.ui.actionDataBrowser.triggered.connect(lambda: DataBrowser_view_fun(self))
+        # self.ui.actionProject_Tree.triggered.connect(lambda: Project_view_fun(self))
         self.ui.actionQCM.triggered.connect(lambda: QCM_view_fun(self))
         self.ui.actionFTIR.triggered.connect(lambda: FTIR_view_fun(self))
         self.ui.actionSE.triggered.connect(lambda: SE_view_fun(self))
@@ -174,7 +176,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionXPS_Help.triggered.connect(lambda: self.memory_usage())
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
         self.ui.actionLegend_Toggle.setShortcut(QtCore.QCoreApplication.translate("MainWindow", u"Ctrl+L", None))
-        self.clear_all_graphs_action.setShortcut(QtCore.QCoreApplication.translate("MainWindow", u"Ctrl+W", None))
+        self.ui.actionClear_Graph.setShortcut(QtCore.QCoreApplication.translate("MainWindow", u"Ctrl+W", None))
 
     def plot_context_actions(self):
         self.context_menu_plot = QtWidgets.QMenu(self)
@@ -240,6 +242,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def start(self, dock_widget):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
+
 
     def lims_change(self, event_ax):
         ApplicationSettings.C_X_LIM = list(event_ax.get_xlim())
@@ -394,6 +397,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def clear_single_graph(self):
         self.ax.clear()
         self.fig.tight_layout()
+        self.dragh = DragHandler(self, figure=self.fig)
         self.canvas.draw()
 
     def clear_all_graphs(self):
@@ -406,6 +410,7 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ax_4.clear()
         ApplicationSettings.ALL_DATA_PLOTTED = {}
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
+        self.dragh = DragHandler(self, figure=self.fig)
         self.fig.tight_layout()
         self.canvas.draw()
 
@@ -434,6 +439,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ax_2 = None
         self.ax_3 = None
         self.ax_4 = None
+        self.dragh = DragHandler(self, figure=self.fig)
 
     def import_fitted_parameters(self):
         pass
@@ -442,6 +448,40 @@ class MainWindow(QtWidgets.QMainWindow):
         # Write window size and position to config file
         self.settings.setValue("size", self.size())
         # self.settings.setValue("pos", self.pos())
-        print('happened')
         e.accept()
 
+# class DragHandler(object):
+#     """ A simple class to handle Drag n Drop.
+#
+#     This is a simple example, which works for Text objects only
+#     """
+#     def __init__(self,main_window, figure=None):
+#         """ Create a new drag handler and connect it to the figure's event system.
+#         If the figure handler is not given, the current figure is used instead
+#         """
+#         if figure is None : figure = matplotlib.pyplot.gcf()
+#         # simple attibute to store the dragged text object
+#         self.dragged = None
+#         self.main_window = main_window
+#         # Connect events and callbacks
+#         figure.canvas.mpl_connect("pick_event", self.on_pick_event)
+#         figure.canvas.mpl_connect("button_release_event", self.on_release_event)
+#         # figure.canvas.mpl_connect("button_release_event", self.on_release)
+#
+#     def on_pick_event(self, event):
+#         " Store which text object was picked and were the pick event occurs."
+#         if isinstance(event.artist, Text):
+#             self.dragged = event.artist
+#             self.pick_pos = (event.mouseevent.xdata, event.mouseevent.ydata)
+#         return True
+#
+#     def on_release_event(self, event):
+#         " Update text position and redraw"
+#         if self.dragged is not None :
+#             old_pos = self.dragged.get_position()
+#             new_pos = (old_pos[0] + event.xdata - self.pick_pos[0],
+#                        old_pos[1] + event.ydata - self.pick_pos[1])
+#             self.dragged.set_position(new_pos)
+#             self.dragged = None
+#             self.main_window.canvas.draw()
+#         return True

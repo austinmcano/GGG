@@ -5,8 +5,8 @@ from scipy.signal import savgol_filter
 from lmfit.models import VoigtModel, ConstantModel, LinearModel
 from lmfit import Model, Parameters
 from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
-from src.gui_elements.plotting_functions import baseline_als
-from src.gui_elements.general_functions import find_nearest
+from src.gui_elements.plotting_functions import baseline_als, find_nearest
+# from src.gui_elements.general_functions import find_nearest
 from matplotlib.widgets import SpanSelector
 
 class FTIR_view(QtWidgets.QDockWidget):

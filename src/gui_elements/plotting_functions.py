@@ -16,6 +16,7 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 from matplotlib.pyplot import figure
 import matplotlib
 import pickle
+from matplotlib.text import Text
 import pandas as pd
 from PySide2 import QtCore,QtWidgets,QtGui
 import sys
@@ -63,45 +64,28 @@ def spine_color_fun(self):
     ui.buttonBox.accepted.connect(lambda: finish())
     dialog.exec_()
 
+
 def graph_test_fun(self):
-    path, ext = QtWidgets.QFileDialog.getOpenFileName(self, 'Pickeled Figure', self.settings.value('FIG_PATH'))
-    ax = pickle.load(open(path, 'rb'))
-    self.ui.verticalLayout.removeWidget(self.toolbar)
-    self.ui.verticalLayout.removeWidget(self.canvas)
-    self.toolbar.close()
-    self.canvas.close()
-    self.ax.remove()
-    sns.set(context=self.context, style=self.style, palette=self.c_palette,
-            font=self.font, font_scale=self.fs, color_codes=True)
-    self.fig = figure(num=None, figsize=(8, 6), dpi=80, facecolor='w', edgecolor='k')
-    self.canvas = FigureCanvas(self.fig)
-    self.ui.verticalLayout.addWidget(NavigationToolbar(self.canvas, self.canvas, coordinates=True))
-    self.ui.verticalLayout.addWidget(self.canvas)
-    self.ax = ax
-    self.canvas.installEventFilter(self)
+    print(self.ax.lines)
+    self.ax.lines[0].remove()
     self.canvas.draw()
+
 
 def tight_figure(self):
     self.fig.tight_layout()
     self.canvas.draw()
 
+
 def save_fig(self):
-    def finish():
-        text = ui.lineEdit.text()
-        # pickle.dump(self.ax, self.settings.value('FIG_PATH') + text, 'w')
-        # with open(self.settings.value('FIG_PATH') + text, 'wb') as f:  # should be 'wb' rather than 'w'
-        #     pickle.dump(self.fig, f)
+    text, ok = QtWidgets.QInputDialog.getText(self, 'Saving Figure', 'Save Figure As: ')
+    if ok:
         with open(os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'), 'wb') as fid:
             pickle.dump(self.fig, fid)
-        # os.path.join(self.settings.value('FIG_PATH'), text+'.pkl')
-        # print(self.settings.value('FIG_PATH') + text+'.pkl')
-    dialog = QtWidgets.QDialog()
-    ui = simple_text_ui()
-    ui.setupUi(dialog)
-    ui.buttonBox.accepted.connect(lambda: finish())
-    dialog.exec_()
+        msg = QtWidgets.QMessageBox()
+        msg.setText('Saved as: ' + os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'))
+        msg.exec_()
 
-    # pickle.dump(self.fig, open(ApplicationSettings.FIG_PATH+text, 'wb'))
+
 
 def show_pickled_fig(self):
     path,ext = QtWidgets.QFileDialog.getOpenFileName(self,'Pickeled Figure',self.settings.value('FIG_PATH'))
@@ -118,61 +102,86 @@ def show_pickled_fig(self):
         sns.set(context=self.context, style=self.style, palette=self.c_palette,
                 font=self.font, font_scale=self.fs, color_codes=True)
         self.fig = figx
-        print(self.fig.axes)
         self.ax_1 = self.fig.axes[0]
+        for i in self.ax_1.lines:
+            ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+        for i in self.ax_1.texts:
+            ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
         self.ax = self.ax_1
         for ax in self.fig.axes:
-            print(ax)
-            if ax is not self.ax:
-                # self.ax.get_shared_y_axes().join(self.ax, ax)
+            if ax is not self.ax_1:
                 self.ax_2 = ax
+                for i in self.ax_2.lines:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                for i in self.ax_2.texts:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            elif ax is not self.ax_1 and ax is not self.ax_2:
+                self.ax_3 = ax
+                for i in self.ax_3.lines:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                for i in self.ax_3.texts:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
+                self.ax_4 = ax
+                for i in self.ax_4.lines:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                for i in self.ax_4.texts:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
         self.canvas = FigureCanvas(self.fig)
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)
         self.ui.verticalLayout.addWidget(self.canvas)
-
         self.canvas.installEventFilter(self)
+        self.dragh = DragHandler(self, figure=self.fig)
         self.canvas.draw()
 
-def Project_view_fun(self):
-    self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_ProjectView)
-    self.restoreDockWidget(self.dw_ProjectView)
-    self.dw_ProjectView.show()
+# def Project_view_fun(self):
+#     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_ProjectView)
+#     self.restoreDockWidget(self.dw_ProjectView)
+#     self.dw_ProjectView.show()
+#
+#
+# def DataBrowser_view_fun(self):
+#     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_Data_Broswer)
+#     self.restoreDockWidget(self.dw_Data_Broswer)
+#     self.dw_Data_Broswer.show()
 
-def DataBrowser_view_fun(self):
-    self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_Data_Broswer)
-    self.restoreDockWidget(self.dw_Data_Broswer)
-    self.dw_Data_Broswer.show()
 
 def XPS_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_XPS)
     self.restoreDockWidget(self.dw_XPS)
     self.dw_XPS.show()
 
+
 def FTIR_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_FTIR)
     self.restoreDockWidget(self.dw_FTIR)
     self.dw_FTIR.show()
+
 
 def QCM_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_QCM)
     self.restoreDockWidget(self.dw_QCM)
     self.dw_QCM.show()
 
+
 def XRD_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_XRD)
     self.restoreDockWidget(self.dw_XRD)
     self.dw_XRD.show()
+
 
 def SE_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_SE)
     self.restoreDockWidget(self.dw_SE)
     self.dw_SE.show()
 
+
 def CF_view_fun(self):
     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_CF)
     self.restoreDockWidget(self.dw_CF)
     self.dw_CF.show()
+
 
 def Console_view_fun(self):
     pass
@@ -196,10 +205,12 @@ def Console_view_fun(self):
     # self.restoreDockWidget(self.dw_Console)
     # self.dw_Console.show()
 
+
 def Calc_view_fun(self):
     self.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.dw_calc)
     self.restoreDockWidget(self.dw_calc)
     self.dw_calc.show()
+
 
 def toggle_legend(self):
     if self.ax.get_legend() is None:
@@ -212,6 +223,7 @@ def toggle_legend(self):
         if self.ax_2 is not None:
             self.ax_2.get_legend().remove()
         self.canvas.draw()
+
 
 def Save_All_Plotted(self):
     # names = self.settings.value('Data_Names')
@@ -241,70 +253,52 @@ def Save_All_Plotted(self):
     ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
     dialog.exec_()
 
+
 def remove_line(self):
     def finish():
         for j in ui.treeWidget.selectedIndexes():
-            print(j)
-            print(j.data())
             line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
-
-            try:
-                if isinstance(line, list):
-                    try:
-                        self.ax.lines.remove(line[0])
-                    except ValueError:
-                        pass
-                    except AttributeError:
-                        pass
-                    try:
-                        self.ax_1.lines.remove(line[0])
-                    except ValueError:
-                        pass
-                    except AttributeError:
-                        pass
-                    try:
-                        self.ax_2.lines.remove(line[0])
-                    except ValueError:
-                        pass
-                    except AttributeError:
-                        pass
-                    try:
-                        self.ax_3.lines.remove(line[0])
-                    except ValueError:
-                        pass
-                    except AttributeError:
-                        pass
-                    try:
-                        self.ax_3.lines.remove(line[0])
-                    except ValueError:
-                        pass
-                    except AttributeError:
-                        pass
-                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
-                    del line
-                    self.canvas.draw()
-                elif isinstance(line,matplotlib.lines.Line2D):
+            if isinstance(line, list):
+                try:
+                    self.ax.lines.remove(line[0])
+                except ValueError:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setText('Removing Line From Wrong Axes!')
+                    msg.exec_()
+                except AttributeError:
+                    pass
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+                self.canvas.draw()
+            elif isinstance(line,matplotlib.lines.Line2D):
+                try:
                     self.ax.lines.remove(line)
                     ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                     del line
-                    self.canvas.draw()
-                elif isinstance(line,matplotlib.offsetbox.DraggableAnnotation):
-                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
-                    del line
-                    self.canvas.draw()
-                elif isinstance(line,matplotlib.collections.PolyCollection):
-                    line.remove()
-                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
-                    del line
-                else:
-                    print(line)
-                    print(type(line))
-                    line_0 = line.lines[0]
-                    self.ax.lines.remove(line_0)
-                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
-                    del line_0
-            except IndexError:
-                print("Index Error")
+                except ValueError:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setText('Removing Line From Wrong Axes!')
+                    msg.exec_()
+            elif isinstance(line, matplotlib.offsetbox.DraggableAnnotation):
+                msg = QtWidgets.QMessageBox()
+                msg.text("Can't Remove Annotation :(")
+                msg.exec_()
+            elif isinstance(line, matplotlib.collections.PolyCollection):
+                line.remove()
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            elif isinstance(line, matplotlib.text.Text):
+                line.remove()
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            else:
+                print(line)
+                print(type(line))
+                line_0 = line.lines[0]
+                self.ax.lines.remove(line_0)
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line_0
+
     all_lines = ApplicationSettings.ALL_DATA_PLOTTED
     dialog = QtWidgets.QDialog()
     ui = simple_tw()
@@ -318,32 +312,20 @@ def remove_line(self):
     dialog.exec_()
     self.canvas.draw()
 
+
 def send_to_cf(self):
-    # def finish():
-    #     for j in ui.treeWidget.selectedIndexes():
-    #         line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
-    # all_lines = ApplicationSettings.ALL_DATA_PLOTTED
-    # dialog = QtWidgets.QDialog()
-    # ui = simple_tw()
-    # ui.setupUi(dialog)
-    # ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
-    # Key_List = []
-    # for i in all_lines.keys():
-    #     Key_List.append(QtWidgets.QTreeWidgetItem([i]))
-    # ui.treeWidget.addTopLevelItems(Key_List)
-    # ui.buttonBox.accepted.connect(lambda:finish())
-    # dialog.exec_()
-    # self.canvas.draw()
     fit_list = self.dw_SE.fitted_slopes
     self.dw_CF.ui.tableWidget.setRowCount(len(fit_list))
     for row in range(len(fit_list)):
         self.dw_CF.ui.tableWidget.setItem(row, 1, QtWidgets.QTableWidgetItem(str(fit_list[row])))
+
 
 def random_c_plot(self):
     Z = np.random.rand(6, 10)
     c = self.ax.pcolor(Z)
     self.canvas.draw()
     self.fig.colorbar(c, ax=self.ax)
+
 
 def app_settings_fun(self):
     def function():
@@ -398,6 +380,7 @@ def app_settings_fun(self):
     ui.changexrdpath_pb.clicked.connect(lambda: change_path('XRD_PATH'))
     d.exec_()
 
+
 def send_to_custom_data(self):
     pass
     def temp():
@@ -415,6 +398,7 @@ def send_to_custom_data(self):
     ui.treeWidget.addTopLevelItems(Key_List)
     ui.buttonBox.accepted.connect(lambda: temp())
     dialog.exec_()
+
 
 def new_project(self):
     def new_pro(project_name):
@@ -435,9 +419,11 @@ def new_project(self):
     ui.buttonBox.accepted.connect(lambda: new_pro(dialog_path))
     d.exec_()
 
+
 def open_project(self):
     dialog = QtWidgets.QFileDialog.getExistingDirectory()
     self.settings.setValue('PROJECT_PATH', dialog)
+
 
 def load_data(self):
     temp = self.settings.value()
@@ -446,6 +432,7 @@ def load_data(self):
         data = temp[i][0]._xy.T
         self.ax.plot(data[0],data[1])
     self.canvas.draw()
+
 
 def import_file(self):
     filepath = QtWidgets.QFileDialog.getOpenFileName()[0]
@@ -456,35 +443,37 @@ def import_file(self):
     except FileNotFoundError:
         pass
 
+
 def import_directiory_function(self):
     src_directory = QtWidgets.QFileDialog.getExistingDirectory()
     dirname = src_directory.split('/')[-1]
     print(os.path.join(self.settings.value('DATA_PATH'),dirname))
     copytree(src_directory,os.path.join(self.settings.value('DATA_PATH'),dirname))
 
+
 def plot_annotation(self):
     def finish():
-        if ui.frame_cb.currentText() == 'No Frame':
-            ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = \
-                self.ax.annotate(ui.text_le.text(), xy=(.5, .5),xycoords='figure fraction',horizontalalignment='left',
-                                 verticalalignment='top',fontsize=ui.size_sb.value()).draggable()
+        if ui.frame.currentText()=='none':
+            bbox=None
         else:
-            frame = str(ui.frame_cb.currentText())
-            # spot = [np.average(ApplicationSettings.C_X_LIM),np.average(ApplicationSettings.C_Y_LIM)]
-            # if type(spot[0]) is float and type(spot[1]) is float:
-            #     ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = self.ax.annotate(ui.text_le.text(),xy=(spot[0],spot[1])).draggable()
-            # else:
-            ApplicationSettings.ALL_DATA_PLOTTED[ui.text_le.text()] = \
-                self.ax.annotate(ui.text_le.text(),xy=(.5, .5), xycoords='figure fraction',horizontalalignment='left',
-                                 verticalalignment='top',fontsize=ui.size_sb.value(),
-                                 bbox=dict(boxstyle=frame+",pad=0.3", fc=ui.framebgcolor_cb.currentText(),
-                                           ec=ui.framecolor_cb.currentText(), lw=ui.framewidth_sb.value())).draggable()
+            bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k"))
+        ApplicationSettings.ALL_DATA_PLOTTED[ui.text.text()] = \
+            self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), ui.text.text(), color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
+                         fontstyle=ui.fontstyle.currentText(), rotation=ui.rotation.value(), bbox=bbox,
+                         alpha=ui.alpha.value())
         self.canvas.draw()
     d = QtWidgets.QDialog()
     ui = annotation_ui()
     ui.setupUi(d)
+    ui.bgcolor.addItems(self.color_list)
+    ui.bgcolor.setCurrentText('white')
+    ui.color.addItems(self.color_list)
+    ui.color.setCurrentText('black')
+    ui.framecolor.addItems(self.color_list)
+    ui.framecolor.setCurrentText('white')
     ui.buttonBox.accepted.connect(lambda: finish())
     d.exec_()
+
 
 def bar_graph(self):
     def plot_bar():
@@ -537,6 +526,7 @@ def bar_graph(self):
     ui.buttonBox.accepted.connect(lambda: plot_bar())
     d.exec_()
 
+
 def baseline_als(y, lam, p, niter=10):
     L = len(y)
     D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
@@ -548,6 +538,7 @@ def baseline_als(y, lam, p, niter=10):
         w = p * (y > z) + (1-p) * (y < z)
     print(z)
     return z
+
 
 def fill_cols_fun(self):
     self.ui.tw_x.clear()
@@ -581,6 +572,7 @@ def fill_cols_fun(self):
         self.ui.tw_x.addTopLevelItems(column_list_x)
         self.ui.tw_y.addTopLevelItems(column_list_y)
 
+
 def change_axis(self,axis):
     if axis =='axis1':
         self.ax = self.ax_1
@@ -594,6 +586,7 @@ def change_axis(self,axis):
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
     except AttributeError:
         print('No Axis made yet')
+
 
 def axis_setup_fun(self,ax_num):
     self.ax.clear()
@@ -629,6 +622,7 @@ def axis_setup_fun(self,ax_num):
     self.ax.callbacks.connect('xlim_changed', self.lims_change)
     self.fig.tight_layout()
     self.canvas.draw()
+
 
 def axis_setup_function(self,ax_num):
     def axis_fun():
@@ -678,13 +672,14 @@ def axis_setup_function(self,ax_num):
     ui.buttonBox.accepted.connect(lambda: axis_fun())
     dialog.exec_()
 
+
 def add_line_to_graph(self):
     def finish():
         if ui.comboBox.currentText() == 'Verticle Line':
-            self.ax.axvline(x=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
+            ApplicationSettings.ALL_DATA_PLOTTED['vline'+str(ui.line_pos_sb.value())] = self.ax.axvline(x=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
                             color=ui.color_cb.currentText())
         elif ui.comboBox.currentText() == 'Horizontal Line':
-            self.ax.axhline(y=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
+            ApplicationSettings.ALL_DATA_PLOTTED['hline'+str(ui.line_pos_sb.value())] = self.ax.axhline(y=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
                             color=ui.color_cb.currentText())
         self.canvas.draw()
     d = QtWidgets.QDialog()
@@ -692,3 +687,215 @@ def add_line_to_graph(self):
     ui.setupUi(d)
     ui.buttonBox.accepted.connect(lambda: finish())
     d.exec_()
+
+
+def keycheck(dict, key):
+    if key in dict.keys():
+        return True
+    else:
+        return False
+
+
+def addmpl(self,fig):
+    self.main_window.canvas = FigureCanvas(fig)
+    self.ui.verticalLayout.addWidget(self.main_window.canvas)
+    self.main_window.canvas.draw()
+    self.toolbar = NavigationToolbar(self.main_window.canvas,
+                                     self, coordinates=True)
+    self.ui.verticalLayout.addWidget(self.main_window.toolbar)
+
+
+def rmmpl(self):
+    self.ui.verticalLayout.removeWidget(self.main_window.canvas)
+    self.main_window.canvas.close()
+    self.ui.verticalLayout.removeWidget(self.main_window.toolbar)
+
+
+def qcm_hc_mass(data, start_time=float, end_time=float, purge_time_a=float, purge_time_b=float, num_cycles=int):
+    time = data[0]
+    mass = data[2]
+    exposure = []
+    exposure_idx = []
+    mass_hc_a = []
+    mass_hc_b = []
+    exp_length_idx = []
+    # time_in_idx = find_nearest(time, end_time) - find_nearest(time, start_time)
+    mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
+    time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
+    print(time_process)
+    print(mass_process)
+    for i in range(num_cycles):
+        if i % 2 == 0:
+            exposure.append(start_time + (purge_time_a * i))
+            exposure_idx.append(find_nearest(time_process, start_time + (purge_time_a * i)))
+        elif i % 2 == 1:
+            exposure.append(start_time + (purge_time_b * i))
+            exposure_idx.append(find_nearest(time_process, start_time + (purge_time_b * i)))
+    for k in range(len(exposure_idx) - 1):
+        exp_length_idx.append(exposure_idx[k + 1] - exposure_idx[k])
+    for j in range(num_cycles - 1):
+        if j % 2 == 0:
+            mass_hc_a.append(
+                mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
+                    exposure_idx[j]])
+        elif j % 2 == 1:
+            mass_hc_b.append(
+                mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
+                    exposure_idx[j]])
+    fc = np.zeros(len(mass_hc_b))
+    for i in range(len(mass_hc_b)):
+        fc[i] = mass_hc_a[i]+mass_hc_b[i]
+    return mass_hc_a,mass_hc_b, fc
+
+
+def plot_QCM(self, time,pressure,mass,a_exp=int,b_exp=int,ttp=float,threshold=float,from_time=int,to_time=int,
+             wait_time=float, density = float):
+    #  Few more assignments Exposures is the time of each Exposure, the Index is just what index it
+    #  shows up as. M_Diff and P_Diff are the mass and pressure difference at different exposures
+    #  Purge Time Index is the number of data points between one exposure and the next, does not
+    #  differentiate for the exposure time.
+    Exposures = []
+    A_Exposures = a_exp
+    Exposure_index = []
+    QCM_M_Diff = []
+    QCM_P_Diff = []
+    MC_A = []
+    MC_B = []
+    MC_P = []
+    MC_N = []
+    MC_Cycle = []
+
+    t = 0
+    #  Time through purge is the time to "wait" after there is an exposure to not overcount exposures
+    #  Time is just a temp variable that gives the time of the last exposure
+
+    # This for loop is just for appending the exposures to Exposures and Exposure_index nee
+    for num in range(len(pressure) - 10):
+        QCM_M_Diff.append(mass[num + 3] - mass[num])
+        QCM_P_Diff.append(pressure[num + 3] - pressure[num])
+        if QCM_P_Diff[num] >= threshold and time[num] - t > wait_time and time[num] > from_time and time[num] < to_time:
+            Exposures.append(time[num])
+            Exposure_index.append(num)
+            t = time[num]
+
+            # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
+            # above line will add a line for each exposure if someone is uncertain about if its right
+
+    # This for loop is knowing how long each purge time is (or time from one exposure to next)
+    Purge_Time_Index = np.zeros(len(Exposure_index))
+
+    for num in range(len(Exposure_index) - 1):
+        if (Exposure_index[num + 1] - Exposure_index[num]) < 2000:
+            Purge_Time_Index[num] = Exposure_index[num + 1] - Exposure_index[num]
+
+
+    Purge_Time_Index[-1] = Purge_Time_Index[0]
+
+    # print(Purge_Time_Index)
+
+    #  for loop finds the mass at the: Exposure time + Purge_time*(time_through_purge) which takes the time
+    #  of the last exposure and then adds something like 0.8*Time of purge... Insert is to do the last one
+    #  if else says if Mass_Middle was bigger or smaller than the last one and sorts it into one of two lists
+    #  Last if else sorts based on if num is odd or even... For A-B experiemtns.. Nothing for A BBB or some
+    #  Thing like that
+    mass_middle = np.zeros(len(Exposure_index)+2)
+    mass_middle[0] = mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)]
+    # mass_middle.insert(0, mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)])
+
+    for num in range(len(Exposure_index)):
+        # mass_middle.append(mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))])
+        mass_middle[num+1] = mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))]
+        # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
+        # above line will add a line for each time if someone is uncertain about if its right
+
+    # mass_middle.append(mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)])
+    mass_middle[-1] = mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)]
+
+    # print('There was ' + str(len(Exposures)) + '  Precursor Exposures')
+    self.main_window.dw_QCM.ui.num_doses.setText(str(len(Exposures)))
+
+    for num in range(len(Exposure_index)):
+        if mass_middle[num + 1] - mass_middle[num] > 0:
+            MC_P.append(mass_middle[num + 1] - mass_middle[num])
+        elif mass_middle[num + 1] - mass_middle[num] < 0:
+            MC_N.append(mass_middle[num + 1] - mass_middle[num])
+        if num % (b_exp + A_Exposures) == 0:
+            MC_Cycle.append(mass_middle[num + b_exp + A_Exposures] - mass_middle[num])
+        if num == a_exp - 1:
+            MC_A.append(mass_middle[num + 1] - mass_middle[num + 1 - A_Exposures])
+        elif num == b_exp + a_exp - 1:
+            MC_B.append(mass_middle[num + 1] - mass_middle[num + 1 - b_exp])
+        elif num == a_exp + b_exp:
+            a_exp = a_exp + A_Exposures + b_exp
+            if num == a_exp - 1:
+                MC_A.append(mass_middle[num + 1] - mass_middle[
+                    num + 1 - A_Exposures])
+
+
+            # elif num == B_Doses + A_Doses:
+            #     self.QCM_Dict['MC_B'].QCM_B.append(Mass_Middle[num] - Mass_Middle[num + 1 - int(B_Exposures.text())])
+    half_cycle_density_A = np.zeros(len(MC_A))
+    half_cycle_density_B = np.zeros(len(MC_B))
+    full_cycle_density = np.zeros(len(MC_Cycle))
+    for i in range(len(MC_A)):
+        half_cycle_density_A[i] = MC_A[i] / (10.0 * density)
+    for i in range(len(MC_B)):
+        half_cycle_density_B[i] = MC_B[i] / (10.0 * density)
+    for i in range(len(MC_Cycle)):
+        full_cycle_density[i] = MC_Cycle[i] / (10 * density)
+
+    return MC_A, MC_B, MC_Cycle, half_cycle_density_A, half_cycle_density_B, full_cycle_density
+
+def find_nearest(array: object, value: object) -> object:
+    array = np.asarray(array)
+    idx = (np.abs(array - value)).argmin()
+    return idx
+
+
+def baseline_als(y, lam, p, niter=10):
+    # where y is the data needed to be corrected, lam is lambda and is a smoothing
+    # parameter and p is the asymmetry of the baseline, niter is the num of iterations
+    L = len(y)
+    D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
+    w = np.ones(L)
+    for i in range(niter):
+        W = sparse.spdiags(w, 0, L, L)
+        Z = W + lam * D.dot(D.transpose())
+        z = spsolve(Z, w*y)
+        w = p * (y > z) + (1-p) * (y < z)
+
+class DragHandler(object):
+    """ A simple class to handle Drag n Drop.
+
+    This is a simple example, which works for Text objects only
+    """
+    def __init__(self, main_window, figure=None):
+        """ Create a new drag handler and connect it to the figure's event system.
+        If the figure handler is not given, the current figure is used instead
+        """
+        if figure is None : figure = matplotlib.pyplot.gcf()
+        # simple attibute to store the dragged text object
+        self.dragged = None
+        self.main_window = main_window
+        # Connect events and callbacks
+        figure.canvas.mpl_connect("pick_event", self.on_pick_event)
+        figure.canvas.mpl_connect("button_release_event", self.on_release_event)
+        # figure.canvas.mpl_connect("button_release_event", self.on_release)
+
+    def on_pick_event(self, event):
+        " Store which text object was picked and were the pick event occurs."
+        if isinstance(event.artist, Text):
+            self.dragged = event.artist
+            self.pick_pos = (event.mouseevent.xdata, event.mouseevent.ydata)
+        return True
+
+    def on_release_event(self, event):
+        " Update text position and redraw"
+        if self.dragged is not None :
+            old_pos = self.dragged.get_position()
+            new_pos = (old_pos[0] + event.xdata - self.pick_pos[0],
+                       old_pos[1] + event.ydata - self.pick_pos[1])
+            self.dragged.set_position(new_pos)
+            self.dragged = None
+            self.main_window.canvas.draw()
+        return True

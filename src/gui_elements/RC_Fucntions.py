@@ -5,6 +5,7 @@ from src.gui_elements.settings import ApplicationSettings
 from src.Ui_Files.Dialogs.Plot_Dialog_General import Ui_Dialog as plot_dialog
 from src.Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_dialog
 import os
+import glob
 import pickle
 from src.Ui_Files.Dialogs.delete_dialog import Ui_Dialog as delete_dialog
 from src.Ui_Files.Dialogs.simple_tablewidget import Ui_Dialog as tableWidget_dialog
@@ -68,48 +69,48 @@ def get_path_clicked(self):
     filepath = self.model.filePath(self.tree_view.currentIndex())
     print(filepath)
 
-def plot_directory(self):
-    pass
-    path = self.model.filePath(self.tree_view.currentIndex())
-
-    plot_dia = QtWidgets.QDialog()
-    plot_dia_ui = Plot_Directory_Functions_Ui()
-    plot_dia_ui.setupUi(plot_dia)
-
-    if os.path.isdir(path):
-        filename, extension = os.path.splitext(path)
-        l = []
-        list_of_csv = sorted(glob.glob(path + '/*CSV'))
-
-        for i in list_of_csv:
-            text = i.split('/')[-1]
-            #  Needed to be a list for some reason, above will only work on macs
-            l.append(QtWidgets.QTreeWidgetItem([text]))
-
-
-        plot_dia_ui.treewidget_list.addTopLevelItems(l)
-
-        # add everything to the tree
-        plot_dia.exec_()
-        from_te = int(plot_dia_ui.lineEdit_from.text())
-        to_te = int(plot_dia_ui.lineEdit_to.text())
-        skip_every = int(plot_dia_ui.lineEdit.text())
-
-        function = plot_dia_ui.treewidget_functions.indexOfTopLevelItem(plot_dia_ui.treewidget_functions.currentItem())
-
-        if function == 0:
-            plot_all_in_directory(self,list_of_csv,from_te,to_te, skip_every)
-        elif function == 1:
-            subtraction_from_survey(self, list_of_csv,from_te,to_te, skip_every)
-        elif function == 2:
-            difference_from_survey(self,list_of_csv,from_te,to_te, skip_every)
-
-        # x = plot_dia_ui.treewidget_list.indexOfTopLevelItem(plot_dia_ui.treewidget_list.currentItem())
-
-        # data_list = [np.genfromtxt(csv) for csv in list_of_csv]
-
-    else:
-        print("Needs to be a directory")
+# def plot_directory(self):
+#     pass
+#     path = self.model.filePath(self.tree_view.currentIndex())
+#
+#     plot_dia = QtWidgets.QDialog()
+#     plot_dia_ui = Plot_Directory_Functions_Ui()
+#     plot_dia_ui.setupUi(plot_dia)
+#
+#     if os.path.isdir(path):
+#         filename, extension = os.path.splitext(path)
+#         l = []
+#         list_of_csv = sorted(glob.glob(path + '/*CSV'))
+#
+#         for i in list_of_csv:
+#             text = i.split('/')[-1]
+#             #  Needed to be a list for some reason, above will only work on macs
+#             l.append(QtWidgets.QTreeWidgetItem([text]))
+#
+#
+#         plot_dia_ui.treewidget_list.addTopLevelItems(l)
+#
+#         # add everything to the tree
+#         plot_dia.exec_()
+#         from_te = int(plot_dia_ui.lineEdit_from.text())
+#         to_te = int(plot_dia_ui.lineEdit_to.text())
+#         skip_every = int(plot_dia_ui.lineEdit.text())
+#
+#         function = plot_dia_ui.treewidget_functions.indexOfTopLevelItem(plot_dia_ui.treewidget_functions.currentItem())
+#
+#         if function == 0:
+#             plot_all_in_directory(self,list_of_csv,from_te,to_te, skip_every)
+#         elif function == 1:
+#             subtraction_from_survey(self, list_of_csv,from_te,to_te, skip_every)
+#         elif function == 2:
+#             difference_from_survey(self,list_of_csv,from_te,to_te, skip_every)
+#
+#         # x = plot_dia_ui.treewidget_list.indexOfTopLevelItem(plot_dia_ui.treewidget_list.currentItem())
+#
+#         # data_list = [np.genfromtxt(csv) for csv in list_of_csv]
+#
+#     else:
+#         print("Needs to be a directory")
 
 def plot_action_clicked(self):
     path = self.model.filePath(self.tree_view.currentIndex())
@@ -172,19 +173,19 @@ def table_dialog(self):
     dialog.exec_()
 
 def delete_action_clicked(self):
-    def finish():
+    path = self.model.filePath(self.tree_view.currentIndex())
+    msg = QtWidgets.QMessageBox()
+    msg.setText('Delete? This cannot be undone.')
+    msg.setDetailedText(path)
+    msg.setIcon(QtWidgets.QMessageBox.Warning)
+    msg.setStandardButtons(QtWidgets.QMessageBox.Ok | QtWidgets.QMessageBox.Cancel)
+    returnValue = msg.exec()
+    if returnValue == QtWidgets.QMessageBox.Ok:
         if os.path.isfile(path):
             os.remove(path)
-            print('was this done')
         elif os.path.isdir(path):
             rmtree(path)
-    path = self.model.filePath(self.tree_view.currentIndex())
-    d = QtWidgets.QDialog()
-    ui = delete_dialog()
-    ui.setupUi(d)
-    ui.label_2.setText(path)
-    ui.buttonBox.accepted.connect(lambda: finish())
-    d.exec_()
+
 
 def import_directory_clicked(self):
     dirpath = self.model.filePath(self.tree_view.currentIndex())
@@ -210,25 +211,16 @@ def new_directory_clicked(self):
         print('Path Exists')
         print(newdirpath)
 
-# def addmpl(self,fig):
-#     self.main_window.canvas = FigureCanvas(fig)
-#     self.ui.verticalLayout.addWidget(self.main_window.canvas)
-#     self.main_window.canvas.draw()
-#     self.toolbar = NavigationToolbar(self.main_window.canvas,
-#                                      self, coordinates=True)
-#     self.ui.verticalLayout.addWidget(self.main_window.toolbar)
-# def rmmpl(self):
-#     self.ui.verticalLayout.removeWidget(self.main_window.canvas)
-#     self.main_window.canvas.close()
-#     self.ui.verticalLayout.removeWidget(self.main_window.toolbar)
 
 def change_path(self):
     path = QtWidgets.QFileDialog.getExistingDirectory()
+    print(self)
     if type(path) is str:
         self.tree_view.setRootIndex(self.model.index(path))
         self.main_window.settings.setValue('PROJECT_PATH',path)
     else:
         print(path)
+
 
 def show_pickled_fig(self):
     path = self.model.filePath(self.tree_view.currentIndex())

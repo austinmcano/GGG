@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'line_dialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -29,6 +32,7 @@ class Ui_Dialog(object):
 
         self.line_pos_sb = QDoubleSpinBox(Dialog)
         self.line_pos_sb.setObjectName(u"line_pos_sb")
+        self.line_pos_sb.setMaximum(99999999.000000000000000)
         self.line_pos_sb.setValue(75.000000000000000)
 
         self.gridLayout.addWidget(self.line_pos_sb, 1, 1, 1, 1)

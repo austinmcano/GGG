@@ -46,174 +46,174 @@ from scipy.sparse.linalg import spsolve
 #     self.ax.plot(new_data[0], np.poly1d(fit)(new_data[0]))
 #     self.canvas.draw()
 
-def keycheck(dict, key):
-    if key in dict.keys():
-        return True
-    else:
-        return False
-
-def addmpl(self,fig):
-    self.main_window.canvas = FigureCanvas(fig)
-    self.ui.verticalLayout.addWidget(self.main_window.canvas)
-    self.main_window.canvas.draw()
-    self.toolbar = NavigationToolbar(self.main_window.canvas,
-                                     self, coordinates=True)
-    self.ui.verticalLayout.addWidget(self.main_window.toolbar)
-
-def rmmpl(self):
-    self.ui.verticalLayout.removeWidget(self.main_window.canvas)
-    self.main_window.canvas.close()
-    self.ui.verticalLayout.removeWidget(self.main_window.toolbar)
-
-def qcm_hc_mass(data, start_time=float, end_time=float, purge_time_a=float, purge_time_b=float, num_cycles=int):
-    time = data[0]
-    mass = data[2]
-    exposure = []
-    exposure_idx = []
-    mass_hc_a = []
-    mass_hc_b = []
-    exp_length_idx = []
-    # time_in_idx = find_nearest(time, end_time) - find_nearest(time, start_time)
-    mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
-    time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
-    print(time_process)
-    print(mass_process)
-    for i in range(num_cycles):
-        if i % 2 == 0:
-            exposure.append(start_time + (purge_time_a * i))
-            exposure_idx.append(find_nearest(time_process, start_time + (purge_time_a * i)))
-        elif i % 2 == 1:
-            exposure.append(start_time + (purge_time_b * i))
-            exposure_idx.append(find_nearest(time_process, start_time + (purge_time_b * i)))
-    for k in range(len(exposure_idx) - 1):
-        exp_length_idx.append(exposure_idx[k + 1] - exposure_idx[k])
-    for j in range(num_cycles - 1):
-        if j % 2 == 0:
-            mass_hc_a.append(
-                mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
-                    exposure_idx[j]])
-        elif j % 2 == 1:
-            mass_hc_b.append(
-                mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
-                    exposure_idx[j]])
-    fc = np.zeros(len(mass_hc_b))
-    for i in range(len(mass_hc_b)):
-        fc[i] = mass_hc_a[i]+mass_hc_b[i]
-    return mass_hc_a,mass_hc_b, fc
-
-
-def plot_QCM(self, time,pressure,mass,a_exp=int,b_exp=int,ttp=float,threshold=float,from_time=int,to_time=int,
-             wait_time=float, density = float):
-    #  Few more assignments Exposures is the time of each Exposure, the Index is just what index it
-    #  shows up as. M_Diff and P_Diff are the mass and pressure difference at different exposures
-    #  Purge Time Index is the number of data points between one exposure and the next, does not
-    #  differentiate for the exposure time.
-    Exposures = []
-    A_Exposures = a_exp
-    Exposure_index = []
-    QCM_M_Diff = []
-    QCM_P_Diff = []
-    MC_A = []
-    MC_B = []
-    MC_P = []
-    MC_N = []
-    MC_Cycle = []
-
-    t = 0
-    #  Time through purge is the time to "wait" after there is an exposure to not overcount exposures
-    #  Time is just a temp variable that gives the time of the last exposure
-
-    # This for loop is just for appending the exposures to Exposures and Exposure_index nee
-    for num in range(len(pressure) - 10):
-        QCM_M_Diff.append(mass[num + 3] - mass[num])
-        QCM_P_Diff.append(pressure[num + 3] - pressure[num])
-        if QCM_P_Diff[num] >= threshold and time[num] - t > wait_time and time[num] > from_time and time[num] < to_time:
-            Exposures.append(time[num])
-            Exposure_index.append(num)
-            t = time[num]
-
-            # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
-            # above line will add a line for each exposure if someone is uncertain about if its right
-
-    # This for loop is knowing how long each purge time is (or time from one exposure to next)
-    Purge_Time_Index = np.zeros(len(Exposure_index))
-
-    for num in range(len(Exposure_index) - 1):
-        if (Exposure_index[num + 1] - Exposure_index[num]) < 2000:
-            Purge_Time_Index[num] = Exposure_index[num + 1] - Exposure_index[num]
-
-
-    Purge_Time_Index[-1] = Purge_Time_Index[0]
-
-    # print(Purge_Time_Index)
-
-    #  for loop finds the mass at the: Exposure time + Purge_time*(time_through_purge) which takes the time
-    #  of the last exposure and then adds something like 0.8*Time of purge... Insert is to do the last one
-    #  if else says if Mass_Middle was bigger or smaller than the last one and sorts it into one of two lists
-    #  Last if else sorts based on if num is odd or even... For A-B experiemtns.. Nothing for A BBB or some
-    #  Thing like that
-    mass_middle = np.zeros(len(Exposure_index)+2)
-    mass_middle[0] = mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)]
-    # mass_middle.insert(0, mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)])
-
-    for num in range(len(Exposure_index)):
-        # mass_middle.append(mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))])
-        mass_middle[num+1] = mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))]
-        # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
-        # above line will add a line for each time if someone is uncertain about if its right
-
-    # mass_middle.append(mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)])
-    mass_middle[-1] = mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)]
-
-    # print('There was ' + str(len(Exposures)) + '  Precursor Exposures')
-    self.main_window.dw_QCM.ui.num_doses.setText(str(len(Exposures)))
-
-    for num in range(len(Exposure_index)):
-        if mass_middle[num + 1] - mass_middle[num] > 0:
-            MC_P.append(mass_middle[num + 1] - mass_middle[num])
-        elif mass_middle[num + 1] - mass_middle[num] < 0:
-            MC_N.append(mass_middle[num + 1] - mass_middle[num])
-        if num % (b_exp + A_Exposures) == 0:
-            MC_Cycle.append(mass_middle[num + b_exp + A_Exposures] - mass_middle[num])
-        if num == a_exp - 1:
-            MC_A.append(mass_middle[num + 1] - mass_middle[num + 1 - A_Exposures])
-        elif num == b_exp + a_exp - 1:
-            MC_B.append(mass_middle[num + 1] - mass_middle[num + 1 - b_exp])
-        elif num == a_exp + b_exp:
-            a_exp = a_exp + A_Exposures + b_exp
-            if num == a_exp - 1:
-                MC_A.append(mass_middle[num + 1] - mass_middle[
-                    num + 1 - A_Exposures])
-
-
-            # elif num == B_Doses + A_Doses:
-            #     self.QCM_Dict['MC_B'].QCM_B.append(Mass_Middle[num] - Mass_Middle[num + 1 - int(B_Exposures.text())])
-    half_cycle_density_A = np.zeros(len(MC_A))
-    half_cycle_density_B = np.zeros(len(MC_B))
-    full_cycle_density = np.zeros(len(MC_Cycle))
-    for i in range(len(MC_A)):
-        half_cycle_density_A[i] = MC_A[i] / (10.0 * density)
-    for i in range(len(MC_B)):
-        half_cycle_density_B[i] = MC_B[i] / (10.0 * density)
-    for i in range(len(MC_Cycle)):
-        full_cycle_density[i] = MC_Cycle[i] / (10 * density)
-
-    return MC_A, MC_B, MC_Cycle, half_cycle_density_A, half_cycle_density_B, full_cycle_density
-
-def find_nearest(array: object, value: object) -> object:
-    array = np.asarray(array)
-    idx = (np.abs(array - value)).argmin()
-    return idx
-
-
-def baseline_als(y, lam, p, niter=10):
-    # where y is the data needed to be corrected, lam is lambda and is a smoothing
-    # parameter and p is the asymmetry of the baseline, niter is the num of iterations
-    L = len(y)
-    D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
-    w = np.ones(L)
-    for i in range(niter):
-        W = sparse.spdiags(w, 0, L, L)
-        Z = W + lam * D.dot(D.transpose())
-        z = spsolve(Z, w*y)
-        w = p * (y > z) + (1-p) * (y < z)
+# def keycheck(dict, key):
+#     if key in dict.keys():
+#         return True
+#     else:
+#         return False
+#
+# def addmpl(self,fig):
+#     self.main_window.canvas = FigureCanvas(fig)
+#     self.ui.verticalLayout.addWidget(self.main_window.canvas)
+#     self.main_window.canvas.draw()
+#     self.toolbar = NavigationToolbar(self.main_window.canvas,
+#                                      self, coordinates=True)
+#     self.ui.verticalLayout.addWidget(self.main_window.toolbar)
+#
+# def rmmpl(self):
+#     self.ui.verticalLayout.removeWidget(self.main_window.canvas)
+#     self.main_window.canvas.close()
+#     self.ui.verticalLayout.removeWidget(self.main_window.toolbar)
+#
+# def qcm_hc_mass(data, start_time=float, end_time=float, purge_time_a=float, purge_time_b=float, num_cycles=int):
+#     time = data[0]
+#     mass = data[2]
+#     exposure = []
+#     exposure_idx = []
+#     mass_hc_a = []
+#     mass_hc_b = []
+#     exp_length_idx = []
+#     # time_in_idx = find_nearest(time, end_time) - find_nearest(time, start_time)
+#     mass_process = mass[find_nearest(time, start_time): find_nearest(time, end_time)]
+#     time_process = time[find_nearest(time, start_time):find_nearest(time, end_time)]
+#     print(time_process)
+#     print(mass_process)
+#     for i in range(num_cycles):
+#         if i % 2 == 0:
+#             exposure.append(start_time + (purge_time_a * i))
+#             exposure_idx.append(find_nearest(time_process, start_time + (purge_time_a * i)))
+#         elif i % 2 == 1:
+#             exposure.append(start_time + (purge_time_b * i))
+#             exposure_idx.append(find_nearest(time_process, start_time + (purge_time_b * i)))
+#     for k in range(len(exposure_idx) - 1):
+#         exp_length_idx.append(exposure_idx[k + 1] - exposure_idx[k])
+#     for j in range(num_cycles - 1):
+#         if j % 2 == 0:
+#             mass_hc_a.append(
+#                 mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
+#                     exposure_idx[j]])
+#         elif j % 2 == 1:
+#             mass_hc_b.append(
+#                 mass_process[int((exposure_idx[j + 1] - exposure_idx[j]) * .9 + exposure_idx[j])] - mass_process[
+#                     exposure_idx[j]])
+#     fc = np.zeros(len(mass_hc_b))
+#     for i in range(len(mass_hc_b)):
+#         fc[i] = mass_hc_a[i]+mass_hc_b[i]
+#     return mass_hc_a,mass_hc_b, fc
+#
+#
+# def plot_QCM(self, time,pressure,mass,a_exp=int,b_exp=int,ttp=float,threshold=float,from_time=int,to_time=int,
+#              wait_time=float, density = float):
+#     #  Few more assignments Exposures is the time of each Exposure, the Index is just what index it
+#     #  shows up as. M_Diff and P_Diff are the mass and pressure difference at different exposures
+#     #  Purge Time Index is the number of data points between one exposure and the next, does not
+#     #  differentiate for the exposure time.
+#     Exposures = []
+#     A_Exposures = a_exp
+#     Exposure_index = []
+#     QCM_M_Diff = []
+#     QCM_P_Diff = []
+#     MC_A = []
+#     MC_B = []
+#     MC_P = []
+#     MC_N = []
+#     MC_Cycle = []
+#
+#     t = 0
+#     #  Time through purge is the time to "wait" after there is an exposure to not overcount exposures
+#     #  Time is just a temp variable that gives the time of the last exposure
+#
+#     # This for loop is just for appending the exposures to Exposures and Exposure_index nee
+#     for num in range(len(pressure) - 10):
+#         QCM_M_Diff.append(mass[num + 3] - mass[num])
+#         QCM_P_Diff.append(pressure[num + 3] - pressure[num])
+#         if QCM_P_Diff[num] >= threshold and time[num] - t > wait_time and time[num] > from_time and time[num] < to_time:
+#             Exposures.append(time[num])
+#             Exposure_index.append(num)
+#             t = time[num]
+#
+#             # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
+#             # above line will add a line for each exposure if someone is uncertain about if its right
+#
+#     # This for loop is knowing how long each purge time is (or time from one exposure to next)
+#     Purge_Time_Index = np.zeros(len(Exposure_index))
+#
+#     for num in range(len(Exposure_index) - 1):
+#         if (Exposure_index[num + 1] - Exposure_index[num]) < 2000:
+#             Purge_Time_Index[num] = Exposure_index[num + 1] - Exposure_index[num]
+#
+#
+#     Purge_Time_Index[-1] = Purge_Time_Index[0]
+#
+#     # print(Purge_Time_Index)
+#
+#     #  for loop finds the mass at the: Exposure time + Purge_time*(time_through_purge) which takes the time
+#     #  of the last exposure and then adds something like 0.8*Time of purge... Insert is to do the last one
+#     #  if else says if Mass_Middle was bigger or smaller than the last one and sorts it into one of two lists
+#     #  Last if else sorts based on if num is odd or even... For A-B experiemtns.. Nothing for A BBB or some
+#     #  Thing like that
+#     mass_middle = np.zeros(len(Exposure_index)+2)
+#     mass_middle[0] = mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)]
+#     # mass_middle.insert(0, mass[Exposure_index[0] - int(Purge_Time_Index[0] * ttp)])
+#
+#     for num in range(len(Exposure_index)):
+#         # mass_middle.append(mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))])
+#         mass_middle[num+1] = mass[int(Exposure_index[num] + int(Purge_Time_Index[num] * ttp))]
+#         # self.main_window.ax.axvline(time[num], color='gray', lw=1, alpha=0.5)
+#         # above line will add a line for each time if someone is uncertain about if its right
+#
+#     # mass_middle.append(mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)])
+#     mass_middle[-1] = mass[Exposure_index[-1] + int(Purge_Time_Index[0] * ttp)]
+#
+#     # print('There was ' + str(len(Exposures)) + '  Precursor Exposures')
+#     self.main_window.dw_QCM.ui.num_doses.setText(str(len(Exposures)))
+#
+#     for num in range(len(Exposure_index)):
+#         if mass_middle[num + 1] - mass_middle[num] > 0:
+#             MC_P.append(mass_middle[num + 1] - mass_middle[num])
+#         elif mass_middle[num + 1] - mass_middle[num] < 0:
+#             MC_N.append(mass_middle[num + 1] - mass_middle[num])
+#         if num % (b_exp + A_Exposures) == 0:
+#             MC_Cycle.append(mass_middle[num + b_exp + A_Exposures] - mass_middle[num])
+#         if num == a_exp - 1:
+#             MC_A.append(mass_middle[num + 1] - mass_middle[num + 1 - A_Exposures])
+#         elif num == b_exp + a_exp - 1:
+#             MC_B.append(mass_middle[num + 1] - mass_middle[num + 1 - b_exp])
+#         elif num == a_exp + b_exp:
+#             a_exp = a_exp + A_Exposures + b_exp
+#             if num == a_exp - 1:
+#                 MC_A.append(mass_middle[num + 1] - mass_middle[
+#                     num + 1 - A_Exposures])
+#
+#
+#             # elif num == B_Doses + A_Doses:
+#             #     self.QCM_Dict['MC_B'].QCM_B.append(Mass_Middle[num] - Mass_Middle[num + 1 - int(B_Exposures.text())])
+#     half_cycle_density_A = np.zeros(len(MC_A))
+#     half_cycle_density_B = np.zeros(len(MC_B))
+#     full_cycle_density = np.zeros(len(MC_Cycle))
+#     for i in range(len(MC_A)):
+#         half_cycle_density_A[i] = MC_A[i] / (10.0 * density)
+#     for i in range(len(MC_B)):
+#         half_cycle_density_B[i] = MC_B[i] / (10.0 * density)
+#     for i in range(len(MC_Cycle)):
+#         full_cycle_density[i] = MC_Cycle[i] / (10 * density)
+#
+#     return MC_A, MC_B, MC_Cycle, half_cycle_density_A, half_cycle_density_B, full_cycle_density
+#
+# def find_nearest(array: object, value: object) -> object:
+#     array = np.asarray(array)
+#     idx = (np.abs(array - value)).argmin()
+#     return idx
+#
+#
+# def baseline_als(y, lam, p, niter=10):
+#     # where y is the data needed to be corrected, lam is lambda and is a smoothing
+#     # parameter and p is the asymmetry of the baseline, niter is the num of iterations
+#     L = len(y)
+#     D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
+#     w = np.ones(L)
+#     for i in range(niter):
+#         W = sparse.spdiags(w, 0, L, L)
+#         Z = W + lam * D.dot(D.transpose())
+#         z = spsolve(Z, w*y)
+#         w = p * (y > z) + (1-p) * (y < z)

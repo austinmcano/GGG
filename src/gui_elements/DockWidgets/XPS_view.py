@@ -131,7 +131,7 @@ class XPS_view(QtWidgets.QDockWidget):
             temp = self.fit_obj[self.ui.fit_range_cb.currentText()]
             self.main_window.ax.set_xlim(temp.maxi+5,temp.mini-5)
             self.main_window.ax.set_ylim(auto=True)
-            _, _, _, constraints, holds = self.checked_cons()
+            checked, cons, num_checked, constraints, holds = self.checked_cons()
             for i in range(8):
                 for j in range(3):
                     for k in range(3):
