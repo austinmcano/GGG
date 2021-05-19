@@ -80,7 +80,11 @@ def save_fig(self):
     text, ok = QtWidgets.QInputDialog.getText(self, 'Saving Figure', 'Save Figure As: ')
     if ok:
         with open(os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'), 'wb') as fid:
-            pickle.dump(self.fig, fid)
+            try:
+                pickle.dump(self.fig, fid)
+            except TypeError:
+                msg = QtWidgets.QMessageBox()
+                msg.setText("Can't save FigureCanvasQtAgg object")
         msg = QtWidgets.QMessageBox()
         msg.setText('Saved as: ' + os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'))
         msg.exec_()
@@ -93,7 +97,12 @@ def show_pickled_fig(self):
         pass
     else:
         with open(path, 'rb') as fid:
-            figx = pickle.load(fid)
+            try:
+                figx = pickle.load(fid)
+            except EOFError:
+                msg = QtWidgets.QMessageBox()
+                msg.setText('There was a problem saving this so there is nothing to load')
+                msg.exec_()
         self.canvas.draw()
         self.ui.verticalLayout.removeWidget(self.toolbar)
         self.toolbar.close()
@@ -214,14 +223,14 @@ def Calc_view_fun(self):
 
 def toggle_legend(self):
     if self.ax.get_legend() is None:
-        self.ax.legend()
-        leg_1 = self.ax.legend(loc='best')
-        leg_1.set_draggable(True)
-        self.canvas.draw()
+        items = ('medium','xx-small','x-small','small','large','x-large','xx-large')
+        size, ok = QtWidgets.QInputDialog.getItem(self, "Legend",
+                                        "size", items, 0, False)
+        if ok:
+            self.ax.legend(loc='best', fontsize=size)
+            self.canvas.draw()
     else:
         self.ax.get_legend().remove()
-        if self.ax_2 is not None:
-            self.ax_2.get_legend().remove()
         self.canvas.draw()
 
 
@@ -453,24 +462,44 @@ def import_directiory_function(self):
 
 def plot_annotation(self):
     def finish():
-        if ui.frame.currentText()=='none':
-            bbox=None
+        if ui.frame.currentText() == 'none':
+            bbox = None
         else:
             bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k"))
         ApplicationSettings.ALL_DATA_PLOTTED[ui.text.text()] = \
             self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), ui.text.text(), color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
                          fontstyle=ui.fontstyle.currentText(), rotation=ui.rotation.value(), bbox=bbox,
                          alpha=ui.alpha.value())
+        self.anno_alpha = ui.alpha.value()
+        self.anno_text = ui.text.text()
+        self.anno_bgcolor = ui.bgcolor.currentText()
+        self.anno_fecolor = ui.framecolor.currentText()
+        self.anno_rotation = ui.rotation.value()
+        self.anno_color = ui.color.currentText()
+        self.anno_frame_width = ui.framewidth_sb.value()
+        self.anno_frame = ui.frame.currentText()
+        self.anno_style = ui.fontstyle.currentText()
+        self.anno_size = ui.size.value()
+
         self.canvas.draw()
     d = QtWidgets.QDialog()
     ui = annotation_ui()
     ui.setupUi(d)
     ui.bgcolor.addItems(self.color_list)
-    ui.bgcolor.setCurrentText('white')
-    ui.color.addItems(self.color_list)
-    ui.color.setCurrentText('black')
     ui.framecolor.addItems(self.color_list)
-    ui.framecolor.setCurrentText('white')
+    ui.color.addItems(self.color_list)
+
+    ui.size.setValue(self.anno_size)
+    ui.bgcolor.setCurrentText(self.anno_bgcolor)
+    ui.color.setCurrentText(self.anno_color)
+    ui.framecolor.setCurrentText(self.anno_fecolor)
+    ui.frame.setCurrentText(self.anno_frame)
+    ui.alpha.setValue(self.anno_alpha)
+    ui.text.setText(self.anno_text)
+    ui.rotation.setValue(self.anno_rotation)
+    ui.framewidth_sb.setValue(self.anno_frame_width)
+    ui.fontstyle.setCurrentText(self.anno_style)
+
     ui.buttonBox.accepted.connect(lambda: finish())
     d.exec_()
 
@@ -584,6 +613,7 @@ def change_axis(self,axis):
         self.ax = self.ax_4
     try:
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
+        self.dragh = DragHandler(self, figure=self.fig)
     except AttributeError:
         print('No Axis made yet')
 
@@ -891,7 +921,7 @@ class DragHandler(object):
 
     def on_release_event(self, event):
         " Update text position and redraw"
-        if self.dragged is not None :
+        if self.dragged is not None:
             old_pos = self.dragged.get_position()
             new_pos = (old_pos[0] + event.xdata - self.pick_pos[0],
                        old_pos[1] + event.ydata - self.pick_pos[1])

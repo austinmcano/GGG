@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'app_settings.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -39,16 +42,6 @@ class Ui_Dialog(object):
 
         self.gridLayout_3.addWidget(self.textBrowser, 1, 1, 1, 1)
 
-        self.label_2 = QLabel(self.tab_2)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout_3.addWidget(self.label_2, 2, 0, 1, 1)
-
-        self.spinBox = QSpinBox(self.tab_2)
-        self.spinBox.setObjectName(u"spinBox")
-
-        self.gridLayout_3.addWidget(self.spinBox, 2, 1, 1, 1)
-
         self.label = QLabel(self.tab_2)
         self.label.setObjectName(u"label")
 
@@ -58,6 +51,23 @@ class Ui_Dialog(object):
         self.comboBox.setObjectName(u"comboBox")
 
         self.gridLayout_3.addWidget(self.comboBox, 0, 1, 1, 1)
+
+        self.label_2 = QLabel(self.tab_2)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout_3.addWidget(self.label_2, 2, 0, 1, 1)
+
+        self.comboBox_2 = QComboBox(self.tab_2)
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.setObjectName(u"comboBox_2")
+
+        self.gridLayout_3.addWidget(self.comboBox_2, 2, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
         self.tab = QWidget()
@@ -223,7 +233,7 @@ class Ui_Dialog(object):
         self.buttonBox.accepted.connect(Dialog.accept)
         self.buttonBox.rejected.connect(Dialog.reject)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(Dialog)
@@ -234,13 +244,21 @@ class Ui_Dialog(object):
         self.textBrowser.setHtml(QCoreApplication.translate("Dialog", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.SF NS Text'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; font-style:italic; text-decoration: underline;\">Warning</span>: Changing the App Style will instantly restart the app. </p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Only do this if you are prepared to lose anything curing going on</p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">in the program right now.</p></body><"
-                        "/html>", None))
-        self.label_2.setText(QCoreApplication.translate("Dialog", u"Maker Size", None))
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.SF NS Text'; font-size:13pt; font-weight:600; font-style:italic; text-decoration: underline;\">Warning</span><span style=\" font-family:'.SF NS Text'; font-size:13pt;\">: Changing the App Style will instantly restart the app. </span></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.SF NS Text'; font-size:13pt;\">Only do this if you are prepared to lose anything curing going on</span></"
+                        "p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.SF NS Text'; font-size:13pt;\">in the program right now.</span></p></body></html>", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"App Style", None))
+        self.label_2.setText(QCoreApplication.translate("Dialog", u"Legend Text Size", None))
+        self.comboBox_2.setItemText(0, QCoreApplication.translate("Dialog", u"xx-small", None))
+        self.comboBox_2.setItemText(1, QCoreApplication.translate("Dialog", u"x-small", None))
+        self.comboBox_2.setItemText(2, QCoreApplication.translate("Dialog", u"small", None))
+        self.comboBox_2.setItemText(3, QCoreApplication.translate("Dialog", u"medium", None))
+        self.comboBox_2.setItemText(4, QCoreApplication.translate("Dialog", u"large", None))
+        self.comboBox_2.setItemText(5, QCoreApplication.translate("Dialog", u"x-large", None))
+        self.comboBox_2.setItemText(6, QCoreApplication.translate("Dialog", u"xx-large", None))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("Dialog", u"App Settings", None))
         self.label_10.setText(QCoreApplication.translate("Dialog", u"Curve Fit Path", None))
         self.label_9.setText(QCoreApplication.translate("Dialog", u"XPS Path", None))

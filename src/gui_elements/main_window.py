@@ -84,6 +84,18 @@ class MainWindow(QtWidgets.QMainWindow):
         for name in matplotlib.colors.cnames.items():
             self.color_list.append(name[0])
 
+        self.anno_text = ''
+        self.anno_size = 20
+        self.anno_alpha = 1.0
+        self.anno_color = 'black'
+        self.anno_bgcolor = 'white'
+        self.anno_fecolor = 'white'
+        self.anno_frame = 'none'
+        self.anno_frame_width = 2.0
+        self.anno_rotation = 0.0
+        self.anno_style = 'normal'
+
+        self.legend_size = 'medium'
 
     def init_connections(self):
         self.plot_context_actions()

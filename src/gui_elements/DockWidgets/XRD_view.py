@@ -50,7 +50,7 @@ class XRD_view(QtWidgets.QDockWidget):
         self.tree_view.setColumnWidth(0, 200)
 
         self.ui.tw_fit_params.cellChanged.connect(lambda: self.save_constraints())
-        self.ui.fillcols_pb.clicked.connect(lambda: fil_cols_fun(self))
+        self.ui.fillcols_pb.clicked.connect(lambda: plotting_functions.fill_cols_fun(self))
         self.ui.plot_pb.clicked.connect(lambda: self.plot_xrd())
         self.ui.baseline_pb.clicked.connect(lambda: self.baseline_function())
         self.ui.go_pb.clicked.connect(lambda: self.scherrer_calculate())
@@ -118,8 +118,6 @@ class XRD_view(QtWidgets.QDockWidget):
     def xrd_basic(self):
         self.main_window.ax.set_xlabel('2$\\theta$ ($^\circ$)')
         self.main_window.ax.set_ylabel('Counts')
-        leg = self.main_window.ax.legend(loc='best')
-        leg.set_draggable(True)
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
@@ -166,8 +164,7 @@ class XRD_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data,
                                                                                        result.best_fit,
                                                                                        'r--', label='Result')
-                leg = self.main_window.ax.legend(loc='best', fontsize='small')
-                leg.set_draggable(True)
+
 
         elif self.ui.fittype_cb.currentText() == 'Lorentz':
             if self.ui.num_peaks_sb.value() == 1:
@@ -181,9 +178,7 @@ class XRD_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data,
                                                                                        result.best_fit,
                                                                                        'r--', label='Result')
-                leg = self.main_window.ax.legend(loc='best', fontsize='small')
                 self.ui.fwhm_sb.setValue(2 * result.params['sigma'].value*np.pi/180)
-                leg.set_draggable(True)
             elif self.ui.num_peaks_sb.value() == 2:
                 lmodel = LorentzianModel(prefix='p1_') + LorentzianModel(prefix='p2_')
                 params = Parameters()
@@ -205,8 +200,7 @@ class XRD_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED['Fit'] = self.main_window.ax.plot(self.x_data,
                                                                                        result.best_fit,
                                                                                        'r--', label='Result')
-                leg = self.main_window.ax.legend(loc='best', fontsize='small')
-                leg.set_draggable(True)
+
 
         elif self.ui.fittype_cb.currentText() == 'Pseudo-Voigt':
             if self.ui.num_peaks_sb.value() == 1:

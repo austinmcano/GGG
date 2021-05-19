@@ -261,8 +261,12 @@ class SE_view(QtWidgets.QDockWidget):
     def on_select(self,minimum, maximum):
         def finish():
             key = ui.treeWidget.currentItem().text(0)
-            data_x = ApplicationSettings.ALL_DATA_PLOTTED[key][0]._xy.T[0]
-            data_y = ApplicationSettings.ALL_DATA_PLOTTED[key][0]._xy.T[1]
+            try:
+                data_x = ApplicationSettings.ALL_DATA_PLOTTED[key][0]._xy.T[0]
+                data_y = ApplicationSettings.ALL_DATA_PLOTTED[key][0]._xy.T[1]
+            except TypeError:
+                data_x = ApplicationSettings.ALL_DATA_PLOTTED[key]._xy.T[0]
+                data_y = ApplicationSettings.ALL_DATA_PLOTTED[key]._xy.T[1]
             lims = [find_nearest(data_x, minimum), find_nearest(data_x, maximum)]
             data_x = data_x[lims[0]:lims[1]]
             data_y = data_y[lims[0]:lims[1]]
