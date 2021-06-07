@@ -1,12 +1,11 @@
-from src.Ui_Files.DockWidgets.Py.dw_FTIR import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
+from Ui_Files.DockWidgets.Py.dw_FTIR import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
 import glob
 from scipy.signal import savgol_filter
 from lmfit.models import VoigtModel, ConstantModel, LinearModel
 from lmfit import Model, Parameters
-from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
-from src.gui_elements.plotting_functions import baseline_als, find_nearest
-# from src.gui_elements.general_functions import find_nearest
+from Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
+from gui_elements.plotting_functions import baseline_als, find_nearest
 from matplotlib.widgets import SpanSelector
 
 class FTIR_view(QtWidgets.QDockWidget):
@@ -70,7 +69,7 @@ class FTIR_view(QtWidgets.QDockWidget):
         # self.ui.selectdata_pb.clicked.connect(lambda: self.select_data())
         # self.ui.baseline_pb.clicked.connect(lambda: self.baseline_data())
         # self.ui.integratemode_rb.toggled.connect(self.integrate_mode)
-
+        self.ui.integratemode_rb.toggled.connect(self.select_integrate_range)
         self.ui.select_ir_range_cb.toggled.connect(self.select_ir_range)
         self.ui.sub_dir_pb.clicked.connect(lambda: self.ir_plot('sub'))
         self.ui.diff_2_pb.clicked.connect(lambda: self.ir_plot('diff2'))
@@ -175,6 +174,37 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()
 
+    def select_integrate_range(self,enabled):
+        if enabled:
+            self.span = SpanSelector(self.main_window.ax_1, self.on_int_select, 'horizontal', useblit=False,
+                                     rectprops=dict(alpha=0.2, facecolor='blue'))
+        else:
+            del self.span
+
+    def on_int_select(self, minimum, maximum):
+        data_list = []
+        for i in ApplicationSettings.ALL_DATA_PLOTTED.keys():
+            print(ApplicationSettings.ALL_DATA_PLOTTED[i])
+            if data_list == []:
+                data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0]._xy.T[0])
+            data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0]._xy.T[1])
+
+        if self.ui.leftrightaxis_cb.currentText() == 'Left Axis':
+            ax = self.main_window.ax
+        elif self.ui.leftrightaxis_cb.currentText() == 'Right Axis':
+            if self.main_window.ax_2 is None:
+                self.main_window.ax_2 = self.main_window.ax.twinx()
+            ax = self.main_window.ax_2
+        inte = self.integrate_ir(data_list, minimum, maximum)
+        if self.ui.xaxis_cb.currentText() == 'Ints':
+            x = np.linspace(1, len(inte), len(inte))
+        elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
+            x = np.linspace(0.5, len(inte) / 2, len(inte))
+        ApplicationSettings.ALL_DATA_PLOTTED[
+            'Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
+            ax.plot(x, inte, '.-', label='Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
+        self.main_window.canvas.draw()
+
     def integrate(self):
         # dict = ApplicationSettings.ALL_DATA_PLOTTED
         # Key_List = []
@@ -190,8 +220,8 @@ class FTIR_view(QtWidgets.QDockWidget):
         # self.main_window.ax.plot(inte, '.-', label=str(np.round(self.ui.min_sb.value(), 4)) + '-' +
         #                                              str(np.round(self.ui.max_sb.value(), 4)))
         # self.main_window.canvas.draw()
-        path = self.model.filePath(self.tree_view.currentIndex())
-        csv_list = sorted(glob.glob(path + '/*CSV'))
+        # path = self.model.filePath(self.tree_view.currentIndex())
+        # csv_list = sorted(glob.glob(path + '/*CSV'))
         # self.sub = self.subtraction_from_survey(csv_list)
         # min_max = [[400,4000],[400,4000],[400,4000],[400,4000]]
         # labels = ['','','','']
@@ -203,6 +233,11 @@ class FTIR_view(QtWidgets.QDockWidget):
         # minimum = float(self.ui.tableWidget.item(0,0).text())
         # maximum = float(self.ui.tableWidget.item(0, 1).text())
         # num_of_int = self.ui.spinBox.value()
+        data_list = []
+        for i in ApplicationSettings.ALL_DATA_PLOTTED.keys():
+            if data_list == []:
+                data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0])
+            data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][1])
 
         if self.ui.leftrightaxis_cb.currentText()=='Left Axis':
             ax = self.main_window.ax
@@ -210,24 +245,25 @@ class FTIR_view(QtWidgets.QDockWidget):
             if self.main_window.ax_2 is None:
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
-        if self.ui.int_type_cb.currentText() == 'Absolute':
-            print('Passed')
-        elif self.ui.int_type_cb.currentText() == 'Subtraction_C':
-            # for i in range(num_of_int):
-            self.sub = self.subtraction_from_survey(csv_list)
-            inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
-            inte_c = [i-inte[0] for i in inte]
-            ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
-                ax.plot(inte_c, '.-', label=str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
-        elif self.ui.int_type_cb.currentText() == 'Subtraction':
-            # for i in range(num_of_int):
-
-            self.sub = self.subtraction_from_survey(csv_list)
-            inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
-        elif self.ui.int_type_cb.currentText() == 'Difference':
-            # for i in range(num_of_int):
-            self.diff = self.difference_from_survey(csv_list)
-            inte = self.integrate_ir(self.diff, self.ui.min_sb.value(), self.ui.max_sb.value())
+        # if self.ui.int_type_cb.currentText() == 'Absolute':
+        #     print('Passed')
+        # elif self.ui.int_type_cb.currentText() == 'Subtraction_C':
+        #     # for i in range(num_of_int):
+        #     self.sub = self.subtraction_from_survey(csv_list)
+        #     inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
+        #     inte_c = [i-inte[0] for i in inte]
+        #     ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
+        #         ax.plot(inte_c, '.-', label=str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
+        # elif self.ui.int_type_cb.currentText() == 'Subtraction':
+        #     # for i in range(num_of_int):
+        #
+        #     self.sub = self.subtraction_from_survey(csv_list)
+        #     inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
+        # elif self.ui.int_type_cb.currentText() == 'Difference':
+        #     # for i in range(num_of_int):
+        #     self.diff = self.difference_from_survey(csv_list)
+        #     inte = self.integrate_ir(self.diff, self.ui.min_sb.value(), self.ui.max_sb.value())
+        inte = self.integrate_ir(data_list,self.ui.min_sb.value(),self.ui.max_sb.value())
         if self.ui.xaxis_cb.currentText() == 'Ints':
             x = np.linspace(1, len(inte), len(inte))
         elif self.ui.xaxis_cb.currentText() == 'Half-Ints':

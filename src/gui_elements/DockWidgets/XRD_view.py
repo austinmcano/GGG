@@ -1,7 +1,6 @@
-from src.Ui_Files.DockWidgets.Py.dw_XRD import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
-from src.gui_elements import plotting_functions
-from src.gui_elements.general_functions import *
+from Ui_Files.DockWidgets.Py.dw_XRD import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
+from gui_elements import plotting_functions
 from lmfit import Parameters
 from lmfit.models import VoigtModel, GaussianModel, LorentzianModel
 

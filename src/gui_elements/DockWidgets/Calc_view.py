@@ -1,5 +1,5 @@
-from src.Ui_Files.DockWidgets.Py.dw_calculator import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
+from Ui_Files.DockWidgets.Py.dw_calculator import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
 from PySide2 import QtCore,QtWidgets
 # import numexpr
 

@@ -1,6 +1,6 @@
-from src.Ui_Files.DockWidgets.Py.dw_ProjectView import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
-from src.gui_elements.settings import ApplicationSettings
+from Ui_Files.DockWidgets.Py.dw_ProjectView import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
+from gui_elements.settings import ApplicationSettings
 from PySide2 import QtCore,QtWidgets
 
 

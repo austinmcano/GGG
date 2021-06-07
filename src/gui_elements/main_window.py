@@ -1,26 +1,31 @@
-from src.Ui_Files.main_window import Ui_MainWindow
-from src.gui_elements.DockWidgets.data_browser import DataBrowser
-from src.gui_elements.DockWidgets.project_browser import ProjectBrowser
-from src.gui_elements.DockWidgets.XPS_view import XPS_view
-from src.gui_elements.DockWidgets.QCM_view import QCM_view
-from src.gui_elements.DockWidgets.FTIR_view import FTIR_view
-from src.gui_elements.DockWidgets.SE_view import SE_view
-from src.gui_elements.DockWidgets.CF_view import CurveFit_view
-from src.gui_elements.DockWidgets.XRD_view import XRD_view
-from src.gui_elements.DockWidgets.Calc_view import Calculator_view
-from src.Ui_Files.Dialogs.start_dialog import Ui_Dialog as start_Ui
-from src.gui_elements.DockWidgets.Console_view import Console_view
-from src.Ui_Files.Dialogs.seaborn_settings import Ui_Dialog as Ui_sns_Dialog
+from Ui_Files.main_window import Ui_MainWindow
+from gui_elements.DockWidgets.data_browser import DataBrowser
+from gui_elements.DockWidgets.project_browser import ProjectBrowser
+from gui_elements.DockWidgets.XPS_view import XPS_view
+from gui_elements.DockWidgets.QCM_view import QCM_view
+from gui_elements.DockWidgets.FTIR_view import FTIR_view
+from gui_elements.DockWidgets.SE_view import SE_view
+from gui_elements.DockWidgets.CF_view import CurveFit_view
+from gui_elements.DockWidgets.XRD_view import XRD_view
+from gui_elements.DockWidgets.Calc_view import Calculator_view
+from Ui_Files.Dialogs.start_dialog import Ui_Dialog as start_Ui
+from gui_elements.DockWidgets.Console_view import Console_view
+from Ui_Files.Dialogs.seaborn_settings import Ui_Dialog as Ui_sns_Dialog
 import gc
-from src.gui_elements.plotting_functions import *
-from src.gui_elements.general_functions import *
+from gui_elements.plotting_functions import *
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
+        local_path = os.path.realpath(__file__)
+        self.settings = QtCore.QSettings('../../settings.ini', QtCore.QSettings.IniFormat)
+        if self.settings.allKeys() == []:
+            self.settings = QtCore.QSettings('settings.ini', QtCore.QSettings.IniFormat)
+        if self.settings.allKeys() == []:
+            filename = QtWidgets.QFileDialog.getOpenFileName(self, 'Please help me find settings.ini because im lost')[0]
+            self.settings = QtCore.QSettings(filename, QtCore.QSettings.IniFormat)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self._init_UI()
         self.init_connections()
@@ -33,10 +38,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.font = self.settings.value('sns_font')
         self.axes_facecolor = self.settings.value('sns_axesfacecolor')
         self.fig_facecolor = self.settings.value('sns_figfacecolor')
+        # self.style = 'ticks'
+        # self.context = 'notebook'
+        # self.fs = 2
+        # self.c_palette = 'tab20b'
+        # self.font = 'Arial'
+        # self.axes_facecolor = 1
+        # self.fig_facecolor = 1
 
         # sns.set(self.context, self.style, self.c_palette, self.font, self.fs, True, {"axes.facecolor": "#F0F0F0", 'figure.facecolor': '#505F69'})
         sns.set(self.context, self.style, self.c_palette, self.font,
-                self.fs,True, {"axes.facecolor": self.axes_facecolor,'figure.facecolor': self.fig_facecolor})
+                self.fs, True, {"axes.facecolor": self.axes_facecolor,'figure.facecolor': self.fig_facecolor})
+        # sns.set(self.context, self.style, self.c_palette, self.font,self.fs, True)
 
         self.fig = figure(num=None, figsize=(8, 6), dpi=80)
         self.canvas = FigureCanvas(self.fig)
@@ -49,7 +62,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.verticalLayout.addWidget(self.toolbar)
         self.ui.verticalLayout.addWidget(self.canvas)
         self.canvas.draw()
-        self.bar = {'xlist': '', 'y1list':'','y2list':'','y3list':'', 'width':'0.35', 'num':1,
+        self.bar = {'xlist': 'C Ni Al N O Cl Cu F Cr', 'y1list':'20.2 1.21 39.23 20.4 5 8.2 0 4.7 1.1',
+                    'y2list':'27.2 2.44 18.4 11 12.3 5.4 .5 2 0','y3list':'', 'width':'0.35', 'num':3,
                     'label1':'','label2':'','label3':''}
         self.ax = self.ax_1
         self.dragh = DragHandler(self, figure=self.fig)
@@ -254,7 +268,6 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def start(self, dock_widget):
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, dock_widget)
-
 
     def lims_change(self, event_ax):
         ApplicationSettings.C_X_LIM = list(event_ax.get_xlim())

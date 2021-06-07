@@ -1,11 +1,11 @@
-from src.Ui_Files.DockWidgets.Py.dw_CF import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
+from Ui_Files.DockWidgets.Py.dw_CF import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
 from PySide2 import QtCore,QtWidgets,QtGui
-from src.Ui_Files.Dialogs.fit_dialog_cf import Ui_Dialog as fit_dialog
+from Ui_Files.Dialogs.fit_dialog_cf import Ui_Dialog as fit_dialog
 from lmfit import Model
 from lmfit.models import GaussianModel,LorentzianModel,VoigtModel,LinearModel, PowerLawModel
-from src.Ui_Files.Dialogs.auto_x_values import Ui_Dialog as auto_x_dialog
-from src.Ui_Files.Dialogs.Plot_Dialog_General import Ui_Dialog as plot_dia
+from Ui_Files.Dialogs.auto_x_values import Ui_Dialog as auto_x_dialog
+from Ui_Files.Dialogs.Plot_Dialog_General import Ui_Dialog as plot_dia
 import csv
 import io
 

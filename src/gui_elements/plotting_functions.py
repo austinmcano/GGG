@@ -1,16 +1,16 @@
-from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as TW_ui
+from Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as TW_ui
 from PySide2 import QtWidgets
 import numpy as np
-from src.Ui_Files.Dialogs.line_dialog import Ui_Dialog as vhline_ui
-from src.Ui_Files.Dialogs.axis_setup_dialog import Ui_Dialog as axis_setup_ui
-from src.Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as STC_ui
-from src.Ui_Files.Dialogs.app_settings import Ui_Dialog as app_settings
-from src.Ui_Files.Dialogs.annotation_dialog import Ui_Dialog as annotation_ui
-from src.Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_ui
-from src.Ui_Files.Dialogs.new_project_dialog import Ui_Dialog as new_project_dialog
-from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as simple_tw
-from src.Ui_Files.Dialogs.bargraph_dialog import Ui_Dialog as bar_dialog
-from src.Ui_Files.Dialogs.spine_color_dialog import Ui_Dialog as spine_color_dialog
+from Ui_Files.Dialogs.line_dialog import Ui_Dialog as vhline_ui
+from Ui_Files.Dialogs.axis_setup_dialog import Ui_Dialog as axis_setup_ui
+from Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as STC_ui
+from Ui_Files.Dialogs.app_settings import Ui_Dialog as app_settings
+from Ui_Files.Dialogs.annotation_dialog import Ui_Dialog as annotation_ui
+from Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_ui
+from Ui_Files.Dialogs.new_project_dialog import Ui_Dialog as new_project_dialog
+from Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as simple_tw
+from Ui_Files.Dialogs.bargraph_dialog import Ui_Dialog as bar_dialog
+from Ui_Files.Dialogs.spine_color_dialog import Ui_Dialog as spine_color_dialog
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.pyplot import figure
@@ -23,7 +23,7 @@ import sys
 from shutil import copyfile, copytree, rmtree, copy2
 import os
 import seaborn as sns
-from src.gui_elements.settings import ApplicationSettings
+from gui_elements.settings import ApplicationSettings
 from scipy import integrate
 from scipy.linalg import norm
 from scipy.signal import savgol_filter
@@ -66,9 +66,11 @@ def spine_color_fun(self):
 
 
 def graph_test_fun(self):
-    print(self.ax.lines)
-    self.ax.lines[0].remove()
-    self.canvas.draw()
+    print(self.fig.canvas.callbacks.callbacks)
+    for i in self.fig.canvas.callbacks.callbacks.keys():
+        self.fig.canvas.callbacks.mpl_disconnect(i)
+        print(i)
+    print(self.fig.canvas.callbacks.callbacks)
 
 
 def tight_figure(self):
@@ -77,16 +79,26 @@ def tight_figure(self):
 
 
 def save_fig(self):
-    text, ok = QtWidgets.QInputDialog.getText(self, 'Saving Figure', 'Save Figure As: ')
-    if ok:
-        with open(os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'), 'wb') as fid:
+    # with open(os.path.join(self.settings.value('FIG_PATH'), 'test' + '.pkl'), 'wb') as fid:
+    #     try:
+    #         pickle.dump(self.fig, fid)
+    #     except TypeError:
+    #         msg = QtWidgets.QMessageBox()
+    #         msg.setText("Can't save FigureCanvasQtAgg object")
+    filename = QtWidgets.QFileDialog.getSaveFileName(None, 'Save Figure', self.settings.value('FIG_PATH'), "pickle (*.pkl);;All Files (*)")
+    # text, ok = QtWidgets.QInputDialog.getText(self, 'Saving Figure', 'Save Figure As: ')
+    print(filename)
+    if filename[0] == '':
+        print('passed')
+    else:
+        with open(filename[0], 'wb') as fid:
             try:
                 pickle.dump(self.fig, fid)
             except TypeError:
                 msg = QtWidgets.QMessageBox()
                 msg.setText("Can't save FigureCanvasQtAgg object")
         msg = QtWidgets.QMessageBox()
-        msg.setText('Saved as: ' + os.path.join(self.settings.value('FIG_PATH'), text+'.pkl'))
+        msg.setText('Saved as: ' + filename[0])
         msg.exec_()
 
 
@@ -103,47 +115,51 @@ def show_pickled_fig(self):
                 msg = QtWidgets.QMessageBox()
                 msg.setText('There was a problem saving this so there is nothing to load')
                 msg.exec_()
-        self.canvas.draw()
-        self.ui.verticalLayout.removeWidget(self.toolbar)
-        self.toolbar.close()
-        self.ui.verticalLayout.removeWidget(self.canvas)
-        self.canvas.close()
-        sns.set(context=self.context, style=self.style, palette=self.c_palette,
-                font=self.font, font_scale=self.fs, color_codes=True)
-        self.fig = figx
-        self.ax_1 = self.fig.axes[0]
-        for i in self.ax_1.lines:
-            ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-        for i in self.ax_1.texts:
-            ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-        self.ax = self.ax_1
-        for ax in self.fig.axes:
-            if ax is not self.ax_1:
-                self.ax_2 = ax
-                for i in self.ax_2.lines:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                for i in self.ax_2.texts:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-            elif ax is not self.ax_1 and ax is not self.ax_2:
-                self.ax_3 = ax
-                for i in self.ax_3.lines:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                for i in self.ax_3.texts:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-            elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
-                self.ax_4 = ax
-                for i in self.ax_4.lines:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                for i in self.ax_4.texts:
-                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-        self.canvas = FigureCanvas(self.fig)
-        self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
-        self.ui.verticalLayout.addWidget(self.toolbar)
-        self.ui.verticalLayout.addWidget(self.canvas)
-        self.canvas.installEventFilter(self)
-        self.dragh = DragHandler(self, figure=self.fig)
-        self.canvas.draw()
-
+        try:
+            self.canvas.draw()
+            self.ui.verticalLayout.removeWidget(self.toolbar)
+            self.toolbar.close()
+            self.ui.verticalLayout.removeWidget(self.canvas)
+            self.canvas.close()
+            sns.set(context=self.context, style=self.style, palette=self.c_palette,
+                    font=self.font, font_scale=self.fs, color_codes=True)
+            self.fig = figx
+            self.ax_1 = self.fig.axes[0]
+            for i in self.ax_1.lines:
+                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            for i in self.ax_1.texts:
+                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            self.ax = self.ax_1
+            for ax in self.fig.axes:
+                if ax is not self.ax_1:
+                    self.ax_2 = ax
+                    for i in self.ax_2.lines:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                    for i in self.ax_2.texts:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                elif ax is not self.ax_1 and ax is not self.ax_2:
+                    self.ax_3 = ax
+                    for i in self.ax_3.lines:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                    for i in self.ax_3.texts:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
+                    self.ax_4 = ax
+                    for i in self.ax_4.lines:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                    for i in self.ax_4.texts:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            self.canvas = FigureCanvas(self.fig)
+            self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+            self.ui.verticalLayout.addWidget(self.toolbar)
+            self.ui.verticalLayout.addWidget(self.canvas)
+            self.canvas.installEventFilter(self)
+            self.dragh = DragHandler(self, figure=self.fig)
+            self.canvas.draw()
+        except UnboundLocalError:
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Press "Ctrl+1" for a new axes')
+            msg.exec_()
 # def Project_view_fun(self):
 #     self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self.dw_ProjectView)
 #     self.restoreDockWidget(self.dw_ProjectView)
@@ -505,53 +521,48 @@ def plot_annotation(self):
 
 
 def bar_graph(self):
-    def plot_bar():
-        N = ui.num_sb.value()
-        xlist = ui.x_list.text().split(' ')
-        ind = np.arange(N)
-        width = float(ui.width_le.text())
-        try:
-            y1list_ = ui.y1_list.text().split(' ')
-            y1list = [float(i) for i in y1list_]
-            self.ax.bar(ind, y1list, width, label=ui.label1_le.text())
-        except ValueError:
-            print('ValueError')
-        try:
-            y2list_ = ui.y2_list.text().split(' ')
-            y2list = [float(i) for i in y2list_]
-            self.ax.bar(ind+width, y2list, width, label=ui.label2_le.text())
-        except ValueError:
-            print('ValueError')
-        try:
-            y3list_ = ui.y3_list.text().split(' ')
-            y3list = [float(i) for i in y3list_]
-            self.ax.bar(ind+width+width, y3list, width, label=ui.label3_le.text())
-        except ValueError:
-            print('ValueError')
-        self.bar['xlist'] = ui.x_list.text()
-        self.bar['y1list'] = ui.y1_list.text()
-        self.bar['y2list'] = ui.y2_list.text()
-        self.bar['y3list'] = ui.y3_list.text()
-        self.bar['label1'] = ui.label1_le.text()
-        self.bar['label2'] = ui.label2_le.text()
-        self.bar['label3'] = ui.label3_le.text()
-        self.bar['width'] = ui.width_le.text()
-        self.bar['num'] = ui.num_sb.value()
-        self.ax.set_xticks(ind + width / N, xlist)
-        self.ax.legend(loc='best')
-        self.canvas.draw()
     d = QtWidgets.QDialog()
     ui = bar_dialog()
     ui.setupUi(d)
-    ui.x_list.setText(self.bar['xlist'])
-    ui.y1_list.setText(self.bar['y1list'])
-    ui.y2_list.setText(self.bar['y2list'])
-    ui.y3_list.setText(self.bar['y3list'])
-    ui.label1_le.setText(self.bar['label1'])
-    ui.label2_le.setText(self.bar['label2'])
-    ui.label3_le.setText(self.bar['label3'])
-    ui.width_le.setText(self.bar['width'])
-    ui.num_sb.setValue(self.bar['num'])
+    l1 = [ui.x_list, ui.y1_list, ui.y2_list, ui.y3_list, ui.label1_le, ui.label2_le, ui.label3_le, ui.width_le, ui.num_sb]
+    l2 = ['xlist', 'y1list', 'y2list', 'y3list', 'label1', 'label2', 'label3', 'width', 'num']
+    def plot_bar():
+        N = ui.num_sb.value()
+        width = float(ui.width_le.text())
+        labels = ui.x_list.text().split(' ')
+        x = np.arange(len(labels))  # the label locations
+
+        if N == 1:
+            y1 = [float(i) for i in ui.y1_list.text().split(' ')]
+            self.ax.bar(x, y1, width, label=ui.label1_le.text())
+        elif N == 2:
+            y1 = [float(i) for i in ui.y1_list.text().split(' ')]
+            self.ax.bar(x - width / 2, y1, width, label=ui.label1_le.text())
+            y2 = [float(i) for i in ui.y2_list.text().split(' ')]
+            self.ax.bar(x + width / 2, y2, width, label=ui.label2_le.text())
+        elif N == 3:
+            y1 = [float(i) for i in ui.y1_list.text().split(' ')]
+            self.ax.bar(x - 3*width / 3, y1, width, label=ui.label1_le.text())
+            y2 = [float(i) for i in ui.y2_list.text().split(' ')]
+            self.ax.bar(x + 3*width / 3, y2, width, label=ui.label2_le.text())
+            y3 = [float(i) for i in ui.y3_list.text().split(' ')]
+            self.ax.bar(x , y3, width, label=ui.label3_le.text())
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        self.ax.set_xticks(x)
+        self.ax.set_xticklabels(labels)
+        self.ax.legend()
+
+        # self.fig.bar_label(rects1, padding=3)
+        # self.fig.bar_label(rects2, padding=3)
+        for i in range(len(l1)):
+            self.bar[l2[i]] = l1[i].text()
+        self.canvas.draw()
+    for i in range(len(l1)):
+        try:
+            l1[i].setText(self.bar[l2[i]])
+        except AttributeError:
+            l1[i].setValue(int(self.bar[l2[i]]))
     ui.buttonBox.accepted.connect(lambda: plot_bar())
     d.exec_()
 

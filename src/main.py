@@ -1,10 +1,15 @@
 import sys
 from PySide2 import QtWidgets, QtCore, QtGui
-from src.gui_elements.main_window import MainWindow
+from gui_elements.main_window import MainWindow
 import os
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
-settings = QtCore.QSettings('Resources/settings.ini', QtCore.QSettings.IniFormat)
+settings = QtCore.QSettings('../../settings.ini', QtCore.QSettings.IniFormat)
+if settings.allKeys() == []:
+    settings = QtCore.QSettings('settings.ini', QtCore.QSettings.IniFormat)
+if settings.allKeys() == []:
+    filename = QtWidgets.QFileDialog.getOpenFileName('ini file')[0]
+    settings = QtCore.QSettings(filename, QtCore.QSettings.IniFormat)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

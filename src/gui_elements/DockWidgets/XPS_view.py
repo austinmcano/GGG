@@ -1,7 +1,6 @@
-from src.Ui_Files.DockWidgets.Py.dw_XPS import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
-from src.gui_elements.plotting_functions import *
-from src.gui_elements.general_functions import *
+from Ui_Files.DockWidgets.Py.dw_XPS import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
+from gui_elements.plotting_functions import *
 from lmfit import Model, Parameters
 from scipy.linalg import norm
 from lmfit.models import VoigtModel, GaussianModel, LorentzianModel, PseudoVoigtModel
@@ -105,7 +104,7 @@ class XPS_view(QtWidgets.QDockWidget):
         self.y_data = self.y_data[~np.isnan(self.y_data)]
         self.x_data = self.correct_to(self.x_data,self.y_data, self.ui.correctc1s_dsb.value(), self.ui.offset_sb.value())
         ApplicationSettings.ALL_DATA_PLOTTED[os.path.basename(self.path)] = \
-            self.main_window.ax.plot(self.x_data, self.y_data, '.-', markersize=6, label=os.path.basename(self.path))
+            self.main_window.ax.plot(self.x_data, self.y_data, 'r.-', markersize=20, label=os.path.basename(self.path))
         self.xps_basic()
 
     def select_xps_range(self,enabled):

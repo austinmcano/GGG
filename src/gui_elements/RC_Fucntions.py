@@ -1,14 +1,10 @@
-from shutil import copyfile, copytree, rmtree
-from src.Ui_Files.Dialogs.Plot_Directory_Functions import Ui_Dialog as Plot_Directory_Functions_Ui
-from src.gui_elements.plotting_functions import *
-from src.gui_elements.settings import ApplicationSettings
-from src.Ui_Files.Dialogs.Plot_Dialog_General import Ui_Dialog as plot_dialog
-from src.Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_dialog
+from gui_elements.plotting_functions import *
+from gui_elements.settings import ApplicationSettings
+from Ui_Files.Dialogs.Plot_Dialog_General import Ui_Dialog as plot_dialog
+from Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_dialog
 import os
-import glob
 import pickle
-from src.Ui_Files.Dialogs.delete_dialog import Ui_Dialog as delete_dialog
-from src.Ui_Files.Dialogs.simple_tablewidget import Ui_Dialog as tableWidget_dialog
+from Ui_Files.Dialogs.simple_tablewidget import Ui_Dialog as tableWidget_dialog
 
 
 def rc_browser_options(self):

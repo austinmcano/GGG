@@ -1,7 +1,6 @@
-from src.Ui_Files.DockWidgets.Py.dw_QCM import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
-from src.gui_elements.general_functions import *
-from src.gui_elements.plotting_functions import *
+from Ui_Files.DockWidgets.Py.dw_QCM import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
+from gui_elements.plotting_functions import *
 from matplotlib.widgets import SpanSelector
 from lmfit.models import PolynomialModel
 from lmfit import Parameters, Model

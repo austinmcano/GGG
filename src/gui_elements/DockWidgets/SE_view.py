@@ -1,10 +1,9 @@
-from src.Ui_Files.DockWidgets.Py.dw_SE import Ui_DockWidget
-from src.gui_elements.RC_Fucntions import *
-from src.gui_elements.plotting_functions import *
+from Ui_Files.DockWidgets.Py.dw_SE import Ui_DockWidget
+from gui_elements.RC_Fucntions import *
+from gui_elements.plotting_functions import *
 from PySide2 import QtCore,QtWidgets
 from lmfit.models import LinearModel
-from src.gui_elements.general_functions import *
-from src.Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
+from Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 from matplotlib.widgets import SpanSelector
 from lmfit import Parameters
 
@@ -92,12 +91,12 @@ class SE_view(QtWidgets.QDockWidget):
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
                 ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data-y_data[0],self.ui.linetype_cb.currentText(),label=x)
+                    ax.plot(x_data, y_data-y_data[0],'.-',label=x)
         elif not self.ui.zero_correct_checkb.isChecked():
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
                 ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data, self.ui.linetype_cb.currentText(),label=x)
+                    ax.plot(x_data, y_data, '.-',label=x)
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
