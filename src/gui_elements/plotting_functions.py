@@ -116,6 +116,7 @@ def show_pickled_fig(self):
                 msg.setText('There was a problem saving this so there is nothing to load')
                 msg.exec_()
         try:
+            ApplicationSettings.ALL_DATA_PLOTTED = {}
             self.canvas.draw()
             self.ui.verticalLayout.removeWidget(self.toolbar)
             self.toolbar.close()
@@ -243,11 +244,28 @@ def toggle_legend(self):
         size, ok = QtWidgets.QInputDialog.getItem(self, "Legend",
                                         "size", items, 0, False)
         if ok:
-            self.ax.legend(loc='best', fontsize=size)
-            self.canvas.draw()
+            items_2 = ('best', 'upper right', 'upper left', 'lower left', 'lower right', 'right', 'center left',
+                       'center right', 'lower center', 'upper center', 'center')
+            pos, ok_1 = QtWidgets.QInputDialog.getItem(self, "Legend",
+                                                       "position", items_2, 0, False)
+            if ok_1:
+                all, ok_2 = QtWidgets.QInputDialog.getItem(self, "Legend",
+                                                           "Combine all Axis Legends? ", ('No','Yes'), 0, False)
+                if ok_2:
+                    if all == 'Yes':
+                        try:
+                            lines_1, labels_1 = self.ax_1.get_legend_handles_labels()
+                            lines_2, labels_2 = self.ax_2.get_legend_handles_labels()
+                            lines = lines_1 + lines_2
+                            labels = labels_1 + labels_2
+                            self.ax.legend(lines, labels, loc=pos, fontsize = size)
+                        except AttributeError:
+                            self.ax.legend(loc=pos, fontsize=size)
+                    else:
+                        self.ax.legend(loc=pos, fontsize=size)
     else:
         self.ax.get_legend().remove()
-        self.canvas.draw()
+    self.canvas.draw()
 
 
 def Save_All_Plotted(self):
@@ -263,9 +281,12 @@ def Save_All_Plotted(self):
             text = ix.data()
             temp.append(text)
             name = os.path.join(self.settings.value('SAVED_DATA_PATH'),ix.data())
-            np.savetxt(str(name)+ui.save_as_LE.text()+ui.comboBox.currentText(),
-                       ApplicationSettings.ALL_DATA_PLOTTED[ix.data()][0]._xy,delimiter=',')
-            print(ApplicationSettings.ALL_DATA_PLOTTED[ix.data()][0]._xy)
+            try:
+                np.savetxt(str(name)+ui.save_as_LE.text()+ui.comboBox.currentText(),
+                           ApplicationSettings.ALL_DATA_PLOTTED[ix.data()][0]._xy,delimiter=',')
+            except TypeError:
+                np.savetxt(str(name) + ui.save_as_LE.text() + ui.comboBox.currentText(),
+                           ApplicationSettings.ALL_DATA_PLOTTED[ix.data()]._xy, delimiter=',')
     dialog = QtWidgets.QDialog()
     ui = STC_ui()
     ui.setupUi(dialog)
@@ -286,15 +307,15 @@ def remove_line(self):
             if isinstance(line, list):
                 try:
                     self.ax.lines.remove(line[0])
+                    ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                    del line
+                    self.canvas.draw()
                 except ValueError:
                     msg = QtWidgets.QMessageBox()
                     msg.setText('Removing Line From Wrong Axes!')
                     msg.exec_()
                 except AttributeError:
                     pass
-                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
-                del line
-                self.canvas.draw()
             elif isinstance(line,matplotlib.lines.Line2D):
                 try:
                     self.ax.lines.remove(line)
@@ -313,6 +334,10 @@ def remove_line(self):
                 ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                 del line
             elif isinstance(line, matplotlib.text.Text):
+                line.remove()
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            elif isinstance(line, matplotlib.collections.LineCollection):
                 line.remove()
                 ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                 del line
@@ -478,24 +503,37 @@ def import_directiory_function(self):
 
 def plot_annotation(self):
     def finish():
-        if ui.frame.currentText() == 'none':
-            bbox = None
-        else:
-            bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k"))
-        ApplicationSettings.ALL_DATA_PLOTTED[ui.text.text()] = \
-            self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), ui.text.text(), color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
-                         fontstyle=ui.fontstyle.currentText(), rotation=ui.rotation.value(), bbox=bbox,
-                         alpha=ui.alpha.value())
-        self.anno_alpha = ui.alpha.value()
-        self.anno_text = ui.text.text()
-        self.anno_bgcolor = ui.bgcolor.currentText()
-        self.anno_fecolor = ui.framecolor.currentText()
-        self.anno_rotation = ui.rotation.value()
-        self.anno_color = ui.color.currentText()
-        self.anno_frame_width = ui.framewidth_sb.value()
-        self.anno_frame = ui.frame.currentText()
-        self.anno_style = ui.fontstyle.currentText()
-        self.anno_size = ui.size.value()
+        try:
+            a_list = [ui.text.text(), ui.text_2.text(), ui.text_3.text()]
+            while ("" in a_list):
+                a_list.remove("")
+            print(a_list)
+            joined_string = "\n".join(a_list)
+            print(joined_string)
+            if ui.frame.currentText() == 'none':
+                bbox = None
+            else:
+                bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k"))
+            ApplicationSettings.ALL_DATA_PLOTTED[ui.text.text()] = \
+                self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), joined_string, color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
+                             fontstyle=ui.fontstyle.currentText(), rotation=ui.rotation.value(), bbox=bbox,
+                             alpha=ui.alpha.value(),ha=ui.ha_cb.currentText(),va='center')
+            self.anno_alpha = ui.alpha.value()
+            self.anno_text = ui.text.text()
+            self.anno_text_2 = ui.text_2.text()
+            self.anno_text_3 = ui.text_3.text()
+            self.anno_bgcolor = ui.bgcolor.currentText()
+            self.anno_fecolor = ui.framecolor.currentText()
+            self.anno_rotation = ui.rotation.value()
+            self.anno_color = ui.color.currentText()
+            self.anno_frame_width = ui.framewidth_sb.value()
+            self.anno_frame = ui.frame.currentText()
+            self.anno_style = ui.fontstyle.currentText()
+            self.anno_size = ui.size.value()
+        except ValueError:
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Annotation Syntax Error')
+            msg.exec_()
 
         self.canvas.draw()
     d = QtWidgets.QDialog()
@@ -512,6 +550,8 @@ def plot_annotation(self):
     ui.frame.setCurrentText(self.anno_frame)
     ui.alpha.setValue(self.anno_alpha)
     ui.text.setText(self.anno_text)
+    ui.text_2.setText(self.anno_text_2)
+    ui.text_3.setText(self.anno_text_3)
     ui.rotation.setValue(self.anno_rotation)
     ui.framewidth_sb.setValue(self.anno_frame_width)
     ui.fontstyle.setCurrentText(self.anno_style)
@@ -611,6 +651,47 @@ def fill_cols_fun(self):
         column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
         self.ui.tw_x.addTopLevelItems(column_list_x)
         self.ui.tw_y.addTopLevelItems(column_list_y)
+
+
+def move_line(self):
+    def finish():
+        for j in ui.treeWidget.selectedIndexes():
+            line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+            print(line)
+            print(type(line))
+            if isinstance(line, list):
+                new_line = line._xy.T[1] + float(ui.lineEdit.text())
+                print(new_line)
+                ApplicationSettings.ALL_DATA_PLOTTED[j.data() + '_' + str(ui.lineEdit.text())] = self.ax.plot(
+                    line._xy.T[0], new_line)
+                self.ax.lines.remove(line[0])
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            elif isinstance(line, matplotlib.lines.Line2D):
+                new_line = line._xy.T[1] + float(ui.lineEdit.text())
+                print(new_line)
+                ApplicationSettings.ALL_DATA_PLOTTED[j.data()+'_'+str(ui.lineEdit.text())] = self.ax.plot(
+                    line._xy.T[0],new_line)
+                self.ax.lines.remove(line)
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setText('Make sure its a line')
+                msg.exec_()
+
+    all_lines = ApplicationSettings.ALL_DATA_PLOTTED
+    dialog = QtWidgets.QDialog()
+    ui = simple_tw()
+    ui.setupUi(dialog)
+    ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+    Key_List = []
+    for i in all_lines.keys():
+        Key_List.append(QtWidgets.QTreeWidgetItem([i]))
+    ui.treeWidget.addTopLevelItems(Key_List)
+    ui.buttonBox.accepted.connect(lambda:finish())
+    dialog.exec_()
+    self.canvas.draw()
 
 
 def change_axis(self,axis):
@@ -904,6 +985,25 @@ def baseline_als(y, lam, p, niter=10):
         Z = W + lam * D.dot(D.transpose())
         z = spsolve(Z, w*y)
         w = p * (y > z) + (1-p) * (y < z)
+
+def label_size(self):
+    size, ok = QtWidgets.QInputDialog.getInt(None, 'Axis Label Size', 'Size: ')
+    if ok:
+        self.ax_1.set_xlabel(self.ax_1.get_xlabel(), fontsize=size)
+        self.ax_1.set_ylabel(self.ax_1.get_ylabel(), fontsize=size)
+        self.ax_1.set_xticklabels(self.ax_1.get_xticklabels(), fontsize=size)
+        self.ax_1.set_yticklabels(self.ax_1.get_yticklabels(), fontsize=size)
+        try:
+            self.ax_2.set_xlabel(self.ax_2.get_xlabel(), fontsize=size)
+            self.ax_2.set_xticklabels(self.ax_2.get_xticklabels(), fontsize=size)
+        except AttributeError:
+            print('AttError')
+        try:
+            self.ax_2.set_ylabel(self.ax_2.get_ylabel(), fontsize=size)
+            self.ax_2.set_yticklabels(self.ax_2.get_yticklabels(), fontsize=size)
+        except AttributeError:
+            print('AttError')
+        self.canvas.draw()
 
 class DragHandler(object):
     """ A simple class to handle Drag n Drop.

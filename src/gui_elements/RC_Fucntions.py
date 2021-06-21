@@ -15,31 +15,20 @@ def rc_browser_options(self):
     self.import_file_action = self.import_menu.addAction(' Import File')
     self.import_directory_action = self.import_menu.addAction(' Import Directory')
     self.context_menu.addSeparator()
-
     self.get_path_action = self.context_menu.addAction('Get Path')
     self.change_path_action = self.context_menu.addAction('Change Path')
+    self.open_in_action = self.context_menu.addAction('Open In Excel')
     self.context_menu.addSeparator()
-    # self.to_root_action = self.context_menu.addAction('Go To Root')
-    # self.cut_action = self.context_menu.addAction(' Cut')
-    # self.copy_action = self.context_menu.addAction(' Copy')
-    # self.paste_action = self.context_menu.addAction(' Paste')
     self.context_menu.addSeparator()
-    # self.rename_action = self.context_menu.addAction(' Rename')
-    # self.move_action = self.context_menu.addAction(' Move')
     self.delete_action = self.context_menu.addAction(' Delete')
     self.context_menu.addSeparator()
     self.unpickle_action = self.context_menu.addAction('Show Fig')
-    # self.new_figure_action = self.context_menu.addAction(' New Figure')
-    # self.new_table_action = self.context_menu.addAction(' New Table')
     self.plot_menu = self.context_menu.addMenu('Plot')
     self.plot_action = self.plot_menu.addAction('Plot')
     self.directory_plot_action = self.plot_menu.addAction('Directory Plot')
-
     self.table_action = self.context_menu.addAction('Table')
-
     self.context_menu.addSeparator()
-
-    self.graph_options_action = self.context_menu.addAction('Graph Options')
+    self.graph_options_action = self.context_menu.addAction('Test')
 
     self.import_file_action.triggered.connect(lambda: import_file_clicked(self))
     self.plot_action.triggered.connect(lambda: plot_action_clicked(self))
@@ -47,12 +36,20 @@ def rc_browser_options(self):
     self.import_directory_action.triggered.connect(lambda: import_directory_clicked(self))
     self.new_directory_action.triggered.connect(lambda: new_directory_clicked(self))
     self.get_path_action.triggered.connect(lambda: get_path_clicked(self))
-    # self.graph_options_action.triggered.connect(lambda: Graph_Options(self))
-    # self.to_root_action.triggered.connect(lambda: to_root_fun(self))
-    self.directory_plot_action.triggered.connect(lambda: plot_directory(self))
     self.unpickle_action.triggered.connect(lambda: show_pickled_fig(self))
     self.table_action.triggered.connect(lambda: table_dialog(self))
     self.change_path_action.triggered.connect(lambda: change_path(self))
+    self.open_in_action.triggered.connect(lambda: open_in_excel(self))
+    self.graph_options_action.triggered.connect(lambda: test(self))
+
+
+def test(self):
+    print(self)
+
+
+def open_in_excel(self):
+    path = self.model.filePath(self.tree_view.currentIndex())
+    os.system("start EXCEL.EXE " + '"' + path + '"')
 
 def import_file_clicked(self):
     filepath = self.model.filePath(self.tree_view.currentIndex())
@@ -63,50 +60,9 @@ def import_file_clicked(self):
 
 def get_path_clicked(self):
     filepath = self.model.filePath(self.tree_view.currentIndex())
-    print(filepath)
-
-# def plot_directory(self):
-#     pass
-#     path = self.model.filePath(self.tree_view.currentIndex())
-#
-#     plot_dia = QtWidgets.QDialog()
-#     plot_dia_ui = Plot_Directory_Functions_Ui()
-#     plot_dia_ui.setupUi(plot_dia)
-#
-#     if os.path.isdir(path):
-#         filename, extension = os.path.splitext(path)
-#         l = []
-#         list_of_csv = sorted(glob.glob(path + '/*CSV'))
-#
-#         for i in list_of_csv:
-#             text = i.split('/')[-1]
-#             #  Needed to be a list for some reason, above will only work on macs
-#             l.append(QtWidgets.QTreeWidgetItem([text]))
-#
-#
-#         plot_dia_ui.treewidget_list.addTopLevelItems(l)
-#
-#         # add everything to the tree
-#         plot_dia.exec_()
-#         from_te = int(plot_dia_ui.lineEdit_from.text())
-#         to_te = int(plot_dia_ui.lineEdit_to.text())
-#         skip_every = int(plot_dia_ui.lineEdit.text())
-#
-#         function = plot_dia_ui.treewidget_functions.indexOfTopLevelItem(plot_dia_ui.treewidget_functions.currentItem())
-#
-#         if function == 0:
-#             plot_all_in_directory(self,list_of_csv,from_te,to_te, skip_every)
-#         elif function == 1:
-#             subtraction_from_survey(self, list_of_csv,from_te,to_te, skip_every)
-#         elif function == 2:
-#             difference_from_survey(self,list_of_csv,from_te,to_te, skip_every)
-#
-#         # x = plot_dia_ui.treewidget_list.indexOfTopLevelItem(plot_dia_ui.treewidget_list.currentItem())
-#
-#         # data_list = [np.genfromtxt(csv) for csv in list_of_csv]
-#
-#     else:
-#         print("Needs to be a directory")
+    msg = QtWidgets.QMessageBox()
+    msg.setText(filepath)
+    msg.exec_()
 
 def plot_action_clicked(self):
     path = self.model.filePath(self.tree_view.currentIndex())

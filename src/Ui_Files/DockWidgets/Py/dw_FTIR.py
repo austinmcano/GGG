@@ -157,6 +157,13 @@ class Ui_DockWidget(object):
 
         self.gridLayout_2.addWidget(self.skiprows_sb, 7, 2, 1, 1)
 
+        self.plotside_cb = QComboBox(self.tab)
+        self.plotside_cb.addItem("")
+        self.plotside_cb.addItem("")
+        self.plotside_cb.setObjectName(u"plotside_cb")
+
+        self.gridLayout_2.addWidget(self.plotside_cb, 6, 3, 1, 1)
+
         self.tabWidget.addTab(self.tab, "")
         self.tab_3 = QWidget()
         self.tab_3.setObjectName(u"tab_3")
@@ -1159,6 +1166,9 @@ class Ui_DockWidget(object):
         self.diff_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Diff Plot (dir)", None))
         self.label_7.setText(QCoreApplication.translate("DockWidget", u"UNDER WORK", None))
         self.label_5.setText(QCoreApplication.translate("DockWidget", u"Skip Rows", None))
+        self.plotside_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left Ax", None))
+        self.plotside_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right Ax", None))
+
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("DockWidget", u"IR Plot", None))
         self.textBrowser.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

@@ -99,6 +99,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.color_list.append(name[0])
 
         self.anno_text = ''
+        self.anno_text_2 = ''
+        self.anno_text_3 = ''
         self.anno_size = 20
         self.anno_alpha = 1.0
         self.anno_color = 'black'
@@ -216,12 +218,14 @@ class MainWindow(QtWidgets.QMainWindow):
         self.actionSave_To_CSV = self.save_menu.addAction('Save To CSV')
         self.graph_menu = self.context_menu_plot.addMenu(' Graphs')
         self.removeplot_action = self.graph_menu.addAction('Remove Line')
+        self.label_size_action = self.graph_menu.addAction('Label Sizes')
         self.save_figure_action = self.save_menu.addAction('Save Figure')
         self.annotation_action = self.context_menu_plot.addAction('Annotate')
         self.sns_settings_action = self.graph_menu.addAction('Seaborn Settings')
-        self.send_to_cf_action = self.context_menu_plot.addAction('Send to CF')
-        self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
+        # self.send_to_cf_action = self.context_menu_plot.addAction('Send to CF')
         self.axis_colors_action = self.graph_menu.addAction('Axis Colors')
+        self.moveline_action = self.context_menu_plot.addAction('Move Line')
+        self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
         # self.axis_setup_action = self.graph_menu.addAction('Change Axis Setup')
         # self.axis_setup_action2 = self.graph_menu.addAction('Change Axis Setup 2')
         # self.axis_setup_action3 = self.graph_menu.addAction('Change Axis Setup 3')
@@ -230,14 +234,18 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clear_single_action.triggered.connect(lambda: self.clear_single_graph())
         self.clear_all_graphs_action.triggered.connect(lambda: self.clear_all_graphs())
         self.clear_action.triggered.connect(lambda: self.cleargraph())
+        self.clear_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+X'), self)
+        self.clear_action_2.activated.connect(lambda: self.cleargraph())
         self.removeplot_action.triggered.connect(lambda: remove_line(self))
         self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
         self.save_figure_action.triggered.connect(lambda: save_fig(self))
         self.annotation_action.triggered.connect(lambda: plot_annotation(self))
         self.sns_settings_action.triggered.connect(lambda: self.sns_settings())
-        self.send_to_cf_action.triggered.connect(lambda: send_to_cf(self))
+        # self.send_to_cf_action.triggered.connect(lambda: send_to_cf(self))
         self.open_fig_action.triggered.connect(lambda: show_pickled_fig(self))
         self.axis_colors_action.triggered.connect(lambda: spine_color_fun(self))
+        self.moveline_action.triggered.connect(lambda: move_line(self))
+        self.label_size_action.triggered.connect(lambda: label_size(self))
         # self.axis_setup_action.triggered.connect(lambda: axis_setup_function(self))
         self.ui.actionAxis1.triggered.connect(lambda: change_axis(self, 'axis1'))
         self.ui.actionAxis2.triggered.connect(lambda: change_axis(self, 'axis2'))
@@ -293,14 +301,14 @@ class MainWindow(QtWidgets.QMainWindow):
             self.cleargraph()
             self.fig.delaxes(self.ax)
             self.ax = self.fig.add_subplot(111)
-            self.ax.spines['bottom'].set_color(self.settings.value('bottom_spine_color'))
-            self.ax.spines['top'].set_color(self.settings.value('top_spine_color'))
-            self.ax.spines['right'].set_color(self.settings.value('right_spine_color'))
-            self.ax.spines['left'].set_color(self.settings.value('left_spine_color'))
-            self.ax.xaxis.label.set_color(self.settings.value('bottom_spine_color'))
-            self.ax.yaxis.label.set_color(self.settings.value('left_spine_color'))
-            self.ax.tick_params(axis='x', colors=self.settings.value('bottom_spine_color'))
-            self.ax.tick_params(axis='y', colors=self.settings.value('left_spine_color'))
+            # self.ax.spines['bottom'].set_color(self.settings.value('bottom_spine_color'))
+            # self.ax.spines['top'].set_color(self.settings.value('top_spine_color'))
+            # self.ax.spines['right'].set_color(self.settings.value('right_spine_color'))
+            # self.ax.spines['left'].set_color(self.settings.value('left_spine_color'))
+            # self.ax.xaxis.label.set_color(self.settings.value('bottom_spine_color'))
+            # self.ax.yaxis.label.set_color(self.settings.value('left_spine_color'))
+            # self.ax.tick_params(axis='x', colors=self.settings.value('bottom_spine_color'))
+            # self.ax.tick_params(axis='y', colors=self.settings.value('left_spine_color'))
             self.canvas.draw()
 
         d = QtWidgets.QDialog()
@@ -327,7 +335,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            'spring_r', 'summer', 'summer_r', 'tab10', 'tab10_r', 'tab20', 'tab20_r', 'tab20b',
                            'tab20b_r', 'tab20c', 'tab20c_r', 'terrain', 'terrain_r', 'twilight', 'twilight_r',
                            'twilight_shifted', 'twilight_shifted_r', 'viridis', 'viridis_r', 'vlag', 'vlag_r',
-                           'winter', 'winter_r']
+                           'winter', 'winter_r','deep']
         font_options = ['Al Nile', 'Al Tarikh', 'AlBayan', 'AmericanTypewriter', 'Andale Mono', 'Apple Braille',
                         'Apple Braille Outline 6 Dot', 'Apple Braille Outline 8 Dot', 'Apple Braille Pinpoint 6 Dot',
                         'Apple Braille Pinpoint 8 Dot', 'Apple Chancery', 'Apple Color Emoji', 'Apple Symbols',
@@ -440,16 +448,17 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas.draw()
 
     def cleargraph(self):
+        print('cleared')
         self.dw_XPS.ui.fit_range_cb.clear()
         self.dw_XPS.fit_obj.clear()
         self.ax.clear()
         self.fig.clf()
-        del self.fig
+        # del self.fig
         self.ui.verticalLayout.removeWidget(self.toolbar)
         self.ui.verticalLayout.removeWidget(self.canvas)
         self.toolbar.close()
         self.canvas.close()
-        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+        # self.fig = figure(num=None, figsize=(8, 6), dpi=80)
         self.canvas = FigureCanvas(self.fig)
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)

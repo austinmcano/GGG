@@ -26,7 +26,7 @@ class Ui_Dialog(object):
         self.line_width_sb = QDoubleSpinBox(Dialog)
         self.line_width_sb.setObjectName(u"line_width_sb")
         self.line_width_sb.setSingleStep(0.100000000000000)
-        self.line_width_sb.setValue(0.800000000000000)
+        self.line_width_sb.setValue(2.000000000000000)
 
         self.gridLayout.addWidget(self.line_width_sb, 2, 1, 1, 1)
 

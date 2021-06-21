@@ -21,7 +21,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
@@ -227,6 +227,141 @@ p, li { white-space: pre-wrap; }
          <widget class="QPushButton" name="linfitall_pb">
           <property name="text">
            <string>Lin. Fit. All</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>QMS</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="9" column="1">
+         <widget class="QComboBox" name="plot_side_cb">
+          <item>
+           <property name="text">
+            <string>Left</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Right</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QDoubleSpinBox" name="mass_start_dsb">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>30.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QDoubleSpinBox" name="mass_end_dsb">
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>300.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Starting Mass</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="0">
+         <widget class="QComboBox" name="plottype_cb">
+          <item>
+           <property name="text">
+            <string>Mass Spectrum</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Mass Trace</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Ending Mass</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1" colspan="2">
+         <widget class="QLabel" name="pointsperamu_label">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Skip Rows</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QSpinBox" name="skiprows_qms_sb"/>
+        </item>
+        <item row="1" column="2" colspan="2">
+         <widget class="QTreeWidget" name="qmsy_tw">
+          <column>
+           <property name="text">
+            <string>QMS Y</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QTreeView" name="treeView_qms"/>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QTreeWidget" name="qmsx_tw">
+          <column>
+           <property name="text">
+            <string>QMS_X</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Points per amu</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="2">
+         <widget class="QPushButton" name="fill_cols_qms_pb">
+          <property name="text">
+           <string>Fill Columns</string>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QPushButton" name="plot_qms_pb">
+          <property name="text">
+           <string>Plot</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QPushButton" name="abundance_pb">
+          <property name="text">
+           <string>Abundance Plot</string>
           </property>
          </widget>
         </item>

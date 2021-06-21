@@ -71,12 +71,12 @@ class FTIR_view(QtWidgets.QDockWidget):
         # self.ui.integratemode_rb.toggled.connect(self.integrate_mode)
         self.ui.integratemode_rb.toggled.connect(self.select_integrate_range)
         self.ui.select_ir_range_cb.toggled.connect(self.select_ir_range)
-        self.ui.sub_dir_pb.clicked.connect(lambda: self.ir_plot('sub'))
-        self.ui.diff_2_pb.clicked.connect(lambda: self.ir_plot('diff2'))
-        self.ui.diff_dir_pb.clicked.connect(lambda: self.ir_plot('diff'))
-        self.ui.abs_dir_pb.clicked.connect(lambda: self.ir_plot('abs'))
+        self.ui.sub_dir_pb.clicked.connect(lambda: self.ir_plot('sub', self.ui.plotside_cb.currentText()))
+        self.ui.diff_2_pb.clicked.connect(lambda: self.ir_plot('diff2',self.ui.plotside_cb.currentText()))
+        self.ui.diff_dir_pb.clicked.connect(lambda: self.ir_plot('diff',self.ui.plotside_cb.currentText()))
+        self.ui.abs_dir_pb.clicked.connect(lambda: self.ir_plot('abs',self.ui.plotside_cb.currentText()))
         self.ui.clear_fit_pb.clicked.connect(lambda: self.clear_fit_objs())
-        self.ui.spectra_pb.clicked.connect(lambda: self.ir_plot('spectra'))
+        self.ui.spectra_pb.clicked.connect(lambda: self.ir_plot('spectra',self.ui.plotside_cb.currentText()))
         # self.ui.fit2_pb.clicked.connect(lambda: self.fitting_function_2())
         # self.ui.select_data_pb.clicked.connect(lambda: self.select_data())
         # self.ui.fit_init_pb.clicked.connect(lambda: self.plot_init_2())
@@ -87,89 +87,97 @@ class FTIR_view(QtWidgets.QDockWidget):
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
 
-    def ir_plot(self,type):
+    def ir_plot(self, type, axis):
         path = self.model.filePath(self.tree_view.currentIndex())
         head, tail = os.path.split(path)
-        if type == 'spectra':
-            try:
-                temp = pd.read_csv(path,delimiter=',', skiprows=self.ui.skiprows_sb.value())
-                self.data = temp.to_numpy().T
-                ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
-                    self.data[0], self.data[1], label=tail)
-            except IndexError:
-                temp = pd.read_csv(path, delimiter='\t', skiprows=self.ui.skiprows_sb.value())
-                self.data = temp.to_numpy().T
-                ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
-                    self.data[0], self.data[1], label=tail)
-        elif type == 'sub':
-            if os.path.isdir(path):
-                csv_list = sorted(glob.glob(path + '/*CSV'))
+        if axis == 'Left Ax':
+            ax = self.main_window.ax
+        elif axis == 'Right Ax':
+            self.main_window.ax_2 = self.main_window.ax.twinx()
+            ax = self.main_window.ax_2
+        try:
+            if type == 'spectra':
+                try:
+                    temp = pd.read_csv(path,delimiter=',', skiprows=self.ui.skiprows_sb.value())
+                    self.data = temp.to_numpy().T
+                    ApplicationSettings.ALL_DATA_PLOTTED[tail] = ax.plot(
+                        self.data[0], self.data[1], label=tail)
+                except IndexError:
+                    temp = pd.read_csv(path, delimiter='\t', skiprows=self.ui.skiprows_sb.value())
+                    self.data = temp.to_numpy().T
+                    ApplicationSettings.ALL_DATA_PLOTTED[tail] = ax.plot(
+                        self.data[0], self.data[1], label=tail)
+            elif type == 'sub':
+                if os.path.isdir(path):
+                    csv_list = sorted(glob.glob(path + '/*CSV'))
+                    data = []
+                    for csv in csv_list:
+                        data.append(np.genfromtxt(csv, delimiter=',').T)
+                    sub_list = [data[0][0]]
+                    for l in range(len(data) - 1):
+                        length = len(data[0][0])
+                        sub_list.append(data[l + 1][1][:length] - data[0][1][:length])
+                    self.sub = sub_list
+                    for i in range(0,len(self.sub)-1,self.ui.skip_sb.value()+1):
+                        ApplicationSettings.ALL_DATA_PLOTTED['Sub_'+str(i)] = \
+                            ax.plot(self.sub[0],self.sub[i+1],label='Sub_'+str(i))
+            elif type == 'diff':
+                if os.path.isdir(path):
+                    csv_list = sorted(glob.glob(path + '/*CSV'))
 
-                data = []
-                for csv in csv_list:
-                    data.append(np.genfromtxt(csv, delimiter=',').T)
-                sub_list = [data[0][0]]
-                for l in range(len(data) - 1):
-                    length = len(data[0][0])
-                    sub_list.append(data[l + 1][1][:length] - data[0][1][:length])
-                self.sub = sub_list
+                    data = []
+                    for csv in csv_list:
+                        temp_data = pd.read_csv(csv, delimiter=',')
+                        temp_data = temp_data.dropna(how='any')
+                        data.append(temp_data.to_numpy().T)
+                    sub_list = [data[0][0]]
+                    for l in range(len(data) - 1):
+                        length = len(data[0][0])
+                        if len(data[l + 1][1][:length]) == len(data[l][1][:length]):
+                            try:
+                                sub_list.append(data[l + 1][1][:length] - data[l][1][:length])
+                            except TypeError:
+                                print('problem with unequal lengths')
+                    self.diff = sub_list
 
-                for i in range(0,len(self.sub)-1,self.ui.skip_sb.value()+1):
-                    ApplicationSettings.ALL_DATA_PLOTTED['Sub_'+str(i)] = \
-                        self.main_window.ax.plot(self.sub[0],self.sub[i+1],label='Sub_'+str(i))
-        elif type == 'diff':
-            if os.path.isdir(path):
-                csv_list = sorted(glob.glob(path + '/*CSV'))
-
-                data = []
-                for csv in csv_list:
-                    temp_data = pd.read_csv(csv, delimiter=',')
-                    temp_data = temp_data.dropna(how='any')
-                    data.append(temp_data.to_numpy().T)
-                sub_list = [data[0][0]]
-                for l in range(len(data) - 1):
-                    length = len(data[0][0])
-                    if len(data[l + 1][1][:length]) == len(data[l][1][:length]):
+                    for i in range(0,len(self.diff)-1,self.ui.skip_sb.value()+1):
                         try:
-                            sub_list.append(data[l + 1][1][:length] - data[l][1][:length])
-                        except TypeError:
-                            print('problem with unequal lengths')
-                self.diff = sub_list
+                            ApplicationSettings.ALL_DATA_PLOTTED['Diff_'+str(i)] = \
+                                ax.plot(self.diff[0],self.diff[i+1],label='Diff_'+str(i))
+                        except ValueError:
+                            print('not the same size thing')
+            elif type == 'abs':
+                if os.path.isdir(path):
+                    csv_list = sorted(glob.glob(path + '/*CSV'))
+                    data = []
+                    for csv in csv_list:
+                        data.append(np.genfromtxt(csv, delimiter=',').T)
+                    self.data = [data[0][0]]
+                    for i in range(0,len(data),self.ui.skip_sb.value()+1):
+                        self.data.append(data[i][1])
+                    for j in range(0,len(self.data)-1,self.ui.skip_sb.value()+1):
+                        ApplicationSettings.ALL_DATA_PLOTTED['IR_'+str(j)] = \
+                            ax.plot(self.data[0],self.data[j+1])
+            elif type == 'diff2':
 
-                for i in range(0,len(self.diff)-1,self.ui.skip_sb.value()+1):
-                    try:
-                        ApplicationSettings.ALL_DATA_PLOTTED['Diff_'+str(i)] = \
-                            self.main_window.ax.plot(self.diff[0],self.diff[i+1],label='Diff_'+str(i))
-                    except ValueError:
-                        print('not the same size thing')
-        elif type == 'abs':
-            if os.path.isdir(path):
-                csv_list = sorted(glob.glob(path + '/*CSV'))
-                data = []
-                for csv in csv_list:
-                    data.append(np.genfromtxt(csv, delimiter=',').T)
-                self.data = [data[0][0]]
-                for i in range(0,len(data),self.ui.skip_sb.value()+1):
-                    self.data.append(data[i][1])
-                for j in range(0,len(self.data)-1,self.ui.skip_sb.value()+1):
-                    ApplicationSettings.ALL_DATA_PLOTTED['IR_'+str(j)] = \
-                        self.main_window.ax.plot(self.data[0],self.data[j+1])
-        elif type == 'diff2':
-
-            paths = [self.model.filePath(self.tree_view.selectedIndexes()[0]),
-                     self.model.filePath(self.tree_view.selectedIndexes()[5])]
-            temp1 = pd.read_csv(paths[0],delimiter=',').to_numpy().T
-            temp2 = pd.read_csv(paths[1],delimiter=',').to_numpy().T
-            self.data = [temp1[0],temp1[1]-temp2[1]]
-            ApplicationSettings.ALL_DATA_PLOTTED[tail] = self.main_window.ax.plot(
-                self.data[0], self.data[1], label=tail)
-        self.ir_basic()
+                paths = [self.model.filePath(self.tree_view.selectedIndexes()[0]),
+                         self.model.filePath(self.tree_view.selectedIndexes()[5])]
+                temp1 = pd.read_csv(paths[0],delimiter=',').to_numpy().T
+                temp2 = pd.read_csv(paths[1],delimiter=',').to_numpy().T
+                self.data = [temp1[0],temp1[1]-temp2[1]]
+                ApplicationSettings.ALL_DATA_PLOTTED[tail] = ax.plot(
+                    self.data[0], self.data[1], label=tail)
+            self.ir_basic()
+        except PermissionError or IndexError:
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Aint Nottin Her')
+            msg.exec_()
 
     def ir_basic(self):
         limits = self.main_window.ax.get_xlim()
         if limits[1] > limits[0]:
             self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])
-        self.main_window.ax.set_xlabel('Wavenumber ($cm^{-1}$)')
+        self.main_window.ax.set_xlabel('Wavenumber (cm$^{-1}$)')
         self.main_window.ax.set_ylabel('Absorbance')
         self.main_window.fig.tight_layout()
         self.main_window.canvas.draw()

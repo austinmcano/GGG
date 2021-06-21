@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>747</width>
-    <height>536</height>
+    <height>533</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,7 +40,7 @@
      <x>0</x>
      <y>0</y>
      <width>747</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -178,7 +178,7 @@
     <string>FTIR</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+F</string>
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionQCM">
@@ -304,7 +304,7 @@
     <string>XPS</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+X</string>
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionProject_Tree">
@@ -322,7 +322,7 @@
     <string>SE</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionConsole">
@@ -617,6 +617,9 @@
   <action name="actionXRD">
    <property name="text">
     <string>XRD</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
   <action name="actionAxis1">

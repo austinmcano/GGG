@@ -156,6 +156,99 @@ class Ui_DockWidget(object):
         self.gridLayout_5.addWidget(self.linfitall_pb, 5, 3, 1, 1)
 
         self.tabWidget.addTab(self.tab_2, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_2 = QGridLayout(self.tab)
+        self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.plot_side_cb = QComboBox(self.tab)
+        self.plot_side_cb.addItem("")
+        self.plot_side_cb.addItem("")
+        self.plot_side_cb.setObjectName(u"plot_side_cb")
+
+        self.gridLayout_2.addWidget(self.plot_side_cb, 9, 1, 1, 1)
+
+        self.mass_start_dsb = QDoubleSpinBox(self.tab)
+        self.mass_start_dsb.setObjectName(u"mass_start_dsb")
+        self.mass_start_dsb.setMaximum(1000.000000000000000)
+        self.mass_start_dsb.setValue(30.000000000000000)
+
+        self.gridLayout_2.addWidget(self.mass_start_dsb, 3, 1, 1, 1)
+
+        self.mass_end_dsb = QDoubleSpinBox(self.tab)
+        self.mass_end_dsb.setObjectName(u"mass_end_dsb")
+        self.mass_end_dsb.setMaximum(1000.000000000000000)
+        self.mass_end_dsb.setValue(300.000000000000000)
+
+        self.gridLayout_2.addWidget(self.mass_end_dsb, 4, 1, 1, 1)
+
+        self.label_3 = QLabel(self.tab)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout_2.addWidget(self.label_3, 3, 0, 1, 1)
+
+        self.plottype_cb = QComboBox(self.tab)
+        self.plottype_cb.addItem("")
+        self.plottype_cb.addItem("")
+        self.plottype_cb.setObjectName(u"plottype_cb")
+
+        self.gridLayout_2.addWidget(self.plottype_cb, 9, 0, 1, 1)
+
+        self.label_4 = QLabel(self.tab)
+        self.label_4.setObjectName(u"label_4")
+
+        self.gridLayout_2.addWidget(self.label_4, 4, 0, 1, 1)
+
+        self.pointsperamu_label = QLabel(self.tab)
+        self.pointsperamu_label.setObjectName(u"pointsperamu_label")
+
+        self.gridLayout_2.addWidget(self.pointsperamu_label, 5, 1, 1, 2)
+
+        self.label_6 = QLabel(self.tab)
+        self.label_6.setObjectName(u"label_6")
+
+        self.gridLayout_2.addWidget(self.label_6, 3, 2, 1, 1)
+
+        self.skiprows_qms_sb = QSpinBox(self.tab)
+        self.skiprows_qms_sb.setObjectName(u"skiprows_qms_sb")
+
+        self.gridLayout_2.addWidget(self.skiprows_qms_sb, 3, 3, 1, 1)
+
+        self.qmsy_tw = QTreeWidget(self.tab)
+        self.qmsy_tw.setObjectName(u"qmsy_tw")
+
+        self.gridLayout_2.addWidget(self.qmsy_tw, 1, 2, 1, 2)
+
+        self.treeView_qms = QTreeView(self.tab)
+        self.treeView_qms.setObjectName(u"treeView_qms")
+
+        self.gridLayout_2.addWidget(self.treeView_qms, 0, 0, 1, 4)
+
+        self.qmsx_tw = QTreeWidget(self.tab)
+        self.qmsx_tw.setObjectName(u"qmsx_tw")
+
+        self.gridLayout_2.addWidget(self.qmsx_tw, 1, 0, 1, 2)
+
+        self.label_5 = QLabel(self.tab)
+        self.label_5.setObjectName(u"label_5")
+
+        self.gridLayout_2.addWidget(self.label_5, 5, 0, 1, 1)
+
+        self.fill_cols_qms_pb = QPushButton(self.tab)
+        self.fill_cols_qms_pb.setObjectName(u"fill_cols_qms_pb")
+
+        self.gridLayout_2.addWidget(self.fill_cols_qms_pb, 9, 2, 1, 1)
+
+        self.plot_qms_pb = QPushButton(self.tab)
+        self.plot_qms_pb.setObjectName(u"plot_qms_pb")
+
+        self.gridLayout_2.addWidget(self.plot_qms_pb, 9, 3, 1, 1)
+
+        self.abundance_pb = QPushButton(self.tab)
+        self.abundance_pb.setObjectName(u"abundance_pb")
+
+        self.gridLayout_2.addWidget(self.abundance_pb, 5, 3, 1, 1)
+
+        self.tabWidget.addTab(self.tab, "")
         self.tab_4 = QWidget()
         self.tab_4.setObjectName(u"tab_4")
         self.gridLayout_4 = QGridLayout(self.tab_4)
@@ -234,7 +327,7 @@ class Ui_DockWidget(object):
 
         self.retranslateUi(DockWidget)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(DockWidget)
@@ -277,6 +370,25 @@ class Ui_DockWidget(object):
         self.lin_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit", None))
         self.linfitall_pb.setText(QCoreApplication.translate("DockWidget", u"Lin. Fit. All", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Fit Results", None))
+        self.plot_side_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left", None))
+        self.plot_side_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right", None))
+
+        self.label_3.setText(QCoreApplication.translate("DockWidget", u"Starting Mass", None))
+        self.plottype_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Mass Spectrum", None))
+        self.plottype_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Mass Trace", None))
+
+        self.label_4.setText(QCoreApplication.translate("DockWidget", u"Ending Mass", None))
+        self.pointsperamu_label.setText(QCoreApplication.translate("DockWidget", u"0", None))
+        self.label_6.setText(QCoreApplication.translate("DockWidget", u"Skip Rows", None))
+        ___qtreewidgetitem2 = self.qmsy_tw.headerItem()
+        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("DockWidget", u"QMS Y", None));
+        ___qtreewidgetitem3 = self.qmsx_tw.headerItem()
+        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("DockWidget", u"QMS_X", None));
+        self.label_5.setText(QCoreApplication.translate("DockWidget", u"Points per amu", None))
+        self.fill_cols_qms_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
+        self.plot_qms_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
+        self.abundance_pb.setText(QCoreApplication.translate("DockWidget", u"Abundance Plot", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("DockWidget", u"QMS", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"Y Axis", None))
         self.plottable_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Table", None))
         self.label.setText(QCoreApplication.translate("DockWidget", u"X Axis", None))

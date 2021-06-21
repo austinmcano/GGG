@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -17,7 +20,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(747, 536)
+        MainWindow.resize(747, 533)
         MainWindow.setTabShape(QTabWidget.Rounded)
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.actionOpen_File = QAction(MainWindow)
@@ -229,7 +232,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 747, 24))
+        self.menubar.setGeometry(QRect(0, 0, 747, 21))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuImport = QMenu(self.menuFile)
@@ -318,7 +321,7 @@ class Ui_MainWindow(object):
         self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
         self.actionFTIR.setText(QCoreApplication.translate("MainWindow", u"FTIR", None))
 #if QT_CONFIG(shortcut)
-        self.actionFTIR.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+F", None))
+        self.actionFTIR.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+T", None))
 #endif // QT_CONFIG(shortcut)
         self.actionQCM.setText(QCoreApplication.translate("MainWindow", u"QCM", None))
 #if QT_CONFIG(shortcut)
@@ -348,13 +351,13 @@ class Ui_MainWindow(object):
         self.actionClear_Current_Data.setText(QCoreApplication.translate("MainWindow", u"Clear Current Data", None))
         self.actionXPS.setText(QCoreApplication.translate("MainWindow", u"XPS", None))
 #if QT_CONFIG(shortcut)
-        self.actionXPS.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+X", None))
+        self.actionXPS.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+P", None))
 #endif // QT_CONFIG(shortcut)
         self.actionProject_Tree.setText(QCoreApplication.translate("MainWindow", u"Project Tree", None))
         self.actionDataBrowser.setText(QCoreApplication.translate("MainWindow", u"Data Browser", None))
         self.actionSE.setText(QCoreApplication.translate("MainWindow", u"SE", None))
 #if QT_CONFIG(shortcut)
-        self.actionSE.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+S", None))
+        self.actionSE.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+E", None))
 #endif // QT_CONFIG(shortcut)
         self.actionConsole.setText(QCoreApplication.translate("MainWindow", u"Console", None))
         self.actionQCM_Help.setText(QCoreApplication.translate("MainWindow", u"QCM Help", None))
@@ -419,6 +422,9 @@ class Ui_MainWindow(object):
         self.actionTight_Layout.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+I", None))
 #endif // QT_CONFIG(shortcut)
         self.actionXRD.setText(QCoreApplication.translate("MainWindow", u"XRD", None))
+#if QT_CONFIG(shortcut)
+        self.actionXRD.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+R", None))
+#endif // QT_CONFIG(shortcut)
         self.actionAxis1.setText(QCoreApplication.translate("MainWindow", u"Axis1", None))
         self.actionAxis2.setText(QCoreApplication.translate("MainWindow", u"Axis2", None))
         self.actionAxis3.setText(QCoreApplication.translate("MainWindow", u"Axis3", None))
