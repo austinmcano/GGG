@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(747, 533)
+        MainWindow.resize(747, 531)
         MainWindow.setTabShape(QTabWidget.Rounded)
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.actionOpen_File = QAction(MainWindow)
@@ -217,6 +217,8 @@ class Ui_MainWindow(object):
         self.actionAxis4.setObjectName(u"actionAxis4")
         self.actionAdd_Line = QAction(MainWindow)
         self.actionAdd_Line.setObjectName(u"actionAdd_Line")
+        self.actionRemove_Noise = QAction(MainWindow)
+        self.actionRemove_Noise.setObjectName(u"actionRemove_Noise")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout = QGridLayout(self.centralwidget)
@@ -293,6 +295,7 @@ class Ui_MainWindow(object):
         self.menuFigure.addAction(self.actionBar_Graph)
         self.menuFigure.addAction(self.actionTight_Layout)
         self.menuFigure.addAction(self.actionAdd_Line)
+        self.menuFigure.addAction(self.actionRemove_Noise)
         self.menuHELP.addSeparator()
         self.menuHELP.addAction(self.actionQCM_Help)
         self.menuHELP.addAction(self.actionXPS_Help)
@@ -430,6 +433,7 @@ class Ui_MainWindow(object):
         self.actionAxis3.setText(QCoreApplication.translate("MainWindow", u"Axis3", None))
         self.actionAxis4.setText(QCoreApplication.translate("MainWindow", u"Axis4", None))
         self.actionAdd_Line.setText(QCoreApplication.translate("MainWindow", u"Add Line", None))
+        self.actionRemove_Noise.setText(QCoreApplication.translate("MainWindow", u"Remove Noise", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuImport.setTitle(QCoreApplication.translate("MainWindow", u"Import", None))
         self.menuEdit.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))

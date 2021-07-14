@@ -67,6 +67,10 @@ class MainWindow(QtWidgets.QMainWindow):
                     'label1':'','label2':'','label3':''}
         self.ax = self.ax_1
         self.dragh = DragHandler(self, figure=self.fig)
+        self.pickle_opened = QtWidgets.QLabel()
+        self.pickle_opened.setText('None')
+        self.ui.toolBar.addWidget(self.pickle_opened)
+
 
         self.dw_ProjectView = ProjectBrowser(self)
         self.dw_Data_Broswer = DataBrowser(self)
@@ -115,53 +119,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def init_connections(self):
         self.plot_context_actions()
-        # self.context_menu_plot = QtWidgets.QMenu(self)
-        # self.canvas.installEventFilter(self)
-        #
-        # self.clear_menu = self.context_menu_plot.addMenu('Clear')
-        # self.clear_action = self.clear_menu.addAction('Clear All')
-        # self.clear_single_action = self.clear_menu.addAction('Clear Graph')
-        # self.clear_all_graphs_action = self.clear_menu.addAction('Clear All Graphs')
-        # self.save_menu = self.context_menu_plot.addMenu('Save')
-        # self.actionSave_To_CSV = self.save_menu.addAction('Save To CSV')
-        # self.graph_menu = self.context_menu_plot.addMenu(' Graphs')
-        # self.removeplot_action = self.graph_menu.addAction('Remove Line')
-        # self.save_figure_action = self.save_menu.addAction('Save Figure')
-        # self.annotation_action = self.context_menu_plot.addAction('Annotate')
-        # self.sns_settings_action = self.graph_menu.addAction('Seaborn Settings')
-        # self.send_to_cf_action = self.context_menu_plot.addAction('Send to CF')
-        # self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
-        # self.axis_colors_action = self.graph_menu.addAction('Axis Colors')
-        # self.axis_setup_action = self.graph_menu.addAction('Change Axis Setup')
-        # self.axis_setup_action2 = self.graph_menu.addAction('Change Axis Setup 2')
-        # self.axis_setup_action3 = self.graph_menu.addAction('Change Axis Setup 3')
-        # self.axis_setup_action4 = self.graph_menu.addAction('Change Axis Setup 4')
-        #
-        # self.clear_single_action.triggered.connect(lambda: self.clear_single_graph())
-        # self.clear_all_graphs_action.triggered.connect(lambda: self.clear_all_graphs())
-        # self.clear_action.triggered.connect(lambda: self.cleargraph())
-        # self.removeplot_action.triggered.connect(lambda: remove_line(self))
-        # self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
-        # self.save_figure_action.triggered.connect(lambda: save_fig(self))
-        # self.annotation_action.triggered.connect(lambda: plot_annotation(self))
-        # self.sns_settings_action.triggered.connect(lambda: self.sns_settings())
-        # self.send_to_cf_action.triggered.connect(lambda: send_to_cf(self))
-        # self.open_fig_action.triggered.connect(lambda: show_pickled_fig(self))
-        # self.axis_colors_action.triggered.connect(lambda: spine_color_fun(self))
-        # # self.axis_setup_action.triggered.connect(lambda: axis_setup_function(self))
-        # self.ui.actionAxis1.triggered.connect(lambda: change_axis(self, 'axis1'))
-        # self.ui.actionAxis2.triggered.connect(lambda: change_axis(self, 'axis2'))
-        # self.ui.actionAxis3.triggered.connect(lambda: change_axis(self, 'axis3'))
-        # self.ui.actionAxis4.triggered.connect(lambda: change_axis(self, 'axis4'))
-        #
-        # self.axis_setup_action = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+1'), self)
-        # self.axis_setup_action.activated.connect(lambda: axis_setup_fun(self,1))
-        # self.axis_setup_action2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+2'), self)
-        # self.axis_setup_action2.activated.connect(lambda: axis_setup_fun(self, 2))
-        # self.axis_setup_action3 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+3'), self)
-        # self.axis_setup_action3.activated.connect(lambda: axis_setup_fun(self, 3))
-        # self.axis_setup_action4 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+4'), self)
-        # self.axis_setup_action4.activated.connect(lambda: axis_setup_fun(self, 4))
+
         start_dialog = QtWidgets.QDialog()
         start_ui = start_Ui()
         start_ui.setupUi(start_dialog)
@@ -188,6 +146,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionClear_Graph.triggered.connect(lambda: self.cleargraph())
         self.ui.actionXPS.triggered.connect(lambda: XPS_view_fun(self))
         self.ui.actionXRD.triggered.connect(lambda: XRD_view_fun(self))
+        self.ui.actionRemove_Noise.triggered.connect(self.select_delete_range)
         # self.ui.actionDataBrowser.triggered.connect(lambda: DataBrowser_view_fun(self))
         # self.ui.actionProject_Tree.triggered.connect(lambda: Project_view_fun(self))
         self.ui.actionQCM.triggered.connect(lambda: QCM_view_fun(self))
@@ -453,12 +412,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dw_XPS.fit_obj.clear()
         self.ax.clear()
         self.fig.clf()
-        # del self.fig
+        del self.fig
         self.ui.verticalLayout.removeWidget(self.toolbar)
         self.ui.verticalLayout.removeWidget(self.canvas)
         self.toolbar.close()
         self.canvas.close()
-        # self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
         self.canvas = FigureCanvas(self.fig)
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)
@@ -484,38 +443,46 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.settings.setValue("pos", self.pos())
         e.accept()
 
-# class DragHandler(object):
-#     """ A simple class to handle Drag n Drop.
-#
-#     This is a simple example, which works for Text objects only
-#     """
-#     def __init__(self,main_window, figure=None):
-#         """ Create a new drag handler and connect it to the figure's event system.
-#         If the figure handler is not given, the current figure is used instead
-#         """
-#         if figure is None : figure = matplotlib.pyplot.gcf()
-#         # simple attibute to store the dragged text object
-#         self.dragged = None
-#         self.main_window = main_window
-#         # Connect events and callbacks
-#         figure.canvas.mpl_connect("pick_event", self.on_pick_event)
-#         figure.canvas.mpl_connect("button_release_event", self.on_release_event)
-#         # figure.canvas.mpl_connect("button_release_event", self.on_release)
-#
-#     def on_pick_event(self, event):
-#         " Store which text object was picked and were the pick event occurs."
-#         if isinstance(event.artist, Text):
-#             self.dragged = event.artist
-#             self.pick_pos = (event.mouseevent.xdata, event.mouseevent.ydata)
-#         return True
-#
-#     def on_release_event(self, event):
-#         " Update text position and redraw"
-#         if self.dragged is not None :
-#             old_pos = self.dragged.get_position()
-#             new_pos = (old_pos[0] + event.xdata - self.pick_pos[0],
-#                        old_pos[1] + event.ydata - self.pick_pos[1])
-#             self.dragged.set_position(new_pos)
-#             self.dragged = None
-#             self.main_window.canvas.draw()
-#         return True
+    def select_delete_range(self):
+        self.span_d = SpanSelector(self.ax, self.remove_data_0, 'horizontal', useblit=False,
+                                   rectprops=dict(alpha=0.2, facecolor='blue'))
+
+
+    def remove_data_0(self, minimum, maximum):
+        all_lines = ApplicationSettings.ALL_DATA_PLOTTED
+        dialog = QtWidgets.QDialog()
+        ui = simple_tw()
+        ui.setupUi(dialog)
+        ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+        Key_List = []
+        for i in all_lines.keys():
+            Key_List.append(QtWidgets.QTreeWidgetItem([i]))
+        ui.treeWidget.addTopLevelItems(Key_List)
+        ok = dialog.exec_()
+        self.indexes = ui.treeWidget.selectedIndexes()
+        if ok:
+            self.canvas.draw()
+        for j in self.indexes:
+            line_1 = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+            line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+            try:
+                data = line_1._xy.T
+                temp = line_1._xy.T[0]
+            except AttributeError:
+                data = line_1[0]._xy.T
+                temp = line_1[0]._xy.T[0]
+            new_data = []
+            delete_array = range(find_nearest(temp, minimum),find_nearest(temp, maximum))
+            new_data.append(np.delete(data[0], delete_array))
+            new_data.append(np.delete(data[1], delete_array))
+            try:
+                self.ax.lines.remove(line)
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            except ValueError:
+                self.ax.lines.remove(line[0])
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+                del line
+            ApplicationSettings.ALL_DATA_PLOTTED[j.data()] = self.ax.plot(new_data[0], new_data[1], label=j.data())
+        del self.span_d
+        self.canvas.draw()

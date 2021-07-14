@@ -57,7 +57,5 @@ if __name__ == "__main__":
 
 """
 to do list:
-Make fitting object in FTIR DW section 
-Save the figure and open again.. long time coming
-update annotate in the plot.. also make it deleteable would be nice
+
 """

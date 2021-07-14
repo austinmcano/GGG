@@ -28,6 +28,7 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.x_data = None
         self.y_data = None
         self.fit_name = None
+        self.data_list = []
         # self.constraints = np.asarray(
         #     [[10, -1000, 1000, 3700, 400, 4000, 50, 1, 400], [10, -1000, 2900, 285, 400, 4000, 50, 1, 400],
         #      [1, -1000, 1000, 2890, 400, 4000, 50, 1, 400], [10, -1000, 1000, 1215, 400, 4000, 50, 1, 400],
@@ -88,6 +89,7 @@ class FTIR_view(QtWidgets.QDockWidget):
         return False
 
     def ir_plot(self, type, axis):
+        self.data_list = []
         path = self.model.filePath(self.tree_view.currentIndex())
         head, tail = os.path.split(path)
         if axis == 'Left Ax':
@@ -168,9 +170,13 @@ class FTIR_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED[tail] = ax.plot(
                     self.data[0], self.data[1], label=tail)
             self.ir_basic()
-        except PermissionError or IndexError:
+        except PermissionError:
             msg = QtWidgets.QMessageBox()
             msg.setText('Aint Nottin Her')
+            msg.exec_()
+        except IndexError:
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Aint Nottin Here')
             msg.exec_()
 
     def ir_basic(self):
@@ -214,71 +220,60 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.main_window.canvas.draw()
 
     def integrate(self):
-        # dict = ApplicationSettings.ALL_DATA_PLOTTED
-        # Key_List = []
-        # data = []
-        # index = 0
-        # for i in dict.keys():
-        #     if index == 0:
-        #         data.append(dict[i][0]._xy.T[0])
-        #         index += 1
-        #     Key_List.append(i)
-        #     data.append(dict[i][0]._xy.T[1])
-        # inte = self.integrate_ir(data, self.ui.min_sb.value(), self.ui.max_sb.value())
-        # self.main_window.ax.plot(inte, '.-', label=str(np.round(self.ui.min_sb.value(), 4)) + '-' +
-        #                                              str(np.round(self.ui.max_sb.value(), 4)))
-        # self.main_window.canvas.draw()
-        # path = self.model.filePath(self.tree_view.currentIndex())
-        # csv_list = sorted(glob.glob(path + '/*CSV'))
-        # self.sub = self.subtraction_from_survey(csv_list)
-        # min_max = [[400,4000],[400,4000],[400,4000],[400,4000]]
-        # labels = ['','','','']
-        # for row in range(4):
-        #     labels[row] = self.ui.tableWidget.item(row, 2).text()
-        #     for column in range(2):
-        #         min_max[row][column] = float(self.ui.tableWidget.item(row,column).text())
-        # print(labels)
-        # minimum = float(self.ui.tableWidget.item(0,0).text())
-        # maximum = float(self.ui.tableWidget.item(0, 1).text())
-        # num_of_int = self.ui.spinBox.value()
-        data_list = []
-        for i in ApplicationSettings.ALL_DATA_PLOTTED.keys():
-            if data_list == []:
-                data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0])
-            data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][1])
-
-        if self.ui.leftrightaxis_cb.currentText()=='Left Axis':
+        # make list for the data
+        # self.data_list = []
+        # grab all the lines from applicationsettings. if it is a list of Line2D then flatten else grab the line
+        # print(self.data_list)
+        if self.data_list == []:
+            for i in ApplicationSettings.ALL_DATA_PLOTTED.keys():
+                if type(ApplicationSettings.ALL_DATA_PLOTTED[i]) == list:
+                    if self.data_list == []:
+                        self.data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0]._xy.T[0])
+                    self.data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i][0]._xy.T[1])
+                else:
+                    try:
+                        if self.data_list == []:
+                            self.data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i]._xy.T[0])
+                        self.data_list.append(ApplicationSettings.ALL_DATA_PLOTTED[i]._xy.T[1])
+                    except AttributeError:
+                        pass
+            self.main_window.cleargraph()
+        # else:
+        #     pass
+        #  Which axis to plot on and clear the previous graph
+        if self.ui.leftrightaxis_cb.currentText() == 'Left Axis':
             ax = self.main_window.ax
-        elif self.ui.leftrightaxis_cb.currentText()=='Right Axis':
+        elif self.ui.leftrightaxis_cb.currentText() == 'Right Axis':
             if self.main_window.ax_2 is None:
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
-        # if self.ui.int_type_cb.currentText() == 'Absolute':
-        #     print('Passed')
-        # elif self.ui.int_type_cb.currentText() == 'Subtraction_C':
-        #     # for i in range(num_of_int):
-        #     self.sub = self.subtraction_from_survey(csv_list)
-        #     inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
-        #     inte_c = [i-inte[0] for i in inte]
-        #     ApplicationSettings.ALL_DATA_PLOTTED['Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
-        #         ax.plot(inte_c, '.-', label=str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
-        # elif self.ui.int_type_cb.currentText() == 'Subtraction':
-        #     # for i in range(num_of_int):
-        #
-        #     self.sub = self.subtraction_from_survey(csv_list)
-        #     inte = self.integrate_ir(self.sub, self.ui.min_sb.value(), self.ui.max_sb.value())
-        # elif self.ui.int_type_cb.currentText() == 'Difference':
-        #     # for i in range(num_of_int):
-        #     self.diff = self.difference_from_survey(csv_list)
-        #     inte = self.integrate_ir(self.diff, self.ui.min_sb.value(), self.ui.max_sb.value())
-        inte = self.integrate_ir(data_list,self.ui.min_sb.value(),self.ui.max_sb.value())
-        if self.ui.xaxis_cb.currentText() == 'Ints':
-            x = np.linspace(1, len(inte), len(inte))
-        elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
-            x = np.linspace(0.5, len(inte)/2, len(inte))
-        ApplicationSettings.ALL_DATA_PLOTTED[
-            'Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value())] = \
-            ax.plot(x,inte, '.-', label='Int. ' + str(self.ui.min_sb.value()) + '-' + str(self.ui.max_sb.value()))
+        ints_on = [self.ui.integrate1_cb.isChecked(), self.ui.integrate2_cb.isChecked(), self.ui.integrate3_cb.isChecked()
+                   , self.ui.integrate4_cb.isChecked(), self.ui.integrate5_cb.isChecked()]
+
+        minimum_ints = [self.ui.min1_sb.value(),self.ui.min2_sb.value(),self.ui.min3_sb.value(),self.ui.min4_sb.value()
+                        ,self.ui.min5_sb.value()]
+        maximum_ints = [self.ui.max1_sb.value(),self.ui.max2_sb.value(),self.ui.max3_sb.value(),self.ui.max4_sb.value()
+                        ,self.ui.max5_sb.value()]
+
+        for i in range(len(ints_on)):
+            if ints_on[i] is True:
+                # use the function integrate ir to take an array of wavenumber and data and integrate from min to max
+                inte = self.integrate_ir(self.data_list,minimum_ints[i],maximum_ints[i])
+
+                # if self.ui.xaxis_cb.currentText() == 'Ints':
+                #     x = np.linspace(1, len(inte), len(inte))
+                # elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
+                #     x = np.linspace(0.5, len(inte)/2, len(inte))
+                if self.ui.xaxis_cb.currentText() == 'Ints':
+                    x = np.linspace(0, len(inte)-1, len(inte))
+                elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
+                    x = np.linspace(0, (len(inte)-1)/2, len(inte))
+
+                ApplicationSettings.ALL_DATA_PLOTTED[
+                    'Int. ' + str(minimum_ints[i]) + '-' + str(maximum_ints[i])] = \
+                    ax.plot(x, inte, '.-', label='Int. ' + str(minimum_ints[i]) + '-' + str(maximum_ints[i]),
+                            markersize=40)
+        print(ax)
         self.main_window.canvas.draw()
 
     def integrate_ir(self, data, minimum, maximum):
@@ -337,7 +332,10 @@ class FTIR_view(QtWidgets.QDockWidget):
     def on_select(self,minimum, maximum):
         line = list(ApplicationSettings.ALL_DATA_PLOTTED.keys())
         if len(line) == 1:
-            line = ApplicationSettings.ALL_DATA_PLOTTED[list(ApplicationSettings.ALL_DATA_PLOTTED.keys())[0]][0]
+            try:
+                line = ApplicationSettings.ALL_DATA_PLOTTED[list(ApplicationSettings.ALL_DATA_PLOTTED.keys())[0]][0]
+            except TypeError:
+                line = ApplicationSettings.ALL_DATA_PLOTTED[list(ApplicationSettings.ALL_DATA_PLOTTED.keys())[0]]
             self.x_data = line._xy.T[0]
             self.y_data = line._xy.T[1]
             self.fit_obj[str(np.round(minimum, 1)) + '+' + str(np.round(maximum, 1))] = \
@@ -537,7 +535,10 @@ class FTIR_view(QtWidgets.QDockWidget):
         if str('lin_part' + self.ui.ir_range_cb.currentText()) in ApplicationSettings.ALL_DATA_PLOTTED:
             line0 = ApplicationSettings.ALL_DATA_PLOTTED['lin_part' + self.ui.ir_range_cb.currentText()]
             print(line0)
-            self.main_window.ax.lines.remove(line0[0])
+            try:
+                self.main_window.ax.lines.remove(line0[0])
+            except ValueError:
+                line0.remove()
         self.main_window.canvas.draw()
 
 class IR_Fit_Object(object):

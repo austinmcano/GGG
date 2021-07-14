@@ -95,9 +95,9 @@ class SE_view(QtWidgets.QDockWidget):
         if self.ui.ax_cb.currentText() == 'Left Ax':
             ax = self.main_window.ax
         elif self.ui.ax_cb.currentText() == 'Right Ax':
-            if self.main_window.ax_2 is None:
-                self.main_window.ax_2 = self.main_window.ax.twinx()
-            ax = self.main_window.ax_2
+            # if self.main_window.ax_2 is None:
+            ax = self.main_window.ax.twinx()
+            # ax = self.main_window.ax_2
         x = self.ui.tw_x.currentIndex().data()
         y = self.ui.tw_y.currentIndex().data()
         x_data = self.data[x].to_numpy()
@@ -272,14 +272,14 @@ class SE_view(QtWidgets.QDockWidget):
         if self.ui.zero_correct_checkb.isChecked():
             y_data = y_data-y_data[0]
         if self.ui.plot_type_cb.currentText() == 'Ext. Plot (ints)':
-            ApplicationSettings.ALL_DATA_PLOTTED[name] = \
-                ax.plot(np.linspace(0, len(y_data) - 1, len(y_data)), y_data, '.-',label=y)
+            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
+                ax.plot(np.linspace(0, len(y_data) - 1, len(y_data)), y_data, '.-',label=name+y)
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (half-ints)':
-            ApplicationSettings.ALL_DATA_PLOTTED[name] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,'.-',label=y)
+            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
+                ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,'.-',label=name+y)
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (third-ints)':
-            ApplicationSettings.ALL_DATA_PLOTTED[name] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 3, len(y_data)), y_data, '.-',label=y)
+            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
+                ax.plot(np.linspace(0, (len(y_data) - 1) / 3, len(y_data)), y_data, '.-',label=name+y)
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
@@ -357,9 +357,8 @@ class SE_view(QtWidgets.QDockWidget):
         #         if not np.isnan(j):
         #             y_data.append(j)
         y_data = self.data[self.ui.qmsy_tw.selectedItems()[0].text(0)].to_numpy()
-        x_data = self.data[self.ui.qmsx_tw.selectedItems()[0].text(0)].to_numpy()
-        print(x_data)
         if self.ui.plottype_cb.currentText() == 'Mass Spectrum':
+            x_data = self.data[self.ui.qmsx_tw.selectedItems()[0].text(0)].to_numpy()
             ApplicationSettings.ALL_DATA_PLOTTED[name] = \
                 ax.plot(x_data, y_data, '.-', label=y)
             ax.set_xlabel('m/z')
@@ -382,24 +381,29 @@ class SE_view(QtWidgets.QDockWidget):
             for i in indexes:
                 ApplicationSettings.ALL_DATA_PLOTTED['abundline_' + str(allmasses[i].value())] = \
                     self.main_window.ax.vlines(x=allmasses[i].value(), ymin=0, ymax=allabund[i].value()*max_abun/100,
-                                    linestyle="--", lw=2, color='red')
+                                    linestyle="-", lw=3, color='red',label='abundline_'+str(allmasses[i].value()))
+                print(ApplicationSettings.ALL_DATA_PLOTTED['abundline_' + str(allmasses[i].value())])
             for i in range(len(self.mslinemass)):
                 self.mslinemass[i] = allmasses[i].value()
                 self.mslineabund[i] = allabund[i].value()
 
-        data = self.main_window.ax.lines[0]._xy.T
-        d = QtWidgets.QDialog()
-        ui = mslines_ui()
-        ui.setupUi(d)
+        try:
+            data = self.main_window.ax.lines[0]._xy.T
+            d = QtWidgets.QDialog()
+            ui = mslines_ui()
+            ui.setupUi(d)
 
-        allabund = [ui.a1, ui.a2, ui.a3, ui.a4, ui.a5, ui.a6, ui.a7, ui.a8]
-        allmasses = [ui.m1, ui.m2, ui.m3, ui.m4, ui.m5, ui.m6, ui.m7, ui.m8]
+            allabund = [ui.a1, ui.a2, ui.a3, ui.a4, ui.a5, ui.a6, ui.a7, ui.a8]
+            allmasses = [ui.m1, ui.m2, ui.m3, ui.m4, ui.m5, ui.m6, ui.m7, ui.m8]
 
-        for i in range(len(allabund)):
-            allabund[i].setValue(self.mslineabund[i])
-            allmasses[i].setValue(self.mslinemass[i])
+            for i in range(len(allabund)):
+                allabund[i].setValue(self.mslineabund[i])
+                allmasses[i].setValue(self.mslinemass[i])
 
-        ui.buttonBox.accepted.connect(finish)
-        d.exec_()
-        self.main_window.canvas.draw()
-
+            ui.buttonBox.accepted.connect(finish)
+            d.exec_()
+            self.main_window.canvas.draw()
+        except IndexError:
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Need data to work')
+            msg.exec_()

@@ -15,6 +15,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.pyplot import figure
 import matplotlib
+from matplotlib.widgets import SpanSelector
 import pickle
 from matplotlib.text import Text
 import pandas as pd
@@ -66,12 +67,11 @@ def spine_color_fun(self):
 
 
 def graph_test_fun(self):
-    print(self.fig.canvas.callbacks.callbacks)
-    for i in self.fig.canvas.callbacks.callbacks.keys():
-        self.fig.canvas.callbacks.mpl_disconnect(i)
-        print(i)
-    print(self.fig.canvas.callbacks.callbacks)
-
+    self.ax.set_xlim(0,200)
+    print(self.ax_2.get_xlim())
+    print(self.ax.get_ylim())
+    self.ax.autoscale()
+    self.n
 
 def tight_figure(self):
     self.fig.tight_layout()
@@ -79,34 +79,49 @@ def tight_figure(self):
 
 
 def save_fig(self):
-    # with open(os.path.join(self.settings.value('FIG_PATH'), 'test' + '.pkl'), 'wb') as fid:
-    #     try:
-    #         pickle.dump(self.fig, fid)
-    #     except TypeError:
-    #         msg = QtWidgets.QMessageBox()
-    #         msg.setText("Can't save FigureCanvasQtAgg object")
-    filename = QtWidgets.QFileDialog.getSaveFileName(None, 'Save Figure', self.settings.value('FIG_PATH'), "pickle (*.pkl);;All Files (*)")
-    # text, ok = QtWidgets.QInputDialog.getText(self, 'Saving Figure', 'Save Figure As: ')
-    print(filename)
-    if filename[0] == '':
-        print('passed')
+    if self.pickle_opened.text() == 'None':
+        filename = QtWidgets.QFileDialog.getSaveFileName(
+            None, 'Save Figure', self.settings.value('FIG_PATH'), "pickle (*.pkl);;All Files (*)")
+        if filename[0] == '':
+            print('passed')
+        else:
+            with open(filename[0], 'wb') as fid:
+                try:
+                    pickle.dump(self.fig, fid)
+                except TypeError:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setText("Can't save FigureCanvasQtAgg object")
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Saved as: ' + filename[0])
+            msg.exec_()
     else:
-        with open(filename[0], 'wb') as fid:
-            try:
-                pickle.dump(self.fig, fid)
-            except TypeError:
-                msg = QtWidgets.QMessageBox()
-                msg.setText("Can't save FigureCanvasQtAgg object")
-        msg = QtWidgets.QMessageBox()
-        msg.setText('Saved as: ' + filename[0])
-        msg.exec_()
-
+        filename = QtWidgets.QFileDialog.getSaveFileName(
+            None, 'Save Figure', self.pickle_opened.text(), "pickle (*.pkl);;All Files (*)")
+        if filename[0] == '':
+            print('passed')
+        else:
+            with open(filename[0], 'wb') as fid:
+                try:
+                    pickle.dump(self.fig, fid)
+                except TypeError:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setText("Can't save FigureCanvasQtAgg object")
+            msg = QtWidgets.QMessageBox()
+            msg.setText('Saved as: ' + filename[0])
+            msg.exec_()
 
 
 def show_pickled_fig(self):
-    path,ext = QtWidgets.QFileDialog.getOpenFileName(self,'Pickeled Figure',self.settings.value('FIG_PATH'))
+    self.cleargraph()
+    if self.pickle_opened.text() == 'None':
+        path,ext = QtWidgets.QFileDialog.getOpenFileName(self, 'Pickeled Figure', self.settings.value('FIG_PATH'))
+        self.pickle_opened.setText(path)
+    else:
+        # print(self.pickle_opened.text())
+        path, ext = QtWidgets.QFileDialog.getOpenFileName(self, 'Pickeled Figure', self.pickle_opened.text())
+        self.pickle_opened.setText(path)
     if path == '':
-        pass
+        self.pickle_opened.setText('None')
     else:
         with open(path, 'rb') as fid:
             try:
@@ -122,6 +137,9 @@ def show_pickled_fig(self):
             self.toolbar.close()
             self.ui.verticalLayout.removeWidget(self.canvas)
             self.canvas.close()
+            del self.fig
+            del self.canvas
+            del self.toolbar
             sns.set(context=self.context, style=self.style, palette=self.c_palette,
                     font=self.font, font_scale=self.fs, color_codes=True)
             self.fig = figx
@@ -130,6 +148,8 @@ def show_pickled_fig(self):
                 ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
             for i in self.ax_1.texts:
                 ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+            for i in self.ax_1.collections:
+                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
             self.ax = self.ax_1
             for ax in self.fig.axes:
                 if ax is not self.ax_1:
@@ -137,6 +157,8 @@ def show_pickled_fig(self):
                     for i in self.ax_2.lines:
                         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
                     for i in self.ax_2.texts:
+                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                    for i in self.ax_2.collections:
                         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
                 elif ax is not self.ax_1 and ax is not self.ax_2:
                     self.ax_3 = ax
@@ -155,8 +177,11 @@ def show_pickled_fig(self):
             self.ui.verticalLayout.addWidget(self.toolbar)
             self.ui.verticalLayout.addWidget(self.canvas)
             self.canvas.installEventFilter(self)
+            self.ax.callbacks.connect('xlim_changed', self.lims_change)
+            self.ax.callbacks.connect('ylim_changed', self.lims_change)
             self.dragh = DragHandler(self, figure=self.fig)
             self.canvas.draw()
+
         except UnboundLocalError:
             msg = QtWidgets.QMessageBox()
             msg.setText('Press "Ctrl+1" for a new axes')
@@ -269,12 +294,7 @@ def toggle_legend(self):
 
 
 def Save_All_Plotted(self):
-    # names = self.settings.value('Data_Names')
-    # if names is None:
-    #     pass
-    # else:
-    #     for i in names:
-    #         self.settings.remove(i)
+
     def temp():
         temp = []
         for ix in ui.treeWidget.selectedIndexes():
@@ -298,6 +318,26 @@ def Save_All_Plotted(self):
     ui.buttonBox.accepted.connect(lambda: temp())
     ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
     dialog.exec_()
+
+
+def recoup_data(self):
+    dict = ApplicationSettings.ALL_DATA_PLOTTED
+    data = []
+    x_label = self.ax.get_xlabel()
+    y_label = self.ax.get_ylabel()
+    for i in dict.keys():
+        if type(dict[i]) == list:
+            try:
+                data.append(dict[i][0]._xy.T)
+            except IndexError:
+                pass
+        else:
+            try:
+                data.append(dict[i]._xy.T)
+            except IndexError:
+                pass
+    self.cleargraph()
+
 
 
 def remove_line(self):
@@ -513,11 +553,12 @@ def plot_annotation(self):
             if ui.frame.currentText() == 'none':
                 bbox = None
             else:
-                bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k"))
+                bbox = dict(dict(boxstyle=ui.frame.currentText(), fc=ui.bgcolor.currentText(), ec="k", alpha=ui.alpha.value()))
             ApplicationSettings.ALL_DATA_PLOTTED[ui.text.text()] = \
-                self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), joined_string, color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
+                self.ax.text(np.average(self.ax.get_xlim()), np.average(self.ax.get_ylim()), joined_string,
+                             color=ui.color.currentText(), fontsize=ui.size.value(), picker=True,
                              fontstyle=ui.fontstyle.currentText(), rotation=ui.rotation.value(), bbox=bbox,
-                             alpha=ui.alpha.value(),ha=ui.ha_cb.currentText(),va='center')
+                             ha=ui.ha_cb.currentText(), va='center')
             self.anno_alpha = ui.alpha.value()
             self.anno_text = ui.text.text()
             self.anno_text_2 = ui.text_2.text()
@@ -799,10 +840,10 @@ def add_line_to_graph(self):
     def finish():
         if ui.comboBox.currentText() == 'Verticle Line':
             ApplicationSettings.ALL_DATA_PLOTTED['vline'+str(ui.line_pos_sb.value())] = self.ax.axvline(x=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
-                            color=ui.color_cb.currentText())
+                            color=ui.color_cb.currentText(), alpha=ui.alpha_sb.value())
         elif ui.comboBox.currentText() == 'Horizontal Line':
             ApplicationSettings.ALL_DATA_PLOTTED['hline'+str(ui.line_pos_sb.value())] = self.ax.axhline(y=ui.line_pos_sb.value(), linestyle="--", lw=ui.line_width_sb.value(),
-                            color=ui.color_cb.currentText())
+                            color=ui.color_cb.currentText(), alpha=ui.alpha_sb.value())
         self.canvas.draw()
     d = QtWidgets.QDialog()
     ui = vhline_ui()
@@ -974,6 +1015,60 @@ def find_nearest(array: object, value: object) -> object:
     return idx
 
 
+def select_delete_range(self, enabled):
+    if enabled:
+        self.span = SpanSelector(self.main_window.ax, remove_data_0, 'horizontal', useblit=False,
+                                 rectprops=dict(alpha=0.2, facecolor='blue'))
+    else:
+        del self.span
+
+
+def remove_data_0(self, minimum, maximum):
+    def finish():
+        data = []
+        for j in ui.treeWidget.selectedIndexes():
+            line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+            data.append(line._xy.T)
+            temp = line._xy.T[0]
+            print(find_nearest(temp,minimum))
+            print(find_nearest(temp, maximum))
+        print(data)
+            # if isinstance(line, list):
+            #     try:
+            #         self.ax.lines.remove(line[0])
+            #         ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+            #         del line
+            #         self.canvas.draw()
+            #     except ValueError:
+            #         msg = QtWidgets.QMessageBox()
+            #         msg.setText('Removing Line From Wrong Axes!')
+            #         msg.exec_()
+            #     except AttributeError:
+            #         pass
+            # elif isinstance(line, matplotlib.lines.Line2D):
+            #     try:
+            #         self.ax.lines.remove(line)
+            #         ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
+            #         del line
+            #     except ValueError:
+            #         msg = QtWidgets.QMessageBox()
+            #         msg.setText('Removing Line From Wrong Axes!')
+            #         msg.exec_()
+    all_lines = ApplicationSettings.ALL_DATA_PLOTTED
+    dialog = QtWidgets.QDialog()
+    ui = simple_tw()
+    ui.setupUi(dialog)
+    ui.treeWidget.setSelectionMode(QtWidgets.QAbstractItemView.MultiSelection)
+    Key_List = []
+    for i in all_lines.keys():
+        Key_List.append(QtWidgets.QTreeWidgetItem([i]))
+    ui.treeWidget.addTopLevelItems(Key_List)
+    ui.buttonBox.accepted.connect(lambda: finish())
+    dialog.exec_()
+    self.canvas.draw()
+
+
+
 def baseline_als(y, lam, p, niter=10):
     # where y is the data needed to be corrected, lam is lambda and is a smoothing
     # parameter and p is the asymmetry of the baseline, niter is the num of iterations
@@ -988,22 +1083,22 @@ def baseline_als(y, lam, p, niter=10):
 
 def label_size(self):
     size, ok = QtWidgets.QInputDialog.getInt(None, 'Axis Label Size', 'Size: ')
-    if ok:
-        self.ax_1.set_xlabel(self.ax_1.get_xlabel(), fontsize=size)
-        self.ax_1.set_ylabel(self.ax_1.get_ylabel(), fontsize=size)
-        self.ax_1.set_xticklabels(self.ax_1.get_xticklabels(), fontsize=size)
-        self.ax_1.set_yticklabels(self.ax_1.get_yticklabels(), fontsize=size)
-        try:
-            self.ax_2.set_xlabel(self.ax_2.get_xlabel(), fontsize=size)
-            self.ax_2.set_xticklabels(self.ax_2.get_xticklabels(), fontsize=size)
-        except AttributeError:
-            print('AttError')
-        try:
-            self.ax_2.set_ylabel(self.ax_2.get_ylabel(), fontsize=size)
-            self.ax_2.set_yticklabels(self.ax_2.get_yticklabels(), fontsize=size)
-        except AttributeError:
-            print('AttError')
-        self.canvas.draw()
+    # if ok:
+    #     self.ax.set_xlabel(self.ax.get_xlabel(), fontsize=size)
+    #     self.ax.set_ylabel(self.ax.get_ylabel(), fontsize=size)
+    #     self.ax.set_xticklabels(self.ax.get_xticklabels(), fontsize=size)
+    #     self.ax.set_yticklabels(self.ax.get_yticklabels(), fontsize=size)
+        # try:
+        #     self.ax_2.set_xlabel(self.ax_2.get_xlabel(), fontsize=size)
+        #     self.ax_2.set_xticklabels(self.ax_2.get_xticklabels(), fontsize=size)
+        # except AttributeError:
+        #     print('AttError')
+        # try:
+        #     self.ax_2.set_ylabel(self.ax_2.get_ylabel(), fontsize=size)
+        #     self.ax_2.set_yticklabels(self.ax_2.get_yticklabels(), fontsize=size)
+        # except AttributeError:
+        #     print('AttError')
+        # self.canvas.draw()
 
 class DragHandler(object):
     """ A simple class to handle Drag n Drop.

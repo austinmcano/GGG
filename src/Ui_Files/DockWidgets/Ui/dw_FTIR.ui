@@ -216,53 +216,8 @@
         <string>Integrate</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="3" colspan="3">
-         <widget class="QTextBrowser" name="textBrowser">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>100</height>
-           </size>
-          </property>
-          <property name="html">
-           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;Press integrate mode.  Add the spectra to the top axis then click and hold on one limit and release on the other limit and the integral will show up on the axis below as well as in the table below here,  or manually type in the limits below and press &amp;quot;Integrate&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="3" rowspan="4" colspan="3">
-         <widget class="QTableWidget" name="tableWidget">
-          <property name="minimumSize">
-           <size>
-            <width>320</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>1000</width>
-            <height>1000</height>
-           </size>
-          </property>
-          <property name="rowCount">
-           <number>0</number>
-          </property>
-          <property name="columnCount">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QDoubleSpinBox" name="max_sb">
+        <item row="5" column="5">
+         <widget class="QDoubleSpinBox" name="max1_sb">
           <property name="maximum">
            <double>4000.000000000000000</double>
           </property>
@@ -272,29 +227,6 @@ p, li { white-space: pre-wrap; }
          </widget>
         </item>
         <item row="2" column="4">
-         <widget class="QDoubleSpinBox" name="min_sb">
-          <property name="maximum">
-           <double>4000.000000000000000</double>
-          </property>
-          <property name="value">
-           <double>400.000000000000000</double>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QPushButton" name="integrate_pb">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Integrate</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="4">
          <widget class="QComboBox" name="int_type_cb">
           <item>
            <property name="text">
@@ -318,14 +250,123 @@ p, li { white-space: pre-wrap; }
           </item>
          </widget>
         </item>
-        <item row="5" column="3" colspan="3">
+        <item row="7" column="4">
+         <widget class="QDoubleSpinBox" name="min3_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="5">
+         <widget class="QPushButton" name="integrate_pb">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Integrate</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="3">
+         <widget class="QTextBrowser" name="textBrowser">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>100</height>
+           </size>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.AppleSystemUIFont'; font-size:13pt;&quot;&gt;Press integrate mode.  Add the spectra to the top axis then click and hold on one limit and release on the other limit and the integral will show up on the axis below as well as in the table below here,  or manually type in the limits below and press &amp;quot;Integrate&amp;quot;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="5">
+         <widget class="QDoubleSpinBox" name="max4_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>4000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="3">
+         <widget class="QCheckBox" name="integrate4_cb">
+          <property name="text">
+           <string>Int 4</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="3">
+         <widget class="QCheckBox" name="integrate2_cb">
+          <property name="text">
+           <string>Int 2</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="3">
+         <widget class="QCheckBox" name="integrate3_cb">
+          <property name="text">
+           <string>Int 3</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="3" colspan="3">
          <widget class="Line" name="line_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
-        <item row="4" column="3">
+        <item row="16" column="4">
+         <widget class="QComboBox" name="tabley_cb"/>
+        </item>
+        <item row="16" column="5">
+         <widget class="QPushButton" name="plottable_pb">
+          <property name="text">
+           <string>Plot Table</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="3" rowspan="4" colspan="3">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="minimumSize">
+           <size>
+            <width>320</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>1000</width>
+            <height>1000</height>
+           </size>
+          </property>
+          <property name="rowCount">
+           <number>0</number>
+          </property>
+          <property name="columnCount">
+           <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="5">
          <widget class="QComboBox" name="xaxis_cb">
           <item>
            <property name="text">
@@ -339,7 +380,17 @@ p, li { white-space: pre-wrap; }
           </item>
          </widget>
         </item>
-        <item row="2" column="3">
+        <item row="7" column="5">
+         <widget class="QDoubleSpinBox" name="max3_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>4000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="4">
          <widget class="QComboBox" name="leftrightaxis_cb">
           <property name="maximumSize">
            <size>
@@ -359,22 +410,89 @@ p, li { white-space: pre-wrap; }
           </item>
          </widget>
         </item>
-        <item row="1" column="3" colspan="3">
+        <item row="5" column="3">
+         <widget class="QCheckBox" name="integrate1_cb">
+          <property name="text">
+           <string>Int 1</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
          <widget class="QRadioButton" name="integratemode_rb">
           <property name="text">
            <string>Integrate Mode</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="5">
-         <widget class="QPushButton" name="plottable_pb">
-          <property name="text">
-           <string>Plot Table</string>
+        <item row="6" column="4">
+         <widget class="QDoubleSpinBox" name="min2_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
           </property>
          </widget>
         </item>
-        <item row="11" column="4">
-         <widget class="QComboBox" name="tabley_cb"/>
+        <item row="5" column="4">
+         <widget class="QDoubleSpinBox" name="min1_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="5">
+         <widget class="QDoubleSpinBox" name="max2_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>4000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="4">
+         <widget class="QDoubleSpinBox" name="min5_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="4">
+         <widget class="QDoubleSpinBox" name="min4_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="5">
+         <widget class="QDoubleSpinBox" name="max5_sb">
+          <property name="maximum">
+           <double>4000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>4000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="3">
+         <widget class="QCheckBox" name="integrate5_cb">
+          <property name="text">
+           <string>Int 5</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>

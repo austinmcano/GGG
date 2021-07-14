@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>747</width>
-    <height>533</height>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -102,6 +102,7 @@
     <addaction name="actionBar_Graph"/>
     <addaction name="actionTight_Layout"/>
     <addaction name="actionAdd_Line"/>
+    <addaction name="actionRemove_Noise"/>
    </widget>
    <widget class="QMenu" name="menuHELP">
     <property name="title">
@@ -648,6 +649,11 @@
   <action name="actionAdd_Line">
    <property name="text">
     <string>Add Line</string>
+   </property>
+  </action>
+  <action name="actionRemove_Noise">
+   <property name="text">
+    <string>Remove Noise</string>
    </property>
   </action>
  </widget>

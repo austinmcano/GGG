@@ -20,9 +20,14 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(400, 300)
+        Dialog.resize(400, 301)
         self.gridLayout = QGridLayout(Dialog)
         self.gridLayout.setObjectName(u"gridLayout")
+        self.label_2 = QLabel(Dialog)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
+
         self.line_width_sb = QDoubleSpinBox(Dialog)
         self.line_width_sb.setObjectName(u"line_width_sb")
         self.line_width_sb.setSingleStep(0.100000000000000)
@@ -44,27 +49,12 @@ class Ui_Dialog(object):
 
         self.gridLayout.addWidget(self.comboBox, 0, 0, 1, 2)
 
-        self.label_2 = QLabel(Dialog)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout.addWidget(self.label_2, 2, 0, 1, 1)
-
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setOrientation(Qt.Horizontal)
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
 
-        self.gridLayout.addWidget(self.buttonBox, 4, 1, 1, 1)
-
-        self.label = QLabel(Dialog)
-        self.label.setObjectName(u"label")
-
-        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
-
-        self.label_3 = QLabel(Dialog)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout.addWidget(self.label_3, 3, 0, 1, 1)
+        self.gridLayout.addWidget(self.buttonBox, 5, 1, 1, 1)
 
         self.color_cb = QComboBox(Dialog)
         self.color_cb.addItem("")
@@ -78,6 +68,29 @@ class Ui_Dialog(object):
 
         self.gridLayout.addWidget(self.color_cb, 3, 1, 1, 1)
 
+        self.label_3 = QLabel(Dialog)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout.addWidget(self.label_3, 3, 0, 1, 1)
+
+        self.label = QLabel(Dialog)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
+
+        self.label_4 = QLabel(Dialog)
+        self.label_4.setObjectName(u"label_4")
+
+        self.gridLayout.addWidget(self.label_4, 4, 0, 1, 1)
+
+        self.alpha_sb = QDoubleSpinBox(Dialog)
+        self.alpha_sb.setObjectName(u"alpha_sb")
+        self.alpha_sb.setMaximum(1.000000000000000)
+        self.alpha_sb.setSingleStep(0.100000000000000)
+        self.alpha_sb.setValue(1.000000000000000)
+
+        self.gridLayout.addWidget(self.alpha_sb, 4, 1, 1, 1)
+
 
         self.retranslateUi(Dialog)
         self.buttonBox.accepted.connect(Dialog.accept)
@@ -88,12 +101,10 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
+        self.label_2.setText(QCoreApplication.translate("Dialog", u"Line Width", None))
         self.comboBox.setItemText(0, QCoreApplication.translate("Dialog", u"Verticle Line", None))
         self.comboBox.setItemText(1, QCoreApplication.translate("Dialog", u"Horizontal Line", None))
 
-        self.label_2.setText(QCoreApplication.translate("Dialog", u"Line Width", None))
-        self.label.setText(QCoreApplication.translate("Dialog", u"Line At", None))
-        self.label_3.setText(QCoreApplication.translate("Dialog", u"Line Color", None))
         self.color_cb.setItemText(0, QCoreApplication.translate("Dialog", u"black", None))
         self.color_cb.setItemText(1, QCoreApplication.translate("Dialog", u"red", None))
         self.color_cb.setItemText(2, QCoreApplication.translate("Dialog", u"blue", None))
@@ -102,5 +113,8 @@ class Ui_Dialog(object):
         self.color_cb.setItemText(5, QCoreApplication.translate("Dialog", u"orange", None))
         self.color_cb.setItemText(6, QCoreApplication.translate("Dialog", u"white", None))
 
+        self.label_3.setText(QCoreApplication.translate("Dialog", u"Line Color", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"Line At", None))
+        self.label_4.setText(QCoreApplication.translate("Dialog", u"Alpha", None))
     # retranslateUi
 
