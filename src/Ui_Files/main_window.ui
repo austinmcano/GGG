@@ -583,9 +583,6 @@
    <property name="text">
     <string>Curve Fitting</string>
    </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
-   </property>
   </action>
   <action name="actionLoad_Data">
    <property name="text">

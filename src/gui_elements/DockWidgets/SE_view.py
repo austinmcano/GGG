@@ -8,6 +8,7 @@ from matplotlib.widgets import SpanSelector
 from Ui_Files.Dialogs.mass_spec_line_dialog import Ui_Dialog as mslines_ui
 import xlrd
 from lmfit import Parameters
+from gui_elements.qms_functions import isotopic_prediction
 
 
 class SE_view(QtWidgets.QDockWidget):
@@ -30,6 +31,14 @@ class SE_view(QtWidgets.QDockWidget):
         self.path = None
         self.mslinemass = [100., 101.,102., 103.,104., 105.,106., 107.]
         self.mslineabund = [100., 50., 0.0,0.0,0.0,0.0,0.0,0.0]
+        self.colors = [self.ui.color_1, self.ui.color_2, self.ui.color_3, self.ui.color_4, self.ui.color_5,
+                       self.ui.color_6, self.ui.color_7, self.ui.color_8, self.ui.color_9, self.ui.color_10,
+                       self.ui.color_11, self.ui.color_12, self.ui.color_13, self.ui.color_14, self.ui.color_15,
+                       self.ui.color_16, self.ui.color_17, self.ui.color_18, self.ui.color_19, self.ui.color_20
+                       ]
+        for i in self.colors:
+            i.setStyleSheet("background-color: {}".format('#ff0000'))
+            i.setText('#ff0000')
 
     def _init_widgets(self):
         self.tree_view = self.ui.SE_treeView
@@ -63,6 +72,8 @@ class SE_view(QtWidgets.QDockWidget):
 
         self.ui.tw_y.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
 
+
+
         for rows in range(self.ui.tableWidget.rowCount()):
             for cols in range(self.ui.tableWidget.columnCount()):
                 self.ui.tableWidget.setItem(rows,cols,QtWidgets.QTableWidgetItem('0'))
@@ -76,13 +87,35 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.axischoise_cb.currentTextChanged.connect(lambda: self.change_axis())
         self.ui.selectrange_box.toggled.connect(self.select_fit_range)
         self.ui.plot_qms_pb.clicked.connect(lambda: self.qms_plot())
-        self.ui.abundance_pb.clicked.connect(lambda: self.abundance_plot())
+        # self.ui.abundance_pb.clicked.connect(lambda: self.abundance_plot())
+
+        self.ui.color_1.clicked.connect(lambda: self.color_test(self.ui.color_1))
+        self.ui.color_2.clicked.connect(lambda: self.color_test(self.ui.color_2))
+        self.ui.color_3.clicked.connect(lambda: self.color_test(self.ui.color_3))
+        self.ui.color_4.clicked.connect(lambda: self.color_test(self.ui.color_4))
+        self.ui.color_5.clicked.connect(lambda: self.color_test(self.ui.color_5))
+        self.ui.color_6.clicked.connect(lambda: self.color_test(self.ui.color_6))
+        self.ui.color_7.clicked.connect(lambda: self.color_test(self.ui.color_7))
+        self.ui.color_8.clicked.connect(lambda: self.color_test(self.ui.color_8))
+        self.ui.color_9.clicked.connect(lambda: self.color_test(self.ui.color_9))
+        self.ui.color_10.clicked.connect(lambda: self.color_test(self.ui.color_10))
+
+        self.ui.calc_iso_pb.clicked.connect(lambda: self.calc_iso())
 
     def eventFilter(self, object, event):
         # For right click events
         if event.type() == QtCore.QEvent.ContextMenu:
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
+
+    # def color_test(self, button):
+    #     color = QtWidgets.QColorDialog()
+    #     color.exec_()
+    #     try:
+    #         button.setStyleSheet("background-color: {}".format(color.currentColor().name()))
+    #         button.setText(color.currentColor().name())
+    #     except ValueError:
+    #         print('err')
 
     def plot_type_organizer(self):
         if self.ui.plot_type_cb.currentText() == 'X vs Y':
@@ -225,9 +258,6 @@ class SE_view(QtWidgets.QDockWidget):
             self.data_x = dict[i][0]._xy.T[0]
             self.data_y = dict[i][0]._xy.T[1]
             x_lim = ApplicationSettings.C_X_LIM
-            # indexs = [find_nearest(self.data_x, x_lim[0]), find_nearest(self.data_x, x_lim[1])]
-            # self.data_x = self.data_x[indexs[0]:indexs[1]]
-            # self.data_y = self.data_y[indexs[0]:indexs[1]]
             pars = model.guess(self.data_y, x=self.data_x)
             fit = model.fit(self.data_y, pars, x=self.data_x)
             self.main_window.ax.plot(self.data_x, fit.best_fit, label=str(i) + '_Fit')
@@ -357,16 +387,16 @@ class SE_view(QtWidgets.QDockWidget):
         #         if not np.isnan(j):
         #             y_data.append(j)
         y_data = self.data[self.ui.qmsy_tw.selectedItems()[0].text(0)].to_numpy()
-        if self.ui.plottype_cb.currentText() == 'Mass Spectrum':
+        if self.ui.plottype_cb.currentText() == 'X vs Y':
             x_data = self.data[self.ui.qmsx_tw.selectedItems()[0].text(0)].to_numpy()
-            ApplicationSettings.ALL_DATA_PLOTTED[name] = \
+            ApplicationSettings.ALL_DATA_PLOTTED[y] = \
                 ax.plot(x_data, y_data, '.-', label=y)
-            ax.set_xlabel('m/z')
+            ax.set_xlabel('Time')
             ax.set_ylabel('Intensity (mV)')
-        elif self.ui.plottype_cb.currentText() == 'Mass Trace':
+        elif self.ui.plottype_cb.currentText() == 'Mass Spectrum':
             ApplicationSettings.ALL_DATA_PLOTTED[name] = \
                 ax.plot(np.linspace(self.ui.mass_start_dsb.value(), self.ui.mass_end_dsb.value(), len(y_data)), y_data,'.-', label=y)
-            ax.set_xlabel('Time (min)')
+            ax.set_xlabel('m/z')
             ax.set_ylabel('Intensity (mV)')
         self.main_window.canvas.draw()
 
@@ -376,7 +406,6 @@ class SE_view(QtWidgets.QDockWidget):
             allabund = [ui.a1, ui.a2, ui.a3, ui.a4, ui.a5, ui.a6, ui.a7, ui.a8]
             allmasses = [ui.m1, ui.m2, ui.m3, ui.m4, ui.m5, ui.m6, ui.m7, ui.m8]
             indexes = [i for i in range(len(allabund)) if allabund[i].value() != 0]
-            rel_abund = []
 
             for i in indexes:
                 ApplicationSettings.ALL_DATA_PLOTTED['abundline_' + str(allmasses[i].value())] = \
@@ -407,3 +436,108 @@ class SE_view(QtWidgets.QDockWidget):
             msg = QtWidgets.QMessageBox()
             msg.setText('Need data to work')
             msg.exec_()
+
+    def removing_qms_lines(self):
+        for i in list(ApplicationSettings.ALL_DATA_PLOTTED):
+            line = ApplicationSettings.ALL_DATA_PLOTTED[i]
+            if isinstance(line, matplotlib.collections.LineCollection):
+                line.remove()
+                ApplicationSettings.ALL_DATA_PLOTTED.pop(i)
+                del line
+        self.main_window.canvas.draw()
+
+    def calc_iso(self):
+        self.removing_qms_lines()
+        self.ui.tableWidget_2.clear()
+        checked = [self.ui.species1_cb.isChecked(), self.ui.species2_cb.isChecked(), self.ui.species3_cb.isChecked(),
+                   self.ui.species4_cb.isChecked(), self.ui.species5_cb.isChecked(), self.ui.species6_cb.isChecked(),
+                   self.ui.species7_cb.isChecked(), self.ui.species8_cb.isChecked(), self.ui.species9_cb.isChecked(),
+                   self.ui.species10_cb.isChecked(), self.ui.species11_cb.isChecked(), self.ui.species12_cb.isChecked(),
+                   self.ui.species13_cb.isChecked(), self.ui.species14_cb.isChecked(), self.ui.species15_cb.isChecked(),
+                   self.ui.species16_cb.isChecked(), self.ui.species17_cb.isChecked(), self.ui.species18_cb.isChecked(),
+                   self.ui.species19_cb.isChecked(), self.ui.species20_cb.isChecked()]
+        num = 0
+        all_species = [self.ui.name1_le.text(), self.ui.name2_le.text(), self.ui.name3_le.text(),
+                       self.ui.name4_le.text(), self.ui.name5_le.text(), self.ui.name6_le.text(),
+                       self.ui.name7_le.text(), self.ui.name8_le.text(), self.ui.name9_le.text(),
+                       self.ui.name10_le.text(), self.ui.name11_le.text(), self.ui.name12_le.text(), self.ui.name13_le.text(),
+                       self.ui.name14_le.text(), self.ui.name15_le.text(), self.ui.name16_le.text(),
+                       self.ui.name17_le.text(), self.ui.name18_le.text(), self.ui.name19_le.text(),
+                       self.ui.name20_le.text()]
+        current_colors = [self.ui.color_1.text(), self.ui.color_2.text(), self.ui.color_3.text(),
+                          self.ui.color_4.text(), self.ui.color_5.text(), self.ui.color_6.text(),
+                          self.ui.color_7.text(), self.ui.color_8.text(), self.ui.color_9.text(),
+                          self.ui.color_10.text(), self.ui.color_11.text(), self.ui.color_12.text(), self.ui.color_13.text(),
+                          self.ui.color_14.text(), self.ui.color_15.text(), self.ui.color_16.text(),
+                          self.ui.color_17.text(), self.ui.color_18.text(), self.ui.color_19.text(),
+                          self.ui.color_20.text()]
+        alphas = [self.ui.s1_alpha.value(), self.ui.s2_alpha.value(), self.ui.s3_alpha.value(),
+                  self.ui.s4_alpha.value(), self.ui.s5_alpha.value(), self.ui.s6_alpha.value(),
+                  self.ui.s7_alpha.value(), self.ui.s8_alpha.value(), self.ui.s9_alpha.value(),
+                  self.ui.s10_alpha.value(), self.ui.s11_alpha.value(), self.ui.s12_alpha.value(), self.ui.s13_alpha.value(),
+                  self.ui.s14_alpha.value(), self.ui.s15_alpha.value(), self.ui.s16_alpha.value(),
+                  self.ui.s17_alpha.value(), self.ui.s18_alpha.value(), self.ui.s19_alpha.value(),
+                  self.ui.s20_alpha.value()]
+        sizes = [self.ui.size1.value(), self.ui.size2.value(), self.ui.size3.value(), self.ui.size4.value(),
+                 self.ui.size5.value(), self.ui.size6.value(), self.ui.size7.value(), self.ui.size8.value(),
+                 self.ui.size9.value(), self.ui.size10.value(), self.ui.size11.value(), self.ui.size12.value(), self.ui.size13.value(), self.ui.size14.value(),
+                 self.ui.size15.value(), self.ui.size16.value(), self.ui.size17.value(), self.ui.size18.value(),
+                 self.ui.size19.value(), self.ui.size20.value()]
+        if self.ui.type_iso_cb.currentText() == 'User Defined':
+            user_ratio = [self.ui.s1ratio.value(), self.ui.s2ratio.value(), self.ui.s3ratio.value(),
+                          self.ui.s4ratio.value(), self.ui.s5ratio.value(), self.ui.s6ratio.value(),
+                          self.ui.s7ratio.value(), self.ui.s8ratio.value(), self.ui.s9ratio.value(),
+                          self.ui.s10ratio.value()]
+            dict_all = {}
+            for j in range(len(checked)):
+                if checked[j] is True:
+                    masses, abunds = isotopic_prediction(all_species[j], round=self.ui.round_mass.value())
+                    dict_all[all_species[j]] = [masses+self.ui.mass_offset_dsb.value(), abunds * user_ratio[j],
+                                                current_colors[j], num, alphas[j], sizes[j]]
+                    num = num + 2
+            allmasses = []
+            allabund = []
+            for i in dict_all.keys():
+                for j in range(len(dict_all[i][0])):
+                    if dict_all[i][0][j] in allmasses:
+                        idx = allmasses.index(dict_all[i][0][j])
+                        ApplicationSettings.ALL_DATA_PLOTTED[i + '_'+str(j)] = \
+                            self.main_window.ax.vlines(dict_all[i][0][j], allabund[idx], allabund[idx]+dict_all[i][1][j],
+                                                       label='_' + i, linestyle="-", lw=dict_all[i][5], color=dict_all[i][2],
+                                                       alpha=dict_all[i][4])
+                        allabund[idx] = allabund[idx]+dict_all[i][1][j]
+                    else:
+                        allmasses.append(dict_all[i][0][j])
+                        allabund.append(dict_all[i][1][j])
+                        ApplicationSettings.ALL_DATA_PLOTTED[i + '_'+str(j)] = \
+                            self.main_window.ax.vlines(dict_all[i][0][j], 0, dict_all[i][1][j],
+                                                       label='_' + i, linestyle="-", lw=dict_all[i][5], color=dict_all[i][2],
+                                                       alpha=dict_all[i][4])
+                    self.ui.tableWidget_2.setItem(j,dict_all[i][3],QtWidgets.QTableWidgetItem(str(np.round(dict_all[i][0][j],self.ui.round_mass.value()))))
+                    self.ui.tableWidget_2.setItem(j, dict_all[i][3]+1, QtWidgets.QTableWidgetItem(str(np.round(dict_all[i][1][j],2))))
+                self.ui.tableWidget_2.setHorizontalHeaderItem(dict_all[i][3], QtWidgets.QTableWidgetItem(i+' mass'))
+                self.ui.tableWidget_2.setHorizontalHeaderItem(dict_all[i][3]+1, QtWidgets.QTableWidgetItem(i+' abund (mV)'))
+        else:
+            dict_all = {}
+            for j in range(len(checked)):
+                if checked[j] is True:
+                    masses, abunds = isotopic_prediction(all_species[j], round=self.ui.round_mass.value())
+                    dict_all[all_species[j]] = [masses+self.ui.mass_offset_dsb.value(), abunds, current_colors[j],
+                                                num, alphas[j], sizes[j]]
+                    num = num + 2
+            data = self.main_window.ax.lines[0]._xy.T
+            for i in dict_all.keys():
+                index_ = np.where(dict_all[i][1] == 100)[0][0]
+                max_abun = data[1][find_nearest(data[0], dict_all[i][0][index_])]
+                for j in range(len(dict_all[i][0])):
+                    dict_all[i][1][j] = dict_all[i][1][j] * max_abun / 100
+                    ApplicationSettings.ALL_DATA_PLOTTED[i + '_'+str(j)] = \
+                        self.main_window.ax.vlines(dict_all[i][0][j], 0, dict_all[i][1][j],
+                                                   label='_' + i, linestyle="-", lw=dict_all[i][5], color=dict_all[i][2],
+                                                   alpha=dict_all[i][4])
+                    self.ui.tableWidget_2.setItem(j,dict_all[i][3],QtWidgets.QTableWidgetItem(str(dict_all[i][0][j]+self.ui.mass_offset_dsb.value())))
+                    self.ui.tableWidget_2.setItem(j, dict_all[i][3]+1, QtWidgets.QTableWidgetItem(str(dict_all[i][1][j])))
+                self.ui.tableWidget_2.setHorizontalHeaderItem(dict_all[i][3], QtWidgets.QTableWidgetItem(i+' mass'))
+                self.ui.tableWidget_2.setHorizontalHeaderItem(dict_all[i][3]+1, QtWidgets.QTableWidgetItem(i+' abund'))
+        self.main_window.fig.tight_layout()
+        self.main_window.canvas.draw()

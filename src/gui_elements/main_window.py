@@ -11,6 +11,7 @@ from gui_elements.DockWidgets.Calc_view import Calculator_view
 from Ui_Files.Dialogs.start_dialog import Ui_Dialog as start_Ui
 from gui_elements.DockWidgets.Console_view import Console_view
 from Ui_Files.Dialogs.seaborn_settings import Ui_Dialog as Ui_sns_Dialog
+from PySide2 import QtGui
 import gc
 from gui_elements.plotting_functions import *
 
@@ -178,13 +179,21 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graph_menu = self.context_menu_plot.addMenu(' Graphs')
         self.removeplot_action = self.graph_menu.addAction('Remove Line')
         self.label_size_action = self.graph_menu.addAction('Label Sizes')
+
         self.save_figure_action = self.save_menu.addAction('Save Figure')
+        self.save_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+S'), self)
+        self.save_action_2.activated.connect(lambda: save_fig(self))
+
         self.annotation_action = self.context_menu_plot.addAction('Annotate')
         self.sns_settings_action = self.graph_menu.addAction('Seaborn Settings')
         # self.send_to_cf_action = self.context_menu_plot.addAction('Send to CF')
         self.axis_colors_action = self.graph_menu.addAction('Axis Colors')
         self.moveline_action = self.context_menu_plot.addAction('Move Line')
+
         self.open_fig_action = self.context_menu_plot.addAction('Open Fig')
+        self.open_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+O'), self)
+        self.open_action_2.activated.connect(lambda: show_pickled_fig(self))
+
         # self.axis_setup_action = self.graph_menu.addAction('Change Axis Setup')
         # self.axis_setup_action2 = self.graph_menu.addAction('Change Axis Setup 2')
         # self.axis_setup_action3 = self.graph_menu.addAction('Change Axis Setup 3')
@@ -195,6 +204,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clear_action.triggered.connect(lambda: self.cleargraph())
         self.clear_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+X'), self)
         self.clear_action_2.activated.connect(lambda: self.cleargraph())
+
         self.removeplot_action.triggered.connect(lambda: remove_line(self))
         self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
         self.save_figure_action.triggered.connect(lambda: save_fig(self))
@@ -407,7 +417,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.canvas.draw()
 
     def cleargraph(self):
-        print('cleared')
         self.dw_XPS.ui.fit_range_cb.clear()
         self.dw_XPS.fit_obj.clear()
         self.ax.clear()

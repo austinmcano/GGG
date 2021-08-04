@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'start_dialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -76,7 +79,7 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Dialog", None))
         self.CF_pb.setText(QCoreApplication.translate("Dialog", u"Curve Fitting", None))
-        self.SE_pb.setText(QCoreApplication.translate("Dialog", u"Spectroscopic Ellipsometry", None))
+        self.SE_pb.setText(QCoreApplication.translate("Dialog", u"SE/QMS", None))
         self.label_2.setText(QCoreApplication.translate("Dialog", u"Select what closest matches up with why you are here:", None))
         self.label.setText(QCoreApplication.translate("Dialog", u"Welcome to the George group gui!", None))
         self.XPS_pb.setText(QCoreApplication.translate("Dialog", u"X-Ray Photoelectron Spectroscopy", None))

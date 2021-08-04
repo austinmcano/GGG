@@ -1,12 +1,9 @@
-from Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as TW_ui
-from PySide2 import QtWidgets
 import numpy as np
 from Ui_Files.Dialogs.line_dialog import Ui_Dialog as vhline_ui
 from Ui_Files.Dialogs.axis_setup_dialog import Ui_Dialog as axis_setup_ui
 from Ui_Files.Dialogs.Save_To_CSV import Ui_Dialog as STC_ui
 from Ui_Files.Dialogs.app_settings import Ui_Dialog as app_settings
 from Ui_Files.Dialogs.annotation_dialog import Ui_Dialog as annotation_ui
-from Ui_Files.Dialogs.simple_text import Ui_Dialog as simple_text_ui
 from Ui_Files.Dialogs.new_project_dialog import Ui_Dialog as new_project_dialog
 from Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as simple_tw
 from Ui_Files.Dialogs.bargraph_dialog import Ui_Dialog as bar_dialog
@@ -19,15 +16,11 @@ from matplotlib.widgets import SpanSelector
 import pickle
 from matplotlib.text import Text
 import pandas as pd
-from PySide2 import QtCore,QtWidgets,QtGui
-import sys
-from shutil import copyfile, copytree, rmtree, copy2
+from PySide2 import QtCore,QtWidgets
+from shutil import copytree, copy2
 import os
 import seaborn as sns
 from gui_elements.settings import ApplicationSettings
-from scipy import integrate
-from scipy.linalg import norm
-from scipy.signal import savgol_filter
 from scipy import sparse
 from scipy.sparse.linalg import spsolve
 
@@ -344,6 +337,7 @@ def remove_line(self):
     def finish():
         for j in ui.treeWidget.selectedIndexes():
             line = ApplicationSettings.ALL_DATA_PLOTTED[j.data()]
+            print(type(line))
             if isinstance(line, list):
                 try:
                     self.ax.lines.remove(line[0])
@@ -1082,23 +1076,34 @@ def baseline_als(y, lam, p, niter=10):
         w = p * (y > z) + (1-p) * (y < z)
 
 def label_size(self):
-    size, ok = QtWidgets.QInputDialog.getInt(None, 'Axis Label Size', 'Size: ')
-    # if ok:
-    #     self.ax.set_xlabel(self.ax.get_xlabel(), fontsize=size)
+    size, ok = QtWidgets.QInputDialog.getDouble(None, 'Axis Label Size', 'Size: ')
+    if ok:
+        # sns.set(font_scale=size)
+        ax_xlabel = self.ax_1.get_xlabel()
+        self.ax_1.set_xlabel(ax_xlabel, fontsize=size)
+        ax_ylabel = self.ax_1.get_ylabel()
+        self.ax_1.set_ylabel(ax_ylabel, fontsize=size)
     #     self.ax.set_ylabel(self.ax.get_ylabel(), fontsize=size)
     #     self.ax.set_xticklabels(self.ax.get_xticklabels(), fontsize=size)
     #     self.ax.set_yticklabels(self.ax.get_yticklabels(), fontsize=size)
-        # try:
-        #     self.ax_2.set_xlabel(self.ax_2.get_xlabel(), fontsize=size)
-        #     self.ax_2.set_xticklabels(self.ax_2.get_xticklabels(), fontsize=size)
-        # except AttributeError:
-        #     print('AttError')
-        # try:
-        #     self.ax_2.set_ylabel(self.ax_2.get_ylabel(), fontsize=size)
-        #     self.ax_2.set_yticklabels(self.ax_2.get_yticklabels(), fontsize=size)
-        # except AttributeError:
-        #     print('AttError')
-        # self.canvas.draw()
+        try:
+            ax2_xlabel = self.ax_2.get_xlabel()
+            self.ax_2.set_xlabel(ax2_xlabel, fontsize=size)
+            # self.ax_2.set_xticklabels(self.ax_2.get_xticklabels(), fontsize=size)
+        except AttributeError:
+            print('AttError')
+        try:
+            ax2_ylabel = self.ax_2.get_ylabel()
+            self.ax_2.set_ylabel(ax2_ylabel, fontsize=size)
+            # self.ax_2.set_ylabel(self.ax_2.get_ylabel(), fontsize=size)
+            # self.ax_2.set_yticklabels(self.ax_2.get_yticklabels(), fontsize=size)
+        except AttributeError:
+            print('AttError')
+        self.canvas.draw()
+
+def print_something():
+    print('something')
+print_something()
 
 class DragHandler(object):
     """ A simple class to handle Drag n Drop.
