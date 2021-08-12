@@ -277,6 +277,7 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.main_window.canvas.draw()
 
     def integrate_ir(self, data, minimum, maximum):
+        from scipy import integrate
         integral_list = []
         lim = [min(range(len(data[0])), key=lambda i: abs(data[0][i] - minimum)),
                min(range(len(data[0])), key=lambda i: abs(data[0][i] - maximum))]

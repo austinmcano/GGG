@@ -99,6 +99,16 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.color_8.clicked.connect(lambda: self.color_test(self.ui.color_8))
         self.ui.color_9.clicked.connect(lambda: self.color_test(self.ui.color_9))
         self.ui.color_10.clicked.connect(lambda: self.color_test(self.ui.color_10))
+        self.ui.color_11.clicked.connect(lambda: self.color_test(self.ui.color_11))
+        self.ui.color_12.clicked.connect(lambda: self.color_test(self.ui.color_12))
+        self.ui.color_13.clicked.connect(lambda: self.color_test(self.ui.color_13))
+        self.ui.color_14.clicked.connect(lambda: self.color_test(self.ui.color_14))
+        self.ui.color_15.clicked.connect(lambda: self.color_test(self.ui.color_15))
+        self.ui.color_16.clicked.connect(lambda: self.color_test(self.ui.color_16))
+        self.ui.color_17.clicked.connect(lambda: self.color_test(self.ui.color_17))
+        self.ui.color_18.clicked.connect(lambda: self.color_test(self.ui.color_18))
+        self.ui.color_19.clicked.connect(lambda: self.color_test(self.ui.color_19))
+        self.ui.color_20.clicked.connect(lambda: self.color_test(self.ui.color_20))
 
         self.ui.calc_iso_pb.clicked.connect(lambda: self.calc_iso())
 
@@ -108,14 +118,14 @@ class SE_view(QtWidgets.QDockWidget):
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
 
-    # def color_test(self, button):
-    #     color = QtWidgets.QColorDialog()
-    #     color.exec_()
-    #     try:
-    #         button.setStyleSheet("background-color: {}".format(color.currentColor().name()))
-    #         button.setText(color.currentColor().name())
-    #     except ValueError:
-    #         print('err')
+    def color_test(self, button):
+        color = QtWidgets.QColorDialog()
+        color.exec_()
+        try:
+            button.setStyleSheet("background-color: {}".format(color.currentColor().name()))
+            button.setText(color.currentColor().name())
+        except ValueError:
+            print('err')
 
     def plot_type_organizer(self):
         if self.ui.plot_type_cb.currentText() == 'X vs Y':
@@ -152,10 +162,7 @@ class SE_view(QtWidgets.QDockWidget):
 
     def linear_SE(self):
         def finish():
-            if self.ui.line_name_checkbox.isChecked():
-                name = self.ui.line_name_le.text()
-            else:
-                name = self.ui.tw_y.currentIndex().data()
+            name = self.ui.tw_y.currentIndex().data()
             if keycheck(dict, name) is True:
                 name = name + '_'
             key = ui.treeWidget.currentItem().text(0)
@@ -394,6 +401,7 @@ class SE_view(QtWidgets.QDockWidget):
             ax.set_xlabel('Time')
             ax.set_ylabel('Intensity (mV)')
         elif self.ui.plottype_cb.currentText() == 'Mass Spectrum':
+            y_data = y_data[np.logical_not(np.isnan(y_data))]
             ApplicationSettings.ALL_DATA_PLOTTED[name] = \
                 ax.plot(np.linspace(self.ui.mass_start_dsb.value(), self.ui.mass_end_dsb.value(), len(y_data)), y_data,'.-', label=y)
             ax.set_xlabel('m/z')
@@ -447,7 +455,8 @@ class SE_view(QtWidgets.QDockWidget):
         self.main_window.canvas.draw()
 
     def calc_iso(self):
-        self.removing_qms_lines()
+        if self.ui.clear_combo.currentText() == 'Clear Lines On':
+            self.removing_qms_lines()
         self.ui.tableWidget_2.clear()
         checked = [self.ui.species1_cb.isChecked(), self.ui.species2_cb.isChecked(), self.ui.species3_cb.isChecked(),
                    self.ui.species4_cb.isChecked(), self.ui.species5_cb.isChecked(), self.ui.species6_cb.isChecked(),
@@ -487,7 +496,10 @@ class SE_view(QtWidgets.QDockWidget):
             user_ratio = [self.ui.s1ratio.value(), self.ui.s2ratio.value(), self.ui.s3ratio.value(),
                           self.ui.s4ratio.value(), self.ui.s5ratio.value(), self.ui.s6ratio.value(),
                           self.ui.s7ratio.value(), self.ui.s8ratio.value(), self.ui.s9ratio.value(),
-                          self.ui.s10ratio.value()]
+                          self.ui.s10ratio.value(), self.ui.s11ratio.value(), self.ui.s12ratio.value(), self.ui.s13ratio.value(),
+                          self.ui.s14ratio.value(), self.ui.s15ratio.value(), self.ui.s16ratio.value(),
+                          self.ui.s17ratio.value(), self.ui.s18ratio.value(), self.ui.s19ratio.value(),
+                          self.ui.s20ratio.value()]
             dict_all = {}
             for j in range(len(checked)):
                 if checked[j] is True:

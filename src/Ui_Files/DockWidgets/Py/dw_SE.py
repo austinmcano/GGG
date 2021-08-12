@@ -302,7 +302,7 @@ class Ui_DockWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -195, 558, 640))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -236, 558, 640))
         self.gridLayout_8 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.s8_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
@@ -984,131 +984,161 @@ class Ui_DockWidget(object):
 
         self.size11 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size11.setObjectName(u"size11")
-        self.size11.setMaximum(1.000000000000000)
+        self.size11.setMaximum(99.000000000000000)
         self.size11.setSingleStep(0.100000000000000)
-        self.size11.setValue(1.000000000000000)
+        self.size11.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size11, 13, 6, 1, 1)
 
         self.size12 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size12.setObjectName(u"size12")
-        self.size12.setMaximum(1.000000000000000)
+        self.size12.setMaximum(99.000000000000000)
         self.size12.setSingleStep(0.100000000000000)
-        self.size12.setValue(1.000000000000000)
+        self.size12.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size12, 14, 6, 1, 1)
 
         self.size13 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size13.setObjectName(u"size13")
-        self.size13.setMaximum(1.000000000000000)
+        self.size13.setMaximum(99.000000000000000)
         self.size13.setSingleStep(0.100000000000000)
-        self.size13.setValue(1.000000000000000)
+        self.size13.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size13, 15, 6, 1, 1)
 
         self.size14 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size14.setObjectName(u"size14")
-        self.size14.setMaximum(1.000000000000000)
+        self.size14.setMaximum(99.000000000000000)
         self.size14.setSingleStep(0.100000000000000)
-        self.size14.setValue(1.000000000000000)
+        self.size14.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size14, 16, 6, 1, 1)
 
         self.size15 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size15.setObjectName(u"size15")
-        self.size15.setMaximum(1.000000000000000)
+        self.size15.setMaximum(99.000000000000000)
         self.size15.setSingleStep(0.100000000000000)
-        self.size15.setValue(1.000000000000000)
+        self.size15.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size15, 17, 6, 1, 1)
 
         self.size16 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size16.setObjectName(u"size16")
-        self.size16.setMaximum(1.000000000000000)
+        self.size16.setMaximum(99.000000000000000)
         self.size16.setSingleStep(0.100000000000000)
-        self.size16.setValue(1.000000000000000)
+        self.size16.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size16, 18, 6, 1, 1)
 
         self.size17 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size17.setObjectName(u"size17")
-        self.size17.setMaximum(1.000000000000000)
+        self.size17.setMaximum(99.000000000000000)
         self.size17.setSingleStep(0.100000000000000)
-        self.size17.setValue(1.000000000000000)
+        self.size17.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size17, 19, 6, 1, 1)
 
         self.size18 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size18.setObjectName(u"size18")
-        self.size18.setMaximum(1.000000000000000)
+        self.size18.setMaximum(99.000000000000000)
         self.size18.setSingleStep(0.100000000000000)
-        self.size18.setValue(1.000000000000000)
+        self.size18.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size18, 20, 6, 1, 1)
 
         self.size19 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size19.setObjectName(u"size19")
-        self.size19.setMaximum(1.000000000000000)
+        self.size19.setMaximum(99.000000000000000)
         self.size19.setSingleStep(0.100000000000000)
-        self.size19.setValue(1.000000000000000)
+        self.size19.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size19, 21, 6, 1, 1)
 
         self.size20 = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.size20.setObjectName(u"size20")
-        self.size20.setMaximum(1.000000000000000)
+        self.size20.setMaximum(99.000000000000000)
         self.size20.setSingleStep(0.100000000000000)
-        self.size20.setValue(1.000000000000000)
+        self.size20.setValue(5.000000000000000)
 
         self.gridLayout_8.addWidget(self.size20, 22, 6, 1, 1)
 
         self.s11_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s11_alpha.setObjectName(u"s11_alpha")
+        self.s11_alpha.setMaximum(1.000000000000000)
+        self.s11_alpha.setSingleStep(0.100000000000000)
+        self.s11_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s11_alpha, 13, 7, 1, 1)
 
         self.s12_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s12_alpha.setObjectName(u"s12_alpha")
+        self.s12_alpha.setMaximum(1.000000000000000)
+        self.s12_alpha.setSingleStep(0.100000000000000)
+        self.s12_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s12_alpha, 14, 7, 1, 1)
 
         self.s13_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s13_alpha.setObjectName(u"s13_alpha")
+        self.s13_alpha.setMaximum(1.000000000000000)
+        self.s13_alpha.setSingleStep(0.100000000000000)
+        self.s13_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s13_alpha, 15, 7, 1, 1)
 
         self.s14_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s14_alpha.setObjectName(u"s14_alpha")
+        self.s14_alpha.setMaximum(1.000000000000000)
+        self.s14_alpha.setSingleStep(0.100000000000000)
+        self.s14_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s14_alpha, 16, 7, 1, 1)
 
         self.s15_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s15_alpha.setObjectName(u"s15_alpha")
+        self.s15_alpha.setMaximum(1.000000000000000)
+        self.s15_alpha.setSingleStep(0.100000000000000)
+        self.s15_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s15_alpha, 17, 7, 1, 1)
 
         self.s16_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s16_alpha.setObjectName(u"s16_alpha")
+        self.s16_alpha.setMaximum(1.000000000000000)
+        self.s16_alpha.setSingleStep(0.100000000000000)
+        self.s16_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s16_alpha, 18, 7, 1, 1)
 
         self.s17_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s17_alpha.setObjectName(u"s17_alpha")
+        self.s17_alpha.setMaximum(1.000000000000000)
+        self.s17_alpha.setSingleStep(0.100000000000000)
+        self.s17_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s17_alpha, 19, 7, 1, 1)
 
         self.s18_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s18_alpha.setObjectName(u"s18_alpha")
+        self.s18_alpha.setMaximum(1.000000000000000)
+        self.s18_alpha.setSingleStep(0.100000000000000)
+        self.s18_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s18_alpha, 20, 7, 1, 1)
 
         self.s19_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s19_alpha.setObjectName(u"s19_alpha")
+        self.s19_alpha.setMaximum(1.000000000000000)
+        self.s19_alpha.setSingleStep(0.100000000000000)
+        self.s19_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s19_alpha, 21, 7, 1, 1)
 
         self.s20_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.s20_alpha.setObjectName(u"s20_alpha")
+        self.s20_alpha.setMaximum(1.000000000000000)
+        self.s20_alpha.setSingleStep(0.100000000000000)
+        self.s20_alpha.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s20_alpha, 22, 7, 1, 1)
 

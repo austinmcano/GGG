@@ -70,6 +70,21 @@ def tight_figure(self):
     self.fig.tight_layout()
     self.canvas.draw()
 
+def clearimage(self):
+    from PIL import Image
+    img = Image.open(r'C:\Users\austi\Desktop\image2.png')
+    img = img.convert("RGBA")
+    datas = img.getdata()
+
+    newData = []
+    for item in datas:
+        if item[0] == 255 and item[1] == 255 and item[2] == 255:
+            newData.append((255, 255, 255, 0))
+        else:
+            newData.append(item)
+
+    img.putdata(newData)
+    img.save(r"C:\Users\austi\Desktop\img2.png", "PNG")
 
 def save_fig(self):
     if self.pickle_opened.text() == 'None':
@@ -96,6 +111,7 @@ def save_fig(self):
             with open(filename[0], 'wb') as fid:
                 try:
                     pickle.dump(self.fig, fid)
+                    self.pickle_opened.setText(filename[0])
                 except TypeError:
                     msg = QtWidgets.QMessageBox()
                     msg.setText("Can't save FigureCanvasQtAgg object")
@@ -272,8 +288,9 @@ def toggle_legend(self):
                 if ok_2:
                     if all == 'Yes':
                         try:
-                            lines_1, labels_1 = self.ax_1.get_legend_handles_labels()
+                            lines_1, labels_1 = self.ax.get_legend_handles_labels()
                             lines_2, labels_2 = self.ax_2.get_legend_handles_labels()
+                            print(labels_2)
                             lines = lines_1 + lines_2
                             labels = labels_1 + labels_2
                             self.ax.legend(lines, labels, loc=pos, fontsize = size)
