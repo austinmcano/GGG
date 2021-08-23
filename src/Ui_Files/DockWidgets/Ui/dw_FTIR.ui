@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
-    <height>536</height>
+    <width>848</width>
+    <height>743</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -532,7 +532,7 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>747</width>
+             <width>801</width>
              <height>887</height>
             </rect>
            </property>
@@ -1606,22 +1606,39 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="21" column="0">
-             <widget class="QLabel" name="baseline_combo">
+            <item row="1" column="0">
+             <widget class="QPushButton" name="clear_fit_pb">
               <property name="text">
-               <string>Baseline</string>
+               <string>Clear Fitting</string>
               </property>
              </widget>
             </item>
-            <item row="20" column="1" colspan="2">
-             <widget class="QCheckBox" name="plot_components_box">
-              <property name="text">
-               <string>Plot Components</string>
+            <item row="20" column="5">
+             <widget class="QDoubleSpinBox" name="slope_dsb">
+              <property name="minimum">
+               <double>-999999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>999999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="21" column="1" colspan="2">
-             <widget class="QComboBox" name="comboBox">
+            <item row="20" column="4">
+             <widget class="QLabel" name="label_18">
+              <property name="text">
+               <string>slope</string>
+              </property>
+             </widget>
+            </item>
+            <item row="20" column="3">
+             <widget class="QCheckBox" name="checkBox">
+              <property name="text">
+               <string>Hold Baseline</string>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="3">
+             <widget class="QComboBox" name="baseline_combo">
               <item>
                <property name="text">
                 <string>None</string>
@@ -1639,38 +1656,21 @@ p, li { white-space: pre-wrap; }
               </item>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="clear_fit_pb">
+            <item row="21" column="0">
+             <widget class="QCheckBox" name="plot_components_box">
               <property name="text">
-               <string>Clear Fitting</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="3">
-             <widget class="QLabel" name="label_18">
-              <property name="text">
-               <string>slope</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="4">
-             <widget class="QDoubleSpinBox" name="slope_dsb">
-              <property name="minimum">
-               <double>-999999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="3">
-             <widget class="QLabel" name="label_19">
-              <property name="text">
-               <string>intercept</string>
+               <string>Plot Components</string>
               </property>
              </widget>
             </item>
             <item row="21" column="4">
+             <widget class="QLabel" name="label_19">
+              <property name="text">
+               <string>intercept/constant</string>
+              </property>
+             </widget>
+            </item>
+            <item row="21" column="5">
              <widget class="QDoubleSpinBox" name="intercept_dsb">
               <property name="minimum">
                <double>-999999.000000000000000</double>

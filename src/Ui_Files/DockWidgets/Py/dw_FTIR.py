@@ -20,7 +20,7 @@ class Ui_DockWidget(object):
     def setupUi(self, DockWidget):
         if not DockWidget.objectName():
             DockWidget.setObjectName(u"DockWidget")
-        DockWidget.resize(555, 536)
+        DockWidget.resize(848, 743)
         self.dockWidgetContents = QWidget()
         self.dockWidgetContents.setObjectName(u"dockWidgetContents")
         self.gridLayout = QGridLayout(self.dockWidgetContents)
@@ -362,7 +362,7 @@ class Ui_DockWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 747, 887))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 801, 887))
         self.gridLayout_6 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.plot_3sig_box = QCheckBox(self.scrollAreaWidgetContents)
@@ -1167,52 +1167,52 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.select_ir_range_cb, 1, 1, 1, 2)
 
-        self.baseline_combo = QLabel(self.scrollAreaWidgetContents)
-        self.baseline_combo.setObjectName(u"baseline_combo")
-
-        self.gridLayout_6.addWidget(self.baseline_combo, 21, 0, 1, 1)
-
-        self.plot_components_box = QCheckBox(self.scrollAreaWidgetContents)
-        self.plot_components_box.setObjectName(u"plot_components_box")
-
-        self.gridLayout_6.addWidget(self.plot_components_box, 20, 1, 1, 2)
-
-        self.comboBox = QComboBox(self.scrollAreaWidgetContents)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
-
-        self.gridLayout_6.addWidget(self.comboBox, 21, 1, 1, 2)
-
         self.clear_fit_pb = QPushButton(self.scrollAreaWidgetContents)
         self.clear_fit_pb.setObjectName(u"clear_fit_pb")
 
         self.gridLayout_6.addWidget(self.clear_fit_pb, 1, 0, 1, 1)
-
-        self.label_18 = QLabel(self.scrollAreaWidgetContents)
-        self.label_18.setObjectName(u"label_18")
-
-        self.gridLayout_6.addWidget(self.label_18, 20, 3, 1, 1)
 
         self.slope_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.slope_dsb.setObjectName(u"slope_dsb")
         self.slope_dsb.setMinimum(-999999.000000000000000)
         self.slope_dsb.setMaximum(999999.000000000000000)
 
-        self.gridLayout_6.addWidget(self.slope_dsb, 20, 4, 1, 1)
+        self.gridLayout_6.addWidget(self.slope_dsb, 20, 5, 1, 1)
+
+        self.label_18 = QLabel(self.scrollAreaWidgetContents)
+        self.label_18.setObjectName(u"label_18")
+
+        self.gridLayout_6.addWidget(self.label_18, 20, 4, 1, 1)
+
+        self.checkBox = QCheckBox(self.scrollAreaWidgetContents)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.gridLayout_6.addWidget(self.checkBox, 20, 3, 1, 1)
+
+        self.baseline_combo = QComboBox(self.scrollAreaWidgetContents)
+        self.baseline_combo.addItem("")
+        self.baseline_combo.addItem("")
+        self.baseline_combo.addItem("")
+        self.baseline_combo.setObjectName(u"baseline_combo")
+
+        self.gridLayout_6.addWidget(self.baseline_combo, 21, 3, 1, 1)
+
+        self.plot_components_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.plot_components_box.setObjectName(u"plot_components_box")
+
+        self.gridLayout_6.addWidget(self.plot_components_box, 21, 0, 1, 1)
 
         self.label_19 = QLabel(self.scrollAreaWidgetContents)
         self.label_19.setObjectName(u"label_19")
 
-        self.gridLayout_6.addWidget(self.label_19, 21, 3, 1, 1)
+        self.gridLayout_6.addWidget(self.label_19, 21, 4, 1, 1)
 
         self.intercept_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.intercept_dsb.setObjectName(u"intercept_dsb")
         self.intercept_dsb.setMinimum(-999999.000000000000000)
         self.intercept_dsb.setMaximum(999999.000000000000000)
 
-        self.gridLayout_6.addWidget(self.intercept_dsb, 21, 4, 1, 1)
+        self.gridLayout_6.addWidget(self.intercept_dsb, 21, 5, 1, 1)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
@@ -1325,15 +1325,15 @@ class Ui_DockWidget(object):
         self.p8_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p6_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.select_ir_range_cb.setText(QCoreApplication.translate("DockWidget", u"Get IR Fit Range", None))
-        self.baseline_combo.setText(QCoreApplication.translate("DockWidget", u"Baseline", None))
-        self.plot_components_box.setText(QCoreApplication.translate("DockWidget", u"Plot Components", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("DockWidget", u"None", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("DockWidget", u"Linear", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("DockWidget", u"Constant", None))
-
         self.clear_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Clear Fitting", None))
         self.label_18.setText(QCoreApplication.translate("DockWidget", u"slope", None))
-        self.label_19.setText(QCoreApplication.translate("DockWidget", u"intercept", None))
+        self.checkBox.setText(QCoreApplication.translate("DockWidget", u"Hold Baseline", None))
+        self.baseline_combo.setItemText(0, QCoreApplication.translate("DockWidget", u"None", None))
+        self.baseline_combo.setItemText(1, QCoreApplication.translate("DockWidget", u"Linear", None))
+        self.baseline_combo.setItemText(2, QCoreApplication.translate("DockWidget", u"Constant", None))
+
+        self.plot_components_box.setText(QCoreApplication.translate("DockWidget", u"Plot Components", None))
+        self.label_19.setText(QCoreApplication.translate("DockWidget", u"intercept/constant", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("DockWidget", u"Fit Panel", None))
     # retranslateUi
 

@@ -36,6 +36,8 @@ class SE_view(QtWidgets.QDockWidget):
                        self.ui.color_11, self.ui.color_12, self.ui.color_13, self.ui.color_14, self.ui.color_15,
                        self.ui.color_16, self.ui.color_17, self.ui.color_18, self.ui.color_19, self.ui.color_20
                        ]
+        self.ui.secolorpb.setStyleSheet("background-color: {}".format('#ff0000'))
+        self.ui.secolorpb.setText('#ff0000')
         for i in self.colors:
             i.setStyleSheet("background-color: {}".format('#ff0000'))
             i.setText('#ff0000')
@@ -110,6 +112,8 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.color_19.clicked.connect(lambda: self.color_test(self.ui.color_19))
         self.ui.color_20.clicked.connect(lambda: self.color_test(self.ui.color_20))
 
+        self.ui.secolorpb.clicked.connect(lambda: self.color_test(self.ui.secolorpb))
+
         self.ui.calc_iso_pb.clicked.connect(lambda: self.calc_iso())
 
     def eventFilter(self, object, event):
@@ -144,17 +148,18 @@ class SE_view(QtWidgets.QDockWidget):
         x = self.ui.tw_x.currentIndex().data()
         y = self.ui.tw_y.currentIndex().data()
         x_data = self.data[x].to_numpy()
-
         if self.ui.zero_correct_checkb.isChecked():
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
                 ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data-y_data[0],'.-',label=y)
+                    ax.plot(x_data, y_data-y_data[0], '.-', label=y, color=self.ui.secolorpb.text(),
+                            markersize=self.ui.semarkersize.value())
         elif not self.ui.zero_correct_checkb.isChecked():
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
                 ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data, '.-',label=y)
+                    ax.plot(x_data, y_data, '.-',label=y, color=self.ui.secolorpb.text(),
+                            markersize=self.ui.semarkersize.value())
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
@@ -310,13 +315,16 @@ class SE_view(QtWidgets.QDockWidget):
             y_data = y_data-y_data[0]
         if self.ui.plot_type_cb.currentText() == 'Ext. Plot (ints)':
             ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, len(y_data) - 1, len(y_data)), y_data, '.-',label=name+y)
+                ax.plot(np.linspace(0, len(y_data) - 1, len(y_data)), y_data, '.-',label=name+y,
+                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (half-ints)':
             ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,'.-',label=name+y)
+                ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,'.-',label=name+y,
+                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (third-ints)':
             ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 3, len(y_data)), y_data, '.-',label=name+y)
+                ax.plot(np.linspace(0, (len(y_data) - 1) / 3, len(y_data)), y_data, '.-',label=name+y,
+                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()

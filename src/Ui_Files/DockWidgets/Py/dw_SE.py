@@ -32,6 +32,11 @@ class Ui_DockWidget(object):
         self.tab_3.setObjectName(u"tab_3")
         self.gridLayout_3 = QGridLayout(self.tab_3)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
+        self.fill_cols_pb = QPushButton(self.tab_3)
+        self.fill_cols_pb.setObjectName(u"fill_cols_pb")
+
+        self.gridLayout_3.addWidget(self.fill_cols_pb, 12, 1, 1, 1)
+
         self.plot_type_cb = QComboBox(self.tab_3)
         self.plot_type_cb.addItem("")
         self.plot_type_cb.addItem("")
@@ -39,40 +44,25 @@ class Ui_DockWidget(object):
         self.plot_type_cb.addItem("")
         self.plot_type_cb.setObjectName(u"plot_type_cb")
 
-        self.gridLayout_3.addWidget(self.plot_type_cb, 11, 2, 1, 1)
-
-        self.xlabel_le = QLineEdit(self.tab_3)
-        self.xlabel_le.setObjectName(u"xlabel_le")
-
-        self.gridLayout_3.addWidget(self.xlabel_le, 4, 2, 1, 2)
-
-        self.ylabel_le = QLineEdit(self.tab_3)
-        self.ylabel_le.setObjectName(u"ylabel_le")
-
-        self.gridLayout_3.addWidget(self.ylabel_le, 5, 2, 1, 2)
-
-        self.fill_cols_pb = QPushButton(self.tab_3)
-        self.fill_cols_pb.setObjectName(u"fill_cols_pb")
-
-        self.gridLayout_3.addWidget(self.fill_cols_pb, 11, 1, 1, 1)
-
-        self.label_9 = QLabel(self.tab_3)
-        self.label_9.setObjectName(u"label_9")
-
-        self.gridLayout_3.addWidget(self.label_9, 5, 1, 1, 1)
-
-        self.zero_correct_checkb = QCheckBox(self.tab_3)
-        self.zero_correct_checkb.setObjectName(u"zero_correct_checkb")
-        self.zero_correct_checkb.setChecked(False)
-
-        self.gridLayout_3.addWidget(self.zero_correct_checkb, 7, 1, 1, 1)
+        self.gridLayout_3.addWidget(self.plot_type_cb, 12, 2, 1, 1)
 
         self.SE_treeView = QTreeView(self.tab_3)
         self.SE_treeView.setObjectName(u"SE_treeView")
 
         self.gridLayout_3.addWidget(self.SE_treeView, 0, 1, 1, 3)
 
-        self.tw_x = QTreeWidget(self.tab_3)
+        self.plot_pb = QPushButton(self.tab_3)
+        self.plot_pb.setObjectName(u"plot_pb")
+
+        self.gridLayout_3.addWidget(self.plot_pb, 12, 3, 1, 1)
+
+        self.tabWidget_3 = QTabWidget(self.tab_3)
+        self.tabWidget_3.setObjectName(u"tabWidget_3")
+        self.tab_7 = QWidget()
+        self.tab_7.setObjectName(u"tab_7")
+        self.gridLayout_9 = QGridLayout(self.tab_7)
+        self.gridLayout_9.setObjectName(u"gridLayout_9")
+        self.tw_x = QTreeWidget(self.tab_7)
         self.tw_x.setObjectName(u"tw_x")
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -80,40 +70,90 @@ class Ui_DockWidget(object):
         sizePolicy.setHeightForWidth(self.tw_x.sizePolicy().hasHeightForWidth())
         self.tw_x.setSizePolicy(sizePolicy)
 
-        self.gridLayout_3.addWidget(self.tw_x, 1, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.tw_x, 0, 0, 1, 1)
 
-        self.tw_y = QTreeWidget(self.tab_3)
+        self.tw_y = QTreeWidget(self.tab_7)
         self.tw_y.setObjectName(u"tw_y")
         self.tw_y.setSelectionMode(QAbstractItemView.SingleSelection)
 
-        self.gridLayout_3.addWidget(self.tw_y, 1, 2, 1, 2)
+        self.gridLayout_9.addWidget(self.tw_y, 0, 1, 1, 1)
 
-        self.plot_pb = QPushButton(self.tab_3)
-        self.plot_pb.setObjectName(u"plot_pb")
-
-        self.gridLayout_3.addWidget(self.plot_pb, 11, 3, 1, 1)
-
-        self.label_8 = QLabel(self.tab_3)
-        self.label_8.setObjectName(u"label_8")
-
-        self.gridLayout_3.addWidget(self.label_8, 4, 1, 1, 1)
-
-        self.ax_cb = QComboBox(self.tab_3)
+        self.ax_cb = QComboBox(self.tab_7)
         self.ax_cb.addItem("")
         self.ax_cb.addItem("")
         self.ax_cb.setObjectName(u"ax_cb")
 
-        self.gridLayout_3.addWidget(self.ax_cb, 7, 2, 1, 1)
+        self.gridLayout_9.addWidget(self.ax_cb, 3, 1, 1, 1)
 
-        self.label_7 = QLabel(self.tab_3)
+        self.zero_correct_checkb = QCheckBox(self.tab_7)
+        self.zero_correct_checkb.setObjectName(u"zero_correct_checkb")
+        self.zero_correct_checkb.setChecked(False)
+
+        self.gridLayout_9.addWidget(self.zero_correct_checkb, 3, 0, 1, 1)
+
+        self.label_7 = QLabel(self.tab_7)
         self.label_7.setObjectName(u"label_7")
 
-        self.gridLayout_3.addWidget(self.label_7, 8, 1, 1, 1)
+        self.gridLayout_9.addWidget(self.label_7, 2, 0, 1, 1)
 
-        self.skip_rows_sb = QSpinBox(self.tab_3)
+        self.skip_rows_sb = QSpinBox(self.tab_7)
         self.skip_rows_sb.setObjectName(u"skip_rows_sb")
 
-        self.gridLayout_3.addWidget(self.skip_rows_sb, 8, 2, 1, 1)
+        self.gridLayout_9.addWidget(self.skip_rows_sb, 2, 1, 1, 1)
+
+        self.tabWidget_3.addTab(self.tab_7, "")
+        self.tab_8 = QWidget()
+        self.tab_8.setObjectName(u"tab_8")
+        self.gridLayout_10 = QGridLayout(self.tab_8)
+        self.gridLayout_10.setObjectName(u"gridLayout_10")
+        self.ylabel_le = QLineEdit(self.tab_8)
+        self.ylabel_le.setObjectName(u"ylabel_le")
+
+        self.gridLayout_10.addWidget(self.ylabel_le, 1, 1, 1, 1)
+
+        self.secolorpb = QPushButton(self.tab_8)
+        self.secolorpb.setObjectName(u"secolorpb")
+
+        self.gridLayout_10.addWidget(self.secolorpb, 3, 1, 1, 1)
+
+        self.xlabel_le = QLineEdit(self.tab_8)
+        self.xlabel_le.setObjectName(u"xlabel_le")
+
+        self.gridLayout_10.addWidget(self.xlabel_le, 1, 0, 1, 1)
+
+        self.label_9 = QLabel(self.tab_8)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setMaximumSize(QSize(16777215, 40))
+
+        self.gridLayout_10.addWidget(self.label_9, 0, 1, 1, 1)
+
+        self.comboBox = QComboBox(self.tab_8)
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.gridLayout_10.addWidget(self.comboBox, 3, 0, 1, 1)
+
+        self.label_18 = QLabel(self.tab_8)
+        self.label_18.setObjectName(u"label_18")
+        self.label_18.setMaximumSize(QSize(16777215, 40))
+
+        self.gridLayout_10.addWidget(self.label_18, 4, 0, 1, 1)
+
+        self.label_8 = QLabel(self.tab_8)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setMaximumSize(QSize(16777215, 40))
+
+        self.gridLayout_10.addWidget(self.label_8, 0, 0, 1, 1)
+
+        self.semarkersize = QDoubleSpinBox(self.tab_8)
+        self.semarkersize.setObjectName(u"semarkersize")
+        self.semarkersize.setMaximum(9999.000000000000000)
+        self.semarkersize.setValue(40.000000000000000)
+
+        self.gridLayout_10.addWidget(self.semarkersize, 5, 0, 1, 1)
+
+        self.tabWidget_3.addTab(self.tab_8, "")
+
+        self.gridLayout_3.addWidget(self.tabWidget_3, 1, 1, 1, 3)
 
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_2 = QWidget()
@@ -302,7 +342,7 @@ class Ui_DockWidget(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, -236, 558, 640))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 558, 640))
         self.gridLayout_8 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.s8_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
@@ -1229,8 +1269,9 @@ class Ui_DockWidget(object):
 
         self.retranslateUi(DockWidget)
 
-        self.tabWidget.setCurrentIndex(2)
-        self.tabWidget_2.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget_3.setCurrentIndex(0)
+        self.tabWidget_2.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(DockWidget)
@@ -1238,26 +1279,30 @@ class Ui_DockWidget(object):
 
     def retranslateUi(self, DockWidget):
         DockWidget.setWindowTitle(QCoreApplication.translate("DockWidget", u"SE/QMS", None))
+        self.fill_cols_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
         self.plot_type_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Ext. Plot (half-ints)", None))
         self.plot_type_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Ext. Plot (ints)", None))
         self.plot_type_cb.setItemText(2, QCoreApplication.translate("DockWidget", u"X vs Y", None))
         self.plot_type_cb.setItemText(3, QCoreApplication.translate("DockWidget", u"Ext. Plot (third-ints)", None))
 
-        self.xlabel_le.setText(QCoreApplication.translate("DockWidget", u"Cycles", None))
-        self.ylabel_le.setText(QCoreApplication.translate("DockWidget", u"$\\Delta$ Thickness ($\\AA$)", None))
-        self.fill_cols_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
-        self.label_9.setText(QCoreApplication.translate("DockWidget", u"Y Label", None))
-        self.zero_correct_checkb.setText(QCoreApplication.translate("DockWidget", u"Zero Correct", None))
+        self.plot_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
         ___qtreewidgetitem = self.tw_x.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("DockWidget", u"SE-X", None));
         ___qtreewidgetitem1 = self.tw_y.headerItem()
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("DockWidget", u"SE-Y", None));
-        self.plot_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
-        self.label_8.setText(QCoreApplication.translate("DockWidget", u"X Label", None))
         self.ax_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left Ax", None))
         self.ax_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right Ax", None))
 
+        self.zero_correct_checkb.setText(QCoreApplication.translate("DockWidget", u"Zero Correct", None))
         self.label_7.setText(QCoreApplication.translate("DockWidget", u"Skip Rows: ", None))
+        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_7), QCoreApplication.translate("DockWidget", u"Add Line to Plot", None))
+        self.ylabel_le.setText("")
+        self.secolorpb.setText("")
+        self.xlabel_le.setText("")
+        self.label_9.setText(QCoreApplication.translate("DockWidget", u"Y Label", None))
+        self.label_18.setText(QCoreApplication.translate("DockWidget", u"Marker Size", None))
+        self.label_8.setText(QCoreApplication.translate("DockWidget", u"X Label", None))
+        self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_8), QCoreApplication.translate("DockWidget", u"Plot Attributes", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Axis Properties", None))
         self.textBrowser.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

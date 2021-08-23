@@ -21,14 +21,21 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="title">
         <string>Axis Properties</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="11" column="2">
+        <item row="12" column="1">
+         <widget class="QPushButton" name="fill_cols_pb">
+          <property name="text">
+           <string>Fill Columns</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="2">
          <widget class="QComboBox" name="plot_type_cb">
           <item>
            <property name="text">
@@ -52,111 +59,170 @@
           </item>
          </widget>
         </item>
-        <item row="4" column="2" colspan="2">
-         <widget class="QLineEdit" name="xlabel_le">
-          <property name="text">
-           <string>Cycles</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2" colspan="2">
-         <widget class="QLineEdit" name="ylabel_le">
-          <property name="text">
-           <string>$\Delta$ Thickness ($\AA$)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="11" column="1">
-         <widget class="QPushButton" name="fill_cols_pb">
-          <property name="text">
-           <string>Fill Columns</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>Y Label</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QCheckBox" name="zero_correct_checkb">
-          <property name="text">
-           <string>Zero Correct</string>
-          </property>
-          <property name="checked">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1" colspan="3">
          <widget class="QTreeView" name="SE_treeView"/>
         </item>
-        <item row="1" column="1">
-         <widget class="QTreeWidget" name="tw_x">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <column>
-           <property name="text">
-            <string>SE-X</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="1" column="2" colspan="2">
-         <widget class="QTreeWidget" name="tw_y">
-          <property name="selectionMode">
-           <enum>QAbstractItemView::SingleSelection</enum>
-          </property>
-          <column>
-           <property name="text">
-            <string>SE-Y</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="11" column="3">
+        <item row="12" column="3">
          <widget class="QPushButton" name="plot_pb">
           <property name="text">
            <string>Plot</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>X Label</string>
+        <item row="1" column="1" colspan="3">
+         <widget class="QTabWidget" name="tabWidget_3">
+          <property name="currentIndex">
+           <number>0</number>
           </property>
+          <widget class="QWidget" name="tab_7">
+           <attribute name="title">
+            <string>Add Line to Plot</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_9">
+            <item row="0" column="0">
+             <widget class="QTreeWidget" name="tw_x">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <column>
+               <property name="text">
+                <string>SE-X</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QTreeWidget" name="tw_y">
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <column>
+               <property name="text">
+                <string>SE-Y</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QComboBox" name="ax_cb">
+              <item>
+               <property name="text">
+                <string>Left Ax</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Right Ax</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="zero_correct_checkb">
+              <property name="text">
+               <string>Zero Correct</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Skip Rows: </string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="skip_rows_sb"/>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_8">
+           <attribute name="title">
+            <string>Plot Attributes</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_10">
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="ylabel_le">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="secolorpb">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLineEdit" name="xlabel_le">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_9">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Y Label</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QComboBox" name="comboBox"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_18">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Marker Size</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>X Label</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QDoubleSpinBox" name="semarkersize">
+              <property name="maximum">
+               <double>9999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>40.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
          </widget>
-        </item>
-        <item row="7" column="2">
-         <widget class="QComboBox" name="ax_cb">
-          <item>
-           <property name="text">
-            <string>Left Ax</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Right Ax</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="8" column="1">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Skip Rows: </string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="2">
-         <widget class="QSpinBox" name="skip_rows_sb"/>
         </item>
        </layout>
       </widget>
@@ -257,7 +323,7 @@ p, li { white-space: pre-wrap; }
         <item row="1" column="0" colspan="3">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -589,7 +655,7 @@ p, li { white-space: pre-wrap; }
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-236</y>
+                 <y>0</y>
                  <width>558</width>
                  <height>640</height>
                 </rect>

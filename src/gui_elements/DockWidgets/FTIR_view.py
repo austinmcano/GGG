@@ -460,7 +460,7 @@ class FTIR_view(QtWidgets.QDockWidget):
         fwhm_list = [self.ui.p1_fwhm,self.ui.p2_fwhm,self.ui.p3_fwhm,self.ui.p4_fwhm,self.ui.p5_fwhm,
                      self.ui.p6_fwhm,self.ui.p7_fwhm,self.ui.p8_fwhm]
         obj = self.fit_obj[self.ui.ir_range_cb.currentText()]
-        result = obj.fit(checked, cons, holds, lin_pars)
+        result = obj.fit(checked, cons, holds, lin_pars, self.ui.baseline_combo.currentText())
         comps = result.eval_components()
         ApplicationSettings.ALL_DATA_PLOTTED[self.ui.ir_range_cb.currentText()+'_fit'] = \
             self.main_window.ax.plot(obj.x_data, result.best_fit, 'r-', label=self.ui.ir_range_cb.currentText()+'_fit')
@@ -488,17 +488,35 @@ class FTIR_view(QtWidgets.QDockWidget):
             obj.peak_constraints[i][0][0] = result.params['p%s_amplitude' % str(i)].value
             obj.peak_constraints[i][1][0] = result.params['p%s_center' % str(i)].value
             obj.peak_constraints[i][2][0] = result.params['p%s_sigma' % str(i)].value
+        try:
             self.ui.slope_dsb.setValue(result.params['slope'])
             self.ui.intercept_dsb.setValue(result.params['intercept'])
+        except KeyError:
+            pass
+        try:
+            self.ui.intercept_dsb.setValue(result.params['c'])
+        except KeyError:
+            pass
 
         if self.ui.plot_components_box.isChecked():
-            for i in nums_checked:
-                ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
-                    self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['linear'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
-            ApplicationSettings.ALL_DATA_PLOTTED['lin_part' + self.ui.ir_range_cb.currentText()] = \
-                self.main_window.ax.plot(obj.x_data, comps['linear'], 'k--',
-                                         label='_linmod_' + self.ui.ir_range_cb.currentText())
-
+            if self.ui.baseline_combo == 'Linear':
+                for i in nums_checked:
+                    ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
+                        self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['linear'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
+                ApplicationSettings.ALL_DATA_PLOTTED['lin_part' + self.ui.ir_range_cb.currentText()] = \
+                    self.main_window.ax.plot(obj.x_data, comps['linear'], 'k--',
+                                             label='_linmod_' + self.ui.ir_range_cb.currentText())
+            elif self.ui.baseline_combo == 'Constant':
+                for i in nums_checked:
+                    ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
+                        self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['c'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
+                ApplicationSettings.ALL_DATA_PLOTTED['const_part' + self.ui.ir_range_cb.currentText()] = \
+                    self.main_window.ax.plot(obj.x_data, comps['c'], 'k--',
+                                             label='_cmod_' + self.ui.ir_range_cb.currentText())
+            elif self.ui.baseline_combo == 'None':
+                for i in nums_checked:
+                    ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
+                        self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['c'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
         self.main_window.canvas.draw()
 
     def clear_fit_objs(self):
@@ -539,7 +557,8 @@ class FTIR_view(QtWidgets.QDockWidget):
             try:
                 self.main_window.ax.lines.remove(line0[0])
             except ValueError:
-                line0.remove()
+                pass
+                # line0.remove()
         self.main_window.canvas.draw()
 
 class IR_Fit_Object(object):
@@ -561,11 +580,16 @@ class IR_Fit_Object(object):
         middle = minimum + (maximum-minimum)/2
         centers = [middle for i in range(8)]
         for i in range(8):
-            self.peak_constraints.append([[50, 0, 99999], [centers[i], minimum, maximum], [50, .0001, 1000]])
+            self.peak_constraints.append([[50, -9999, 99999], [centers[i], minimum, maximum], [50, .0001, 1000]])
 
-    def fit(self, checked, cons, holds, lin_pars):
+    def fit(self, checked, cons, holds, lin_pars, baseline):
         self.update_constraints(cons)
-        con_mod = LinearModel()
+        if baseline == 'Linear':
+            con_mod = LinearModel()
+        elif baseline == 'Constant':
+            con_mod = ConstantModel()
+        elif baseline == 'None':
+            pass
         line_shape_mods = [VoigtModel(prefix='p0_'), VoigtModel(prefix='p1_'),
                            VoigtModel(prefix='p2_'), VoigtModel(prefix='p3_'),
                            VoigtModel(prefix='p4_'), VoigtModel(prefix='p5_'),
@@ -578,27 +602,38 @@ class IR_Fit_Object(object):
             if checked[x]:
                 params.add_many(('p%s_amplitude' % str(x), self.peak_constraints[x][0][0], holds[x][0], self.peak_constraints[x][0][1], self.peak_constraints[x][0][2]),
                                 ('p%s_center' % str(x), self.peak_constraints[x][1][0], holds[x][1], self.peak_constraints[x][1][1], self.peak_constraints[x][1][2]),
-                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]),
-                                ('slope', lin_pars[0], True),('intercept', lin_pars[1], True))
+                                ('p%s_sigma' % str(x), self.peak_constraints[x][2][0], holds[x][2], self.peak_constraints[x][2][1], self.peak_constraints[x][2][2]))
                 checked_peaks.append(x)
                 cur_mods.append(line_shape_mods[x])
+        if baseline == 'Linear':
+            con_mod = LinearModel()
+            params.add_many(('slope', lin_pars[0], False), ('intercept', lin_pars[1], False))
+        elif baseline == 'Constant':
+            con_mod = ConstantModel()
+            params.add_many(('c', lin_pars[1], False))
+        elif baseline == 'None':
+            pass
         if len(checked_peaks) == 1:
-            mod = cur_mods[0] + con_mod
+            mod = cur_mods[0]
         elif len(checked_peaks) == 2:
-            mod = cur_mods[0] + cur_mods[1] + con_mod
+            mod = cur_mods[0] + cur_mods[1]
         elif len(checked_peaks) == 3:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2]
         elif len(checked_peaks) == 4:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3]
         elif len(checked_peaks) == 5:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4]
         elif len(checked_peaks) == 6:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]
         elif len(checked_peaks) == 7:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]+ cur_mods[6] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5]+ cur_mods[6]
         elif len(checked_peaks) == 8:
-            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + cur_mods[7] + con_mod
+            mod = cur_mods[0] + cur_mods[1] + cur_mods[2] + cur_mods[3] + cur_mods[4] + cur_mods[5] + cur_mods[6] + cur_mods[7]
         # add with tuples: (NAME VALUE VARY MIN  MAX  EXPR  BRUTE_STEP)
+        if baseline == 'None':
+            pass
+        else:
+            mod = mod + con_mod
         result = mod.fit(self.y_data, params, x=self.x_data)
         self.fit_result = result.fit_report()
         return result
