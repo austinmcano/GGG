@@ -213,7 +213,7 @@ class SE_view(QtWidgets.QDockWidget):
                 self.data = pd.read_csv(self.path, sep='\t', skiprows=skip_rows)
             else:
                 print(extension)
-                self.data = pd.read_csv(self.path, sep='\t')
+                self.data = pd.read_csv(self.path, sep='\t', skiprows=skip_rows)
 
             strings = [col for col in self.data.columns]
             column_list_x = []

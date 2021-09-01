@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>848</width>
-    <height>743</height>
+    <width>810</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -501,28 +501,28 @@ p, li { white-space: pre-wrap; }
         <string>Fit Panel</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="15" column="3" colspan="2">
+        <item row="14" column="3" colspan="2">
          <widget class="QPushButton" name="fit_init_pb">
           <property name="text">
            <string>Fit Init</string>
           </property>
          </widget>
         </item>
-        <item row="15" column="5" colspan="2">
+        <item row="14" column="5" colspan="2">
          <widget class="QPushButton" name="fit_pb">
           <property name="text">
            <string>Fit</string>
           </property>
          </widget>
         </item>
-        <item row="15" column="1" colspan="2">
+        <item row="14" column="1" colspan="2">
          <widget class="QPushButton" name="select_data_pb">
           <property name="text">
            <string>Select Data</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1" colspan="6">
+        <item row="0" column="1" colspan="6">
          <widget class="QScrollArea" name="scrollArea">
           <property name="widgetResizable">
            <bool>true</bool>
@@ -532,35 +532,11 @@ p, li { white-space: pre-wrap; }
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>801</width>
-             <height>887</height>
+             <width>766</width>
+             <height>706</height>
             </rect>
            </property>
            <layout class="QGridLayout" name="gridLayout_6">
-            <item row="20" column="0">
-             <widget class="QCheckBox" name="plot_3sig_box">
-              <property name="text">
-               <string>Plot 3 sig</string>
-              </property>
-             </widget>
-            </item>
-            <item row="18" column="5">
-             <widget class="QDoubleSpinBox" name="p5_fwhm">
-              <property name="maximum">
-               <double>9999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="4">
-             <widget class="QDoubleSpinBox" name="p4_ampl_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="4" column="6">
              <widget class="QDoubleSpinBox" name="p6_amp_sb">
               <property name="minimum">
@@ -584,134 +560,15 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="2" column="3">
-             <widget class="QCheckBox" name="p3_cb">
-              <property name="text">
-               <string>Peak 3</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="5">
-             <widget class="QCheckBox" name="p5_cb">
-              <property name="text">
-               <string>Peak 5</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="2">
-             <widget class="QDoubleSpinBox" name="p2_amp_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.500000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="2">
-             <widget class="QDoubleSpinBox" name="p2_sig_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>50.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="2">
-             <widget class="QCheckBox" name="p2_cb">
-              <property name="text">
-               <string>Peak 2</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="4">
-             <widget class="QDoubleSpinBox" name="p4_amph_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>9999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="5">
-             <widget class="QDoubleSpinBox" name="p5_amph_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>9999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="17" column="3">
-             <widget class="QDoubleSpinBox" name="p3_sigh_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>300.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="4">
-             <widget class="QDoubleSpinBox" name="p4_sig_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>50.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="3">
-             <widget class="QDoubleSpinBox" name="p3_ampl_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="4">
-             <widget class="QDoubleSpinBox" name="p4_amp_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.500000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="18" column="3">
-             <widget class="QDoubleSpinBox" name="p3_fwhm">
+            <item row="18" column="5">
+             <widget class="QDoubleSpinBox" name="p5_fwhm">
               <property name="maximum">
                <double>9999.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="6" column="5">
-             <widget class="QDoubleSpinBox" name="p5_ampl_sb">
+            <item row="6" column="4">
+             <widget class="QDoubleSpinBox" name="p4_ampl_sb">
               <property name="minimum">
                <double>-99999.000000000000000</double>
               </property>
@@ -730,69 +587,10 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="16" column="3">
-             <widget class="QDoubleSpinBox" name="p3_sigl_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.100000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="p1_amp_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="4">
              <widget class="QCheckBox" name="p4_cb">
               <property name="text">
                <string>Peak 4</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="2">
-             <widget class="QDoubleSpinBox" name="p2_cen_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>1500.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="1">
-             <widget class="QDoubleSpinBox" name="p1_amp_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.500000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="5">
-             <widget class="QDoubleSpinBox" name="p5_amp_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.500000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -810,6 +608,13 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="value">
                <double>300.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="p1_amp_hold">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
@@ -840,16 +645,6 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="9" column="5">
-             <widget class="QDoubleSpinBox" name="p5_cen_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>3000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="14" column="5">
              <widget class="QDoubleSpinBox" name="p5_sig_sb">
               <property name="maximum">
@@ -857,13 +652,6 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="value">
                <double>50.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0">
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Cen</string>
               </property>
              </widget>
             </item>
@@ -907,6 +695,302 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
+            <item row="4" column="2">
+             <widget class="QDoubleSpinBox" name="p2_amp_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.500000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="4">
+             <widget class="QDoubleSpinBox" name="p4_amp_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.500000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="3">
+             <widget class="QDoubleSpinBox" name="p3_ampl_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="5">
+             <widget class="QDoubleSpinBox" name="p5_ampl_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="3">
+             <widget class="QDoubleSpinBox" name="p3_sigl_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="17" column="3">
+             <widget class="QDoubleSpinBox" name="p3_sigh_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>300.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Cen</string>
+              </property>
+             </widget>
+            </item>
+            <item row="18" column="3">
+             <widget class="QDoubleSpinBox" name="p3_fwhm">
+              <property name="maximum">
+               <double>9999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="2">
+             <widget class="QDoubleSpinBox" name="p2_sig_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>50.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="4">
+             <widget class="QDoubleSpinBox" name="p4_amph_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>9999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="5">
+             <widget class="QDoubleSpinBox" name="p5_cen_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>3000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="5">
+             <widget class="QCheckBox" name="p5_cb">
+              <property name="text">
+               <string>Peak 5</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="5">
+             <widget class="QDoubleSpinBox" name="p5_amp_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.500000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="p2_cb">
+              <property name="text">
+               <string>Peak 2</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="5">
+             <widget class="QDoubleSpinBox" name="p5_amph_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>9999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="2">
+             <widget class="QDoubleSpinBox" name="p2_cen_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1500.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QDoubleSpinBox" name="p1_amp_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.500000000000000</double>
+              </property>
+              <property name="value">
+               <double>1.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="4">
+             <widget class="QDoubleSpinBox" name="p4_sig_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>50.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="p3_cb">
+              <property name="text">
+               <string>Peak 3</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QDoubleSpinBox" name="p1_cen_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>1000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="4">
+             <widget class="QDoubleSpinBox" name="p4_cenh_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>4000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="4">
+             <widget class="QCheckBox" name="p4_sigma_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="3">
+             <widget class="QDoubleSpinBox" name="p3_cenh_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>4000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="5">
+             <widget class="QCheckBox" name="p5_amp_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="3">
+             <widget class="QDoubleSpinBox" name="p3_cen_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>2000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QDoubleSpinBox" name="p1_amph_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>9999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="0">
+             <widget class="QLabel" name="label_15">
+              <property name="text">
+               <string>low</string>
+              </property>
+             </widget>
+            </item>
+            <item row="17" column="2">
+             <widget class="QDoubleSpinBox" name="p2_sigh_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>300.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="4">
+             <widget class="QCheckBox" name="p4_cen_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
             <item row="6" column="1">
              <widget class="QDoubleSpinBox" name="p1_ampl_sb">
               <property name="minimum">
@@ -914,6 +998,80 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="maximum">
                <double>99999.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Amp</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="5">
+             <widget class="QDoubleSpinBox" name="p5_cenl_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>400.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="p1_cb">
+              <property name="text">
+               <string>Peak 1</string>
+              </property>
+              <property name="checked">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="4">
+             <widget class="QCheckBox" name="p4_amp_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="3">
+             <widget class="QDoubleSpinBox" name="p3_sig_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>50.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1">
+             <widget class="QDoubleSpinBox" name="p1_cenl_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>400.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="4">
+             <widget class="QDoubleSpinBox" name="p4_cen_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>2500.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="12" column="5">
+             <widget class="QDoubleSpinBox" name="p5_cenh_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>4000.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -940,20 +1098,10 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="p1_cb">
-              <property name="text">
-               <string>Peak 1</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_8">
-              <property name="text">
-               <string>Amp</string>
+            <item row="18" column="2">
+             <widget class="QDoubleSpinBox" name="p2_fwhm">
+              <property name="maximum">
+               <double>9999.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -964,128 +1112,10 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="18" column="2">
-             <widget class="QDoubleSpinBox" name="p2_fwhm">
-              <property name="maximum">
-               <double>9999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="3">
-             <widget class="QDoubleSpinBox" name="p3_cen_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>2000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="4">
-             <widget class="QCheckBox" name="p4_amp_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="1">
-             <widget class="QDoubleSpinBox" name="p1_sigl_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.100000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="4">
-             <widget class="QCheckBox" name="p4_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="3">
-             <widget class="QDoubleSpinBox" name="p3_cenh_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>4000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="1">
-             <widget class="QDoubleSpinBox" name="p1_cenl_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>400.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="16" column="2">
-             <widget class="QDoubleSpinBox" name="p2_sigl_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>0.100000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="17" column="2">
-             <widget class="QDoubleSpinBox" name="p2_sigh_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>300.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="1">
-             <widget class="QDoubleSpinBox" name="p1_cen_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>1000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
             <item row="5" column="2">
              <widget class="QCheckBox" name="p2_amp_hold">
               <property name="text">
                <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="3">
-             <widget class="QCheckBox" name="p3_cen_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="4">
-             <widget class="QDoubleSpinBox" name="p4_cen_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>2500.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="5">
-             <widget class="QDoubleSpinBox" name="p5_cenl_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>400.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -1106,17 +1136,27 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="16" column="0">
-             <widget class="QLabel" name="label_15">
-              <property name="text">
-               <string>low</string>
-              </property>
-             </widget>
-            </item>
             <item row="17" column="0">
              <widget class="QLabel" name="label_16">
               <property name="text">
                <string>high</string>
+              </property>
+             </widget>
+            </item>
+            <item row="16" column="2">
+             <widget class="QDoubleSpinBox" name="p2_sigl_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="3">
+             <widget class="QCheckBox" name="p3_cen_hold">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
@@ -1130,10 +1170,13 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="5" column="5">
-             <widget class="QCheckBox" name="p5_amp_hold">
-              <property name="text">
-               <string>Hold</string>
+            <item row="16" column="1">
+             <widget class="QDoubleSpinBox" name="p1_sigl_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -1144,151 +1187,8 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="14" column="3">
-             <widget class="QDoubleSpinBox" name="p3_sig_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>50.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="4">
-             <widget class="QCheckBox" name="p4_cen_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="4">
-             <widget class="QDoubleSpinBox" name="p4_cenh_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>4000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="1">
-             <widget class="QDoubleSpinBox" name="p1_amph_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>9999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="5">
-             <widget class="QDoubleSpinBox" name="p5_cenh_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>4000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="12" column="1">
-             <widget class="QDoubleSpinBox" name="p1_cenh_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>4000.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="3">
-             <widget class="QCheckBox" name="p3_amp_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="1">
-             <widget class="QDoubleSpinBox" name="p1_sig_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>50.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="10" column="2">
-             <widget class="QCheckBox" name="p2_cen_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="label_10">
-              <property name="text">
-               <string>high</string>
-              </property>
-             </widget>
-            </item>
-            <item row="14" column="0">
-             <widget class="QLabel" name="label_14">
-              <property name="text">
-               <string>sigma</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="1">
-             <widget class="QCheckBox" name="p1_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="5">
-             <widget class="QCheckBox" name="p5_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="3">
-             <widget class="QCheckBox" name="p3_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="2">
-             <widget class="QCheckBox" name="p2_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="6">
-             <widget class="QCheckBox" name="p6_cb">
-              <property name="text">
-               <string>Peak 6</string>
-              </property>
-             </widget>
-            </item>
             <item row="6" column="6">
              <widget class="QDoubleSpinBox" name="p6_ampl_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="7">
-             <widget class="QDoubleSpinBox" name="p7_ampl_sb">
               <property name="minimum">
                <double>-99999.000000000000000</double>
               </property>
@@ -1307,6 +1207,12 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
+            <item row="12" column="8">
+             <widget class="QDoubleSpinBox" name="p8_cenh_sb"/>
+            </item>
+            <item row="12" column="6">
+             <widget class="QDoubleSpinBox" name="p6_cenh_sb"/>
+            </item>
             <item row="2" column="7">
              <widget class="QCheckBox" name="p7_cb">
               <property name="text">
@@ -1314,8 +1220,92 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="4" column="7">
-             <widget class="QDoubleSpinBox" name="p7_amp_sb">
+            <item row="15" column="7">
+             <widget class="QCheckBox" name="p7_sigma_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="7">
+             <widget class="QDoubleSpinBox" name="p7_amph_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>99.989999999999995</double>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="8">
+             <widget class="QCheckBox" name="p8_cen_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="8">
+             <widget class="QDoubleSpinBox" name="p8_amph_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>99.989999999999995</double>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="6">
+             <widget class="QCheckBox" name="p6_amp_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="1">
+             <widget class="QDoubleSpinBox" name="p1_sig_sb">
+              <property name="maximum">
+               <double>500.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>50.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="17" column="6">
+             <widget class="QDoubleSpinBox" name="p6_sigh_sb"/>
+            </item>
+            <item row="12" column="1">
+             <widget class="QDoubleSpinBox" name="p1_cenh_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>4000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="6">
+             <widget class="QCheckBox" name="p6_sigma_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="8">
+             <widget class="QCheckBox" name="p8_cb">
+              <property name="text">
+               <string>Peak 8</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="8">
+             <widget class="QDoubleSpinBox" name="p8_amp_sb">
               <property name="minimum">
                <double>-99999.000000000000000</double>
               </property>
@@ -1330,18 +1320,46 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="17" column="1">
-             <widget class="QDoubleSpinBox" name="p1_sigh_sb">
-              <property name="maximum">
-               <double>500.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>300.000000000000000</double>
+            <item row="10" column="2">
+             <widget class="QCheckBox" name="p2_cen_hold">
+              <property name="text">
+               <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="8">
-             <widget class="QDoubleSpinBox" name="p8_amp_sb">
+            <item row="15" column="2">
+             <widget class="QCheckBox" name="p2_sigma_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="3">
+             <widget class="QDoubleSpinBox" name="p3_cenl_sb">
+              <property name="maximum">
+               <double>4000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>400.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="14" column="0">
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>sigma</string>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="1">
+             <widget class="QCheckBox" name="p1_sigma_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="7">
+             <widget class="QDoubleSpinBox" name="p7_amp_sb">
               <property name="minimum">
                <double>-99999.000000000000000</double>
               </property>
@@ -1366,41 +1384,15 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="11" column="3">
-             <widget class="QDoubleSpinBox" name="p3_cenl_sb">
-              <property name="maximum">
-               <double>4000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>400.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="17" column="6">
-             <widget class="QDoubleSpinBox" name="p6_sigh_sb"/>
-            </item>
-            <item row="8" column="0" colspan="9">
-             <widget class="Line" name="line_4">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="8">
-             <widget class="QCheckBox" name="p8_cb">
+            <item row="7" column="0">
+             <widget class="QLabel" name="label_10">
               <property name="text">
-               <string>Peak 8</string>
+               <string>high</string>
               </property>
              </widget>
             </item>
-            <item row="12" column="8">
-             <widget class="QDoubleSpinBox" name="p8_cenh_sb"/>
-            </item>
-            <item row="12" column="6">
-             <widget class="QDoubleSpinBox" name="p6_cenh_sb"/>
-            </item>
-            <item row="10" column="8">
-             <widget class="QCheckBox" name="p8_cen_hold">
+            <item row="15" column="3">
+             <widget class="QCheckBox" name="p3_sigma_hold">
               <property name="text">
                <string>Hold</string>
               </property>
@@ -1409,65 +1401,68 @@ p, li { white-space: pre-wrap; }
             <item row="14" column="7">
              <widget class="QDoubleSpinBox" name="p7_sig_sb"/>
             </item>
-            <item row="7" column="7">
-             <widget class="QDoubleSpinBox" name="p7_amph_sb">
+            <item row="6" column="7">
+             <widget class="QDoubleSpinBox" name="p7_ampl_sb">
               <property name="minimum">
                <double>-99999.000000000000000</double>
               </property>
               <property name="maximum">
                <double>99999.000000000000000</double>
               </property>
-              <property name="value">
-               <double>99.989999999999995</double>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QCheckBox" name="p6_cb">
+              <property name="text">
+               <string>Peak 6</string>
               </property>
              </widget>
             </item>
-            <item row="7" column="8">
-             <widget class="QDoubleSpinBox" name="p8_amph_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
+            <item row="5" column="3">
+             <widget class="QCheckBox" name="p3_amp_hold">
+              <property name="text">
+               <string>Hold</string>
               </property>
+             </widget>
+            </item>
+            <item row="17" column="1">
+             <widget class="QDoubleSpinBox" name="p1_sigh_sb">
               <property name="maximum">
-               <double>99999.000000000000000</double>
+               <double>500.000000000000000</double>
               </property>
               <property name="value">
-               <double>99.989999999999995</double>
+               <double>300.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="15" column="7">
-             <widget class="QCheckBox" name="p7_sigma_hold">
+            <item row="8" column="0" colspan="9">
+             <widget class="Line" name="line_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="15" column="5">
+             <widget class="QCheckBox" name="p5_sigma_hold">
               <property name="text">
                <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="6">
-             <widget class="QCheckBox" name="p6_amp_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="15" column="6">
-             <widget class="QCheckBox" name="p6_sigma_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
+            <item row="9" column="6">
+             <widget class="QDoubleSpinBox" name="p6_cen_sb"/>
             </item>
             <item row="14" column="8">
              <widget class="QDoubleSpinBox" name="p8_sig_sb"/>
             </item>
-            <item row="6" column="8">
-             <widget class="QDoubleSpinBox" name="p8_ampl_sb">
-              <property name="minimum">
-               <double>-99999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>99999.000000000000000</double>
-              </property>
-             </widget>
+            <item row="9" column="8">
+             <widget class="QDoubleSpinBox" name="p8_cen_sb"/>
+            </item>
+            <item row="16" column="6">
+             <widget class="QDoubleSpinBox" name="p6_sigl_sb"/>
+            </item>
+            <item row="18" column="6">
+             <widget class="QDoubleSpinBox" name="p6_fwhm"/>
             </item>
             <item row="15" column="8">
              <widget class="QCheckBox" name="p8_sigma_hold">
@@ -1475,6 +1470,45 @@ p, li { white-space: pre-wrap; }
                <string>Hold</string>
               </property>
              </widget>
+            </item>
+            <item row="14" column="6">
+             <widget class="QDoubleSpinBox" name="p6_sig_sb"/>
+            </item>
+            <item row="17" column="7">
+             <widget class="QDoubleSpinBox" name="p7_sigh_sb"/>
+            </item>
+            <item row="5" column="8">
+             <widget class="QCheckBox" name="p8_amp_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="6">
+             <widget class="QDoubleSpinBox" name="p6_cenl_sb"/>
+            </item>
+            <item row="11" column="8">
+             <widget class="QDoubleSpinBox" name="p8_cenl_sb"/>
+            </item>
+            <item row="19" column="0" colspan="9">
+             <widget class="Line" name="line_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="7">
+             <widget class="QCheckBox" name="p7_cen_hold">
+              <property name="text">
+               <string>Hold</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="7">
+             <widget class="QDoubleSpinBox" name="p7_cenl_sb"/>
+            </item>
+            <item row="16" column="7">
+             <widget class="QDoubleSpinBox" name="p7_sigl_sb"/>
             </item>
             <item row="7" column="6">
              <widget class="QDoubleSpinBox" name="p6_amph_sb">
@@ -1489,50 +1523,34 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="9" column="8">
-             <widget class="QDoubleSpinBox" name="p8_cen_sb"/>
+            <item row="12" column="7">
+             <widget class="QDoubleSpinBox" name="p7_cenh_sb"/>
             </item>
-            <item row="10" column="7">
-             <widget class="QCheckBox" name="p7_cen_hold">
-              <property name="text">
-               <string>Hold</string>
+            <item row="3" column="0" colspan="9">
+             <widget class="Line" name="line_6">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
              </widget>
             </item>
-            <item row="5" column="7">
-             <widget class="QCheckBox" name="p7_amp_hold">
-              <property name="text">
-               <string>Hold</string>
+            <item row="6" column="8">
+             <widget class="QDoubleSpinBox" name="p8_ampl_sb">
+              <property name="minimum">
+               <double>-99999.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>99999.000000000000000</double>
               </property>
              </widget>
+            </item>
+            <item row="18" column="7">
+             <widget class="QDoubleSpinBox" name="p7_fwhm"/>
+            </item>
+            <item row="18" column="8">
+             <widget class="QDoubleSpinBox" name="p8_fwhm"/>
             </item>
             <item row="9" column="7">
              <widget class="QDoubleSpinBox" name="p7_cen_sb"/>
-            </item>
-            <item row="5" column="8">
-             <widget class="QCheckBox" name="p8_amp_hold">
-              <property name="text">
-               <string>Hold</string>
-              </property>
-             </widget>
-            </item>
-            <item row="11" column="6">
-             <widget class="QDoubleSpinBox" name="p6_cenl_sb"/>
-            </item>
-            <item row="16" column="7">
-             <widget class="QDoubleSpinBox" name="p7_sigl_sb"/>
-            </item>
-            <item row="11" column="8">
-             <widget class="QDoubleSpinBox" name="p8_cenl_sb"/>
-            </item>
-            <item row="11" column="7">
-             <widget class="QDoubleSpinBox" name="p7_cenl_sb"/>
-            </item>
-            <item row="14" column="6">
-             <widget class="QDoubleSpinBox" name="p6_sig_sb"/>
-            </item>
-            <item row="16" column="6">
-             <widget class="QDoubleSpinBox" name="p6_sigl_sb"/>
             </item>
             <item row="10" column="6">
              <widget class="QCheckBox" name="p6_cen_hold">
@@ -1544,50 +1562,8 @@ p, li { white-space: pre-wrap; }
             <item row="16" column="8">
              <widget class="QDoubleSpinBox" name="p8_sigl_sb"/>
             </item>
-            <item row="18" column="6">
-             <widget class="QDoubleSpinBox" name="p6_fwhm"/>
-            </item>
-            <item row="12" column="7">
-             <widget class="QDoubleSpinBox" name="p7_cenh_sb"/>
-            </item>
-            <item row="9" column="6">
-             <widget class="QDoubleSpinBox" name="p6_cen_sb"/>
-            </item>
-            <item row="22" column="0" colspan="9">
-             <widget class="QTextEdit" name="fit_results_te">
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>400</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item row="17" column="7">
-             <widget class="QDoubleSpinBox" name="p7_sigh_sb"/>
-            </item>
-            <item row="3" column="0" colspan="9">
-             <widget class="Line" name="line_6">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="19" column="0" colspan="9">
-             <widget class="Line" name="line_7">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="18" column="7">
-             <widget class="QDoubleSpinBox" name="p7_fwhm"/>
-            </item>
             <item row="17" column="8">
              <widget class="QDoubleSpinBox" name="p8_sigh_sb"/>
-            </item>
-            <item row="18" column="8">
-             <widget class="QDoubleSpinBox" name="p8_fwhm"/>
             </item>
             <item row="13" column="0" colspan="9">
              <widget class="Line" name="line_5">
@@ -1596,88 +1572,158 @@ p, li { white-space: pre-wrap; }
               </property>
              </widget>
             </item>
-            <item row="1" column="3" colspan="4">
-             <widget class="QComboBox" name="ir_range_cb"/>
-            </item>
-            <item row="1" column="1" colspan="2">
-             <widget class="QCheckBox" name="select_ir_range_cb">
+            <item row="5" column="7">
+             <widget class="QCheckBox" name="p7_amp_hold">
               <property name="text">
-               <string>Get IR Fit Range</string>
+               <string>Hold</string>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QPushButton" name="clear_fit_pb">
-              <property name="text">
-               <string>Clear Fitting</string>
+            <item row="0" column="0" colspan="9">
+             <widget class="QScrollArea" name="scrollArea_2">
+              <property name="widgetResizable">
+               <bool>true</bool>
               </property>
-             </widget>
-            </item>
-            <item row="20" column="5">
-             <widget class="QDoubleSpinBox" name="slope_dsb">
-              <property name="minimum">
-               <double>-999999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="4">
-             <widget class="QLabel" name="label_18">
-              <property name="text">
-               <string>slope</string>
-              </property>
-             </widget>
-            </item>
-            <item row="20" column="3">
-             <widget class="QCheckBox" name="checkBox">
-              <property name="text">
-               <string>Hold Baseline</string>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="3">
-             <widget class="QComboBox" name="baseline_combo">
-              <item>
-               <property name="text">
-                <string>None</string>
+              <widget class="QWidget" name="scrollAreaWidgetContents_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>746</width>
+                 <height>298</height>
+                </rect>
                </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Linear</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Constant</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="21" column="0">
-             <widget class="QCheckBox" name="plot_components_box">
-              <property name="text">
-               <string>Plot Components</string>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="4">
-             <widget class="QLabel" name="label_19">
-              <property name="text">
-               <string>intercept/constant</string>
-              </property>
-             </widget>
-            </item>
-            <item row="21" column="5">
-             <widget class="QDoubleSpinBox" name="intercept_dsb">
-              <property name="minimum">
-               <double>-999999.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>999999.000000000000000</double>
-              </property>
+               <layout class="QGridLayout" name="gridLayout_8">
+                <item row="12" column="0" colspan="2">
+                 <widget class="QTextEdit" name="fit_results_te">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="1">
+                 <widget class="QComboBox" name="baseline_combo">
+                  <item>
+                   <property name="text">
+                    <string>None</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Linear</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Constant</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QCheckBox" name="plot_components_box">
+                  <property name="text">
+                   <string>Plot Components</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="label_18">
+                  <property name="text">
+                   <string>slope</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QComboBox" name="ir_range_cb"/>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QDoubleSpinBox" name="slope_dsb">
+                  <property name="decimals">
+                   <number>4</number>
+                  </property>
+                  <property name="minimum">
+                   <double>-999999.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>999999.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="select_ir_range_cb">
+                  <property name="text">
+                   <string>Get IR Fit Range</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QCheckBox" name="plot_3sig_box">
+                  <property name="text">
+                   <string>Plot 3 sig</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="0">
+                 <widget class="QLabel" name="label_20">
+                  <property name="text">
+                   <string>Fit Color</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0">
+                 <widget class="QCheckBox" name="checkBox">
+                  <property name="text">
+                   <string>Hold Baseline</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="10" column="1">
+                 <widget class="QPushButton" name="fitcolor">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="0" colspan="2">
+                 <widget class="Line" name="line_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="0">
+                 <widget class="QLabel" name="label_19">
+                  <property name="text">
+                   <string>intercept/constant</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QDoubleSpinBox" name="intercept_dsb">
+                  <property name="decimals">
+                   <number>4</number>
+                  </property>
+                  <property name="minimum">
+                   <double>-999999.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>999999.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="11" column="1">
+                 <widget class="QPushButton" name="clear_fit_pb">
+                  <property name="text">
+                   <string>Clear Fitting</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>

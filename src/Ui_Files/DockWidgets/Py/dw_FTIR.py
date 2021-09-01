@@ -20,7 +20,7 @@ class Ui_DockWidget(object):
     def setupUi(self, DockWidget):
         if not DockWidget.objectName():
             DockWidget.setObjectName(u"DockWidget")
-        DockWidget.resize(848, 743)
+        DockWidget.resize(810, 821)
         self.dockWidgetContents = QWidget()
         self.dockWidgetContents.setObjectName(u"dockWidgetContents")
         self.gridLayout = QGridLayout(self.dockWidgetContents)
@@ -345,44 +345,26 @@ class Ui_DockWidget(object):
         self.fit_init_pb = QPushButton(self.tab_4)
         self.fit_init_pb.setObjectName(u"fit_init_pb")
 
-        self.gridLayout_5.addWidget(self.fit_init_pb, 15, 3, 1, 2)
+        self.gridLayout_5.addWidget(self.fit_init_pb, 14, 3, 1, 2)
 
         self.fit_pb = QPushButton(self.tab_4)
         self.fit_pb.setObjectName(u"fit_pb")
 
-        self.gridLayout_5.addWidget(self.fit_pb, 15, 5, 1, 2)
+        self.gridLayout_5.addWidget(self.fit_pb, 14, 5, 1, 2)
 
         self.select_data_pb = QPushButton(self.tab_4)
         self.select_data_pb.setObjectName(u"select_data_pb")
 
-        self.gridLayout_5.addWidget(self.select_data_pb, 15, 1, 1, 2)
+        self.gridLayout_5.addWidget(self.select_data_pb, 14, 1, 1, 2)
 
         self.scrollArea = QScrollArea(self.tab_4)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 801, 887))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 766, 706))
         self.gridLayout_6 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.plot_3sig_box = QCheckBox(self.scrollAreaWidgetContents)
-        self.plot_3sig_box.setObjectName(u"plot_3sig_box")
-
-        self.gridLayout_6.addWidget(self.plot_3sig_box, 20, 0, 1, 1)
-
-        self.p5_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_fwhm.setObjectName(u"p5_fwhm")
-        self.p5_fwhm.setMaximum(9999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_fwhm, 18, 5, 1, 1)
-
-        self.p4_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_ampl_sb.setObjectName(u"p4_ampl_sb")
-        self.p4_ampl_sb.setMinimum(-99999.000000000000000)
-        self.p4_ampl_sb.setMaximum(99999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_ampl_sb, 6, 4, 1, 1)
-
         self.p6_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p6_amp_sb.setObjectName(u"p6_amp_sb")
         self.p6_amp_sb.setMinimum(-99999.000000000000000)
@@ -397,95 +379,18 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.label_2, 18, 0, 1, 1)
 
-        self.p3_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p3_cb.setObjectName(u"p3_cb")
+        self.p5_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_fwhm.setObjectName(u"p5_fwhm")
+        self.p5_fwhm.setMaximum(9999.000000000000000)
 
-        self.gridLayout_6.addWidget(self.p3_cb, 2, 3, 1, 1)
+        self.gridLayout_6.addWidget(self.p5_fwhm, 18, 5, 1, 1)
 
-        self.p5_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p5_cb.setObjectName(u"p5_cb")
+        self.p4_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_ampl_sb.setObjectName(u"p4_ampl_sb")
+        self.p4_ampl_sb.setMinimum(-99999.000000000000000)
+        self.p4_ampl_sb.setMaximum(99999.000000000000000)
 
-        self.gridLayout_6.addWidget(self.p5_cb, 2, 5, 1, 1)
-
-        self.p2_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p2_amp_sb.setObjectName(u"p2_amp_sb")
-        self.p2_amp_sb.setMinimum(-99999.000000000000000)
-        self.p2_amp_sb.setMaximum(99999.000000000000000)
-        self.p2_amp_sb.setSingleStep(0.500000000000000)
-        self.p2_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p2_amp_sb, 4, 2, 1, 1)
-
-        self.p2_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p2_sig_sb.setObjectName(u"p2_sig_sb")
-        self.p2_sig_sb.setMaximum(500.000000000000000)
-        self.p2_sig_sb.setValue(50.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p2_sig_sb, 14, 2, 1, 1)
-
-        self.p2_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p2_cb.setObjectName(u"p2_cb")
-
-        self.gridLayout_6.addWidget(self.p2_cb, 2, 2, 1, 1)
-
-        self.p4_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_amph_sb.setObjectName(u"p4_amph_sb")
-        self.p4_amph_sb.setMinimum(-99999.000000000000000)
-        self.p4_amph_sb.setMaximum(99999.000000000000000)
-        self.p4_amph_sb.setValue(9999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_amph_sb, 7, 4, 1, 1)
-
-        self.p5_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_amph_sb.setObjectName(u"p5_amph_sb")
-        self.p5_amph_sb.setMinimum(-99999.000000000000000)
-        self.p5_amph_sb.setMaximum(99999.000000000000000)
-        self.p5_amph_sb.setValue(9999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_amph_sb, 7, 5, 1, 1)
-
-        self.p3_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_sigh_sb.setObjectName(u"p3_sigh_sb")
-        self.p3_sigh_sb.setMaximum(500.000000000000000)
-        self.p3_sigh_sb.setValue(300.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_sigh_sb, 17, 3, 1, 1)
-
-        self.p4_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_sig_sb.setObjectName(u"p4_sig_sb")
-        self.p4_sig_sb.setMaximum(500.000000000000000)
-        self.p4_sig_sb.setValue(50.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_sig_sb, 14, 4, 1, 1)
-
-        self.p3_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_ampl_sb.setObjectName(u"p3_ampl_sb")
-        self.p3_ampl_sb.setMinimum(-99999.000000000000000)
-        self.p3_ampl_sb.setMaximum(99999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_ampl_sb, 6, 3, 1, 1)
-
-        self.p4_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_amp_sb.setObjectName(u"p4_amp_sb")
-        self.p4_amp_sb.setMinimum(-99999.000000000000000)
-        self.p4_amp_sb.setMaximum(99999.000000000000000)
-        self.p4_amp_sb.setSingleStep(0.500000000000000)
-        self.p4_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_amp_sb, 4, 4, 1, 1)
-
-        self.p3_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_fwhm.setObjectName(u"p3_fwhm")
-        self.p3_fwhm.setMaximum(9999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_fwhm, 18, 3, 1, 1)
-
-        self.p5_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_ampl_sb.setObjectName(u"p5_ampl_sb")
-        self.p5_ampl_sb.setMinimum(-99999.000000000000000)
-        self.p5_ampl_sb.setMaximum(99999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_ampl_sb, 6, 5, 1, 1)
+        self.gridLayout_6.addWidget(self.p4_ampl_sb, 6, 4, 1, 1)
 
         self.p2_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p2_ampl_sb.setObjectName(u"p2_ampl_sb")
@@ -494,47 +399,10 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p2_ampl_sb, 6, 2, 1, 1)
 
-        self.p3_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_sigl_sb.setObjectName(u"p3_sigl_sb")
-        self.p3_sigl_sb.setMaximum(500.000000000000000)
-        self.p3_sigl_sb.setValue(0.100000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_sigl_sb, 16, 3, 1, 1)
-
-        self.p1_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p1_amp_hold.setObjectName(u"p1_amp_hold")
-
-        self.gridLayout_6.addWidget(self.p1_amp_hold, 5, 1, 1, 1)
-
         self.p4_cb = QCheckBox(self.scrollAreaWidgetContents)
         self.p4_cb.setObjectName(u"p4_cb")
 
         self.gridLayout_6.addWidget(self.p4_cb, 2, 4, 1, 1)
-
-        self.p2_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p2_cen_sb.setObjectName(u"p2_cen_sb")
-        self.p2_cen_sb.setMaximum(4000.000000000000000)
-        self.p2_cen_sb.setValue(1500.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p2_cen_sb, 9, 2, 1, 1)
-
-        self.p1_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_amp_sb.setObjectName(u"p1_amp_sb")
-        self.p1_amp_sb.setMinimum(-99999.000000000000000)
-        self.p1_amp_sb.setMaximum(99999.000000000000000)
-        self.p1_amp_sb.setSingleStep(0.500000000000000)
-        self.p1_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_amp_sb, 4, 1, 1, 1)
-
-        self.p5_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_amp_sb.setObjectName(u"p5_amp_sb")
-        self.p5_amp_sb.setMinimum(-99999.000000000000000)
-        self.p5_amp_sb.setMaximum(99999.000000000000000)
-        self.p5_amp_sb.setSingleStep(0.500000000000000)
-        self.p5_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_amp_sb, 4, 5, 1, 1)
 
         self.p1_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p1_fwhm.setObjectName(u"p1_fwhm")
@@ -548,6 +416,11 @@ class Ui_DockWidget(object):
         self.p5_sigh_sb.setValue(300.000000000000000)
 
         self.gridLayout_6.addWidget(self.p5_sigh_sb, 17, 5, 1, 1)
+
+        self.p1_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p1_amp_hold.setObjectName(u"p1_amp_hold")
+
+        self.gridLayout_6.addWidget(self.p1_amp_hold, 5, 1, 1, 1)
 
         self.p5_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p5_sigl_sb.setObjectName(u"p5_sigl_sb")
@@ -569,24 +442,12 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p4_fwhm, 18, 4, 1, 1)
 
-        self.p5_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_cen_sb.setObjectName(u"p5_cen_sb")
-        self.p5_cen_sb.setMaximum(4000.000000000000000)
-        self.p5_cen_sb.setValue(3000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_cen_sb, 9, 5, 1, 1)
-
         self.p5_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p5_sig_sb.setObjectName(u"p5_sig_sb")
         self.p5_sig_sb.setMaximum(500.000000000000000)
         self.p5_sig_sb.setValue(50.000000000000000)
 
         self.gridLayout_6.addWidget(self.p5_sig_sb, 14, 5, 1, 1)
-
-        self.label_11 = QLabel(self.scrollAreaWidgetContents)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout_6.addWidget(self.label_11, 9, 0, 1, 1)
 
         self.p3_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p3_amph_sb.setObjectName(u"p3_amph_sb")
@@ -614,12 +475,260 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p2_amph_sb, 7, 2, 1, 1)
 
+        self.p2_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p2_amp_sb.setObjectName(u"p2_amp_sb")
+        self.p2_amp_sb.setMinimum(-99999.000000000000000)
+        self.p2_amp_sb.setMaximum(99999.000000000000000)
+        self.p2_amp_sb.setSingleStep(0.500000000000000)
+        self.p2_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p2_amp_sb, 4, 2, 1, 1)
+
+        self.p4_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_amp_sb.setObjectName(u"p4_amp_sb")
+        self.p4_amp_sb.setMinimum(-99999.000000000000000)
+        self.p4_amp_sb.setMaximum(99999.000000000000000)
+        self.p4_amp_sb.setSingleStep(0.500000000000000)
+        self.p4_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_amp_sb, 4, 4, 1, 1)
+
+        self.p3_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_ampl_sb.setObjectName(u"p3_ampl_sb")
+        self.p3_ampl_sb.setMinimum(-99999.000000000000000)
+        self.p3_ampl_sb.setMaximum(99999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_ampl_sb, 6, 3, 1, 1)
+
+        self.p5_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_ampl_sb.setObjectName(u"p5_ampl_sb")
+        self.p5_ampl_sb.setMinimum(-99999.000000000000000)
+        self.p5_ampl_sb.setMaximum(99999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_ampl_sb, 6, 5, 1, 1)
+
+        self.p3_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_sigl_sb.setObjectName(u"p3_sigl_sb")
+        self.p3_sigl_sb.setMaximum(500.000000000000000)
+        self.p3_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_sigl_sb, 16, 3, 1, 1)
+
+        self.p3_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_sigh_sb.setObjectName(u"p3_sigh_sb")
+        self.p3_sigh_sb.setMaximum(500.000000000000000)
+        self.p3_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_sigh_sb, 17, 3, 1, 1)
+
+        self.label_11 = QLabel(self.scrollAreaWidgetContents)
+        self.label_11.setObjectName(u"label_11")
+
+        self.gridLayout_6.addWidget(self.label_11, 9, 0, 1, 1)
+
+        self.p3_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_fwhm.setObjectName(u"p3_fwhm")
+        self.p3_fwhm.setMaximum(9999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_fwhm, 18, 3, 1, 1)
+
+        self.p2_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p2_sig_sb.setObjectName(u"p2_sig_sb")
+        self.p2_sig_sb.setMaximum(500.000000000000000)
+        self.p2_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p2_sig_sb, 14, 2, 1, 1)
+
+        self.p4_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_amph_sb.setObjectName(u"p4_amph_sb")
+        self.p4_amph_sb.setMinimum(-99999.000000000000000)
+        self.p4_amph_sb.setMaximum(99999.000000000000000)
+        self.p4_amph_sb.setValue(9999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_amph_sb, 7, 4, 1, 1)
+
+        self.p5_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_cen_sb.setObjectName(u"p5_cen_sb")
+        self.p5_cen_sb.setMaximum(4000.000000000000000)
+        self.p5_cen_sb.setValue(3000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_cen_sb, 9, 5, 1, 1)
+
+        self.p5_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p5_cb.setObjectName(u"p5_cb")
+
+        self.gridLayout_6.addWidget(self.p5_cb, 2, 5, 1, 1)
+
+        self.p5_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_amp_sb.setObjectName(u"p5_amp_sb")
+        self.p5_amp_sb.setMinimum(-99999.000000000000000)
+        self.p5_amp_sb.setMaximum(99999.000000000000000)
+        self.p5_amp_sb.setSingleStep(0.500000000000000)
+        self.p5_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_amp_sb, 4, 5, 1, 1)
+
+        self.p2_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p2_cb.setObjectName(u"p2_cb")
+
+        self.gridLayout_6.addWidget(self.p2_cb, 2, 2, 1, 1)
+
+        self.p5_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_amph_sb.setObjectName(u"p5_amph_sb")
+        self.p5_amph_sb.setMinimum(-99999.000000000000000)
+        self.p5_amph_sb.setMaximum(99999.000000000000000)
+        self.p5_amph_sb.setValue(9999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_amph_sb, 7, 5, 1, 1)
+
+        self.p2_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p2_cen_sb.setObjectName(u"p2_cen_sb")
+        self.p2_cen_sb.setMaximum(4000.000000000000000)
+        self.p2_cen_sb.setValue(1500.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p2_cen_sb, 9, 2, 1, 1)
+
+        self.p1_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_amp_sb.setObjectName(u"p1_amp_sb")
+        self.p1_amp_sb.setMinimum(-99999.000000000000000)
+        self.p1_amp_sb.setMaximum(99999.000000000000000)
+        self.p1_amp_sb.setSingleStep(0.500000000000000)
+        self.p1_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_amp_sb, 4, 1, 1, 1)
+
+        self.p4_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_sig_sb.setObjectName(u"p4_sig_sb")
+        self.p4_sig_sb.setMaximum(500.000000000000000)
+        self.p4_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_sig_sb, 14, 4, 1, 1)
+
+        self.p3_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p3_cb.setObjectName(u"p3_cb")
+
+        self.gridLayout_6.addWidget(self.p3_cb, 2, 3, 1, 1)
+
+        self.p1_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_cen_sb.setObjectName(u"p1_cen_sb")
+        self.p1_cen_sb.setMaximum(4000.000000000000000)
+        self.p1_cen_sb.setValue(1000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_cen_sb, 9, 1, 1, 1)
+
+        self.p4_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_cenh_sb.setObjectName(u"p4_cenh_sb")
+        self.p4_cenh_sb.setMaximum(4000.000000000000000)
+        self.p4_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_cenh_sb, 12, 4, 1, 1)
+
+        self.p4_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p4_sigma_hold.setObjectName(u"p4_sigma_hold")
+
+        self.gridLayout_6.addWidget(self.p4_sigma_hold, 15, 4, 1, 1)
+
+        self.p3_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_cenh_sb.setObjectName(u"p3_cenh_sb")
+        self.p3_cenh_sb.setMaximum(4000.000000000000000)
+        self.p3_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_cenh_sb, 12, 3, 1, 1)
+
+        self.p5_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p5_amp_hold.setObjectName(u"p5_amp_hold")
+
+        self.gridLayout_6.addWidget(self.p5_amp_hold, 5, 5, 1, 1)
+
+        self.p3_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_cen_sb.setObjectName(u"p3_cen_sb")
+        self.p3_cen_sb.setMaximum(4000.000000000000000)
+        self.p3_cen_sb.setValue(2000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_cen_sb, 9, 3, 1, 1)
+
+        self.p1_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_amph_sb.setObjectName(u"p1_amph_sb")
+        self.p1_amph_sb.setMinimum(-99999.000000000000000)
+        self.p1_amph_sb.setMaximum(99999.000000000000000)
+        self.p1_amph_sb.setValue(9999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_amph_sb, 7, 1, 1, 1)
+
+        self.label_15 = QLabel(self.scrollAreaWidgetContents)
+        self.label_15.setObjectName(u"label_15")
+
+        self.gridLayout_6.addWidget(self.label_15, 16, 0, 1, 1)
+
+        self.p2_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p2_sigh_sb.setObjectName(u"p2_sigh_sb")
+        self.p2_sigh_sb.setMaximum(500.000000000000000)
+        self.p2_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p2_sigh_sb, 17, 2, 1, 1)
+
+        self.p4_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p4_cen_hold.setObjectName(u"p4_cen_hold")
+
+        self.gridLayout_6.addWidget(self.p4_cen_hold, 10, 4, 1, 1)
+
         self.p1_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p1_ampl_sb.setObjectName(u"p1_ampl_sb")
         self.p1_ampl_sb.setMinimum(-99999.000000000000000)
         self.p1_ampl_sb.setMaximum(99999.000000000000000)
 
         self.gridLayout_6.addWidget(self.p1_ampl_sb, 6, 1, 1, 1)
+
+        self.label_8 = QLabel(self.scrollAreaWidgetContents)
+        self.label_8.setObjectName(u"label_8")
+
+        self.gridLayout_6.addWidget(self.label_8, 4, 0, 1, 1)
+
+        self.p5_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_cenl_sb.setObjectName(u"p5_cenl_sb")
+        self.p5_cenl_sb.setMaximum(4000.000000000000000)
+        self.p5_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_cenl_sb, 11, 5, 1, 1)
+
+        self.p1_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p1_cb.setObjectName(u"p1_cb")
+        self.p1_cb.setChecked(True)
+
+        self.gridLayout_6.addWidget(self.p1_cb, 2, 1, 1, 1)
+
+        self.p4_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p4_amp_hold.setObjectName(u"p4_amp_hold")
+
+        self.gridLayout_6.addWidget(self.p4_amp_hold, 5, 4, 1, 1)
+
+        self.p3_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_sig_sb.setObjectName(u"p3_sig_sb")
+        self.p3_sig_sb.setMaximum(500.000000000000000)
+        self.p3_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_sig_sb, 14, 3, 1, 1)
+
+        self.p1_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_cenl_sb.setObjectName(u"p1_cenl_sb")
+        self.p1_cenl_sb.setMaximum(4000.000000000000000)
+        self.p1_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_cenl_sb, 11, 1, 1, 1)
+
+        self.p4_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_cen_sb.setObjectName(u"p4_cen_sb")
+        self.p4_cen_sb.setMaximum(4000.000000000000000)
+        self.p4_cen_sb.setValue(2500.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_cen_sb, 9, 4, 1, 1)
+
+        self.p5_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p5_cenh_sb.setObjectName(u"p5_cenh_sb")
+        self.p5_cenh_sb.setMaximum(4000.000000000000000)
+        self.p5_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p5_cenh_sb, 12, 5, 1, 1)
 
         self.p3_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p3_amp_sb.setObjectName(u"p3_amp_sb")
@@ -635,110 +744,21 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.label_9, 6, 0, 1, 1)
 
-        self.p1_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p1_cb.setObjectName(u"p1_cb")
-        self.p1_cb.setChecked(True)
-
-        self.gridLayout_6.addWidget(self.p1_cb, 2, 1, 1, 1)
-
-        self.label_8 = QLabel(self.scrollAreaWidgetContents)
-        self.label_8.setObjectName(u"label_8")
-
-        self.gridLayout_6.addWidget(self.label_8, 4, 0, 1, 1)
-
-        self.p1_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p1_cen_hold.setObjectName(u"p1_cen_hold")
-
-        self.gridLayout_6.addWidget(self.p1_cen_hold, 10, 1, 1, 1)
-
         self.p2_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p2_fwhm.setObjectName(u"p2_fwhm")
         self.p2_fwhm.setMaximum(9999.000000000000000)
 
         self.gridLayout_6.addWidget(self.p2_fwhm, 18, 2, 1, 1)
 
-        self.p3_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_cen_sb.setObjectName(u"p3_cen_sb")
-        self.p3_cen_sb.setMaximum(4000.000000000000000)
-        self.p3_cen_sb.setValue(2000.000000000000000)
+        self.p1_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p1_cen_hold.setObjectName(u"p1_cen_hold")
 
-        self.gridLayout_6.addWidget(self.p3_cen_sb, 9, 3, 1, 1)
-
-        self.p4_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p4_amp_hold.setObjectName(u"p4_amp_hold")
-
-        self.gridLayout_6.addWidget(self.p4_amp_hold, 5, 4, 1, 1)
-
-        self.p1_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_sigl_sb.setObjectName(u"p1_sigl_sb")
-        self.p1_sigl_sb.setMaximum(500.000000000000000)
-        self.p1_sigl_sb.setValue(0.100000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_sigl_sb, 16, 1, 1, 1)
-
-        self.p4_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p4_sigma_hold.setObjectName(u"p4_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p4_sigma_hold, 15, 4, 1, 1)
-
-        self.p3_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_cenh_sb.setObjectName(u"p3_cenh_sb")
-        self.p3_cenh_sb.setMaximum(4000.000000000000000)
-        self.p3_cenh_sb.setValue(4000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_cenh_sb, 12, 3, 1, 1)
-
-        self.p1_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_cenl_sb.setObjectName(u"p1_cenl_sb")
-        self.p1_cenl_sb.setMaximum(4000.000000000000000)
-        self.p1_cenl_sb.setValue(400.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_cenl_sb, 11, 1, 1, 1)
-
-        self.p2_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p2_sigl_sb.setObjectName(u"p2_sigl_sb")
-        self.p2_sigl_sb.setMaximum(500.000000000000000)
-        self.p2_sigl_sb.setValue(0.100000000000000)
-
-        self.gridLayout_6.addWidget(self.p2_sigl_sb, 16, 2, 1, 1)
-
-        self.p2_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p2_sigh_sb.setObjectName(u"p2_sigh_sb")
-        self.p2_sigh_sb.setMaximum(500.000000000000000)
-        self.p2_sigh_sb.setValue(300.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p2_sigh_sb, 17, 2, 1, 1)
-
-        self.p1_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_cen_sb.setObjectName(u"p1_cen_sb")
-        self.p1_cen_sb.setMaximum(4000.000000000000000)
-        self.p1_cen_sb.setValue(1000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_cen_sb, 9, 1, 1, 1)
+        self.gridLayout_6.addWidget(self.p1_cen_hold, 10, 1, 1, 1)
 
         self.p2_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
         self.p2_amp_hold.setObjectName(u"p2_amp_hold")
 
         self.gridLayout_6.addWidget(self.p2_amp_hold, 5, 2, 1, 1)
-
-        self.p3_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p3_cen_hold.setObjectName(u"p3_cen_hold")
-
-        self.gridLayout_6.addWidget(self.p3_cen_hold, 10, 3, 1, 1)
-
-        self.p4_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_cen_sb.setObjectName(u"p4_cen_sb")
-        self.p4_cen_sb.setMaximum(4000.000000000000000)
-        self.p4_cen_sb.setValue(2500.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_cen_sb, 9, 4, 1, 1)
-
-        self.p5_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_cenl_sb.setObjectName(u"p5_cenl_sb")
-        self.p5_cenl_sb.setMaximum(4000.000000000000000)
-        self.p5_cenl_sb.setValue(400.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_cenl_sb, 11, 5, 1, 1)
 
         self.label_13 = QLabel(self.scrollAreaWidgetContents)
         self.label_13.setObjectName(u"label_13")
@@ -752,15 +772,22 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p4_sigh_sb, 17, 4, 1, 1)
 
-        self.label_15 = QLabel(self.scrollAreaWidgetContents)
-        self.label_15.setObjectName(u"label_15")
-
-        self.gridLayout_6.addWidget(self.label_15, 16, 0, 1, 1)
-
         self.label_16 = QLabel(self.scrollAreaWidgetContents)
         self.label_16.setObjectName(u"label_16")
 
         self.gridLayout_6.addWidget(self.label_16, 17, 0, 1, 1)
+
+        self.p2_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p2_sigl_sb.setObjectName(u"p2_sigl_sb")
+        self.p2_sigl_sb.setMaximum(500.000000000000000)
+        self.p2_sigl_sb.setValue(0.100000000000000)
+
+        self.gridLayout_6.addWidget(self.p2_sigl_sb, 16, 2, 1, 1)
+
+        self.p3_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p3_cen_hold.setObjectName(u"p3_cen_hold")
+
+        self.gridLayout_6.addWidget(self.p3_cen_hold, 10, 3, 1, 1)
 
         self.p2_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p2_cenl_sb.setObjectName(u"p2_cenl_sb")
@@ -769,108 +796,17 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p2_cenl_sb, 11, 2, 1, 1)
 
-        self.p5_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p5_amp_hold.setObjectName(u"p5_amp_hold")
+        self.p1_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_sigl_sb.setObjectName(u"p1_sigl_sb")
+        self.p1_sigl_sb.setMaximum(500.000000000000000)
+        self.p1_sigl_sb.setValue(0.100000000000000)
 
-        self.gridLayout_6.addWidget(self.p5_amp_hold, 5, 5, 1, 1)
+        self.gridLayout_6.addWidget(self.p1_sigl_sb, 16, 1, 1, 1)
 
         self.label_12 = QLabel(self.scrollAreaWidgetContents)
         self.label_12.setObjectName(u"label_12")
 
         self.gridLayout_6.addWidget(self.label_12, 11, 0, 1, 1)
-
-        self.p3_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_sig_sb.setObjectName(u"p3_sig_sb")
-        self.p3_sig_sb.setMaximum(500.000000000000000)
-        self.p3_sig_sb.setValue(50.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_sig_sb, 14, 3, 1, 1)
-
-        self.p4_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p4_cen_hold.setObjectName(u"p4_cen_hold")
-
-        self.gridLayout_6.addWidget(self.p4_cen_hold, 10, 4, 1, 1)
-
-        self.p4_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_cenh_sb.setObjectName(u"p4_cenh_sb")
-        self.p4_cenh_sb.setMaximum(4000.000000000000000)
-        self.p4_cenh_sb.setValue(4000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_cenh_sb, 12, 4, 1, 1)
-
-        self.p1_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_amph_sb.setObjectName(u"p1_amph_sb")
-        self.p1_amph_sb.setMinimum(-99999.000000000000000)
-        self.p1_amph_sb.setMaximum(99999.000000000000000)
-        self.p1_amph_sb.setValue(9999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_amph_sb, 7, 1, 1, 1)
-
-        self.p5_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p5_cenh_sb.setObjectName(u"p5_cenh_sb")
-        self.p5_cenh_sb.setMaximum(4000.000000000000000)
-        self.p5_cenh_sb.setValue(4000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p5_cenh_sb, 12, 5, 1, 1)
-
-        self.p1_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_cenh_sb.setObjectName(u"p1_cenh_sb")
-        self.p1_cenh_sb.setMaximum(4000.000000000000000)
-        self.p1_cenh_sb.setValue(4000.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_cenh_sb, 12, 1, 1, 1)
-
-        self.p3_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p3_amp_hold.setObjectName(u"p3_amp_hold")
-
-        self.gridLayout_6.addWidget(self.p3_amp_hold, 5, 3, 1, 1)
-
-        self.p1_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_sig_sb.setObjectName(u"p1_sig_sb")
-        self.p1_sig_sb.setMaximum(500.000000000000000)
-        self.p1_sig_sb.setValue(50.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_sig_sb, 14, 1, 1, 1)
-
-        self.p2_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p2_cen_hold.setObjectName(u"p2_cen_hold")
-
-        self.gridLayout_6.addWidget(self.p2_cen_hold, 10, 2, 1, 1)
-
-        self.label_10 = QLabel(self.scrollAreaWidgetContents)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_6.addWidget(self.label_10, 7, 0, 1, 1)
-
-        self.label_14 = QLabel(self.scrollAreaWidgetContents)
-        self.label_14.setObjectName(u"label_14")
-
-        self.gridLayout_6.addWidget(self.label_14, 14, 0, 1, 1)
-
-        self.p1_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p1_sigma_hold.setObjectName(u"p1_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p1_sigma_hold, 15, 1, 1, 1)
-
-        self.p5_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p5_sigma_hold.setObjectName(u"p5_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p5_sigma_hold, 15, 5, 1, 1)
-
-        self.p3_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p3_sigma_hold.setObjectName(u"p3_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p3_sigma_hold, 15, 3, 1, 1)
-
-        self.p2_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p2_sigma_hold.setObjectName(u"p2_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p2_sigma_hold, 15, 2, 1, 1)
-
-        self.p6_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p6_cb.setObjectName(u"p6_cb")
-
-        self.gridLayout_6.addWidget(self.p6_cb, 2, 6, 1, 1)
 
         self.p6_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p6_ampl_sb.setObjectName(u"p6_ampl_sb")
@@ -879,80 +815,12 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p6_ampl_sb, 6, 6, 1, 1)
 
-        self.p7_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_ampl_sb.setObjectName(u"p7_ampl_sb")
-        self.p7_ampl_sb.setMinimum(-99999.000000000000000)
-        self.p7_ampl_sb.setMaximum(99999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p7_ampl_sb, 6, 7, 1, 1)
-
         self.p2_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p2_cenh_sb.setObjectName(u"p2_cenh_sb")
         self.p2_cenh_sb.setMaximum(4000.000000000000000)
         self.p2_cenh_sb.setValue(4000.000000000000000)
 
         self.gridLayout_6.addWidget(self.p2_cenh_sb, 12, 2, 1, 1)
-
-        self.p7_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p7_cb.setObjectName(u"p7_cb")
-
-        self.gridLayout_6.addWidget(self.p7_cb, 2, 7, 1, 1)
-
-        self.p7_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_amp_sb.setObjectName(u"p7_amp_sb")
-        self.p7_amp_sb.setMinimum(-99999.000000000000000)
-        self.p7_amp_sb.setMaximum(99999.000000000000000)
-        self.p7_amp_sb.setSingleStep(0.500000000000000)
-        self.p7_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p7_amp_sb, 4, 7, 1, 1)
-
-        self.p1_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p1_sigh_sb.setObjectName(u"p1_sigh_sb")
-        self.p1_sigh_sb.setMaximum(500.000000000000000)
-        self.p1_sigh_sb.setValue(300.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p1_sigh_sb, 17, 1, 1, 1)
-
-        self.p8_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p8_amp_sb.setObjectName(u"p8_amp_sb")
-        self.p8_amp_sb.setMinimum(-99999.000000000000000)
-        self.p8_amp_sb.setMaximum(99999.000000000000000)
-        self.p8_amp_sb.setSingleStep(0.500000000000000)
-        self.p8_amp_sb.setValue(1.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p8_amp_sb, 4, 8, 1, 1)
-
-        self.p4_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p4_cenl_sb.setObjectName(u"p4_cenl_sb")
-        self.p4_cenl_sb.setMaximum(4000.000000000000000)
-        self.p4_cenl_sb.setValue(400.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p4_cenl_sb, 11, 4, 1, 1)
-
-        self.p3_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p3_cenl_sb.setObjectName(u"p3_cenl_sb")
-        self.p3_cenl_sb.setMaximum(4000.000000000000000)
-        self.p3_cenl_sb.setValue(400.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p3_cenl_sb, 11, 3, 1, 1)
-
-        self.p6_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_sigh_sb.setObjectName(u"p6_sigh_sb")
-
-        self.gridLayout_6.addWidget(self.p6_sigh_sb, 17, 6, 1, 1)
-
-        self.line_4 = QFrame(self.scrollAreaWidgetContents)
-        self.line_4.setObjectName(u"line_4")
-        self.line_4.setFrameShape(QFrame.HLine)
-        self.line_4.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_6.addWidget(self.line_4, 8, 0, 1, 9)
-
-        self.p8_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.p8_cb.setObjectName(u"p8_cb")
-
-        self.gridLayout_6.addWidget(self.p8_cb, 2, 8, 1, 1)
 
         self.p8_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_cenh_sb.setObjectName(u"p8_cenh_sb")
@@ -964,15 +832,15 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p6_cenh_sb, 12, 6, 1, 1)
 
-        self.p8_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p8_cen_hold.setObjectName(u"p8_cen_hold")
+        self.p7_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p7_cb.setObjectName(u"p7_cb")
 
-        self.gridLayout_6.addWidget(self.p8_cen_hold, 10, 8, 1, 1)
+        self.gridLayout_6.addWidget(self.p7_cb, 2, 7, 1, 1)
 
-        self.p7_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_sig_sb.setObjectName(u"p7_sig_sb")
+        self.p7_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p7_sigma_hold.setObjectName(u"p7_sigma_hold")
 
-        self.gridLayout_6.addWidget(self.p7_sig_sb, 14, 7, 1, 1)
+        self.gridLayout_6.addWidget(self.p7_sigma_hold, 15, 7, 1, 1)
 
         self.p7_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p7_amph_sb.setObjectName(u"p7_amph_sb")
@@ -982,6 +850,11 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p7_amph_sb, 7, 7, 1, 1)
 
+        self.p8_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p8_cen_hold.setObjectName(u"p8_cen_hold")
+
+        self.gridLayout_6.addWidget(self.p8_cen_hold, 10, 8, 1, 1)
+
         self.p8_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_amph_sb.setObjectName(u"p8_amph_sb")
         self.p8_amph_sb.setMinimum(-99999.000000000000000)
@@ -990,65 +863,182 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p8_amph_sb, 7, 8, 1, 1)
 
-        self.p7_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p7_sigma_hold.setObjectName(u"p7_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p7_sigma_hold, 15, 7, 1, 1)
-
         self.p6_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
         self.p6_amp_hold.setObjectName(u"p6_amp_hold")
 
         self.gridLayout_6.addWidget(self.p6_amp_hold, 5, 6, 1, 1)
+
+        self.p1_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_sig_sb.setObjectName(u"p1_sig_sb")
+        self.p1_sig_sb.setMaximum(500.000000000000000)
+        self.p1_sig_sb.setValue(50.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_sig_sb, 14, 1, 1, 1)
+
+        self.p6_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_sigh_sb.setObjectName(u"p6_sigh_sb")
+
+        self.gridLayout_6.addWidget(self.p6_sigh_sb, 17, 6, 1, 1)
+
+        self.p1_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_cenh_sb.setObjectName(u"p1_cenh_sb")
+        self.p1_cenh_sb.setMaximum(4000.000000000000000)
+        self.p1_cenh_sb.setValue(4000.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_cenh_sb, 12, 1, 1, 1)
 
         self.p6_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
         self.p6_sigma_hold.setObjectName(u"p6_sigma_hold")
 
         self.gridLayout_6.addWidget(self.p6_sigma_hold, 15, 6, 1, 1)
 
+        self.p8_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p8_cb.setObjectName(u"p8_cb")
+
+        self.gridLayout_6.addWidget(self.p8_cb, 2, 8, 1, 1)
+
+        self.p8_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p8_amp_sb.setObjectName(u"p8_amp_sb")
+        self.p8_amp_sb.setMinimum(-99999.000000000000000)
+        self.p8_amp_sb.setMaximum(99999.000000000000000)
+        self.p8_amp_sb.setSingleStep(0.500000000000000)
+        self.p8_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p8_amp_sb, 4, 8, 1, 1)
+
+        self.p2_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p2_cen_hold.setObjectName(u"p2_cen_hold")
+
+        self.gridLayout_6.addWidget(self.p2_cen_hold, 10, 2, 1, 1)
+
+        self.p2_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p2_sigma_hold.setObjectName(u"p2_sigma_hold")
+
+        self.gridLayout_6.addWidget(self.p2_sigma_hold, 15, 2, 1, 1)
+
+        self.p3_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p3_cenl_sb.setObjectName(u"p3_cenl_sb")
+        self.p3_cenl_sb.setMaximum(4000.000000000000000)
+        self.p3_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p3_cenl_sb, 11, 3, 1, 1)
+
+        self.label_14 = QLabel(self.scrollAreaWidgetContents)
+        self.label_14.setObjectName(u"label_14")
+
+        self.gridLayout_6.addWidget(self.label_14, 14, 0, 1, 1)
+
+        self.p1_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p1_sigma_hold.setObjectName(u"p1_sigma_hold")
+
+        self.gridLayout_6.addWidget(self.p1_sigma_hold, 15, 1, 1, 1)
+
+        self.p7_amp_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_amp_sb.setObjectName(u"p7_amp_sb")
+        self.p7_amp_sb.setMinimum(-99999.000000000000000)
+        self.p7_amp_sb.setMaximum(99999.000000000000000)
+        self.p7_amp_sb.setSingleStep(0.500000000000000)
+        self.p7_amp_sb.setValue(1.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p7_amp_sb, 4, 7, 1, 1)
+
+        self.p4_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p4_cenl_sb.setObjectName(u"p4_cenl_sb")
+        self.p4_cenl_sb.setMaximum(4000.000000000000000)
+        self.p4_cenl_sb.setValue(400.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p4_cenl_sb, 11, 4, 1, 1)
+
+        self.label_10 = QLabel(self.scrollAreaWidgetContents)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_6.addWidget(self.label_10, 7, 0, 1, 1)
+
+        self.p3_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p3_sigma_hold.setObjectName(u"p3_sigma_hold")
+
+        self.gridLayout_6.addWidget(self.p3_sigma_hold, 15, 3, 1, 1)
+
+        self.p7_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_sig_sb.setObjectName(u"p7_sig_sb")
+
+        self.gridLayout_6.addWidget(self.p7_sig_sb, 14, 7, 1, 1)
+
+        self.p7_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_ampl_sb.setObjectName(u"p7_ampl_sb")
+        self.p7_ampl_sb.setMinimum(-99999.000000000000000)
+        self.p7_ampl_sb.setMaximum(99999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p7_ampl_sb, 6, 7, 1, 1)
+
+        self.p6_cb = QCheckBox(self.scrollAreaWidgetContents)
+        self.p6_cb.setObjectName(u"p6_cb")
+
+        self.gridLayout_6.addWidget(self.p6_cb, 2, 6, 1, 1)
+
+        self.p3_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p3_amp_hold.setObjectName(u"p3_amp_hold")
+
+        self.gridLayout_6.addWidget(self.p3_amp_hold, 5, 3, 1, 1)
+
+        self.p1_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p1_sigh_sb.setObjectName(u"p1_sigh_sb")
+        self.p1_sigh_sb.setMaximum(500.000000000000000)
+        self.p1_sigh_sb.setValue(300.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p1_sigh_sb, 17, 1, 1, 1)
+
+        self.line_4 = QFrame(self.scrollAreaWidgetContents)
+        self.line_4.setObjectName(u"line_4")
+        self.line_4.setFrameShape(QFrame.HLine)
+        self.line_4.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_6.addWidget(self.line_4, 8, 0, 1, 9)
+
+        self.p5_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p5_sigma_hold.setObjectName(u"p5_sigma_hold")
+
+        self.gridLayout_6.addWidget(self.p5_sigma_hold, 15, 5, 1, 1)
+
+        self.p6_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_cen_sb.setObjectName(u"p6_cen_sb")
+
+        self.gridLayout_6.addWidget(self.p6_cen_sb, 9, 6, 1, 1)
+
         self.p8_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_sig_sb.setObjectName(u"p8_sig_sb")
 
         self.gridLayout_6.addWidget(self.p8_sig_sb, 14, 8, 1, 1)
-
-        self.p8_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p8_ampl_sb.setObjectName(u"p8_ampl_sb")
-        self.p8_ampl_sb.setMinimum(-99999.000000000000000)
-        self.p8_ampl_sb.setMaximum(99999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.p8_ampl_sb, 6, 8, 1, 1)
-
-        self.p8_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p8_sigma_hold.setObjectName(u"p8_sigma_hold")
-
-        self.gridLayout_6.addWidget(self.p8_sigma_hold, 15, 8, 1, 1)
-
-        self.p6_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_amph_sb.setObjectName(u"p6_amph_sb")
-        self.p6_amph_sb.setMinimum(-99999.000000000000000)
-        self.p6_amph_sb.setMaximum(99999.000000000000000)
-        self.p6_amph_sb.setValue(99.989999999999995)
-
-        self.gridLayout_6.addWidget(self.p6_amph_sb, 7, 6, 1, 1)
 
         self.p8_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_cen_sb.setObjectName(u"p8_cen_sb")
 
         self.gridLayout_6.addWidget(self.p8_cen_sb, 9, 8, 1, 1)
 
-        self.p7_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p7_cen_hold.setObjectName(u"p7_cen_hold")
+        self.p6_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_sigl_sb.setObjectName(u"p6_sigl_sb")
 
-        self.gridLayout_6.addWidget(self.p7_cen_hold, 10, 7, 1, 1)
+        self.gridLayout_6.addWidget(self.p6_sigl_sb, 16, 6, 1, 1)
 
-        self.p7_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
-        self.p7_amp_hold.setObjectName(u"p7_amp_hold")
+        self.p6_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_fwhm.setObjectName(u"p6_fwhm")
 
-        self.gridLayout_6.addWidget(self.p7_amp_hold, 5, 7, 1, 1)
+        self.gridLayout_6.addWidget(self.p6_fwhm, 18, 6, 1, 1)
 
-        self.p7_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_cen_sb.setObjectName(u"p7_cen_sb")
+        self.p8_sigma_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p8_sigma_hold.setObjectName(u"p8_sigma_hold")
 
-        self.gridLayout_6.addWidget(self.p7_cen_sb, 9, 7, 1, 1)
+        self.gridLayout_6.addWidget(self.p8_sigma_hold, 15, 8, 1, 1)
+
+        self.p6_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_sig_sb.setObjectName(u"p6_sig_sb")
+
+        self.gridLayout_6.addWidget(self.p6_sig_sb, 14, 6, 1, 1)
+
+        self.p7_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_sigh_sb.setObjectName(u"p7_sigh_sb")
+
+        self.gridLayout_6.addWidget(self.p7_sigh_sb, 17, 7, 1, 1)
 
         self.p8_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
         self.p8_amp_hold.setObjectName(u"p8_amp_hold")
@@ -1060,30 +1050,74 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p6_cenl_sb, 11, 6, 1, 1)
 
-        self.p7_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_sigl_sb.setObjectName(u"p7_sigl_sb")
-
-        self.gridLayout_6.addWidget(self.p7_sigl_sb, 16, 7, 1, 1)
-
         self.p8_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_cenl_sb.setObjectName(u"p8_cenl_sb")
 
         self.gridLayout_6.addWidget(self.p8_cenl_sb, 11, 8, 1, 1)
+
+        self.line_7 = QFrame(self.scrollAreaWidgetContents)
+        self.line_7.setObjectName(u"line_7")
+        self.line_7.setFrameShape(QFrame.HLine)
+        self.line_7.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_6.addWidget(self.line_7, 19, 0, 1, 9)
+
+        self.p7_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p7_cen_hold.setObjectName(u"p7_cen_hold")
+
+        self.gridLayout_6.addWidget(self.p7_cen_hold, 10, 7, 1, 1)
 
         self.p7_cenl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p7_cenl_sb.setObjectName(u"p7_cenl_sb")
 
         self.gridLayout_6.addWidget(self.p7_cenl_sb, 11, 7, 1, 1)
 
-        self.p6_sig_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_sig_sb.setObjectName(u"p6_sig_sb")
+        self.p7_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_sigl_sb.setObjectName(u"p7_sigl_sb")
 
-        self.gridLayout_6.addWidget(self.p6_sig_sb, 14, 6, 1, 1)
+        self.gridLayout_6.addWidget(self.p7_sigl_sb, 16, 7, 1, 1)
 
-        self.p6_sigl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_sigl_sb.setObjectName(u"p6_sigl_sb")
+        self.p6_amph_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p6_amph_sb.setObjectName(u"p6_amph_sb")
+        self.p6_amph_sb.setMinimum(-99999.000000000000000)
+        self.p6_amph_sb.setMaximum(99999.000000000000000)
+        self.p6_amph_sb.setValue(99.989999999999995)
 
-        self.gridLayout_6.addWidget(self.p6_sigl_sb, 16, 6, 1, 1)
+        self.gridLayout_6.addWidget(self.p6_amph_sb, 7, 6, 1, 1)
+
+        self.p7_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_cenh_sb.setObjectName(u"p7_cenh_sb")
+
+        self.gridLayout_6.addWidget(self.p7_cenh_sb, 12, 7, 1, 1)
+
+        self.line_6 = QFrame(self.scrollAreaWidgetContents)
+        self.line_6.setObjectName(u"line_6")
+        self.line_6.setFrameShape(QFrame.HLine)
+        self.line_6.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_6.addWidget(self.line_6, 3, 0, 1, 9)
+
+        self.p8_ampl_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p8_ampl_sb.setObjectName(u"p8_ampl_sb")
+        self.p8_ampl_sb.setMinimum(-99999.000000000000000)
+        self.p8_ampl_sb.setMaximum(99999.000000000000000)
+
+        self.gridLayout_6.addWidget(self.p8_ampl_sb, 6, 8, 1, 1)
+
+        self.p7_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_fwhm.setObjectName(u"p7_fwhm")
+
+        self.gridLayout_6.addWidget(self.p7_fwhm, 18, 7, 1, 1)
+
+        self.p8_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p8_fwhm.setObjectName(u"p8_fwhm")
+
+        self.gridLayout_6.addWidget(self.p8_fwhm, 18, 8, 1, 1)
+
+        self.p7_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.p7_cen_sb.setObjectName(u"p7_cen_sb")
+
+        self.gridLayout_6.addWidget(self.p7_cen_sb, 9, 7, 1, 1)
 
         self.p6_cen_hold = QCheckBox(self.scrollAreaWidgetContents)
         self.p6_cen_hold.setObjectName(u"p6_cen_hold")
@@ -1095,60 +1129,10 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.p8_sigl_sb, 16, 8, 1, 1)
 
-        self.p6_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_fwhm.setObjectName(u"p6_fwhm")
-
-        self.gridLayout_6.addWidget(self.p6_fwhm, 18, 6, 1, 1)
-
-        self.p7_cenh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_cenh_sb.setObjectName(u"p7_cenh_sb")
-
-        self.gridLayout_6.addWidget(self.p7_cenh_sb, 12, 7, 1, 1)
-
-        self.p6_cen_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p6_cen_sb.setObjectName(u"p6_cen_sb")
-
-        self.gridLayout_6.addWidget(self.p6_cen_sb, 9, 6, 1, 1)
-
-        self.fit_results_te = QTextEdit(self.scrollAreaWidgetContents)
-        self.fit_results_te.setObjectName(u"fit_results_te")
-        self.fit_results_te.setMinimumSize(QSize(0, 400))
-
-        self.gridLayout_6.addWidget(self.fit_results_te, 22, 0, 1, 9)
-
-        self.p7_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_sigh_sb.setObjectName(u"p7_sigh_sb")
-
-        self.gridLayout_6.addWidget(self.p7_sigh_sb, 17, 7, 1, 1)
-
-        self.line_6 = QFrame(self.scrollAreaWidgetContents)
-        self.line_6.setObjectName(u"line_6")
-        self.line_6.setFrameShape(QFrame.HLine)
-        self.line_6.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_6.addWidget(self.line_6, 3, 0, 1, 9)
-
-        self.line_7 = QFrame(self.scrollAreaWidgetContents)
-        self.line_7.setObjectName(u"line_7")
-        self.line_7.setFrameShape(QFrame.HLine)
-        self.line_7.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_6.addWidget(self.line_7, 19, 0, 1, 9)
-
-        self.p7_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p7_fwhm.setObjectName(u"p7_fwhm")
-
-        self.gridLayout_6.addWidget(self.p7_fwhm, 18, 7, 1, 1)
-
         self.p8_sigh_sb = QDoubleSpinBox(self.scrollAreaWidgetContents)
         self.p8_sigh_sb.setObjectName(u"p8_sigh_sb")
 
         self.gridLayout_6.addWidget(self.p8_sigh_sb, 17, 8, 1, 1)
-
-        self.p8_fwhm = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.p8_fwhm.setObjectName(u"p8_fwhm")
-
-        self.gridLayout_6.addWidget(self.p8_fwhm, 18, 8, 1, 1)
 
         self.line_5 = QFrame(self.scrollAreaWidgetContents)
         self.line_5.setObjectName(u"line_5")
@@ -1157,66 +1141,113 @@ class Ui_DockWidget(object):
 
         self.gridLayout_6.addWidget(self.line_5, 13, 0, 1, 9)
 
-        self.ir_range_cb = QComboBox(self.scrollAreaWidgetContents)
-        self.ir_range_cb.setObjectName(u"ir_range_cb")
+        self.p7_amp_hold = QCheckBox(self.scrollAreaWidgetContents)
+        self.p7_amp_hold.setObjectName(u"p7_amp_hold")
 
-        self.gridLayout_6.addWidget(self.ir_range_cb, 1, 3, 1, 4)
+        self.gridLayout_6.addWidget(self.p7_amp_hold, 5, 7, 1, 1)
 
-        self.select_ir_range_cb = QCheckBox(self.scrollAreaWidgetContents)
-        self.select_ir_range_cb.setObjectName(u"select_ir_range_cb")
+        self.scrollArea_2 = QScrollArea(self.scrollAreaWidgetContents)
+        self.scrollArea_2.setObjectName(u"scrollArea_2")
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollAreaWidgetContents_2 = QWidget()
+        self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 746, 298))
+        self.gridLayout_8 = QGridLayout(self.scrollAreaWidgetContents_2)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
+        self.fit_results_te = QTextEdit(self.scrollAreaWidgetContents_2)
+        self.fit_results_te.setObjectName(u"fit_results_te")
+        self.fit_results_te.setMinimumSize(QSize(0, 0))
 
-        self.gridLayout_6.addWidget(self.select_ir_range_cb, 1, 1, 1, 2)
+        self.gridLayout_8.addWidget(self.fit_results_te, 12, 0, 1, 2)
 
-        self.clear_fit_pb = QPushButton(self.scrollAreaWidgetContents)
-        self.clear_fit_pb.setObjectName(u"clear_fit_pb")
-
-        self.gridLayout_6.addWidget(self.clear_fit_pb, 1, 0, 1, 1)
-
-        self.slope_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
-        self.slope_dsb.setObjectName(u"slope_dsb")
-        self.slope_dsb.setMinimum(-999999.000000000000000)
-        self.slope_dsb.setMaximum(999999.000000000000000)
-
-        self.gridLayout_6.addWidget(self.slope_dsb, 20, 5, 1, 1)
-
-        self.label_18 = QLabel(self.scrollAreaWidgetContents)
-        self.label_18.setObjectName(u"label_18")
-
-        self.gridLayout_6.addWidget(self.label_18, 20, 4, 1, 1)
-
-        self.checkBox = QCheckBox(self.scrollAreaWidgetContents)
-        self.checkBox.setObjectName(u"checkBox")
-
-        self.gridLayout_6.addWidget(self.checkBox, 20, 3, 1, 1)
-
-        self.baseline_combo = QComboBox(self.scrollAreaWidgetContents)
+        self.baseline_combo = QComboBox(self.scrollAreaWidgetContents_2)
         self.baseline_combo.addItem("")
         self.baseline_combo.addItem("")
         self.baseline_combo.addItem("")
         self.baseline_combo.setObjectName(u"baseline_combo")
 
-        self.gridLayout_6.addWidget(self.baseline_combo, 21, 3, 1, 1)
+        self.gridLayout_8.addWidget(self.baseline_combo, 7, 1, 1, 1)
 
-        self.plot_components_box = QCheckBox(self.scrollAreaWidgetContents)
+        self.plot_components_box = QCheckBox(self.scrollAreaWidgetContents_2)
         self.plot_components_box.setObjectName(u"plot_components_box")
 
-        self.gridLayout_6.addWidget(self.plot_components_box, 21, 0, 1, 1)
+        self.gridLayout_8.addWidget(self.plot_components_box, 3, 1, 1, 1)
 
-        self.label_19 = QLabel(self.scrollAreaWidgetContents)
+        self.label_18 = QLabel(self.scrollAreaWidgetContents_2)
+        self.label_18.setObjectName(u"label_18")
+
+        self.gridLayout_8.addWidget(self.label_18, 8, 0, 1, 1)
+
+        self.ir_range_cb = QComboBox(self.scrollAreaWidgetContents_2)
+        self.ir_range_cb.setObjectName(u"ir_range_cb")
+
+        self.gridLayout_8.addWidget(self.ir_range_cb, 1, 1, 1, 1)
+
+        self.slope_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents_2)
+        self.slope_dsb.setObjectName(u"slope_dsb")
+        self.slope_dsb.setDecimals(4)
+        self.slope_dsb.setMinimum(-999999.000000000000000)
+        self.slope_dsb.setMaximum(999999.000000000000000)
+
+        self.gridLayout_8.addWidget(self.slope_dsb, 8, 1, 1, 1)
+
+        self.select_ir_range_cb = QCheckBox(self.scrollAreaWidgetContents_2)
+        self.select_ir_range_cb.setObjectName(u"select_ir_range_cb")
+
+        self.gridLayout_8.addWidget(self.select_ir_range_cb, 1, 0, 1, 1)
+
+        self.plot_3sig_box = QCheckBox(self.scrollAreaWidgetContents_2)
+        self.plot_3sig_box.setObjectName(u"plot_3sig_box")
+
+        self.gridLayout_8.addWidget(self.plot_3sig_box, 3, 0, 1, 1)
+
+        self.label_20 = QLabel(self.scrollAreaWidgetContents_2)
+        self.label_20.setObjectName(u"label_20")
+
+        self.gridLayout_8.addWidget(self.label_20, 10, 0, 1, 1)
+
+        self.checkBox = QCheckBox(self.scrollAreaWidgetContents_2)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.gridLayout_8.addWidget(self.checkBox, 7, 0, 1, 1)
+
+        self.fitcolor = QPushButton(self.scrollAreaWidgetContents_2)
+        self.fitcolor.setObjectName(u"fitcolor")
+
+        self.gridLayout_8.addWidget(self.fitcolor, 10, 1, 1, 1)
+
+        self.line_8 = QFrame(self.scrollAreaWidgetContents_2)
+        self.line_8.setObjectName(u"line_8")
+        self.line_8.setFrameShape(QFrame.HLine)
+        self.line_8.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_8.addWidget(self.line_8, 2, 0, 1, 2)
+
+        self.label_19 = QLabel(self.scrollAreaWidgetContents_2)
         self.label_19.setObjectName(u"label_19")
 
-        self.gridLayout_6.addWidget(self.label_19, 21, 4, 1, 1)
+        self.gridLayout_8.addWidget(self.label_19, 9, 0, 1, 1)
 
-        self.intercept_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents)
+        self.intercept_dsb = QDoubleSpinBox(self.scrollAreaWidgetContents_2)
         self.intercept_dsb.setObjectName(u"intercept_dsb")
+        self.intercept_dsb.setDecimals(4)
         self.intercept_dsb.setMinimum(-999999.000000000000000)
         self.intercept_dsb.setMaximum(999999.000000000000000)
 
-        self.gridLayout_6.addWidget(self.intercept_dsb, 21, 5, 1, 1)
+        self.gridLayout_8.addWidget(self.intercept_dsb, 9, 1, 1, 1)
+
+        self.clear_fit_pb = QPushButton(self.scrollAreaWidgetContents_2)
+        self.clear_fit_pb.setObjectName(u"clear_fit_pb")
+
+        self.gridLayout_8.addWidget(self.clear_fit_pb, 11, 1, 1, 1)
+
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+
+        self.gridLayout_6.addWidget(self.scrollArea_2, 0, 0, 1, 9)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.gridLayout_5.addWidget(self.scrollArea, 1, 1, 1, 6)
+        self.gridLayout_5.addWidget(self.scrollArea, 0, 1, 1, 6)
 
         self.tabWidget.addTab(self.tab_4, "")
 
@@ -1280,60 +1311,62 @@ class Ui_DockWidget(object):
         self.fit_init_pb.setText(QCoreApplication.translate("DockWidget", u"Fit Init", None))
         self.fit_pb.setText(QCoreApplication.translate("DockWidget", u"Fit", None))
         self.select_data_pb.setText(QCoreApplication.translate("DockWidget", u"Select Data", None))
-        self.plot_3sig_box.setText(QCoreApplication.translate("DockWidget", u"Plot 3 sig", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"FWHM", None))
-        self.p3_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 3", None))
-        self.p5_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 5", None))
-        self.p2_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 2", None))
-        self.p1_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p4_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 4", None))
-        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Cen", None))
+        self.p1_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.label_17.setText(QCoreApplication.translate("DockWidget", u"Peak #", None))
         self.p5_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.label_9.setText(QCoreApplication.translate("DockWidget", u"low", None))
-        self.p1_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 1", None))
-        self.label_8.setText(QCoreApplication.translate("DockWidget", u"Amp", None))
-        self.p1_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p4_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Cen", None))
+        self.p5_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 5", None))
+        self.p2_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 2", None))
+        self.p3_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 3", None))
         self.p4_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p2_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p3_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.label_13.setText(QCoreApplication.translate("DockWidget", u"high", None))
-        self.label_15.setText(QCoreApplication.translate("DockWidget", u"low", None))
-        self.label_16.setText(QCoreApplication.translate("DockWidget", u"high", None))
         self.p5_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.label_12.setText(QCoreApplication.translate("DockWidget", u"low", None))
+        self.label_15.setText(QCoreApplication.translate("DockWidget", u"low", None))
         self.p4_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p3_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p2_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.label_10.setText(QCoreApplication.translate("DockWidget", u"high", None))
-        self.label_14.setText(QCoreApplication.translate("DockWidget", u"sigma", None))
-        self.p1_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p5_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p3_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p2_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p6_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 6", None))
+        self.label_8.setText(QCoreApplication.translate("DockWidget", u"Amp", None))
+        self.p1_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 1", None))
+        self.p4_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_9.setText(QCoreApplication.translate("DockWidget", u"low", None))
+        self.p1_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p2_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_13.setText(QCoreApplication.translate("DockWidget", u"high", None))
+        self.label_16.setText(QCoreApplication.translate("DockWidget", u"high", None))
+        self.p3_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_12.setText(QCoreApplication.translate("DockWidget", u"low", None))
         self.p7_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 7", None))
-        self.p8_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 8", None))
-        self.p8_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p7_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p8_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p6_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p6_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p8_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 8", None))
+        self.p2_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p2_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_14.setText(QCoreApplication.translate("DockWidget", u"sigma", None))
+        self.p1_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.label_10.setText(QCoreApplication.translate("DockWidget", u"high", None))
+        self.p3_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p6_cb.setText(QCoreApplication.translate("DockWidget", u"Peak 6", None))
+        self.p3_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p5_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p8_sigma_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p7_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.p7_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p8_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
+        self.p7_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.p6_cen_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
-        self.select_ir_range_cb.setText(QCoreApplication.translate("DockWidget", u"Get IR Fit Range", None))
-        self.clear_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Clear Fitting", None))
-        self.label_18.setText(QCoreApplication.translate("DockWidget", u"slope", None))
-        self.checkBox.setText(QCoreApplication.translate("DockWidget", u"Hold Baseline", None))
+        self.p7_amp_hold.setText(QCoreApplication.translate("DockWidget", u"Hold", None))
         self.baseline_combo.setItemText(0, QCoreApplication.translate("DockWidget", u"None", None))
         self.baseline_combo.setItemText(1, QCoreApplication.translate("DockWidget", u"Linear", None))
         self.baseline_combo.setItemText(2, QCoreApplication.translate("DockWidget", u"Constant", None))
 
         self.plot_components_box.setText(QCoreApplication.translate("DockWidget", u"Plot Components", None))
+        self.label_18.setText(QCoreApplication.translate("DockWidget", u"slope", None))
+        self.select_ir_range_cb.setText(QCoreApplication.translate("DockWidget", u"Get IR Fit Range", None))
+        self.plot_3sig_box.setText(QCoreApplication.translate("DockWidget", u"Plot 3 sig", None))
+        self.label_20.setText(QCoreApplication.translate("DockWidget", u"Fit Color", None))
+        self.checkBox.setText(QCoreApplication.translate("DockWidget", u"Hold Baseline", None))
+        self.fitcolor.setText("")
         self.label_19.setText(QCoreApplication.translate("DockWidget", u"intercept/constant", None))
+        self.clear_fit_pb.setText(QCoreApplication.translate("DockWidget", u"Clear Fitting", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("DockWidget", u"Fit Panel", None))
     # retranslateUi
 

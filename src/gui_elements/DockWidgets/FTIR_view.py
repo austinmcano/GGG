@@ -345,8 +345,8 @@ class FTIR_view(QtWidgets.QDockWidget):
             self.ui.ir_range_cb.addItems([i for i in self.fit_obj.keys()])
             self.ui.ir_range_cb.setCurrentText(str(np.round(minimum, 1)) + '+' + str(np.round(maximum, 1)))
             self.ui.select_ir_range_cb.setChecked(False)
-            self.main_window.ax.set_xlim(maximum + 50, minimum - 50)
-            self.main_window.ax.set_ylim(auto=True)
+            # self.main_window.ax.set_xlim(maximum + 50, minimum - 50)
+            # self.main_window.ax.set_ylim(auto=True)
             self.main_window.canvas.draw()
         else:
             mbox = QtWidgets.QMessageBox()
@@ -513,10 +513,10 @@ class FTIR_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED['const_part' + self.ui.ir_range_cb.currentText()] = \
                     self.main_window.ax.plot(obj.x_data, comps['c'], 'k--',
                                              label='_cmod_' + self.ui.ir_range_cb.currentText())
-            elif self.ui.baseline_combo == 'None':
+            else:
                 for i in nums_checked:
                     ApplicationSettings.ALL_DATA_PLOTTED['V%s_' % str(i)+self.ui.ir_range_cb.currentText()] = \
-                        self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)]+comps['c'], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
+                        self.main_window.ax.plot(obj.x_data,  comps['p%s_' % str(i)], 'k--', label='_V%s' % str(i)+self.ui.ir_range_cb.currentText())
         self.main_window.canvas.draw()
 
     def clear_fit_objs(self):
