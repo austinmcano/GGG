@@ -112,6 +112,7 @@ class XRD_view(QtWidgets.QDockWidget):
         self.y_data = self.y_data[~np.isnan(self.y_data)]
         ApplicationSettings.ALL_DATA_PLOTTED[str(x)] = \
             self.main_window.ax.plot(self.x_data, self.y_data, label=x)
+
         self.xrd_basic()
 
     def xrd_basic(self):
@@ -266,7 +267,7 @@ class XRD_view(QtWidgets.QDockWidget):
         print(self.y_data)
         print(self.ui.lambda_sb.value())
         print(self.ui.p_sb.value())
-        self.baseline = plotting_functions.baseline_als(self.y_data,self.ui.lambda_sb.value(),self.ui.p_sb.value())
+        self.baseline = plotting_functions.baseline_als(self.y_data, self.ui.lambda_sb.value(), self.ui.p_sb.value())
         print(self.baseline)
         ApplicationSettings.ALL_DATA_PLOTTED['corrected'] = \
             self.main_window.ax.plot(self.x_data, self.y_data-self.baseline, label='corrected')

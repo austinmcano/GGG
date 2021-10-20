@@ -1,3 +1,5 @@
+import numpy as np
+
 from Ui_Files.DockWidgets.Py.dw_SE import Ui_DockWidget
 from gui_elements.RC_Fucntions import *
 from gui_elements.plotting_functions import *
@@ -10,6 +12,7 @@ import xlrd
 from lmfit import Parameters
 from gui_elements.qms_functions import isotopic_prediction
 
+from dataclasses import dataclass
 
 class SE_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
@@ -86,7 +89,7 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.lin_fit_pb.clicked.connect(lambda: self.linear_SE())
         self.ui.plottable_pb.clicked.connect(lambda: self.plot_table_data())
         self.ui.linfitall_pb.clicked.connect(lambda: self.lin_fit_all_fun())
-        self.ui.axischoise_cb.currentTextChanged.connect(lambda: self.change_axis())
+        # self.ui.axischoise_cb.currentTextChanged.connect(lambda: self.change_axis())
         self.ui.selectrange_box.toggled.connect(self.select_fit_range)
         self.ui.plot_qms_pb.clicked.connect(lambda: self.qms_plot())
         # self.ui.abundance_pb.clicked.connect(lambda: self.abundance_plot())
@@ -147,19 +150,32 @@ class SE_view(QtWidgets.QDockWidget):
             # ax = self.main_window.ax_2
         x = self.ui.tw_x.currentIndex().data()
         y = self.ui.tw_y.currentIndex().data()
+        if self.ui.error_checkbox.isChecked() == True:
+            err = self.ui.error_tw.currentIndex().data()
+            err_data = self.data[err].to_numpy()
         x_data = self.data[x].to_numpy()
         if self.ui.zero_correct_checkb.isChecked():
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
-                ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data-y_data[0], '.-', label=y, color=self.ui.secolorpb.text(),
-                            markersize=self.ui.semarkersize.value())
+                if self.ui.error_checkbox.isChecked():
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
+                        ax.errorbar(x_data,y_data-y_data[0], yerr= err_data,  color='blue', marker='.', ms=20, mew=4,
+                                        capsize=4, linestyle='')
+                else:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
+                        ax.plot(x_data, y_data-y_data[0], '.-', label=y, color=self.ui.secolorpb.text(),
+                                markersize=self.ui.semarkersize.value())
         elif not self.ui.zero_correct_checkb.isChecked():
             for i in self.ui.tw_y.selectedItems():
                 y_data = self.data[i.text(0)].to_numpy()
-                ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
-                    ax.plot(x_data, y_data, '.-',label=y, color=self.ui.secolorpb.text(),
-                            markersize=self.ui.semarkersize.value())
+                if self.ui.error_checkbox.isChecked():
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
+                        ax.errorbar(x_data, y_data, yerr=err_data,  color='blue', marker='.', ms=20, mew=4,
+                                    capsize=4, linestyle='')
+                else:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(x) + str(i.text(0))] = \
+                        ax.plot(x_data, y_data, '.-',label=y, color=self.ui.secolorpb.text(),
+                                markersize=self.ui.semarkersize.value())
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()
@@ -177,9 +193,31 @@ class SE_view(QtWidgets.QDockWidget):
             pars = model.guess(self.data_y,x=self.data_x)
             fit = model.fit(self.data_y,pars,x=self.data_x)
             ApplicationSettings.ALL_DATA_PLOTTED[name+' Fit'] = \
-                self.main_window.ax.plot(self.data_x,fit.best_fit,label=name+' Fit')
+                self.main_window.ax.plot(self.data_x, fit.best_fit,label=name+' Fit')
             self.ui.fit_results_TE.setText(fit.fit_report())
             self.main_window.canvas.draw()
+
+            posnegdict = {'pos':[],'neg':[],'adose':[],'bdose':[]}
+
+            for num in range(len(self.data_y)-1):
+                if self.data_y[num+1] > self.data_y[num]:
+                    posnegdict['pos'].append(self.data_y[num+1] - self.data_y[num])
+                else:
+                    posnegdict['neg'].append(self.data_y[num+1] - self.data_y[num])
+            for num in range(len(self.data_y)-1):
+                if num % 2 == 0:
+                    posnegdict['adose'].append(self.data_y[num+1] - self.data_y[num])
+                else:
+                    posnegdict['bdose'].append(self.data_y[num+1] - self.data_y[num])
+            pave = np.average(posnegdict['pos'])
+            nave = np.average(posnegdict['neg'])
+            aave = np.average(posnegdict['adose'])
+            bave = np.average(posnegdict['bdose'])
+
+            self.ui.adosethickchange.setValue(aave)
+            self.ui.bdosethickchange.setValue(bave)
+            self.ui.posthickchange.setValue(pave)
+            self.ui.negthickchange.setValue(nave)
         dialog = QtWidgets.QDialog()
         ui = twDialog_ui()
         ui.setupUi(dialog)
@@ -192,6 +230,11 @@ class SE_view(QtWidgets.QDockWidget):
         dialog.exec_()
 
     def fill_cols_fun(self, tab):
+        @dataclass
+        class fill_data:
+            column_list_x = []
+            column_list_y = []
+            column_list_err = []
         if tab == 'SE':
             self.ui.tw_x.clear()
             self.ui.tw_y.clear()
@@ -216,13 +259,13 @@ class SE_view(QtWidgets.QDockWidget):
                 self.data = pd.read_csv(self.path, sep='\t', skiprows=skip_rows)
 
             strings = [col for col in self.data.columns]
-            column_list_x = []
-            column_list_y = []
             for i in strings:
-                column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
-                column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
-                self.ui.tw_x.addTopLevelItems(column_list_x)
-                self.ui.tw_y.addTopLevelItems(column_list_y)
+                fill_data.column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
+                fill_data.column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
+                fill_data.column_list_err.append(QtWidgets.QTreeWidgetItem([i]))
+                self.ui.tw_x.addTopLevelItems(fill_data.column_list_x)
+                self.ui.tw_y.addTopLevelItems(fill_data.column_list_y)
+                self.ui.error_tw.addTopLevelItems(fill_data.column_list_err)
         elif tab == 'QMS':
             self.ui.qmsx_tw.clear()
             self.ui.qmsy_tw.clear()
@@ -250,15 +293,14 @@ class SE_view(QtWidgets.QDockWidget):
             else:
                 print(extension)
                 self.data_qms = pd.read_csv(self.path, sep='\t')
-
             strings = [col for col in self.data.columns]
-            column_list_x = []
-            column_list_y = []
             for i in strings:
-                column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
-                column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
-                self.ui.qmsx_tw.addTopLevelItems(column_list_x)
-                self.ui.qmsy_tw.addTopLevelItems(column_list_y)
+                fill_data.column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
+                fill_data.column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
+                fill_data.column_list_err.append(QtWidgets.QTreeWidgetItem([i]))
+                self.ui.tw_x.addTopLevelItems(fill_data.column_list_x)
+                self.ui.tw_y.addTopLevelItems(fill_data.column_list_y)
+                self.ui.error_tw.addTopLevelItems(fill_data.column_list_err)
 
     def lin_fit_all_fun(self):
         dict = ApplicationSettings.ALL_DATA_PLOTTED
@@ -314,17 +356,26 @@ class SE_view(QtWidgets.QDockWidget):
         if self.ui.zero_correct_checkb.isChecked():
             y_data = y_data-y_data[0]
         if self.ui.plot_type_cb.currentText() == 'Ext. Plot (ints)':
-            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, len(y_data) - 1, len(y_data)), y_data, '.-',label=name+y,
-                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
+            x_data = np.linspace(0, len(y_data) - 1, len(y_data))
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (half-ints)':
-            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 2, len(y_data)), y_data,'.-',label=name+y,
-                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
+            x_data = np.linspace(0, (len(y_data) - 1) / 2, len(y_data))
         elif self.ui.plot_type_cb.currentText() == 'Ext. Plot (third-ints)':
+            x_data = np.linspace(0, (len(y_data) - 1) / 3, len(y_data))
+        if self.ui.error_checkbox.isChecked():
+            err_data = []
+            for i in self.ui.error_tw.selectedItems():
+                temp = self.data[i.text(0)].to_numpy()
+            for j in temp:
+                if not np.isnan(j):
+                    err_data.append(j)
             ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
-                ax.plot(np.linspace(0, (len(y_data) - 1) / 3, len(y_data)), y_data, '.-',label=name+y,
-                        color=self.ui.secolorpb.text(),markersize=self.ui.semarkersize.value())
+                ax.errorbar(x_data,y_data, yerr= err_data,  color=self.ui.secolorpb.text(), marker='.', ms=20, mew=4,
+                            capsize=4, linestyle='')
+        else:
+            ApplicationSettings.ALL_DATA_PLOTTED[name+y] = \
+                ax.plot(x_data, y_data, '.-', label=name+y,
+                        color=self.ui.secolorpb.text(), markersize=self.ui.semarkersize.value())
+
         ax.set_xlabel(self.ui.xlabel_le.text())
         ax.set_ylabel(self.ui.ylabel_le.text())
         self.main_window.fig.tight_layout()

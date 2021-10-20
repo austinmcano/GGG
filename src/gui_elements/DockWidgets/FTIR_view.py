@@ -7,6 +7,7 @@ from lmfit import Model, Parameters
 from Ui_Files.Dialogs.simple_treeWidget_dialog import Ui_Dialog as twDialog_ui
 from gui_elements.plotting_functions import baseline_als, find_nearest
 from matplotlib.widgets import SpanSelector
+from dataclasses import dataclass
 
 class FTIR_view(QtWidgets.QDockWidget):
     def __init__(self, main_window):
@@ -288,19 +289,59 @@ class FTIR_view(QtWidgets.QDockWidget):
     def smooth(self):
         dict = ApplicationSettings.ALL_DATA_PLOTTED
         Key_List = []
-        data = []
-        index = 0
-        for i in dict.keys():
-            if index == 0:
-                data.append(dict[i][0]._xy.T[0])
-                index += 1
-            Key_List.append(i)
-            data.append(dict[i][0]._xy.T[1])
+        data_dict = {}
+        @dataclass
+        class smooth_data:
+            data = []
+            colors = []
+            keys = []
+            index = 0
+        # try:
+        #     for i in dict.keys():
+        #         colors.append(dict[i][0]._color)
+        #         if index == 0:
+        #             data.append(dict[i][0]._xy.T[0])
+        #             index += 1
+        #         Key_List.append(i)
+        #         data.append(dict[i][0]._xy.T[1])
+        # except TypeError:
+        #         try:
+        #             for i in dict.keys():
+        #                 colors.append(dict[i]._color)
+        #                 if index == 0:
+        #                     data.append(dict[i]._xy.T[0])
+        #                     index += 1
+        #                 Key_List.append(i)
+        #                 data.append(dict[i]._xy.T[1])
+        #         except TypeError:
+        #             pass
+        try:
+            for i in dict.keys():
+                smooth_data.colors.append(dict[i][0]._color)
+                if smooth_data.index == 0:
+                    smooth_data.data.append(dict[i][0]._xy.T[0])
+                    smooth_data.index += 1
+                smooth_data.keys.append(i)
+                smooth_data.data.append(dict[i][0]._xy.T[1])
+        except TypeError:
+                try:
+                    for i in dict.keys():
+                        smooth_data.colors.append(dict[i]._color)
+                        if smooth_data.index == 0:
+                            smooth_data.data.append(dict[i]._xy.T[0])
+                            smooth_data.index += 1
+                        smooth_data.keys.append(i)
+                        smooth_data.data.append(dict[i]._xy.T[1])
+                except TypeError:
+                    pass
         self.main_window.cleargraph()
-        for i in range(len(Key_List)):
-            ApplicationSettings.ALL_DATA_PLOTTED[str(i)+'_sm'] = self.main_window.ax.plot(
-                data[0],savgol_filter(data[i+1], self.ui.smooth_sb.value(), 3))
+        for i in range(len(smooth_data.keys)):
+            ApplicationSettings.ALL_DATA_PLOTTED[smooth_data.keys[i]+'_sm'] = self.main_window.ax.plot(
+                smooth_data.data[0],savgol_filter(smooth_data.data[i+1], self.ui.smooth_sb.value(), 3),
+                color=smooth_data.colors[i], label=smooth_data.keys[i]+'_sm')
         self.ir_basic()
+        self.main_window.fig.tight_layout()
+        self.main_window.canvas.draw()
 
     def baseline_data(self):
         all_lines = ApplicationSettings.ALL_DATA_PLOTTED

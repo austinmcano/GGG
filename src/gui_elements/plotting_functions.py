@@ -668,7 +668,6 @@ def baseline_als(y, lam, p, niter=10):
         Z = W + lam * D.dot(D.transpose())
         z = spsolve(Z, w*y)
         w = p * (y > z) + (1-p) * (y < z)
-    print(z)
     return z
 
 
@@ -691,6 +690,8 @@ def fill_cols_fun(self):
         self.data = pd.read_csv(path, delimiter='   ', skiprows=48, engine='python')
     elif extension =='.txt':
         self.data = pd.read_csv(path, sep='\t', skiprows=skip_rows)
+    elif extension == '.dat':
+        self.data = pd.read_csv(path, sep=' ', skiprows=skip_rows)
     else:
         print(extension)
         self.data = pd.read_csv(path, sep='\t')
@@ -1079,18 +1080,18 @@ def remove_data_0(self, minimum, maximum):
     self.canvas.draw()
 
 
+# def baseline_als(y, lam, p, niter=10):
+#     # where y is the data needed to be corrected, lam is lambda and is a smoothing
+#     # parameter and p is the asymmetry of the baseline, niter is the num of iterations
+#     L = len(y)
+#     D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
+#     w = np.ones(L)
+#     for i in range(niter):
+#         W = sparse.spdiags(w, 0, L, L)
+#         Z = W + lam * D.dot(D.transpose())
+#         z = spsolve(Z, w*y)
+#         w = p * (y > z) + (1-p) * (y < z)
 
-def baseline_als(y, lam, p, niter=10):
-    # where y is the data needed to be corrected, lam is lambda and is a smoothing
-    # parameter and p is the asymmetry of the baseline, niter is the num of iterations
-    L = len(y)
-    D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
-    w = np.ones(L)
-    for i in range(niter):
-        W = sparse.spdiags(w, 0, L, L)
-        Z = W + lam * D.dot(D.transpose())
-        z = spsolve(Z, w*y)
-        w = p * (y > z) + (1-p) * (y < z)
 
 def label_size(self):
     size, ok = QtWidgets.QInputDialog.getDouble(None, 'Axis Label Size', 'Size: ')

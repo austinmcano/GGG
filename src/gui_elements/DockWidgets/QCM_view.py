@@ -1,3 +1,8 @@
+""" The python class which gives all functionallity to the QCM view
+
+
+    """
+
 from Ui_Files.DockWidgets.Py.dw_QCM import Ui_DockWidget
 from gui_elements.RC_Fucntions import *
 from gui_elements.plotting_functions import *
@@ -40,7 +45,6 @@ class QCM_view(QtWidgets.QDockWidget):
         self.context_menu = QtWidgets.QMenu(self)
         # Create context menu
         rc_browser_options(self)
-        # self.model.setRootPath(QtCore.QDir.currentPath())
         self.model.setRootPath('')
 
         self.tree_view.setModel(self.model)
@@ -135,7 +139,7 @@ class QCM_view(QtWidgets.QDockWidget):
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             self.ax = self.main_window.ax_2
         if self.ui.time_option.currentText()=='From:To Time':
-            lims = [int(self.ui.From_Time.text()),int(self.ui.To_Time.text())]
+            lims = [int(self.ui.From_Time.value()),int(self.ui.To_Time.value())]
         elif self.ui.time_option.currentText()=='Plot Limits':
             lims = ApplicationSettings.C_X_LIM
             self.ui.From_Time.setText(str(int(lims[0])))
@@ -150,40 +154,40 @@ class QCM_view(QtWidgets.QDockWidget):
             mc_a, mc_b, mc_f, hcd_a, hcd_b, fc_d = self.qcm_anal(self.time, self.pressure, self.mass,
                                                             a_exp=int(self.ui.num_A.value()),
                                                             b_exp=int(self.ui.num_B.value()),
-                                                            ttp=float(self.ui.time_through_purge.text()),
-                                                            threshold=float(self.ui.P_Threshold.text()),
+                                                            ttp=float(self.ui.time_through_purge.value()),
+                                                            threshold=float(self.ui.P_Threshold.value()),
                                                             from_time=lims[0],
                                                             to_time=lims[1],
-                                                            wait_time=float(self.ui.wait_LE.text()),
-                                                            density=float(self.ui.Density.text()))
+                                                            wait_time=float(self.ui.wait.value()),
+                                                            density=float(self.ui.Density.value()))
             ApplicationSettings.ALL_DATA_PLOTTED['MC_A'] = self.ax.plot(mc_a, label='Mass Change A')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_B'] = self.ax.plot(mc_b, label='Mass Change B')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_F'] = self.ax.plot(mc_f, label='Cycle Mass Change')
         elif self.ui.plot_type_cb.currentText() == "Half Cycle":
             mc_a, mc_b, mc_f, hcd_a, hcd_b, fc_d = \
                 self.qcm_anal(self.time, self.pressure, self.mass,a_exp=int(self.ui.num_A.value()),
-                              b_exp=int(self.ui.num_B.value()),ttp=float(self.ui.time_through_purge.text()),
-                              threshold=float(self.ui.P_Threshold.text()),from_time=lims[0],to_time=lims[1],
-                              wait_time=float(self.ui.wait_LE.text()),density=float(self.ui.Density.text()))
+                              b_exp=int(self.ui.num_B.value()),ttp=float(self.ui.time_through_purge.value()),
+                              threshold=float(self.ui.P_Threshold.value()),from_time=lims[0],to_time=lims[1],
+                              wait_time=float(self.ui.wait.value()),density=float(self.ui.Density.value()))
             ApplicationSettings.ALL_DATA_PLOTTED['MC_A'] = self.ax.plot(mc_a, label='Mass Change A')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_B'] = self.ax.plot(mc_b, label='Mass Change B')
         elif self.ui.plot_type_cb.currentText() == "Half Cycle Density":
             pass
         elif self.ui.plot_type_cb.currentText() == 'Half+Full Cycle (Mass Only)':
             mc_a, mc_b, mc_f = self.mass_qcm_anal(self.time,self.mass,
-                                                  float(self.ui.start_time_LE.text()),
-                                                  float(self.ui.adp_time_LE.text()),
-                                                  float(self.ui.bdp_time_LE.text()),
-                                                  num_cycles=int(self.ui.num_exp_LE.text()))
+                                                  float(self.ui.start_time_LE.value()),
+                                                  float(self.ui.adp_time_LE.value()),
+                                                  float(self.ui.bdp_time_LE.value()),
+                                                  num_cycles=int(self.ui.num_exp_LE.value()))
             ApplicationSettings.ALL_DATA_PLOTTED['MC_A'] = self.ax.plot(mc_a, label='Mass Change A')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_B'] = self.ax.plot(mc_b, label='Mass Change B')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_F'] = self.ax.plot(mc_f, label='Cycle Mass Change')
         elif self.ui.plot_type_cb.currentText() == 'Half Cycle (Mass Only)':
             mc_a, mc_b, mc_f = self.mass_qcm_anal(self.time, self.mass,
-                                                  float(self.ui.start_time_LE.text()),
-                                                  float(self.ui.adp_time_LE.text()),
-                                                  float(self.ui.bdp_time_LE.text()),
-                                                  num_cycles=int(self.ui.num_exp_LE.text()))
+                                                  float(self.ui.start_time_LE.value()),
+                                                  float(self.ui.adp_time_LE.value()),
+                                                  float(self.ui.bdp_time_LE.value()),
+                                                  num_cycles=int(self.ui.num_exp_LE.value()))
             ApplicationSettings.ALL_DATA_PLOTTED['MC_A'] = self.ax.plot(mc_a, label='Mass Change A')
             ApplicationSettings.ALL_DATA_PLOTTED['MC_B'] = self.ax.plot(mc_b, label='Mass Change B')
         self.main_window.fig.tight_layout()

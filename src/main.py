@@ -1,3 +1,8 @@
+"""
+
+
+"""
+
 import sys
 from PySide2 import QtWidgets, QtCore, QtGui
 from gui_elements.main_window import MainWindow
@@ -56,6 +61,6 @@ if __name__ == "__main__":
     sys.exit(app.exec_())
 
 """
-to do list:
+
 
 """

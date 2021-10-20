@@ -3,13 +3,16 @@
 ################################################################################
 ## Form generated from reading UI file 'dw_QCM.ui'
 ##
-## Created by: Qt User Interface Compiler version 5.15.2
+## Created by: Qt User Interface Compiler version 5.14.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import *
-from PySide2.QtGui import *
+from PySide2.QtCore import (QCoreApplication, QDate, QDateTime, QMetaObject,
+    QObject, QPoint, QRect, QSize, QTime, QUrl, Qt)
+from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QKeySequence, QLinearGradient, QPalette, QPainter,
+    QPixmap, QRadialGradient)
 from PySide2.QtWidgets import *
 
 
@@ -91,160 +94,183 @@ class Ui_DockWidget(object):
         self.Params_Tab.setObjectName(u"Params_Tab")
         self.gridLayout_2 = QGridLayout(self.Params_Tab)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.line = QFrame(self.Params_Tab)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
+        self.adp_time = QDoubleSpinBox(self.Params_Tab)
+        self.adp_time.setObjectName(u"adp_time")
+        self.adp_time.setMaximum(999999.000000000000000)
+        self.adp_time.setValue(61.000000000000000)
 
-        self.gridLayout_2.addWidget(self.line, 9, 0, 1, 5)
+        self.gridLayout_2.addWidget(self.adp_time, 12, 1, 1, 1)
+
+        self.wait = QDoubleSpinBox(self.Params_Tab)
+        self.wait.setObjectName(u"wait")
+        self.wait.setMaximum(99999.000000000000000)
+        self.wait.setValue(50.000000000000000)
+
+        self.gridLayout_2.addWidget(self.wait, 4, 1, 1, 1)
+
+        self.num_A = QSpinBox(self.Params_Tab)
+        self.num_A.setObjectName(u"num_A")
+        self.num_A.setValue(1)
+
+        self.gridLayout_2.addWidget(self.num_A, 1, 1, 1, 1)
+
+        self.bdp_time = QDoubleSpinBox(self.Params_Tab)
+        self.bdp_time.setObjectName(u"bdp_time")
+        self.bdp_time.setMaximum(99999.000000000000000)
+        self.bdp_time.setValue(61.000000000000000)
+
+        self.gridLayout_2.addWidget(self.bdp_time, 12, 3, 1, 1)
+
+        self.start_time = QDoubleSpinBox(self.Params_Tab)
+        self.start_time.setObjectName(u"start_time")
+        self.start_time.setMaximum(99999.000000000000000)
+        self.start_time.setValue(0.000000000000000)
+
+        self.gridLayout_2.addWidget(self.start_time, 13, 1, 1, 1)
 
         self.label_6 = QLabel(self.Params_Tab)
         self.label_6.setObjectName(u"label_6")
 
-        self.gridLayout_2.addWidget(self.label_6, 2, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.label_6, 2, 2, 1, 1)
 
-        self.wait_time_label = QLabel(self.Params_Tab)
-        self.wait_time_label.setObjectName(u"wait_time_label")
+        self.num_exp = QSpinBox(self.Params_Tab)
+        self.num_exp.setObjectName(u"num_exp")
+        self.num_exp.setMaximum(99999)
+        self.num_exp.setValue(100)
 
-        self.gridLayout_2.addWidget(self.wait_time_label, 4, 0, 1, 1)
-
-        self.From_Time = QLineEdit(self.Params_Tab)
-        self.From_Time.setObjectName(u"From_Time")
-
-        self.gridLayout_2.addWidget(self.From_Time, 5, 4, 1, 1)
-
-        self.label_12 = QLabel(self.Params_Tab)
-        self.label_12.setObjectName(u"label_12")
-
-        self.gridLayout_2.addWidget(self.label_12, 13, 3, 1, 1)
-
-        self.pushButton = QPushButton(self.Params_Tab)
-        self.pushButton.setObjectName(u"pushButton")
-
-        self.gridLayout_2.addWidget(self.pushButton, 8, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.num_exp, 13, 3, 1, 1)
 
         self.label_4 = QLabel(self.Params_Tab)
         self.label_4.setObjectName(u"label_4")
 
         self.gridLayout_2.addWidget(self.label_4, 12, 0, 1, 1)
 
-        self.label_3 = QLabel(self.Params_Tab)
-        self.label_3.setObjectName(u"label_3")
+        self.wait_time_label = QLabel(self.Params_Tab)
+        self.wait_time_label.setObjectName(u"wait_time_label")
 
-        self.gridLayout_2.addWidget(self.label_3, 5, 3, 1, 1)
-
-        self.num_B = QSpinBox(self.Params_Tab)
-        self.num_B.setObjectName(u"num_B")
-        self.num_B.setValue(1)
-
-        self.gridLayout_2.addWidget(self.num_B, 1, 4, 1, 1)
-
-        self.wait_LE = QLineEdit(self.Params_Tab)
-        self.wait_LE.setObjectName(u"wait_LE")
-
-        self.gridLayout_2.addWidget(self.wait_LE, 4, 1, 1, 2)
-
-        self.numb_label = QLabel(self.Params_Tab)
-        self.numb_label.setObjectName(u"numb_label")
-
-        self.gridLayout_2.addWidget(self.numb_label, 1, 3, 1, 1)
-
-        self.num_exp_LE = QLineEdit(self.Params_Tab)
-        self.num_exp_LE.setObjectName(u"num_exp_LE")
-
-        self.gridLayout_2.addWidget(self.num_exp_LE, 13, 4, 1, 1)
-
-        self.start_time_LE = QLineEdit(self.Params_Tab)
-        self.start_time_LE.setObjectName(u"start_time_LE")
-
-        self.gridLayout_2.addWidget(self.start_time_LE, 13, 2, 1, 1)
-
-        self.P_Threshold = QLineEdit(self.Params_Tab)
-        self.P_Threshold.setObjectName(u"P_Threshold")
-
-        self.gridLayout_2.addWidget(self.P_Threshold, 2, 1, 1, 2)
-
-        self.line_7 = QFrame(self.Params_Tab)
-        self.line_7.setObjectName(u"line_7")
-        self.line_7.setFrameShape(QFrame.HLine)
-        self.line_7.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_2.addWidget(self.line_7, 10, 0, 1, 5)
-
-        self.Density = QLineEdit(self.Params_Tab)
-        self.Density.setObjectName(u"Density")
-
-        self.gridLayout_2.addWidget(self.Density, 4, 4, 1, 1)
-
-        self.num_A = QSpinBox(self.Params_Tab)
-        self.num_A.setObjectName(u"num_A")
-        self.num_A.setValue(1)
-
-        self.gridLayout_2.addWidget(self.num_A, 1, 1, 1, 2)
+        self.gridLayout_2.addWidget(self.wait_time_label, 4, 0, 1, 1)
 
         self.textBrowser = QTextBrowser(self.Params_Tab)
         self.textBrowser.setObjectName(u"textBrowser")
         self.textBrowser.setMaximumSize(QSize(16777215, 100))
 
-        self.gridLayout_2.addWidget(self.textBrowser, 11, 0, 1, 5)
+        self.gridLayout_2.addWidget(self.textBrowser, 11, 0, 1, 4)
 
-        self.textBrowser_2 = QTextBrowser(self.Params_Tab)
-        self.textBrowser_2.setObjectName(u"textBrowser_2")
-        self.textBrowser_2.setMaximumSize(QSize(16777215, 150))
+        self.P_Threshold = QDoubleSpinBox(self.Params_Tab)
+        self.P_Threshold.setObjectName(u"P_Threshold")
+        self.P_Threshold.setDecimals(3)
+        self.P_Threshold.setSingleStep(0.005000000000000)
+        self.P_Threshold.setValue(0.050000000000000)
 
-        self.gridLayout_2.addWidget(self.textBrowser_2, 0, 0, 1, 5)
+        self.gridLayout_2.addWidget(self.P_Threshold, 2, 1, 1, 1)
 
         self.numa_label = QLabel(self.Params_Tab)
         self.numa_label.setObjectName(u"numa_label")
 
         self.gridLayout_2.addWidget(self.numa_label, 1, 0, 1, 1)
 
-        self.label_13 = QLabel(self.Params_Tab)
-        self.label_13.setObjectName(u"label_13")
-
-        self.gridLayout_2.addWidget(self.label_13, 13, 0, 1, 1)
-
-        self.adp_time_LE = QLineEdit(self.Params_Tab)
-        self.adp_time_LE.setObjectName(u"adp_time_LE")
-
-        self.gridLayout_2.addWidget(self.adp_time_LE, 12, 2, 1, 1)
-
         self.pthress_label = QLabel(self.Params_Tab)
         self.pthress_label.setObjectName(u"pthress_label")
 
         self.gridLayout_2.addWidget(self.pthress_label, 2, 0, 1, 1)
 
-        self.To_Time = QLineEdit(self.Params_Tab)
-        self.To_Time.setObjectName(u"To_Time")
+        self.label_13 = QLabel(self.Params_Tab)
+        self.label_13.setObjectName(u"label_13")
 
-        self.gridLayout_2.addWidget(self.To_Time, 8, 4, 1, 1)
+        self.gridLayout_2.addWidget(self.label_13, 13, 0, 1, 1)
+
+        self.numb_label = QLabel(self.Params_Tab)
+        self.numb_label.setObjectName(u"numb_label")
+
+        self.gridLayout_2.addWidget(self.numb_label, 1, 2, 1, 1)
 
         self.label_9 = QLabel(self.Params_Tab)
         self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_2.addWidget(self.label_9, 12, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.label_9, 12, 2, 1, 1)
+
+        self.label_12 = QLabel(self.Params_Tab)
+        self.label_12.setObjectName(u"label_12")
+
+        self.gridLayout_2.addWidget(self.label_12, 13, 2, 1, 1)
 
         self.label_8 = QLabel(self.Params_Tab)
         self.label_8.setObjectName(u"label_8")
 
-        self.gridLayout_2.addWidget(self.label_8, 4, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.label_8, 4, 2, 1, 1)
 
-        self.time_through_purge = QLineEdit(self.Params_Tab)
+        self.label_3 = QLabel(self.Params_Tab)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout_2.addWidget(self.label_3, 5, 2, 1, 1)
+
+        self.pushButton = QPushButton(self.Params_Tab)
+        self.pushButton.setObjectName(u"pushButton")
+
+        self.gridLayout_2.addWidget(self.pushButton, 8, 2, 1, 1)
+
+        self.To_Time = QDoubleSpinBox(self.Params_Tab)
+        self.To_Time.setObjectName(u"To_Time")
+        self.To_Time.setMaximum(99999999.000000000000000)
+        self.To_Time.setSingleStep(10.000000000000000)
+        self.To_Time.setValue(9999999.000000000000000)
+
+        self.gridLayout_2.addWidget(self.To_Time, 8, 3, 1, 1)
+
+        self.From_Time = QDoubleSpinBox(self.Params_Tab)
+        self.From_Time.setObjectName(u"From_Time")
+        self.From_Time.setMaximum(9999999999.000000000000000)
+        self.From_Time.setSingleStep(10.000000000000000)
+
+        self.gridLayout_2.addWidget(self.From_Time, 5, 3, 1, 1)
+
+        self.Density = QDoubleSpinBox(self.Params_Tab)
+        self.Density.setObjectName(u"Density")
+        self.Density.setSingleStep(0.100000000000000)
+        self.Density.setValue(5.000000000000000)
+
+        self.gridLayout_2.addWidget(self.Density, 4, 3, 1, 1)
+
+        self.time_through_purge = QDoubleSpinBox(self.Params_Tab)
         self.time_through_purge.setObjectName(u"time_through_purge")
+        self.time_through_purge.setMaximum(1.000000000000000)
+        self.time_through_purge.setSingleStep(0.020000000000000)
+        self.time_through_purge.setValue(0.880000000000000)
 
-        self.gridLayout_2.addWidget(self.time_through_purge, 2, 4, 1, 1)
+        self.gridLayout_2.addWidget(self.time_through_purge, 2, 3, 1, 1)
 
-        self.bdp_time_LE = QLineEdit(self.Params_Tab)
-        self.bdp_time_LE.setObjectName(u"bdp_time_LE")
+        self.num_B = QSpinBox(self.Params_Tab)
+        self.num_B.setObjectName(u"num_B")
+        self.num_B.setValue(1)
 
-        self.gridLayout_2.addWidget(self.bdp_time_LE, 12, 4, 1, 1)
+        self.gridLayout_2.addWidget(self.num_B, 1, 3, 1, 1)
+
+        self.textBrowser_2 = QTextBrowser(self.Params_Tab)
+        self.textBrowser_2.setObjectName(u"textBrowser_2")
+        self.textBrowser_2.setMaximumSize(QSize(16777215, 150))
+
+        self.gridLayout_2.addWidget(self.textBrowser_2, 0, 0, 1, 4)
+
+        self.line = QFrame(self.Params_Tab)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_2.addWidget(self.line, 9, 0, 1, 4)
+
+        self.line_7 = QFrame(self.Params_Tab)
+        self.line_7.setObjectName(u"line_7")
+        self.line_7.setFrameShape(QFrame.HLine)
+        self.line_7.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_2.addWidget(self.line_7, 10, 0, 1, 4)
 
         self.time_option = QComboBox(self.Params_Tab)
         self.time_option.addItem("")
         self.time_option.addItem("")
         self.time_option.setObjectName(u"time_option")
 
-        self.gridLayout_2.addWidget(self.time_option, 5, 0, 1, 3)
+        self.gridLayout_2.addWidget(self.time_option, 5, 0, 1, 2)
 
         self.tabWidget.addTab(self.Params_Tab, "")
         self.tab = QWidget()
@@ -393,7 +419,7 @@ class Ui_DockWidget(object):
 
         self.retranslateUi(DockWidget)
 
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(DockWidget)
@@ -424,37 +450,27 @@ class Ui_DockWidget(object):
         ___qtreewidgetitem2.setText(0, QCoreApplication.translate("DockWidget", u"Time", None));
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Select Data", None))
         self.label_6.setText(QCoreApplication.translate("DockWidget", u"% Time", None))
-        self.wait_time_label.setText(QCoreApplication.translate("DockWidget", u"Wait (s)", None))
-        self.From_Time.setText(QCoreApplication.translate("DockWidget", u"0", None))
-        self.label_12.setText(QCoreApplication.translate("DockWidget", u"Num of Exposures", None))
-        self.pushButton.setText(QCoreApplication.translate("DockWidget", u"Refresh Params", None))
         self.label_4.setText(QCoreApplication.translate("DockWidget", u"A D+PTime (s)", None))
-        self.label_3.setText(QCoreApplication.translate("DockWidget", u"From To Time (s)", None))
-        self.wait_LE.setText(QCoreApplication.translate("DockWidget", u"58", None))
-        self.numb_label.setText(QCoreApplication.translate("DockWidget", u"# of B", None))
-        self.num_exp_LE.setText(QCoreApplication.translate("DockWidget", u"100", None))
-        self.start_time_LE.setText(QCoreApplication.translate("DockWidget", u"0", None))
-        self.P_Threshold.setText(QCoreApplication.translate("DockWidget", u"0.05", None))
-        self.Density.setText(QCoreApplication.translate("DockWidget", u"1", None))
+        self.wait_time_label.setText(QCoreApplication.translate("DockWidget", u"Wait (s)", None))
         self.textBrowser.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Use this section for anything with (mass only) Find the appoximate start time.  A D+P is the A precursor dose + purge time. this needs to be exact,  same for B. The program will find the mass at the interval for the number of exposures </p></body></html>", None))
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:13pt;\">Use this section for anything with (mass only) Find the appoximate start time.  A D+P is the A precursor dose + purge time. this needs to be exact,  same for B. The program will find the mass at the interval for the number of exposures </span></p></body></html>", None))
+        self.numa_label.setText(QCoreApplication.translate("DockWidget", u"# of A", None))
+        self.pthress_label.setText(QCoreApplication.translate("DockWidget", u"Pressure", None))
+        self.label_13.setText(QCoreApplication.translate("DockWidget", u"Start Time (s)", None))
+        self.numb_label.setText(QCoreApplication.translate("DockWidget", u"# of B", None))
+        self.label_9.setText(QCoreApplication.translate("DockWidget", u"B D+P Time (s)", None))
+        self.label_12.setText(QCoreApplication.translate("DockWidget", u"Num of Exposures", None))
+        self.label_8.setText(QCoreApplication.translate("DockWidget", u"Den. (g/cm3)", None))
+        self.label_3.setText(QCoreApplication.translate("DockWidget", u"From To Time (s)", None))
+        self.pushButton.setText(QCoreApplication.translate("DockWidget", u"Refresh Params", None))
         self.textBrowser_2.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Use this section for depositions where the pressure is readable.  # of A and # of B is the number of A and B doses in succession.  Pressure is a setpoint, if the pressure goes up by a certain amount,  it will count as a dose.  % time is saying how far through the purge do you want to count the mass as the mass of the half-cycle.  Wait is a way of eliminating noise by saying the next exposure wont occur until at least the wait time</p></body></html>", None))
-        self.numa_label.setText(QCoreApplication.translate("DockWidget", u"# of A", None))
-        self.label_13.setText(QCoreApplication.translate("DockWidget", u"Start Time (s)", None))
-        self.adp_time_LE.setText(QCoreApplication.translate("DockWidget", u"61", None))
-        self.pthress_label.setText(QCoreApplication.translate("DockWidget", u"Pressure", None))
-        self.To_Time.setText(QCoreApplication.translate("DockWidget", u"9999999", None))
-        self.label_9.setText(QCoreApplication.translate("DockWidget", u"B D+P Time (s)", None))
-        self.label_8.setText(QCoreApplication.translate("DockWidget", u"Den. (g/cm3)", None))
-        self.time_through_purge.setText(QCoreApplication.translate("DockWidget", u".88", None))
-        self.bdp_time_LE.setText(QCoreApplication.translate("DockWidget", u"61", None))
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:13pt;\">Use this section for depositions where the pressure is readable.  # of A and # of B is the number of A and B doses in succession.  Pressure is a setpoint, if the pressure goes up by a certain amount,  it will count as a dose.  % time is saying how far through the purge do you want to count the mass as the mass of the half-cycle.  Wait is a way of eliminating noise by saying the next exposure wont occur until at least the wait time</span></p></body></html>", None))
         self.time_option.setItemText(0, QCoreApplication.translate("DockWidget", u"From:To Time", None))
         self.time_option.setItemText(1, QCoreApplication.translate("DockWidget", u"Plot Limits", None))
 
@@ -480,8 +496,8 @@ class Ui_DockWidget(object):
         self.textBrowser_3.setHtml(QCoreApplication.translate("DockWidget", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:36pt; font-weight:600; font-style:italic; text-decoration: underline;\">UNDER WORK</span></p></body></html>", None))
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'.AppleSystemUIFont'; font-size:36pt; font-weight:600; font-style:italic; text-decoration: underline;\">UNDER WORK</span></p></body></html>", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Results", None))
     # retranslateUi
 

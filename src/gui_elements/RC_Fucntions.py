@@ -103,11 +103,31 @@ def plot_action_clicked(self):
         self.main_window.canvas.draw()
 
 def table_dialog(self):
-    path = self.model.filePath(self.tree_view.currentIndex())
-    data = np.genfromtxt(path, delimiter=',',dtype='str',missing_values='',skip_header=4).T
-    length = len(data)
-    data = np.genfromtxt(path, delimiter=',',dtype='str',missing_values=' ',usecols=np.arange(0,length)).T
+    # data = np.genfromtxt(path, delimiter=',',dtype='str',missing_values='',skip_header=4).T
+    #     length = len(data)
+    # data = np.genfromtxt(path, delimiter=',',dtype='str',missing_values=' ',usecols=np.arange(0,length)).T
 
+    path = self.model.filePath(self.tree_view.currentIndex())
+    filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
+    # try:
+    #     skip_rows = self.ui.skip_rows_sb.value()
+    # except AttributeError:
+    #     print('No Skipped Rows')
+    #     skip_rows = 0
+    if extension == '.CSV' or extension == '.csv':
+        data = pd.read_csv(path, delimiter=',')
+    elif extension == '.xls' or extension == '.xlsx':
+        excelfile = pd.ExcelFile(path)
+        data = pd.read_excel(excelfile, "Sheet1")
+    elif extension == '.X01':
+        data = pd.read_csv(path, delimiter='   ', engine='python')
+    elif extension == '.txt':
+        data = pd.read_csv(path, sep='\t')
+    elif extension == '.dat':
+        data = pd.read_csv(path, sep=' ')
+    else:
+        print(extension)
+        data = pd.read_csv(path, sep='\t')
     plot_dia = QtWidgets.QDialog()
     plot_dia_ui = plot_dialog()
     plot_dia_ui.setupUi(plot_dia)
@@ -116,12 +136,14 @@ def table_dialog(self):
     ui = tableWidget_dialog()
     ui.setupUi(dialog)
 
-    ui.tableWidget.setColumnCount(len(data))
-    ui.tableWidget.setRowCount(len(data[0]))
-    print(data)
-    for row in range(len(data[0])):
-        for column in range(len(data)):
-            ui.tableWidget.setItem(row,column,QtWidgets.QTableWidgetItem(data[column][row]))
+    ui.tableWidget.setColumnCount(data.shape[1])
+    ui.tableWidget.setRowCount(data.shape[0]+1)
+    df_keys = data.keys()
+    for i,key in enumerate(df_keys):
+        ui.tableWidget.setItem(0, i, QtWidgets.QTableWidgetItem(key))
+        for j in range(data.shape[0]-1):
+            print(data[key][j])
+            ui.tableWidget.setItem(j+1, i, QtWidgets.QTableWidgetItem(str(data[key][j])))
     dialog.exec_()
 
 def delete_action_clicked(self):
