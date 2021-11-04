@@ -179,6 +179,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.graph_menu = self.context_menu_plot.addMenu(' Graphs')
         self.removeplot_action = self.graph_menu.addAction('Remove Line')
         self.label_size_action = self.graph_menu.addAction('Label Sizes')
+        self.gridspec_action = self.graph_menu.addAction('GridSpec')
 
         self.save_figure_action = self.save_menu.addAction('Save Figure')
         self.save_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+S'), self)
@@ -206,6 +207,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clear_action_2.activated.connect(lambda: self.cleargraph())
 
         self.removeplot_action.triggered.connect(lambda: remove_line(self))
+        self.gridspec_action.triggered.connect(lambda: gridspec(self))
         self.actionSave_To_CSV.triggered.connect(lambda: Save_All_Plotted(self))
         self.save_figure_action.triggered.connect(lambda: save_fig(self))
         self.annotation_action.triggered.connect(lambda: plot_annotation(self))
@@ -421,12 +423,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dw_XPS.fit_obj.clear()
         self.ax.clear()
         self.fig.clf()
-        del self.fig
+        # del self.fig
         self.ui.verticalLayout.removeWidget(self.toolbar)
         self.ui.verticalLayout.removeWidget(self.canvas)
         self.toolbar.close()
         self.canvas.close()
-        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+        # self.fig = figure(num=None, figsize=(8, 6), dpi=80)
         self.canvas = FigureCanvas(self.fig)
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)

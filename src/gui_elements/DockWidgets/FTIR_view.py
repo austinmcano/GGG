@@ -45,6 +45,10 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.context_menu = QtWidgets.QMenu(self)
         # Create context menu
         rc_browser_options(self)
+        self.colors = [self.ui.int_color_1, self.ui.int_color_2,self.ui.int_color_3, self.ui.int_color_4, self.ui.int_color_5]
+        for i in self.colors:
+            i.setStyleSheet("background-color: {}".format('#ff0000'))
+            i.setText('#ff0000')
 
     def _init_UI(self):
         self.model = QtWidgets.QFileSystemModel()
@@ -79,6 +83,12 @@ class FTIR_view(QtWidgets.QDockWidget):
         self.ui.abs_dir_pb.clicked.connect(lambda: self.ir_plot('abs',self.ui.plotside_cb.currentText()))
         self.ui.clear_fit_pb.clicked.connect(lambda: self.clear_fit_objs())
         self.ui.spectra_pb.clicked.connect(lambda: self.ir_plot('spectra',self.ui.plotside_cb.currentText()))
+
+        self.ui.int_color_1.clicked.connect(lambda: color_test(self.ui.int_color_1))
+        self.ui.int_color_2.clicked.connect(lambda: color_test(self.ui.int_color_2))
+        self.ui.int_color_3.clicked.connect(lambda: color_test(self.ui.int_color_3))
+        self.ui.int_color_4.clicked.connect(lambda: color_test(self.ui.int_color_4))
+        self.ui.int_color_5.clicked.connect(lambda: color_test(self.ui.int_color_5))
         # self.ui.fit2_pb.clicked.connect(lambda: self.fitting_function_2())
         # self.ui.select_data_pb.clicked.connect(lambda: self.select_data())
         # self.ui.fit_init_pb.clicked.connect(lambda: self.plot_init_2())
@@ -239,15 +249,23 @@ class FTIR_view(QtWidgets.QDockWidget):
                     except AttributeError:
                         pass
             self.main_window.cleargraph()
-        # else:
-        #     pass
-        #  Which axis to plot on and clear the previous graph
+        @dataclass()
+        class data:
+            ints_on = [self.ui.integrate1_cb.isChecked(), self.ui.integrate2_cb.isChecked(), self.ui.integrate3_cb.isChecked()
+                , self.ui.integrate4_cb.isChecked(), self.ui.integrate5_cb.isChecked()]
+            minimum_ints = [self.ui.min1_sb.value(),self.ui.min2_sb.value(),self.ui.min3_sb.value(),self.ui.min4_sb.value()
+                ,self.ui.min5_sb.value()]
+            maximum_ints = [self.ui.max1_sb.value(),self.ui.max2_sb.value(),self.ui.max3_sb.value(),self.ui.max4_sb.value()
+            ,self.ui.max5_sb.value()]
+            data = self.data_list
+            colors = [self.ui.int_color_1, self.ui.int_color_2, self.ui.int_color_3, self.ui.int_color_4, self.ui.int_color_5]
         if self.ui.leftrightaxis_cb.currentText() == 'Left Axis':
             ax = self.main_window.ax
         elif self.ui.leftrightaxis_cb.currentText() == 'Right Axis':
             if self.main_window.ax_2 is None:
                 self.main_window.ax_2 = self.main_window.ax.twinx()
             ax = self.main_window.ax_2
+
         ints_on = [self.ui.integrate1_cb.isChecked(), self.ui.integrate2_cb.isChecked(), self.ui.integrate3_cb.isChecked()
                    , self.ui.integrate4_cb.isChecked(), self.ui.integrate5_cb.isChecked()]
 
@@ -261,10 +279,6 @@ class FTIR_view(QtWidgets.QDockWidget):
                 # use the function integrate ir to take an array of wavenumber and data and integrate from min to max
                 inte = self.integrate_ir(self.data_list,minimum_ints[i],maximum_ints[i])
 
-                # if self.ui.xaxis_cb.currentText() == 'Ints':
-                #     x = np.linspace(1, len(inte), len(inte))
-                # elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
-                #     x = np.linspace(0.5, len(inte)/2, len(inte))
                 if self.ui.xaxis_cb.currentText() == 'Ints':
                     x = np.linspace(0, len(inte)-1, len(inte))
                 elif self.ui.xaxis_cb.currentText() == 'Half-Ints':
@@ -273,8 +287,7 @@ class FTIR_view(QtWidgets.QDockWidget):
                 ApplicationSettings.ALL_DATA_PLOTTED[
                     'Int. ' + str(minimum_ints[i]) + '-' + str(maximum_ints[i])] = \
                     ax.plot(x, inte, '.-', label='Int. ' + str(minimum_ints[i]) + '-' + str(maximum_ints[i]),
-                            markersize=40)
-        print(ax)
+                            color=self.colors[i].text(), markersize=self.ui.pointsize.value())
         self.main_window.canvas.draw()
 
     def integrate_ir(self, data, minimum, maximum):

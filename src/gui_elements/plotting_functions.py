@@ -1080,18 +1080,54 @@ def remove_data_0(self, minimum, maximum):
     self.canvas.draw()
 
 
-# def baseline_als(y, lam, p, niter=10):
-#     # where y is the data needed to be corrected, lam is lambda and is a smoothing
-#     # parameter and p is the asymmetry of the baseline, niter is the num of iterations
-#     L = len(y)
-#     D = sparse.diags([1,-2,1],[0,-1,-2], shape=(L,L-2))
-#     w = np.ones(L)
-#     for i in range(niter):
-#         W = sparse.spdiags(w, 0, L, L)
-#         Z = W + lam * D.dot(D.transpose())
-#         z = spsolve(Z, w*y)
-#         w = p * (y > z) + (1-p) * (y < z)
+def color_test(button):
+    color = QtWidgets.QColorDialog()
+    color.exec_()
+    try:
+        button.setStyleSheet("background-color: {}".format(color.currentColor().name()))
+        button.setText(color.currentColor().name())
+    except ValueError:
+        print('err')
 
+def gridspec(self):
+    # self.ax.clear()
+    # self.fig.clf()
+    # self.ui.verticalLayout.removeWidget(self.toolbar)
+    # self.ui.verticalLayout.removeWidget(self.canvas)
+    # self.toolbar.close()
+    # self.canvas.close()
+    # self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+    # spec4 = self.fig.add_gridspec(ncols=1, nrows=2, height_ratios=[1, 3])
+    # self.canvas = FigureCanvas(self.fig)
+    # self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+    # self.ui.verticalLayout.addWidget(self.toolbar)
+    # self.ui.verticalLayout.addWidget(self.canvas)
+    # self.canvas.installEventFilter(self)
+    # self.ax1 = self.fig.add_subplot(spec4[0, 0])
+    # self.ax2 = self.fig.add_subplot(spec4[1, 0])
+    # self.canvas.draw
+    rw, rh = 2, 5
+    box1 = self.ax_1.get_position()
+    box2 = self.ax_2.get_position()
+    # current dimensions
+    w1,h1 = box1.x1-box1.x0, box1.y1-box1.y0
+    w2,h2 = box2.x1-box2.x0, box2.y1-box2.y0
+    top1 = box1.y0+h1
+    #top2 = box2.y0+h2
+    full_h = h1+h2   #total height
+
+    # compute new heights for each axes
+    new_h1 = full_h*rw/(rw + rh)
+    new_h2 = full_h*rh/(rw + rh)+.03
+
+    #btm1,btm2 = box1.y0, box2.y0
+    new_bottom1 = top1-new_h1
+
+    # finally, set new location/dimensions of the axes
+    self.ax_1.set_position([box1.x0, new_bottom1, w1, new_h1])
+    self.ax_2.set_position([box2.x0, box2.y0, w2, new_h2])
+
+    self.canvas.draw()
 
 def label_size(self):
     size, ok = QtWidgets.QInputDialog.getDouble(None, 'Axis Label Size', 'Size: ')

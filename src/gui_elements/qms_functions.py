@@ -1,5 +1,5 @@
 import pandas as pd
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
 # import seaborn as sns
 
@@ -92,7 +92,7 @@ def isotopic_prediction(name,round=int):
 # sns.set(context='notebook',style='ticks',font_scale=2)
 # #
 # fig, ax = plt.subplots()
-
+#
 # mass, abund = isotopic_prediction('Al2Cl6')
 #
 # print('The mass list is:')

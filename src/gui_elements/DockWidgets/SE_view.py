@@ -1,3 +1,4 @@
+import matplotlib.lines
 import numpy as np
 
 from Ui_Files.DockWidgets.Py.dw_SE import Ui_DockWidget
@@ -94,28 +95,28 @@ class SE_view(QtWidgets.QDockWidget):
         self.ui.plot_qms_pb.clicked.connect(lambda: self.qms_plot())
         # self.ui.abundance_pb.clicked.connect(lambda: self.abundance_plot())
 
-        self.ui.color_1.clicked.connect(lambda: self.color_test(self.ui.color_1))
-        self.ui.color_2.clicked.connect(lambda: self.color_test(self.ui.color_2))
-        self.ui.color_3.clicked.connect(lambda: self.color_test(self.ui.color_3))
-        self.ui.color_4.clicked.connect(lambda: self.color_test(self.ui.color_4))
-        self.ui.color_5.clicked.connect(lambda: self.color_test(self.ui.color_5))
-        self.ui.color_6.clicked.connect(lambda: self.color_test(self.ui.color_6))
-        self.ui.color_7.clicked.connect(lambda: self.color_test(self.ui.color_7))
-        self.ui.color_8.clicked.connect(lambda: self.color_test(self.ui.color_8))
-        self.ui.color_9.clicked.connect(lambda: self.color_test(self.ui.color_9))
-        self.ui.color_10.clicked.connect(lambda: self.color_test(self.ui.color_10))
-        self.ui.color_11.clicked.connect(lambda: self.color_test(self.ui.color_11))
-        self.ui.color_12.clicked.connect(lambda: self.color_test(self.ui.color_12))
-        self.ui.color_13.clicked.connect(lambda: self.color_test(self.ui.color_13))
-        self.ui.color_14.clicked.connect(lambda: self.color_test(self.ui.color_14))
-        self.ui.color_15.clicked.connect(lambda: self.color_test(self.ui.color_15))
-        self.ui.color_16.clicked.connect(lambda: self.color_test(self.ui.color_16))
-        self.ui.color_17.clicked.connect(lambda: self.color_test(self.ui.color_17))
-        self.ui.color_18.clicked.connect(lambda: self.color_test(self.ui.color_18))
-        self.ui.color_19.clicked.connect(lambda: self.color_test(self.ui.color_19))
-        self.ui.color_20.clicked.connect(lambda: self.color_test(self.ui.color_20))
+        self.ui.color_1.clicked.connect(lambda: color_test(self.ui.color_1))
+        self.ui.color_2.clicked.connect(lambda: color_test(self.ui.color_2))
+        self.ui.color_3.clicked.connect(lambda: color_test(self.ui.color_3))
+        self.ui.color_4.clicked.connect(lambda: color_test(self.ui.color_4))
+        self.ui.color_5.clicked.connect(lambda: color_test(self.ui.color_5))
+        self.ui.color_6.clicked.connect(lambda: color_test(self.ui.color_6))
+        self.ui.color_7.clicked.connect(lambda: color_test(self.ui.color_7))
+        self.ui.color_8.clicked.connect(lambda: color_test(self.ui.color_8))
+        self.ui.color_9.clicked.connect(lambda: color_test(self.ui.color_9))
+        self.ui.color_10.clicked.connect(lambda: color_test(self.ui.color_10))
+        self.ui.color_11.clicked.connect(lambda: color_test(self.ui.color_11))
+        self.ui.color_12.clicked.connect(lambda: color_test(self.ui.color_12))
+        self.ui.color_13.clicked.connect(lambda: color_test(self.ui.color_13))
+        self.ui.color_14.clicked.connect(lambda: color_test(self.ui.color_14))
+        self.ui.color_15.clicked.connect(lambda: color_test(self.ui.color_15))
+        self.ui.color_16.clicked.connect(lambda: color_test(self.ui.color_16))
+        self.ui.color_17.clicked.connect(lambda: color_test(self.ui.color_17))
+        self.ui.color_18.clicked.connect(lambda: color_test(self.ui.color_18))
+        self.ui.color_19.clicked.connect(lambda: color_test(self.ui.color_19))
+        self.ui.color_20.clicked.connect(lambda: color_test(self.ui.color_20))
 
-        self.ui.secolorpb.clicked.connect(lambda: self.color_test(self.ui.secolorpb))
+        self.ui.secolorpb.clicked.connect(lambda: color_test(self.ui.secolorpb))
 
         self.ui.calc_iso_pb.clicked.connect(lambda: self.calc_iso())
 
@@ -124,15 +125,6 @@ class SE_view(QtWidgets.QDockWidget):
         if event.type() == QtCore.QEvent.ContextMenu:
             self.context_menu.exec_(self.mapToGlobal(event.pos()))
         return False
-
-    def color_test(self, button):
-        color = QtWidgets.QColorDialog()
-        color.exec_()
-        try:
-            button.setStyleSheet("background-color: {}".format(color.currentColor().name()))
-            button.setText(color.currentColor().name())
-        except ValueError:
-            print('err')
 
     def plot_type_organizer(self):
         if self.ui.plot_type_cb.currentText() == 'X vs Y':
@@ -238,6 +230,7 @@ class SE_view(QtWidgets.QDockWidget):
         if tab == 'SE':
             self.ui.tw_x.clear()
             self.ui.tw_y.clear()
+            self.ui.error_tw.clear()
             self.path = self.model.filePath(self.tree_view.currentIndex())
             filename, extension = os.path.splitext(self.model.filePath(self.tree_view.currentIndex()))
             try:
@@ -308,16 +301,21 @@ class SE_view(QtWidgets.QDockWidget):
         model = LinearModel()
         listofslopes = []
         names_of_slopes = []
+
         for i in keys:
-            self.data_x = dict[i][0]._xy.T[0]
-            self.data_y = dict[i][0]._xy.T[1]
-            x_lim = ApplicationSettings.C_X_LIM
+            if isinstance(dict[i],list):
+                self.data_x = dict[i][0]._xy.T[0]
+                self.data_y = dict[i][0]._xy.T[1]
+            else:
+                self.data_x = dict[i]._xy.T[0]
+                self.data_y = dict[i]._xy.T[1]
+            # x_lim = ApplicationSettings.C_X_LIM
             pars = model.guess(self.data_y, x=self.data_x)
             fit = model.fit(self.data_y, pars, x=self.data_x)
             self.main_window.ax.plot(self.data_x, fit.best_fit, label=str(i) + '_Fit')
             listofslopes.append(fit.values['slope'])
             names_of_slopes.append(i)
-        print(self.ui.tableWidget.item(0, 1).text())
+        # print(self.ui.tableWidget.item(0, 1).text())
         if self.ui.tableWidget.item(0, 1).text() == '0':
             a = 1
         elif self.ui.tableWidget.item(0, 2).text() == '0':
