@@ -28,14 +28,20 @@ class Ui_DockWidget(object):
         self.tabWidget = QTabWidget(self.dockWidgetContents)
         self.tabWidget.setObjectName(u"tabWidget")
         self.tabWidget.setEnabled(True)
+        self.tabWidget.setFocusPolicy(Qt.TabFocus)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
         self.gridLayout_2 = QGridLayout(self.tab)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.label_3 = QLabel(self.tab)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout_2.addWidget(self.label_3, 17, 1, 1, 1)
+
         self.label_6 = QLabel(self.tab)
         self.label_6.setObjectName(u"label_6")
 
-        self.gridLayout_2.addWidget(self.label_6, 12, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.label_6, 14, 1, 1, 1)
 
         self.sub_dir_pb = QPushButton(self.tab)
         self.sub_dir_pb.setObjectName(u"sub_dir_pb")
@@ -45,52 +51,43 @@ class Ui_DockWidget(object):
         self.smooth_pb = QPushButton(self.tab)
         self.smooth_pb.setObjectName(u"smooth_pb")
 
-        self.gridLayout_2.addWidget(self.smooth_pb, 15, 3, 1, 1)
-
-        self.label_3 = QLabel(self.tab)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout_2.addWidget(self.label_3, 15, 1, 1, 1)
-
-        self.FTIR_treeView = QTreeView(self.tab)
-        self.FTIR_treeView.setObjectName(u"FTIR_treeView")
-
-        self.gridLayout_2.addWidget(self.FTIR_treeView, 0, 1, 1, 3)
-
-        self.lambda_sb = QSpinBox(self.tab)
-        self.lambda_sb.setObjectName(u"lambda_sb")
-        self.lambda_sb.setMaximum(9999999)
-        self.lambda_sb.setSingleStep(1000)
-        self.lambda_sb.setValue(1000)
-
-        self.gridLayout_2.addWidget(self.lambda_sb, 10, 2, 1, 1)
-
-        self.line = QFrame(self.tab)
-        self.line.setObjectName(u"line")
-        self.line.setFrameShape(QFrame.HLine)
-        self.line.setFrameShadow(QFrame.Sunken)
-
-        self.gridLayout_2.addWidget(self.line, 9, 1, 1, 3)
-
-        self.abs_dir_pb = QPushButton(self.tab)
-        self.abs_dir_pb.setObjectName(u"abs_dir_pb")
-
-        self.gridLayout_2.addWidget(self.abs_dir_pb, 1, 3, 1, 1)
-
-        self.baseline_pb = QPushButton(self.tab)
-        self.baseline_pb.setObjectName(u"baseline_pb")
-
-        self.gridLayout_2.addWidget(self.baseline_pb, 10, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.smooth_pb, 17, 3, 1, 1)
 
         self.spectra_pb = QPushButton(self.tab)
         self.spectra_pb.setObjectName(u"spectra_pb")
 
         self.gridLayout_2.addWidget(self.spectra_pb, 4, 1, 1, 1)
 
-        self.label_4 = QLabel(self.tab)
-        self.label_4.setObjectName(u"label_4")
+        self.p_sb = QDoubleSpinBox(self.tab)
+        self.p_sb.setObjectName(u"p_sb")
+        self.p_sb.setDecimals(6)
+        self.p_sb.setMaximum(1000.000000000000000)
+        self.p_sb.setSingleStep(0.010000000000000)
+        self.p_sb.setValue(0.010000000000000)
 
-        self.gridLayout_2.addWidget(self.label_4, 10, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.p_sb, 14, 2, 1, 1)
+
+        self.line_2 = QFrame(self.tab)
+        self.line_2.setObjectName(u"line_2")
+        self.line_2.setFrameShape(QFrame.HLine)
+        self.line_2.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_2.addWidget(self.line_2, 15, 1, 1, 3)
+
+        self.baseline_pb = QPushButton(self.tab)
+        self.baseline_pb.setObjectName(u"baseline_pb")
+
+        self.gridLayout_2.addWidget(self.baseline_pb, 12, 3, 1, 1)
+
+        self.skiprows_sb = QSpinBox(self.tab)
+        self.skiprows_sb.setObjectName(u"skiprows_sb")
+
+        self.gridLayout_2.addWidget(self.skiprows_sb, 7, 2, 1, 1)
+
+        self.label_7 = QLabel(self.tab)
+        self.label_7.setObjectName(u"label_7")
+
+        self.gridLayout_2.addWidget(self.label_7, 14, 3, 1, 1)
 
         self.skip_sb = QSpinBox(self.tab)
         self.skip_sb.setObjectName(u"skip_sb")
@@ -99,6 +96,24 @@ class Ui_DockWidget(object):
         self.skip_sb.setValue(0)
 
         self.gridLayout_2.addWidget(self.skip_sb, 6, 2, 1, 1)
+
+        self.diff_dir_pb = QPushButton(self.tab)
+        self.diff_dir_pb.setObjectName(u"diff_dir_pb")
+
+        self.gridLayout_2.addWidget(self.diff_dir_pb, 1, 2, 1, 1)
+
+        self.smooth_sb = QSpinBox(self.tab)
+        self.smooth_sb.setObjectName(u"smooth_sb")
+        self.smooth_sb.setValue(11)
+
+        self.gridLayout_2.addWidget(self.smooth_sb, 17, 2, 1, 1)
+
+        self.line = QFrame(self.tab)
+        self.line.setObjectName(u"line")
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_2.addWidget(self.line, 11, 1, 1, 3)
 
         self.label = QLabel(self.tab)
         self.label.setObjectName(u"label")
@@ -115,47 +130,33 @@ class Ui_DockWidget(object):
 
         self.gridLayout_2.addWidget(self.pushButton_7, 4, 3, 1, 1)
 
-        self.diff_dir_pb = QPushButton(self.tab)
-        self.diff_dir_pb.setObjectName(u"diff_dir_pb")
+        self.label_4 = QLabel(self.tab)
+        self.label_4.setObjectName(u"label_4")
 
-        self.gridLayout_2.addWidget(self.diff_dir_pb, 1, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.label_4, 12, 1, 1, 1)
 
-        self.line_2 = QFrame(self.tab)
-        self.line_2.setObjectName(u"line_2")
-        self.line_2.setFrameShape(QFrame.HLine)
-        self.line_2.setFrameShadow(QFrame.Sunken)
+        self.FTIR_treeView = QTreeView(self.tab)
+        self.FTIR_treeView.setObjectName(u"FTIR_treeView")
 
-        self.gridLayout_2.addWidget(self.line_2, 13, 1, 1, 3)
+        self.gridLayout_2.addWidget(self.FTIR_treeView, 0, 1, 1, 3)
 
-        self.smooth_sb = QSpinBox(self.tab)
-        self.smooth_sb.setObjectName(u"smooth_sb")
-        self.smooth_sb.setValue(11)
+        self.lambda_sb = QSpinBox(self.tab)
+        self.lambda_sb.setObjectName(u"lambda_sb")
+        self.lambda_sb.setMaximum(9999999)
+        self.lambda_sb.setSingleStep(1000)
+        self.lambda_sb.setValue(1000)
 
-        self.gridLayout_2.addWidget(self.smooth_sb, 15, 2, 1, 1)
+        self.gridLayout_2.addWidget(self.lambda_sb, 12, 2, 1, 1)
 
-        self.p_sb = QDoubleSpinBox(self.tab)
-        self.p_sb.setObjectName(u"p_sb")
-        self.p_sb.setDecimals(6)
-        self.p_sb.setMaximum(1000.000000000000000)
-        self.p_sb.setSingleStep(0.010000000000000)
-        self.p_sb.setValue(0.010000000000000)
+        self.abs_dir_pb = QPushButton(self.tab)
+        self.abs_dir_pb.setObjectName(u"abs_dir_pb")
 
-        self.gridLayout_2.addWidget(self.p_sb, 12, 2, 1, 1)
-
-        self.label_7 = QLabel(self.tab)
-        self.label_7.setObjectName(u"label_7")
-
-        self.gridLayout_2.addWidget(self.label_7, 12, 3, 1, 1)
+        self.gridLayout_2.addWidget(self.abs_dir_pb, 1, 3, 1, 1)
 
         self.label_5 = QLabel(self.tab)
         self.label_5.setObjectName(u"label_5")
 
         self.gridLayout_2.addWidget(self.label_5, 7, 1, 1, 1)
-
-        self.skiprows_sb = QSpinBox(self.tab)
-        self.skiprows_sb.setObjectName(u"skiprows_sb")
-
-        self.gridLayout_2.addWidget(self.skiprows_sb, 7, 2, 1, 1)
 
         self.plotside_cb = QComboBox(self.tab)
         self.plotside_cb.addItem("")
@@ -163,6 +164,37 @@ class Ui_DockWidget(object):
         self.plotside_cb.setObjectName(u"plotside_cb")
 
         self.gridLayout_2.addWidget(self.plotside_cb, 6, 3, 1, 1)
+
+        self.xmin = QDoubleSpinBox(self.tab)
+        self.xmin.setObjectName(u"xmin")
+        self.xmin.setMaximum(5000.000000000000000)
+        self.xmin.setValue(4000.000000000000000)
+
+        self.gridLayout_2.addWidget(self.xmin, 9, 2, 1, 1)
+
+        self.xmax = QDoubleSpinBox(self.tab)
+        self.xmax.setObjectName(u"xmax")
+        self.xmax.setMaximum(5000.000000000000000)
+        self.xmax.setValue(400.000000000000000)
+
+        self.gridLayout_2.addWidget(self.xmax, 10, 2, 1, 1)
+
+        self.line_9 = QFrame(self.tab)
+        self.line_9.setObjectName(u"line_9")
+        self.line_9.setFrameShape(QFrame.HLine)
+        self.line_9.setFrameShadow(QFrame.Sunken)
+
+        self.gridLayout_2.addWidget(self.line_9, 8, 1, 1, 3)
+
+        self.label_22 = QLabel(self.tab)
+        self.label_22.setObjectName(u"label_22")
+
+        self.gridLayout_2.addWidget(self.label_22, 9, 1, 1, 1)
+
+        self.label_23 = QLabel(self.tab)
+        self.label_23.setObjectName(u"label_23")
+
+        self.gridLayout_2.addWidget(self.label_23, 10, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab, "")
         self.tab_3 = QWidget()
@@ -1290,23 +1322,25 @@ class Ui_DockWidget(object):
 
     def retranslateUi(self, DockWidget):
         DockWidget.setWindowTitle(QCoreApplication.translate("DockWidget", u"FTIR", None))
+        self.label_3.setText(QCoreApplication.translate("DockWidget", u"Savitzky\u2013Golay Filter", None))
         self.label_6.setText(QCoreApplication.translate("DockWidget", u"P (asymetry) ", None))
         self.sub_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Sub Plot (dir)", None))
         self.smooth_pb.setText(QCoreApplication.translate("DockWidget", u"Smooth", None))
-        self.label_3.setText(QCoreApplication.translate("DockWidget", u"Savitzky\u2013Golay Filter", None))
-        self.abs_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Plot (dir)", None))
-        self.baseline_pb.setText(QCoreApplication.translate("DockWidget", u"Baseline All", None))
         self.spectra_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
-        self.label_4.setText(QCoreApplication.translate("DockWidget", u"<html><head/><body><p>\u03bb  (smoothness)</p></body></html>", None))
+        self.baseline_pb.setText(QCoreApplication.translate("DockWidget", u"Baseline All", None))
+        self.label_7.setText(QCoreApplication.translate("DockWidget", u"UNDER WORK", None))
+        self.diff_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Diff Plot (dir)", None))
         self.label.setText(QCoreApplication.translate("DockWidget", u"Skip Every", None))
         self.diff_2_pb.setText(QCoreApplication.translate("DockWidget", u"Diff Plot (2)", None))
         self.pushButton_7.setText(QCoreApplication.translate("DockWidget", u"TBD", None))
-        self.diff_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Diff Plot (dir)", None))
-        self.label_7.setText(QCoreApplication.translate("DockWidget", u"UNDER WORK", None))
+        self.label_4.setText(QCoreApplication.translate("DockWidget", u"<html><head/><body><p>\u03bb  (smoothness)</p></body></html>", None))
+        self.abs_dir_pb.setText(QCoreApplication.translate("DockWidget", u"Plot (dir)", None))
         self.label_5.setText(QCoreApplication.translate("DockWidget", u"Skip Rows", None))
         self.plotside_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Left Ax", None))
         self.plotside_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Right Ax", None))
 
+        self.label_22.setText(QCoreApplication.translate("DockWidget", u"X min", None))
+        self.label_23.setText(QCoreApplication.translate("DockWidget", u"X max", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("DockWidget", u"IR Plot", None))
         self.integrate1_cb.setText(QCoreApplication.translate("DockWidget", u"Int 1", None))
         self.integrate5_cb.setText(QCoreApplication.translate("DockWidget", u"Int 5", None))

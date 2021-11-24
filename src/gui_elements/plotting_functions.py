@@ -152,35 +152,69 @@ def show_pickled_fig(self):
             sns.set(context=self.context, style=self.style, palette=self.c_palette,
                     font=self.font, font_scale=self.fs, color_codes=True)
             self.fig = figx
-            self.ax_1 = self.fig.axes[0]
-            for i in self.ax_1.lines:
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-            for i in self.ax_1.texts:
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-            for i in self.ax_1.collections:
-                ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-            self.ax = self.ax_1
-            for ax in self.fig.axes:
-                if ax is not self.ax_1:
+            print(self.fig.axes)
+            for num, ax in enumerate(self.fig.axes):
+                if num == 0:
+                    self.ax_1 = ax
+                    self.ax = self.ax_1
+                elif num == 1:
                     self.ax_2 = ax
-                    for i in self.ax_2.lines:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                    for i in self.ax_2.texts:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                    for i in self.ax_2.collections:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                elif ax is not self.ax_1 and ax is not self.ax_2:
+                elif num == 2:
                     self.ax_3 = ax
-                    for i in self.ax_3.lines:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                    for i in self.ax_3.texts:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
+                elif num == 3:
                     self.ax_4 = ax
-                    for i in self.ax_4.lines:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
-                    for i in self.ax_4.texts:
-                        ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                elif num == 4:
+                    self.ax_5 = ax
+                elif num == 5:
+                    self.ax_6 = ax
+                elif num == 6:
+                    self.ax_7 = ax
+                elif num == 7:
+                    self.ax_8 = ax
+                elif num == 8:
+                    self.ax_9 = ax
+                elif num == 9:
+                    self.ax_10 = ax
+                for i in ax.lines:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                for i in ax.texts:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                for i in ax.collections:
+                    ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                # print(ax)
+                # if ax is not self.ax_1 and ax is not self.ax_2:
+                #     print('axes2')
+                #     print(ax)
+                #     self.ax_2 = ax
+                #     for i in self.ax_2.lines:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_2.texts:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_2.collections:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                # elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
+                #     print('axes3')
+                #     print(ax)
+                #     self.ax_3 = ax
+                #     for i in self.ax_3.lines:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_3.texts:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_3.collections:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                # elif ax is not self.ax_1 and ax is not self.ax_2 and ax is not self.ax_3:
+                #     print('axes4')
+                #     print(ax)
+                #     self.ax_4 = ax
+                #     for i in self.ax_4.lines:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_4.texts:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                #     for i in self.ax_4.collections:
+                #         ApplicationSettings.ALL_DATA_PLOTTED[str(i)] = i
+                # else:
+                #     print('no home')
+                #     print(ax)
             self.canvas = FigureCanvas(self.fig)
             self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
             self.ui.verticalLayout.addWidget(self.toolbar)
@@ -713,16 +747,17 @@ def move_line(self):
             print(line)
             print(type(line))
             if isinstance(line, list):
-                new_line = line._xy.T[1] + float(ui.lineEdit.text())
+                new_line = line[0]._xy.T[1] + float(ui.lineEdit.text())
                 print(new_line)
                 ApplicationSettings.ALL_DATA_PLOTTED[j.data() + '_' + str(ui.lineEdit.text())] = self.ax.plot(
-                    line._xy.T[0], new_line)
+                    line[0]._xy.T[0], new_line)
                 self.ax.lines.remove(line[0])
                 ApplicationSettings.ALL_DATA_PLOTTED.pop(j.data())
                 del line
             elif isinstance(line, matplotlib.lines.Line2D):
                 new_line = line._xy.T[1] + float(ui.lineEdit.text())
                 print(new_line)
+                print()
                 ApplicationSettings.ALL_DATA_PLOTTED[j.data()+'_'+str(ui.lineEdit.text())] = self.ax.plot(
                     line._xy.T[0],new_line)
                 self.ax.lines.remove(line)
@@ -748,14 +783,24 @@ def move_line(self):
 
 
 def change_axis(self,axis):
-    if axis =='axis1':
+    if axis ==1:
         self.ax = self.ax_1
-    elif axis =='axis2':
+    elif axis ==2:
         self.ax = self.ax_2
-    elif axis =='axis3':
+    elif axis ==3:
         self.ax = self.ax_3
-    elif axis =='axis4':
+    elif axis ==4:
         self.ax = self.ax_4
+    elif axis ==5:
+        self.ax = self.ax_5
+    elif axis ==6:
+        self.ax = self.ax_6
+    elif axis ==7:
+        self.ax = self.ax_7
+    elif axis ==8:
+        self.ax = self.ax_8
+    elif axis ==9:
+        self.ax = self.ax_9
     try:
         self.ax.callbacks.connect('xlim_changed', self.lims_change)
         self.dragh = DragHandler(self, figure=self.fig)
@@ -763,7 +808,10 @@ def change_axis(self,axis):
         print('No Axis made yet')
 
 
-def axis_setup_fun(self,ax_num):
+def axis_setup_fun(self):
+    possible_axes = [self.ax_1, self.ax_2, self.ax_3, self.ax_4, self.ax_5,
+                     self.ax_6, self.ax_7, self.ax_8, self.ax_9, self.ax_10]
+    print(possible_axes)
     self.ax.clear()
     self.fig.clf()
     self.ui.verticalLayout.removeWidget(self.toolbar)
@@ -776,76 +824,23 @@ def axis_setup_fun(self,ax_num):
     self.ui.verticalLayout.addWidget(self.toolbar)
     self.ui.verticalLayout.addWidget(self.canvas)
     self.canvas.installEventFilter(self)
-    ApplicationSettings.ALL_DATA_PLOTTED = {}
-    if ax_num == 1:
-        self.ax_1 = self.fig.add_subplot(111)
-    elif ax_num == 2:
-        self.ax_1 = self.fig.add_subplot(211)
-        self.ax_2 = self.fig.add_subplot(212)
-    elif ax_num == 3:
-        self.ax_1 = self.fig.add_subplot(211)
-        self.ax_2 = self.fig.add_subplot(223)
-        self.ax_3 = self.fig.add_subplot(224)
-    elif ax_num >= 4:
-        self.ax_1 = self.fig.add_subplot(221)
-        self.ax_2 = self.fig.add_subplot(222)
-        self.ax_3 = self.fig.add_subplot(223)
-        self.ax_4 = self.fig.add_subplot(224)
-
-    self.ax = self.ax_1
-
     self.ax.callbacks.connect('xlim_changed', self.lims_change)
+    vertical_axes = QtWidgets.QInputDialog.getInt(self, 'Axes Setup','Vertical?',1)
+    horizontal_axes = QtWidgets.QInputDialog.getInt(self, 'Axes Setup', 'Horizontal?',1)
+    axesstr = str(vertical_axes[0]) + str(horizontal_axes[0])
+    axesint = [horizontal_axes[0], vertical_axes[0]]
+    times = axesint[0]*axesint[1]
+
+    pos_axes = [int(axesstr + str(i)) for i in range(1, times+1)]
+    for i,num in enumerate(pos_axes):
+        print(i)
+        print(num)
+        possible_axes[i] = self.fig.add_subplot(num)
+        print(possible_axes)
+    self.ax = self.ax_1
     self.fig.tight_layout()
     self.canvas.draw()
 
-
-def axis_setup_function(self,ax_num):
-    def axis_fun():
-        self.ax.clear()
-        self.fig.clf()
-        self.ui.verticalLayout.removeWidget(self.toolbar)
-        self.ui.verticalLayout.removeWidget(self.canvas)
-        self.toolbar.close()
-        self.canvas.close()
-        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
-        self.canvas = FigureCanvas(self.fig)
-        self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
-        self.ui.verticalLayout.addWidget(self.toolbar)
-        self.ui.verticalLayout.addWidget(self.canvas)
-        self.canvas.installEventFilter(self)
-        self.ax.callbacks.connect('xlim_changed', self.lims_change)
-        axis1 = ui.axis1_cb.currentText()
-        axis2 = ui.axis2_cb.currentText()
-        axis3 = ui.axis3_cb.currentText()
-        axis4 = ui.axis4_cb.currentText()
-        if axis1 == 'ON' and all(i == 'OFF' for i in [axis2,axis3,axis4]):
-            self.ax_1 = self.fig.add_subplot(111)
-            self.ax_2 = None
-            self.ax_3 = None
-            self.ax_4 = None
-        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'OFF' and axis4 == 'OFF':
-            self.ax_1 = self.fig.add_subplot(211)
-            self.ax_2 = self.fig.add_subplot(212)
-            self.ax_3 = None
-            self.ax_4 = None
-        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'OFF':
-            self.ax_1 = self.fig.add_subplot(211)
-            self.ax_2 = self.fig.add_subplot(223)
-            self.ax_3 = self.fig.add_subplot(224)
-            self.ax_4 = None
-        elif axis1 == 'ON' and axis2 == 'ON' and axis3 == 'ON' and axis4 == 'ON':
-            self.ax_1 = self.fig.add_subplot(221)
-            self.ax_2 = self.fig.add_subplot(222)
-            self.ax_3 = self.fig.add_subplot(223)
-            self.ax_4 = self.fig.add_subplot(224)
-        self.ax = self.ax_1
-        self.fig.tight_layout()
-        self.canvas.draw()
-    dialog = QtWidgets.QDialog()
-    ui = axis_setup_ui()
-    ui.setupUi(dialog)
-    ui.buttonBox.accepted.connect(lambda: axis_fun())
-    dialog.exec_()
 
 
 def add_line_to_graph(self):
@@ -1157,7 +1152,6 @@ def label_size(self):
 
 def print_something():
     print('something')
-print_something()
 
 class DragHandler(object):
     """ A simple class to handle Drag n Drop.

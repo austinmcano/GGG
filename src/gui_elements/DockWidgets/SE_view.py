@@ -291,9 +291,8 @@ class SE_view(QtWidgets.QDockWidget):
                 fill_data.column_list_x.append(QtWidgets.QTreeWidgetItem([i]))
                 fill_data.column_list_y.append(QtWidgets.QTreeWidgetItem([i]))
                 fill_data.column_list_err.append(QtWidgets.QTreeWidgetItem([i]))
-                self.ui.tw_x.addTopLevelItems(fill_data.column_list_x)
-                self.ui.tw_y.addTopLevelItems(fill_data.column_list_y)
-                self.ui.error_tw.addTopLevelItems(fill_data.column_list_err)
+                self.ui.qmsx_tw.addTopLevelItems(fill_data.column_list_x)
+                self.ui.qmsy_tw.addTopLevelItems(fill_data.column_list_y)
 
     def lin_fit_all_fun(self):
         dict = ApplicationSettings.ALL_DATA_PLOTTED
@@ -514,6 +513,7 @@ class SE_view(QtWidgets.QDockWidget):
     def calc_iso(self):
         if self.ui.clear_combo.currentText() == 'Clear Lines On':
             self.removing_qms_lines()
+        intensityOS = self.ui.intensityoffset.value()
         self.ui.tableWidget_2.clear()
         checked = [self.ui.species1_cb.isChecked(), self.ui.species2_cb.isChecked(), self.ui.species3_cb.isChecked(),
                    self.ui.species4_cb.isChecked(), self.ui.species5_cb.isChecked(), self.ui.species6_cb.isChecked(),
@@ -557,7 +557,13 @@ class SE_view(QtWidgets.QDockWidget):
                           self.ui.s14ratio.value(), self.ui.s15ratio.value(), self.ui.s16ratio.value(),
                           self.ui.s17ratio.value(), self.ui.s18ratio.value(), self.ui.s19ratio.value(),
                           self.ui.s20ratio.value()]
+
             dict_all = {}
+            @dataclass()
+            class allspecies:
+                mass = []
+                abundance = []
+
             for j in range(len(checked)):
                 if checked[j] is True:
                     masses, abunds = isotopic_prediction(all_species[j], round=self.ui.round_mass.value())
@@ -571,7 +577,8 @@ class SE_view(QtWidgets.QDockWidget):
                     if dict_all[i][0][j] in allmasses:
                         idx = allmasses.index(dict_all[i][0][j])
                         ApplicationSettings.ALL_DATA_PLOTTED[i + '_'+str(j)] = \
-                            self.main_window.ax.vlines(dict_all[i][0][j], allabund[idx], allabund[idx]+dict_all[i][1][j],
+                            self.main_window.ax.vlines(dict_all[i][0][j], allabund[idx]+intensityOS,
+                                                       allabund[idx]+dict_all[i][1][j]+intensityOS,
                                                        label='_' + i, linestyle="-", lw=dict_all[i][5], color=dict_all[i][2],
                                                        alpha=dict_all[i][4])
                         allabund[idx] = allabund[idx]+dict_all[i][1][j]
@@ -579,7 +586,7 @@ class SE_view(QtWidgets.QDockWidget):
                         allmasses.append(dict_all[i][0][j])
                         allabund.append(dict_all[i][1][j])
                         ApplicationSettings.ALL_DATA_PLOTTED[i + '_'+str(j)] = \
-                            self.main_window.ax.vlines(dict_all[i][0][j], 0, dict_all[i][1][j],
+                            self.main_window.ax.vlines(dict_all[i][0][j], intensityOS, dict_all[i][1][j]+intensityOS,
                                                        label='_' + i, linestyle="-", lw=dict_all[i][5], color=dict_all[i][2],
                                                        alpha=dict_all[i][4])
                     self.ui.tableWidget_2.setItem(j,dict_all[i][3],QtWidgets.QTableWidgetItem(str(np.round(dict_all[i][0][j],self.ui.round_mass.value()))))

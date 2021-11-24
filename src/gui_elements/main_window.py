@@ -58,6 +58,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ax_2 = None
         self.ax_3 = None
         self.ax_4 = None
+        self.ax_5 = None
+        self.ax_6 = None
+        self.ax_7 = None
+        self.ax_8 = None
+        self.ax_9 = None
+        self.ax_10 = None
         self.canvas.draw()
         self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
         self.ui.verticalLayout.addWidget(self.toolbar)
@@ -204,7 +210,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.clear_all_graphs_action.triggered.connect(lambda: self.clear_all_graphs())
         self.clear_action.triggered.connect(lambda: self.cleargraph())
         self.clear_action_2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+X'), self)
-        self.clear_action_2.activated.connect(lambda: self.cleargraph())
+        self.clear_action_2.activated.connect(lambda: self.clear_single_graph(self.ax))
 
         self.removeplot_action.triggered.connect(lambda: remove_line(self))
         self.gridspec_action.triggered.connect(lambda: gridspec(self))
@@ -223,25 +229,47 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.actionAxis3.triggered.connect(lambda: change_axis(self, 'axis3'))
         self.ui.actionAxis4.triggered.connect(lambda: change_axis(self, 'axis4'))
 
-        self.axis_setup_action = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+1'), self)
-        self.axis_setup_action.activated.connect(lambda: axis_setup_fun(self, 1))
-        self.axis_setup_action2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+2'), self)
-        self.axis_setup_action2.activated.connect(lambda: axis_setup_fun(self, 2))
-        self.axis_setup_action3 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+3'), self)
-        self.axis_setup_action3.activated.connect(lambda: axis_setup_fun(self, 3))
-        self.axis_setup_action4 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+4'), self)
-        self.axis_setup_action4.activated.connect(lambda: axis_setup_fun(self, 4))
+        self.axis_setup_action = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+0'), self)
+        self.axis_setup_action.activated.connect(lambda: self.axis_setup_fun())
+
+        self.axisact1 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+1'), self)
+        self.axisact1.activated.connect(lambda: change_axis(self, 1))
+        self.axisact2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+2'), self)
+        self.axisact2.activated.connect(lambda: change_axis(self, 2))
+        self.axisact3 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+3'), self)
+        self.axisact3.activated.connect(lambda: change_axis(self, 3))
+        self.axisact4 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+4'), self)
+        self.axisact4.activated.connect(lambda: change_axis(self, 4))
+        self.axisact5 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+5'), self)
+        self.axisact5.activated.connect(lambda: change_axis(self, 5))
+        self.axisact6 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+6'), self)
+        self.axisact6.activated.connect(lambda: change_axis(self, 6))
+        self.axisact7 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+7'), self)
+        self.axisact7.activated.connect(lambda: change_axis(self, 7))
+        self.axisact8 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+8'), self)
+        self.axisact8.activated.connect(lambda: change_axis(self, 8))
+        self.axisact9 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+9'), self)
+        self.axisact9.activated.connect(lambda: change_axis(self, 9))
+        # self.axis_setup_action2 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+2'), self)
+        # self.axis_setup_action2.activated.connect(lambda: axis_setup_fun(self, 2))
+        # self.axis_setup_action3 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+3'), self)
+        # self.axis_setup_action3.activated.connect(lambda: axis_setup_fun(self, 3))
+        # self.axis_setup_action4 = QtWidgets.QShortcut(QtGui.QKeySequence('Ctrl+4'), self)
+        # self.axis_setup_action4.activated.connect(lambda: axis_setup_fun(self, 4))
 
     def memory_usage(self):
-        # !/usr/bin/env python
-        import psutil
-        # gives a single float value
-        print(psutil.cpu_percent())
-        # gives an object with many fields
-        print(psutil.virtual_memory())
-        num = gc.collect()
-        print('gc_collect')
-        print(num)
+        possible_axes = [self.ax_1, self.ax_2, self.ax_3, self.ax_4, self.ax_5,
+                         self.ax_6, self.ax_7, self.ax_8, self.ax_9, self.ax_10]
+        print(possible_axes)
+        # # !/usr/bin/env python
+        # import psutil
+        # # gives a single float value
+        # print(psutil.cpu_percent())
+        # # gives an object with many fields
+        # print(psutil.virtual_memory())
+        # num = gc.collect()
+        # print('gc_collect')
+        # print(num)
         # you can convert that object to a dictionary
         # dict(psutil.virtual_memory()._asdict())
 
@@ -398,8 +426,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def se_help_function(self):
         print('the best color is: #b63841ff')
 
-    def clear_single_graph(self):
-        self.ax.clear()
+    def clear_single_graph(self, ax):
+        ax.clear()
         self.fig.tight_layout()
         self.dragh = DragHandler(self, figure=self.fig)
         self.canvas.draw()
@@ -448,6 +476,54 @@ class MainWindow(QtWidgets.QMainWindow):
     def import_fitted_parameters(self):
         pass
 
+    def axis_setup_fun(self):
+        # self.ax.clear()
+        self.fig.clf()
+        self.ui.verticalLayout.removeWidget(self.toolbar)
+        self.ui.verticalLayout.removeWidget(self.canvas)
+        self.toolbar.close()
+        self.canvas.close()
+        self.fig = figure(num=None, figsize=(8, 6), dpi=80)
+        self.canvas = FigureCanvas(self.fig)
+        self.toolbar = NavigationToolbar(self.canvas, self.canvas, coordinates=True)
+        self.ui.verticalLayout.addWidget(self.toolbar)
+        self.ui.verticalLayout.addWidget(self.canvas)
+        self.canvas.installEventFilter(self)
+        self.ax.callbacks.connect('xlim_changed', self.lims_change)
+        vertical_axes = QtWidgets.QInputDialog.getInt(self, 'Axes Setup','Vertical?',1)
+        horizontal_axes = QtWidgets.QInputDialog.getInt(self, 'Axes Setup', 'Horizontal?',1)
+        axesstr = str(vertical_axes[0]) + str(horizontal_axes[0])
+        axesint = [horizontal_axes[0], vertical_axes[0]]
+        times = axesint[0]*axesint[1]
+
+        pos_axes = [int(axesstr + str(i)) for i in range(1, times+1, 1)]
+        length = len(pos_axes)
+
+        if length >= 1:
+            self.ax_1 = self.fig.add_subplot(pos_axes[0])
+        if length >= 2:
+            self.ax_2 = self.fig.add_subplot(pos_axes[1])
+        if length >= 3:
+            self.ax_3 = self.fig.add_subplot(pos_axes[2])
+        if length >= 4:
+            self.ax_4 = self.fig.add_subplot(pos_axes[3])
+        if length >= 5:
+            self.ax_5 = self.fig.add_subplot(pos_axes[4])
+        if length >= 6:
+            self.ax_6 = self.fig.add_subplot(pos_axes[5])
+        if length >= 7:
+            self.ax_7 = self.fig.add_subplot(pos_axes[6])
+        if length >= 8:
+            self.ax_8 = self.fig.add_subplot(pos_axes[7])
+        if length >= 9:
+            self.ax_9 = self.fig.add_subplot(pos_axes[8])
+
+
+
+        self.ax = self.ax_1
+        self.fig.tight_layout()
+        self.canvas.draw()
+
     def closeEvent(self, e):
         # Write window size and position to config file
         self.settings.setValue("size", self.size())
@@ -457,7 +533,6 @@ class MainWindow(QtWidgets.QMainWindow):
     def select_delete_range(self):
         self.span_d = SpanSelector(self.ax, self.remove_data_0, 'horizontal', useblit=False,
                                    rectprops=dict(alpha=0.2, facecolor='blue'))
-
 
     def remove_data_0(self, minimum, maximum):
         all_lines = ApplicationSettings.ALL_DATA_PLOTTED

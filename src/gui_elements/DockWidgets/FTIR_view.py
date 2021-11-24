@@ -191,6 +191,7 @@ class FTIR_view(QtWidgets.QDockWidget):
             msg.exec_()
 
     def ir_basic(self):
+        self.main_window.ax.set_xlim(self.ui.xmin.value(), self.ui.xmax.value())
         limits = self.main_window.ax.get_xlim()
         if limits[1] > limits[0]:
             self.main_window.ax.set_xlim(self.main_window.ax.get_xlim()[::-1])

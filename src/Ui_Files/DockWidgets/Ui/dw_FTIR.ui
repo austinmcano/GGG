@@ -31,7 +31,14 @@
         <string>IR Plot</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="12" column="1">
+        <item row="17" column="1">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Savitzky–Golay Filter</string>
+          </property>
+         </widget>
+        </item>
+        <item row="14" column="1">
          <widget class="QLabel" name="label_6">
           <property name="text">
            <string>P (asymetry) </string>
@@ -45,54 +52,10 @@
           </property>
          </widget>
         </item>
-        <item row="15" column="3">
+        <item row="17" column="3">
          <widget class="QPushButton" name="smooth_pb">
           <property name="text">
            <string>Smooth</string>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="1">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Savitzky–Golay Filter</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1" colspan="3">
-         <widget class="QTreeView" name="FTIR_treeView"/>
-        </item>
-        <item row="10" column="2">
-         <widget class="QSpinBox" name="lambda_sb">
-          <property name="maximum">
-           <number>9999999</number>
-          </property>
-          <property name="singleStep">
-           <number>1000</number>
-          </property>
-          <property name="value">
-           <number>1000</number>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1" colspan="3">
-         <widget class="Line" name="line">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="abs_dir_pb">
-          <property name="text">
-           <string>Plot (dir)</string>
-          </property>
-         </widget>
-        </item>
-        <item row="10" column="3">
-         <widget class="QPushButton" name="baseline_pb">
-          <property name="text">
-           <string>Baseline All</string>
           </property>
          </widget>
         </item>
@@ -103,10 +66,43 @@
           </property>
          </widget>
         </item>
-        <item row="10" column="1">
-         <widget class="QLabel" name="label_4">
+        <item row="14" column="2">
+         <widget class="QDoubleSpinBox" name="p_sb">
+          <property name="decimals">
+           <number>6</number>
+          </property>
+          <property name="maximum">
+           <double>1000.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.010000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.010000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="15" column="1" colspan="3">
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="3">
+         <widget class="QPushButton" name="baseline_pb">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;λ  (smoothness)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>Baseline All</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QSpinBox" name="skiprows_sb"/>
+        </item>
+        <item row="14" column="3">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>UNDER WORK</string>
           </property>
          </widget>
         </item>
@@ -120,6 +116,27 @@
           </property>
           <property name="value">
            <number>0</number>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="diff_dir_pb">
+          <property name="text">
+           <string>Diff Plot (dir)</string>
+          </property>
+         </widget>
+        </item>
+        <item row="17" column="2">
+         <widget class="QSpinBox" name="smooth_sb">
+          <property name="value">
+           <number>11</number>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="1" colspan="3">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
          </widget>
         </item>
@@ -144,47 +161,33 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="diff_dir_pb">
+        <item row="12" column="1">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Diff Plot (dir)</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;λ  (smoothness)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
-        <item row="13" column="1" colspan="3">
-         <widget class="Line" name="line_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="15" column="2">
-         <widget class="QSpinBox" name="smooth_sb">
-          <property name="value">
-           <number>11</number>
-          </property>
-         </widget>
+        <item row="0" column="1" colspan="3">
+         <widget class="QTreeView" name="FTIR_treeView"/>
         </item>
         <item row="12" column="2">
-         <widget class="QDoubleSpinBox" name="p_sb">
-          <property name="decimals">
-           <number>6</number>
-          </property>
+         <widget class="QSpinBox" name="lambda_sb">
           <property name="maximum">
-           <double>1000.000000000000000</double>
+           <number>9999999</number>
           </property>
           <property name="singleStep">
-           <double>0.010000000000000</double>
+           <number>1000</number>
           </property>
           <property name="value">
-           <double>0.010000000000000</double>
+           <number>1000</number>
           </property>
          </widget>
         </item>
-        <item row="12" column="3">
-         <widget class="QLabel" name="label_7">
+        <item row="1" column="3">
+         <widget class="QPushButton" name="abs_dir_pb">
           <property name="text">
-           <string>UNDER WORK</string>
+           <string>Plot (dir)</string>
           </property>
          </widget>
         </item>
@@ -194,9 +197,6 @@
            <string>Skip Rows</string>
           </property>
          </widget>
-        </item>
-        <item row="7" column="2">
-         <widget class="QSpinBox" name="skiprows_sb"/>
         </item>
         <item row="6" column="3">
          <widget class="QComboBox" name="plotside_cb">
@@ -210,6 +210,47 @@
             <string>Right Ax</string>
            </property>
           </item>
+         </widget>
+        </item>
+        <item row="9" column="2">
+         <widget class="QDoubleSpinBox" name="xmin">
+          <property name="maximum">
+           <double>5000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>4000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="2">
+         <widget class="QDoubleSpinBox" name="xmax">
+          <property name="maximum">
+           <double>5000.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>400.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="1" colspan="3">
+         <widget class="Line" name="line_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item row="9" column="1">
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>X min</string>
+          </property>
+         </widget>
+        </item>
+        <item row="10" column="1">
+         <widget class="QLabel" name="label_23">
+          <property name="text">
+           <string>X max</string>
+          </property>
          </widget>
         </item>
        </layout>

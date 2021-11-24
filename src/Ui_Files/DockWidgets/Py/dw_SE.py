@@ -171,7 +171,7 @@ class Ui_DockWidget(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 575, 275))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 370, 231))
         self.gridLayout_12 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_12.setObjectName(u"gridLayout_12")
         self.linfitall_pb = QPushButton(self.scrollAreaWidgetContents_2)
@@ -258,6 +258,11 @@ class Ui_DockWidget(object):
         self.tab.setObjectName(u"tab")
         self.gridLayout_2 = QGridLayout(self.tab)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.plot_qms_pb = QPushButton(self.tab)
+        self.plot_qms_pb.setObjectName(u"plot_qms_pb")
+
+        self.gridLayout_2.addWidget(self.plot_qms_pb, 2, 1, 1, 2)
+
         self.treeView_qms = QTreeView(self.tab)
         self.treeView_qms.setObjectName(u"treeView_qms")
 
@@ -267,11 +272,6 @@ class Ui_DockWidget(object):
         self.fill_cols_qms_pb.setObjectName(u"fill_cols_qms_pb")
 
         self.gridLayout_2.addWidget(self.fill_cols_qms_pb, 2, 0, 1, 1)
-
-        self.plot_qms_pb = QPushButton(self.tab)
-        self.plot_qms_pb.setObjectName(u"plot_qms_pb")
-
-        self.gridLayout_2.addWidget(self.plot_qms_pb, 2, 1, 1, 2)
 
         self.tabWidget_2 = QTabWidget(self.tab)
         self.tabWidget_2.setObjectName(u"tabWidget_2")
@@ -352,42 +352,6 @@ class Ui_DockWidget(object):
         self.tab_6.setObjectName(u"tab_6")
         self.gridLayout_7 = QGridLayout(self.tab_6)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
-        self.tableWidget_2 = QTableWidget(self.tab_6)
-        if (self.tableWidget_2.columnCount() < 40):
-            self.tableWidget_2.setColumnCount(40)
-        if (self.tableWidget_2.rowCount() < 100):
-            self.tableWidget_2.setRowCount(100)
-        self.tableWidget_2.setObjectName(u"tableWidget_2")
-        self.tableWidget_2.setRowCount(100)
-        self.tableWidget_2.setColumnCount(40)
-
-        self.gridLayout_7.addWidget(self.tableWidget_2, 10, 0, 1, 6)
-
-        self.calc_iso_pb = QPushButton(self.tab_6)
-        self.calc_iso_pb.setObjectName(u"calc_iso_pb")
-
-        self.gridLayout_7.addWidget(self.calc_iso_pb, 0, 0, 1, 2)
-
-        self.mass_offset_dsb = QDoubleSpinBox(self.tab_6)
-        self.mass_offset_dsb.setObjectName(u"mass_offset_dsb")
-        self.mass_offset_dsb.setDecimals(3)
-        self.mass_offset_dsb.setMinimum(-99.000000000000000)
-        self.mass_offset_dsb.setSingleStep(0.020000000000000)
-
-        self.gridLayout_7.addWidget(self.mass_offset_dsb, 0, 4, 1, 1)
-
-        self.clear_combo = QComboBox(self.tab_6)
-        self.clear_combo.addItem("")
-        self.clear_combo.addItem("")
-        self.clear_combo.setObjectName(u"clear_combo")
-
-        self.gridLayout_7.addWidget(self.clear_combo, 0, 2, 1, 1)
-
-        self.label_11 = QLabel(self.tab_6)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout_7.addWidget(self.label_11, 0, 3, 1, 1)
-
         self.type_iso_cb = QComboBox(self.tab_6)
         self.type_iso_cb.addItem("")
         self.type_iso_cb.addItem("")
@@ -395,12 +359,35 @@ class Ui_DockWidget(object):
 
         self.gridLayout_7.addWidget(self.type_iso_cb, 0, 5, 1, 1)
 
+        self.intensityoffset = QDoubleSpinBox(self.tab_6)
+        self.intensityoffset.setObjectName(u"intensityoffset")
+        self.intensityoffset.setMinimum(-99.000000000000000)
+        self.intensityoffset.setSingleStep(0.100000000000000)
+
+        self.gridLayout_7.addWidget(self.intensityoffset, 1, 5, 1, 1)
+
+        self.label_23 = QLabel(self.tab_6)
+        self.label_23.setObjectName(u"label_23")
+
+        self.gridLayout_7.addWidget(self.label_23, 1, 4, 1, 1)
+
+        self.round_mass = QSpinBox(self.tab_6)
+        self.round_mass.setObjectName(u"round_mass")
+        self.round_mass.setValue(1)
+
+        self.gridLayout_7.addWidget(self.round_mass, 1, 3, 1, 1)
+
+        self.label_10 = QLabel(self.tab_6)
+        self.label_10.setObjectName(u"label_10")
+
+        self.gridLayout_7.addWidget(self.label_10, 1, 2, 1, 1)
+
         self.scrollArea = QScrollArea(self.tab_6)
         self.scrollArea.setObjectName(u"scrollArea")
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 558, 640))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -347, 558, 640))
         self.gridLayout_8 = QGridLayout(self.scrollAreaWidgetContents)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.s8_alpha = QDoubleSpinBox(self.scrollAreaWidgetContents)
@@ -488,11 +475,6 @@ class Ui_DockWidget(object):
 
         self.gridLayout_8.addWidget(self.label_16, 1, 2, 1, 1)
 
-        self.label_10 = QLabel(self.scrollAreaWidgetContents)
-        self.label_10.setObjectName(u"label_10")
-
-        self.gridLayout_8.addWidget(self.label_10, 23, 5, 1, 1)
-
         self.abundance_pb = QPushButton(self.scrollAreaWidgetContents)
         self.abundance_pb.setObjectName(u"abundance_pb")
 
@@ -507,12 +489,6 @@ class Ui_DockWidget(object):
         self.species3_cb.setObjectName(u"species3_cb")
 
         self.gridLayout_8.addWidget(self.species3_cb, 5, 0, 1, 1)
-
-        self.round_mass = QSpinBox(self.scrollAreaWidgetContents)
-        self.round_mass.setObjectName(u"round_mass")
-        self.round_mass.setValue(1)
-
-        self.gridLayout_8.addWidget(self.round_mass, 23, 6, 1, 1)
 
         self.name1_le = QLineEdit(self.scrollAreaWidgetContents)
         self.name1_le.setObjectName(u"name1_le")
@@ -614,7 +590,7 @@ class Ui_DockWidget(object):
         self.s2ratio.setObjectName(u"s2ratio")
         self.s2ratio.setDecimals(4)
         self.s2ratio.setMaximum(999999.000000000000000)
-        self.s2ratio.setSingleStep(0.050000000000000)
+        self.s2ratio.setSingleStep(0.010000000000000)
         self.s2ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s2ratio, 4, 4, 1, 1)
@@ -623,7 +599,7 @@ class Ui_DockWidget(object):
         self.s3ratio.setObjectName(u"s3ratio")
         self.s3ratio.setDecimals(4)
         self.s3ratio.setMaximum(999999.000000000000000)
-        self.s3ratio.setSingleStep(0.050000000000000)
+        self.s3ratio.setSingleStep(0.010000000000000)
         self.s3ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s3ratio, 5, 4, 1, 1)
@@ -632,7 +608,7 @@ class Ui_DockWidget(object):
         self.s1ratio.setObjectName(u"s1ratio")
         self.s1ratio.setDecimals(4)
         self.s1ratio.setMaximum(999999.000000000000000)
-        self.s1ratio.setSingleStep(0.050000000000000)
+        self.s1ratio.setSingleStep(0.010000000000000)
         self.s1ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s1ratio, 3, 4, 1, 1)
@@ -693,7 +669,7 @@ class Ui_DockWidget(object):
         self.s5ratio.setObjectName(u"s5ratio")
         self.s5ratio.setDecimals(4)
         self.s5ratio.setMaximum(999999.000000000000000)
-        self.s5ratio.setSingleStep(0.050000000000000)
+        self.s5ratio.setSingleStep(0.010000000000000)
         self.s5ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s5ratio, 7, 4, 1, 1)
@@ -732,7 +708,7 @@ class Ui_DockWidget(object):
         self.s4ratio.setObjectName(u"s4ratio")
         self.s4ratio.setDecimals(4)
         self.s4ratio.setMaximum(999999.000000000000000)
-        self.s4ratio.setSingleStep(0.050000000000000)
+        self.s4ratio.setSingleStep(0.010000000000000)
         self.s4ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s4ratio, 6, 4, 1, 1)
@@ -741,7 +717,7 @@ class Ui_DockWidget(object):
         self.s7ratio.setObjectName(u"s7ratio")
         self.s7ratio.setDecimals(4)
         self.s7ratio.setMaximum(999999.000000000000000)
-        self.s7ratio.setSingleStep(0.050000000000000)
+        self.s7ratio.setSingleStep(0.010000000000000)
         self.s7ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s7ratio, 9, 4, 1, 1)
@@ -750,7 +726,7 @@ class Ui_DockWidget(object):
         self.s6ratio.setObjectName(u"s6ratio")
         self.s6ratio.setDecimals(4)
         self.s6ratio.setMaximum(999999.000000000000000)
-        self.s6ratio.setSingleStep(0.050000000000000)
+        self.s6ratio.setSingleStep(0.010000000000000)
         self.s6ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s6ratio, 8, 4, 1, 1)
@@ -759,7 +735,7 @@ class Ui_DockWidget(object):
         self.s8ratio.setObjectName(u"s8ratio")
         self.s8ratio.setDecimals(4)
         self.s8ratio.setMaximum(999999.000000000000000)
-        self.s8ratio.setSingleStep(0.050000000000000)
+        self.s8ratio.setSingleStep(0.010000000000000)
         self.s8ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s8ratio, 10, 4, 1, 1)
@@ -773,7 +749,7 @@ class Ui_DockWidget(object):
         self.s10ratio.setObjectName(u"s10ratio")
         self.s10ratio.setDecimals(4)
         self.s10ratio.setMaximum(999999.000000000000000)
-        self.s10ratio.setSingleStep(0.050000000000000)
+        self.s10ratio.setSingleStep(0.010000000000000)
         self.s10ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s10ratio, 12, 4, 1, 1)
@@ -792,7 +768,7 @@ class Ui_DockWidget(object):
         self.s9ratio.setObjectName(u"s9ratio")
         self.s9ratio.setDecimals(4)
         self.s9ratio.setMaximum(999999.000000000000000)
-        self.s9ratio.setSingleStep(0.050000000000000)
+        self.s9ratio.setSingleStep(0.010000000000000)
         self.s9ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s9ratio, 11, 4, 1, 1)
@@ -944,7 +920,7 @@ class Ui_DockWidget(object):
         self.s11ratio.setObjectName(u"s11ratio")
         self.s11ratio.setDecimals(4)
         self.s11ratio.setMaximum(99999.000000000000000)
-        self.s11ratio.setSingleStep(0.050000000000000)
+        self.s11ratio.setSingleStep(0.010000000000000)
         self.s11ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s11ratio, 13, 4, 1, 1)
@@ -953,7 +929,7 @@ class Ui_DockWidget(object):
         self.s12ratio.setObjectName(u"s12ratio")
         self.s12ratio.setDecimals(4)
         self.s12ratio.setMaximum(99999.000000000000000)
-        self.s12ratio.setSingleStep(0.050000000000000)
+        self.s12ratio.setSingleStep(0.010000000000000)
         self.s12ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s12ratio, 14, 4, 1, 1)
@@ -962,7 +938,7 @@ class Ui_DockWidget(object):
         self.s13ratio.setObjectName(u"s13ratio")
         self.s13ratio.setDecimals(4)
         self.s13ratio.setMaximum(99999.000000000000000)
-        self.s13ratio.setSingleStep(0.050000000000000)
+        self.s13ratio.setSingleStep(0.010000000000000)
         self.s13ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s13ratio, 15, 4, 1, 1)
@@ -971,7 +947,7 @@ class Ui_DockWidget(object):
         self.s14ratio.setObjectName(u"s14ratio")
         self.s14ratio.setDecimals(4)
         self.s14ratio.setMaximum(99999.000000000000000)
-        self.s14ratio.setSingleStep(0.050000000000000)
+        self.s14ratio.setSingleStep(0.010000000000000)
         self.s14ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s14ratio, 16, 4, 1, 1)
@@ -980,7 +956,7 @@ class Ui_DockWidget(object):
         self.s15ratio.setObjectName(u"s15ratio")
         self.s15ratio.setDecimals(4)
         self.s15ratio.setMaximum(99999.000000000000000)
-        self.s15ratio.setSingleStep(0.050000000000000)
+        self.s15ratio.setSingleStep(0.010000000000000)
         self.s15ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s15ratio, 17, 4, 1, 1)
@@ -989,7 +965,7 @@ class Ui_DockWidget(object):
         self.s16ratio.setObjectName(u"s16ratio")
         self.s16ratio.setDecimals(4)
         self.s16ratio.setMaximum(99999.000000000000000)
-        self.s16ratio.setSingleStep(0.050000000000000)
+        self.s16ratio.setSingleStep(0.010000000000000)
         self.s16ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s16ratio, 18, 4, 1, 1)
@@ -998,7 +974,7 @@ class Ui_DockWidget(object):
         self.s17ratio.setObjectName(u"s17ratio")
         self.s17ratio.setDecimals(4)
         self.s17ratio.setMaximum(99999.000000000000000)
-        self.s17ratio.setSingleStep(0.050000000000000)
+        self.s17ratio.setSingleStep(0.010000000000000)
         self.s17ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s17ratio, 19, 4, 1, 1)
@@ -1007,7 +983,7 @@ class Ui_DockWidget(object):
         self.s18ratio.setObjectName(u"s18ratio")
         self.s18ratio.setDecimals(4)
         self.s18ratio.setMaximum(99999.000000000000000)
-        self.s18ratio.setSingleStep(0.050000000000000)
+        self.s18ratio.setSingleStep(0.010000000000000)
         self.s18ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s18ratio, 20, 4, 1, 1)
@@ -1016,7 +992,7 @@ class Ui_DockWidget(object):
         self.s19ratio.setObjectName(u"s19ratio")
         self.s19ratio.setDecimals(4)
         self.s19ratio.setMaximum(99999.000000000000000)
-        self.s19ratio.setSingleStep(0.050000000000000)
+        self.s19ratio.setSingleStep(0.010000000000000)
         self.s19ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s19ratio, 21, 4, 1, 1)
@@ -1025,7 +1001,7 @@ class Ui_DockWidget(object):
         self.s20ratio.setObjectName(u"s20ratio")
         self.s20ratio.setDecimals(4)
         self.s20ratio.setMaximum(99999.000000000000000)
-        self.s20ratio.setSingleStep(0.050000000000000)
+        self.s20ratio.setSingleStep(0.010000000000000)
         self.s20ratio.setValue(1.000000000000000)
 
         self.gridLayout_8.addWidget(self.s20ratio, 22, 4, 1, 1)
@@ -1242,9 +1218,50 @@ class Ui_DockWidget(object):
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.gridLayout_7.addWidget(self.scrollArea, 2, 0, 1, 6)
+        self.gridLayout_7.addWidget(self.scrollArea, 2, 1, 1, 5)
+
+        self.label_11 = QLabel(self.tab_6)
+        self.label_11.setObjectName(u"label_11")
+
+        self.gridLayout_7.addWidget(self.label_11, 0, 2, 1, 1)
+
+        self.mass_offset_dsb = QDoubleSpinBox(self.tab_6)
+        self.mass_offset_dsb.setObjectName(u"mass_offset_dsb")
+        self.mass_offset_dsb.setDecimals(3)
+        self.mass_offset_dsb.setMinimum(-99.000000000000000)
+        self.mass_offset_dsb.setSingleStep(0.020000000000000)
+
+        self.gridLayout_7.addWidget(self.mass_offset_dsb, 0, 3, 1, 1)
+
+        self.clear_combo = QComboBox(self.tab_6)
+        self.clear_combo.addItem("")
+        self.clear_combo.addItem("")
+        self.clear_combo.setObjectName(u"clear_combo")
+
+        self.gridLayout_7.addWidget(self.clear_combo, 0, 4, 1, 1)
+
+        self.calc_iso_pb = QPushButton(self.tab_6)
+        self.calc_iso_pb.setObjectName(u"calc_iso_pb")
+
+        self.gridLayout_7.addWidget(self.calc_iso_pb, 0, 1, 2, 1)
 
         self.tabWidget_2.addTab(self.tab_6, "")
+        self.tab_10 = QWidget()
+        self.tab_10.setObjectName(u"tab_10")
+        self.gridLayout_5 = QGridLayout(self.tab_10)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.tableWidget_2 = QTableWidget(self.tab_10)
+        if (self.tableWidget_2.columnCount() < 40):
+            self.tableWidget_2.setColumnCount(40)
+        if (self.tableWidget_2.rowCount() < 100):
+            self.tableWidget_2.setRowCount(100)
+        self.tableWidget_2.setObjectName(u"tableWidget_2")
+        self.tableWidget_2.setRowCount(100)
+        self.tableWidget_2.setColumnCount(40)
+
+        self.gridLayout_5.addWidget(self.tableWidget_2, 0, 0, 1, 1)
+
+        self.tabWidget_2.addTab(self.tab_10, "")
 
         self.gridLayout_2.addWidget(self.tabWidget_2, 1, 0, 1, 3)
 
@@ -1329,7 +1346,7 @@ class Ui_DockWidget(object):
 
         self.tabWidget.setCurrentIndex(0)
         self.tabWidget_3.setCurrentIndex(0)
-        self.tabWidget_2.setCurrentIndex(1)
+        self.tabWidget_2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(DockWidget)
@@ -1374,8 +1391,8 @@ class Ui_DockWidget(object):
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_9), QCoreApplication.translate("DockWidget", u"Linear Fit", None))
         self.tabWidget_3.setTabText(self.tabWidget_3.indexOf(self.tab_2), QCoreApplication.translate("DockWidget", u"Error Plotting", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("DockWidget", u"Axis Properties", None))
-        self.fill_cols_qms_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
         self.plot_qms_pb.setText(QCoreApplication.translate("DockWidget", u"Plot", None))
+        self.fill_cols_qms_pb.setText(QCoreApplication.translate("DockWidget", u"Fill Columns", None))
         ___qtreewidgetitem3 = self.qmsx_tw.headerItem()
         ___qtreewidgetitem3.setText(0, QCoreApplication.translate("DockWidget", u"QMS_X", None));
         ___qtreewidgetitem4 = self.qmsy_tw.headerItem()
@@ -1392,14 +1409,11 @@ class Ui_DockWidget(object):
         self.plottype_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"Mass Spectrum", None))
 
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_5), QCoreApplication.translate("DockWidget", u"Plot QMS", None))
-        self.calc_iso_pb.setText(QCoreApplication.translate("DockWidget", u"Calculate isotopic abundance", None))
-        self.clear_combo.setItemText(0, QCoreApplication.translate("DockWidget", u"Clear Lines On", None))
-        self.clear_combo.setItemText(1, QCoreApplication.translate("DockWidget", u"Clear Lines Off", None))
-
-        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Mass Offset", None))
         self.type_iso_cb.setItemText(0, QCoreApplication.translate("DockWidget", u"Map 100%", None))
         self.type_iso_cb.setItemText(1, QCoreApplication.translate("DockWidget", u"User Defined", None))
 
+        self.label_23.setText(QCoreApplication.translate("DockWidget", u"Intensity Offset", None))
+        self.label_10.setText(QCoreApplication.translate("DockWidget", u"Round Mass", None))
         self.species6_cb.setText(QCoreApplication.translate("DockWidget", u"Species 6", None))
         self.species7_cb.setText(QCoreApplication.translate("DockWidget", u"Species 7", None))
         self.species8_cb.setText(QCoreApplication.translate("DockWidget", u"Species 8", None))
@@ -1409,7 +1423,6 @@ class Ui_DockWidget(object):
         self.species1_cb.setText(QCoreApplication.translate("DockWidget", u"Species 1", None))
         self.label_15.setText(QCoreApplication.translate("DockWidget", u"Turn On/Off", None))
         self.label_16.setText(QCoreApplication.translate("DockWidget", u"Molecule", None))
-        self.label_10.setText(QCoreApplication.translate("DockWidget", u"Round Mass", None))
         self.abundance_pb.setText(QCoreApplication.translate("DockWidget", u"Abundance Plot", None))
         self.species2_cb.setText(QCoreApplication.translate("DockWidget", u"Species 2", None))
         self.species3_cb.setText(QCoreApplication.translate("DockWidget", u"Species 3", None))
@@ -1451,7 +1464,13 @@ class Ui_DockWidget(object):
         self.color_18.setText("")
         self.color_19.setText("")
         self.color_20.setText("")
+        self.label_11.setText(QCoreApplication.translate("DockWidget", u"Mass Offset", None))
+        self.clear_combo.setItemText(0, QCoreApplication.translate("DockWidget", u"Clear Lines On", None))
+        self.clear_combo.setItemText(1, QCoreApplication.translate("DockWidget", u"Clear Lines Off", None))
+
+        self.calc_iso_pb.setText(QCoreApplication.translate("DockWidget", u"Calculate isotopic abundance", None))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_6), QCoreApplication.translate("DockWidget", u"Isotopic Prediction", None))
+        self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_10), QCoreApplication.translate("DockWidget", u"Caluclated Abundances", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("DockWidget", u"QMS", None))
         self.label_2.setText(QCoreApplication.translate("DockWidget", u"Y Axis", None))
         self.plottable_pb.setText(QCoreApplication.translate("DockWidget", u"Plot Table", None))

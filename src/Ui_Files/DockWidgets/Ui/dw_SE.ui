@@ -253,8 +253,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>575</width>
-                 <height>275</height>
+                 <width>370</width>
+                 <height>231</height>
                 </rect>
                </property>
                <layout class="QGridLayout" name="gridLayout_12">
@@ -370,6 +370,13 @@
         <string>QMS</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="1" colspan="2">
+         <widget class="QPushButton" name="plot_qms_pb">
+          <property name="text">
+           <string>Plot</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0" colspan="3">
          <widget class="QTreeView" name="treeView_qms"/>
         </item>
@@ -380,17 +387,10 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1" colspan="2">
-         <widget class="QPushButton" name="plot_qms_pb">
-          <property name="text">
-           <string>Plot</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0" colspan="3">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="tab_5">
            <attribute name="title">
@@ -508,197 +508,6 @@
             <string>Isotopic Prediction</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_7">
-            <item row="10" column="0" colspan="6">
-             <widget class="QTableWidget" name="tableWidget_2">
-              <property name="rowCount">
-               <number>100</number>
-              </property>
-              <property name="columnCount">
-               <number>40</number>
-              </property>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-              <column/>
-             </widget>
-            </item>
-            <item row="0" column="0" colspan="2">
-             <widget class="QPushButton" name="calc_iso_pb">
-              <property name="text">
-               <string>Calculate isotopic abundance</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="QDoubleSpinBox" name="mass_offset_dsb">
-              <property name="decimals">
-               <number>3</number>
-              </property>
-              <property name="minimum">
-               <double>-99.000000000000000</double>
-              </property>
-              <property name="singleStep">
-               <double>0.020000000000000</double>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QComboBox" name="clear_combo">
-              <item>
-               <property name="text">
-                <string>Clear Lines On</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Clear Lines Off</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <widget class="QLabel" name="label_11">
-              <property name="text">
-               <string>Mass Offset</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="5">
              <widget class="QComboBox" name="type_iso_cb">
               <item>
@@ -713,7 +522,38 @@
               </item>
              </widget>
             </item>
-            <item row="2" column="0" colspan="6">
+            <item row="1" column="5">
+             <widget class="QDoubleSpinBox" name="intensityoffset">
+              <property name="minimum">
+               <double>-99.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QLabel" name="label_23">
+              <property name="text">
+               <string>Intensity Offset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QSpinBox" name="round_mass">
+              <property name="value">
+               <number>1</number>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QLabel" name="label_10">
+              <property name="text">
+               <string>Round Mass</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1" colspan="5">
              <widget class="QScrollArea" name="scrollArea">
               <property name="widgetResizable">
                <bool>true</bool>
@@ -722,7 +562,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-347</y>
                  <width>558</width>
                  <height>640</height>
                 </rect>
@@ -856,13 +696,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="23" column="5">
-                 <widget class="QLabel" name="label_10">
-                  <property name="text">
-                   <string>Round Mass</string>
-                  </property>
-                 </widget>
-                </item>
                 <item row="23" column="7">
                  <widget class="QPushButton" name="abundance_pb">
                   <property name="text">
@@ -881,13 +714,6 @@
                  <widget class="QCheckBox" name="species3_cb">
                   <property name="text">
                    <string>Species 3</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="23" column="6">
-                 <widget class="QSpinBox" name="round_mass">
-                  <property name="value">
-                   <number>1</number>
                   </property>
                  </widget>
                 </item>
@@ -1040,7 +866,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1056,7 +882,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1072,7 +898,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1161,7 +987,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1213,7 +1039,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1229,7 +1055,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1245,7 +1071,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1261,7 +1087,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1284,7 +1110,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1314,7 +1140,7 @@
                    <double>999999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1475,7 +1301,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1491,7 +1317,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1507,7 +1333,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1523,7 +1349,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1539,7 +1365,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1555,7 +1381,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1571,7 +1397,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1587,7 +1413,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1603,7 +1429,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1619,7 +1445,7 @@
                    <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.050000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                   <property name="value">
                    <double>1.000000000000000</double>
@@ -1958,6 +1784,204 @@
                 </item>
                </layout>
               </widget>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QLabel" name="label_11">
+              <property name="text">
+               <string>Mass Offset</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QDoubleSpinBox" name="mass_offset_dsb">
+              <property name="decimals">
+               <number>3</number>
+              </property>
+              <property name="minimum">
+               <double>-99.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.020000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="QComboBox" name="clear_combo">
+              <item>
+               <property name="text">
+                <string>Clear Lines On</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Clear Lines Off</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="1" rowspan="2">
+             <widget class="QPushButton" name="calc_iso_pb">
+              <property name="text">
+               <string>Calculate isotopic abundance</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_10">
+           <attribute name="title">
+            <string>Caluclated Abundances</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="0">
+             <widget class="QTableWidget" name="tableWidget_2">
+              <property name="rowCount">
+               <number>100</number>
+              </property>
+              <property name="columnCount">
+               <number>40</number>
+              </property>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
+              <column/>
              </widget>
             </item>
            </layout>
