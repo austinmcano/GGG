@@ -9,7 +9,7 @@ from gui_elements.main_window import MainWindow
 import os
 
 os.environ['QT_MAC_WANTS_LAYER'] = '1'
-settings = QtCore.QSettings('../../settings.ini', QtCore.QSettings.IniFormat)
+settings = QtCore.QSettings('src/Resources/settings.ini', QtCore.QSettings.IniFormat)
 if settings.allKeys() == []:
     settings = QtCore.QSettings('settings.ini', QtCore.QSettings.IniFormat)
 if settings.allKeys() == []:

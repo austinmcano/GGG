@@ -21,7 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         local_path = os.path.realpath(__file__)
-        self.settings = QtCore.QSettings('../../settings.ini', QtCore.QSettings.IniFormat)
+        self.settings = QtCore.QSettings('src/Resources/settings.ini', QtCore.QSettings.IniFormat)
         if self.settings.allKeys() == []:
             self.settings = QtCore.QSettings('settings.ini', QtCore.QSettings.IniFormat)
         if self.settings.allKeys() == []:
